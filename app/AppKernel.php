@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new Wbc\UserBundle\WbcUserBundle(),
             new Wbc\UtilityBundle\WbcUtilityBundle(),
+            new Wbc\BranchBundle\WbcBranchBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

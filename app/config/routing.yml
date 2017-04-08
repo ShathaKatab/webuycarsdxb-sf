@@ -1,3 +1,7 @@
+wbc_branch:
+    resource: "@WbcBranchBundle/Resources/config/routing.yml"
+    prefix:   /
+
 wbc_utility:
     resource: "@WbcUtilityBundle/Resources/config/routing.yml"
     prefix:   /

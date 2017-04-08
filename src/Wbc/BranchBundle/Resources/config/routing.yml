@@ -1,0 +1,3 @@
+wbc_branch_homepage:
+    path:     /
+    defaults: { _controller: WbcBranchBundle:Default:index }
