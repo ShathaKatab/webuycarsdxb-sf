@@ -20,3 +20,17 @@ services:
         calls:
             - [ setAnnotationReader, [ @annotation_reader ] ]
 
+    admin.branch:
+        class: Wbc\BranchBundle\Admin\BranchAdmin
+        arguments: [~, Wbc\BranchBundle\Entity\Branch, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Branches, group: "Appointments Section" }
+
+    admin.branch.timing:
+        class: Wbc\BranchBundle\Admin\TimingAdmin
+        arguments: [~, Wbc\BranchBundle\Entity\Timing, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Branch Timings, group: "Appointments Section" }
+
+
+
