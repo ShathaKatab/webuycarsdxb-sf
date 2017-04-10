@@ -85,6 +85,7 @@ class BranchAdmin extends Admin
                 ],
             ])
             ->add('phoneNumber')
+            ->add('active', 'boolean', ['editable' => true])
             ->add('createdAt')
             ->add('updatedAt');
     }
