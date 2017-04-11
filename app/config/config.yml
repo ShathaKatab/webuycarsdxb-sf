@@ -64,6 +64,8 @@ doctrine:
         #     path:     "%database_path%"
         types:
             json: Sonata\Doctrine\Types\JsonType
+            branch_object:  Wbc\BranchBundle\Doctrine\DBAL\Types\BranchType
+            branch_timing_object: Wbc\BranchBundle\Doctrine\DBAL\Types\TimingType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
