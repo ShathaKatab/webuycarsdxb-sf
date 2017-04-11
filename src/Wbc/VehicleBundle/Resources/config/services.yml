@@ -1,0 +1,6 @@
+services:
+    wbc.vehicle.repository.make_repository:
+        class: Wbc\VehicleBundle\Repository\MakeRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - WbcVehicleBundle:Make
