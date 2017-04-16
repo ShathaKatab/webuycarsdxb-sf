@@ -3,27 +3,44 @@
 namespace Wbc\BranchBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Wbc\BranchBundle\Form\DayType;
 
 /**
  * Class Timing.
  *
- * @author Majid Mvulle <majid@majidmvulle.com>
+ * @ORM\Table(name="branch_timing", uniqueConstraints={@ORM\UniqueConstraint(name="wbc_timing_unique_idx", columns={"branch_id",
+ * "day_booked", "from_time"})})
+ * @ORM\Entity(repositoryClass="Wbc\BranchBundle\Repository\TimingRepository")
  *
- * @ORM\Table(name="branch_timing")
- * @ORM\Entity
+ * @Serializer\ExclusionPolicy("all")*
+ *
+ * @author Majid Mvulle <majid@majidmvulle.com>
  */
 class Timing
 {
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="\Wbc\BranchBundle\Entity\Branch", inversedBy="timings", fetch="EAGER")
-     * @ORM\JoinColumn(name="branch_id", referencedColumnName="id")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Expose
+     */
+    protected $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\ManyToOne(targetEntity="\Wbc\BranchBundle\Entity\Branch", inversedBy="timings")
+     * @ORM\JoinColumn(name="branch_id", referencedColumnName="id")
      *
      * @Assert\NotBlank()
+     *
+     * @Serializer\Expose
      */
     protected $branch;
 
@@ -32,12 +49,13 @@ class Timing
      *
      * @var int
      *
-     * @ORM\Column(name="day", type="smallint")
-     * @ORM\Id
+     * @ORM\Column(name="day_booked", type="smallint")
      *
      * @Assert\NotBlank()
+     *
+     * @Serializer\Expose
      */
-    protected $day;
+    protected $dayBooked;
 
     /**
      * Time (format => hour * 60 + minutes).
@@ -45,9 +63,11 @@ class Timing
      * @var int
      *
      * @ORM\Column(name="from_time", type="smallint")
-     * @ORM\Id
      *
      * @Assert\NotBlank()
+     *
+     * @Serializer\Expose
+     * @Serializer\Type("string")
      */
     protected $from;
 
@@ -59,6 +79,9 @@ class Timing
      * @ORM\Column(name="to_time", type="smallint")
      *
      * @Assert\NotBlank()
+     *
+     * @Serializer\Expose
+     * @Serializer\Type("string")
      */
     protected $to;
 
@@ -68,8 +91,17 @@ class Timing
      * @ORM\Column(name="number_of_slots", type="smallint", options={"default": 0})
      *
      * @Assert\NotBlank()
+     *
+     * @Serializer\Expose
      */
     protected $numberOfSlots;
+
+    /**
+     * @Serializer\Expose
+     *
+     * @fixme: Remove this hardcoded value
+     */
+    protected $availableSlots = 3;
 
     /**
      * @var \DateTime
@@ -90,27 +122,41 @@ class Timing
     protected $updatedAt;
 
     /**
-     * Set day.
+     * Timing Constructor.
      *
-     * @param int $day
+     * @param Branch $branch
+     * @param int    $dayBooked
+     * @param int    $from
+     */
+    public function __construct(Branch $branch = null, $dayBooked = null, $from = null)
+    {
+        $this->branch = $branch;
+        $this->dayBooked = $dayBooked;
+        $this->from = $from;
+    }
+
+    /**
+     * Set dayBooked.
+     *
+     * @param int $dayBooked
      *
      * @return Timing
      */
-    public function setDay($day)
+    public function setDayBooked($dayBooked)
     {
-        $this->day = $day;
+        $this->dayBooked = $dayBooked;
 
         return $this;
     }
 
     /**
-     * Get day.
+     * Get dayBooked.
      *
      * @return int
      */
-    public function getDay()
+    public function getDayBooked()
     {
-        return $this->day;
+        return $this->dayBooked;
     }
 
     /**
@@ -255,5 +301,36 @@ class Timing
     public function getBranch()
     {
         return $this->branch;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * @Serializer\VirtualProperty
+     * @Serializer\SerializedName("name")
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        if ($this->branch && !is_null($this->dayBooked) && !is_null($this->from) && !is_null($this->to)) {
+            return sprintf('%s - %s (%s - %s)', $this->branch->getName(), DayType::getDays()[$this->dayBooked], $this->from, $this->to);
+        }
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

@@ -4,26 +4,15 @@ namespace Wbc\BranchBundle\Doctrine\DBAL\Types;
 
 use Doctrine\DBAL\Types\ObjectType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use JMS\DiExtraBundle\Annotation as DI;
-use JMS\Serializer\Serializer;
 
 /**
  * Class TimingType.
- *
- * @DI\Service()
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
  */
 class TimingType extends ObjectType
 {
     const TYPE_NAME = 'branch_timing_object';
-
-    /**
-     * @var Serializer
-     *
-     * @DI\Inject("serializer")
-     */
-    public $serializer;
 
     /**
      * {@inheritdoc}
@@ -39,7 +28,14 @@ class TimingType extends ObjectType
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         if ($value) {
-            return $this->serializer->deserialize($value, '\Wbc\BranchBundle\Entity\Timing', 'json');
+            $value = (is_resource($value)) ? stream_get_contents($value) : $value;
+            $val = unserialize($value);
+
+            if ($val === false && $value !== 'b:0;') {
+                throw ConversionException::conversionFailed($value, $this->getName());
+            }
+
+            return $val;
         }
     }
 
@@ -49,7 +45,7 @@ class TimingType extends ObjectType
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
         if ($value) {
-            return $this->serializer->serialize($value, 'json');
+            return serialize($value);
         }
     }
 }

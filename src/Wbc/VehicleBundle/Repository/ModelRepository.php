@@ -21,7 +21,7 @@ class ModelRepository extends EntityRepository
             ->getResult();
     }
 
-    public function findByMakeId($makeId, $offset = 0, $limit = 100)
+    public function findByMakeId($makeId, $offset = 0, $limit = 200)
     {
         return $this->createQueryBuilder('model')
             ->innerJoin('model.make', 'make')

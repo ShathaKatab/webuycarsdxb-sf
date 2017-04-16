@@ -494,4 +494,25 @@ class ModelType
         //remove the driver's seat
         return $this->seats ? $this->seats - 1 : $this->seats;
     }
+
+    /**
+     * @Serializer\VirtualProperty
+     * @Serializer\SerializedName("name")
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return sprintf('%s - %s - %s - %s (%s)', $this->trim, $this->bodyType, $this->transmission, $this->isGcc ? 'GCC' : 'Non-GCC', number_format($this->engine/1000, 1));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+
 }

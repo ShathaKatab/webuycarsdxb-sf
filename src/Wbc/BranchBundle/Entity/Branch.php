@@ -434,4 +434,9 @@ class Branch
     {
         return $this->timings;
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

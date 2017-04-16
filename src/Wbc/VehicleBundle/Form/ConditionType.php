@@ -3,6 +3,7 @@
 namespace Wbc\VehicleBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -19,7 +20,7 @@ class ConditionType extends AbstractType
     {
         $resolver->setDefaults([
             'label' => 'Vehicle Condition',
-            'choices' => ['fair' => 'Fair', 'good' => 'Good', 'excellent' => 'Excellent'],
+            'choices' => self::getConditions(),
             'placeholder' => '', ]);
     }
 
@@ -28,7 +29,7 @@ class ConditionType extends AbstractType
      */
     public function getParent()
     {
-        return 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
+        return ChoiceType::class;
     }
 
     /**
@@ -45,5 +46,13 @@ class ConditionType extends AbstractType
     public function getName()
     {
         return $this->getBlockPrefix();
+    }
+
+    /**
+     * @return array
+     */
+    public static function getConditions()
+    {
+        return ['fair' => 'Fair', 'good' => 'Good', 'excellent' => 'Excellent', 'other' => 'Other',];
     }
 }

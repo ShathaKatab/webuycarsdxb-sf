@@ -1,0 +1,11 @@
+{% extends 'SonataAdminBundle:CRUD:edit.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/vendor/blockUI/jquery.blockUI.js') }}"></script>
+    {% javascripts
+        '@WbcBranchBundle/Resources/public/js/edit.js'
+    %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+{% endblock %}

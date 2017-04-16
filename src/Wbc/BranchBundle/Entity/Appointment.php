@@ -4,6 +4,7 @@ namespace Wbc\BranchBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
+use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
 use Wbc\VehicleBundle\Entity\ModelType;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -21,6 +22,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Appointment
 {
+    const STATUS_ACTIVE = 'active';
+    const STATUS_CANCELLED = 'cancelled';
+    const STATUS_OFFER_ACCEPTED = 'offer_accepted';
+    const STATUS_OFFER_REJECTED = 'offer_rejected';
+    const STATUS_INVALID = 'invalid';
+
     /**
      * @var int
      *
@@ -70,6 +77,14 @@ class Appointment
     protected $nationality;
 
     /**
+     * @var Make
+     *
+     * @ORM\ManyToOne(targetEntity="\Wbc\VehicleBundle\Entity\Make")
+     * @ORM\JoinColumn(name="vehicle_make_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     */
+    protected $vehicleMake;
+
+    /**
      * @var Model
      *
      * @ORM\ManyToOne(targetEntity="\Wbc\VehicleBundle\Entity\Model")
@@ -86,6 +101,28 @@ class Appointment
     protected $vehicleModelType;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="vehicle_year", type="smallint")
+     *
+     * @Assert\NotBlank()
+     *
+     * @Serializer\Expose()
+     */
+    protected $vehicleYear;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vehicle_transmission", type="string", length=15)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Serializer\Expose()
+     */
+    protected $vehicleTransmission;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="vehicle_trim", type="string", length=100)
@@ -99,24 +136,13 @@ class Appointment
     /**
      * @var int
      *
-     * @ORM\Column(name="vehicle_mileage_from", type="integer")
+     * @ORM\Column(name="vehicle_mileage", type="bigint")
      *
      * @Assert\NotBlank()
      *
      * @Serializer\Expose()
      */
-    protected $vehicleMileageFrom;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="vehicle_mileage_to", type="integer")
-     *
-     * @Assert\NotBlank()
-     *
-     * @Serializer\Expose()
-     */
-    protected $vehicleMileageTo;
+    protected $vehicleMileage;
 
     /**
      * @var string
@@ -141,18 +167,44 @@ class Appointment
     protected $vehicleBodyCondition;
 
     /**
+     * @var Branch
+     */
+    protected $branch;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_booked", type="date")
+     */
+    protected $dateBooked;
+
+    /**
+     * @var string
+     */
+    protected $from;
+
+    /**
+     * @var string
+     */
+    protected $to;
+
+    /**
      * @var Timing
      *
      * @ORM\ManyToOne(targetEntity="\Wbc\BranchBundle\Entity\Timing")
-     * @ORM\JoinColumns({@ORM\JoinColumn(name="branch_id", referencedColumnName="branch_id", onDelete="SET NULL", nullable=true),
-     * @ORM\JoinColumn(name="day", referencedColumnName="day", onDelete="SET NULL", nullable=true),
-     * @ORM\JoinColumn(name="from_time", referencedColumnName="from_time", onDelete="SET NULL", nullable=true)})
+     * @ORM\JoinColumn(name="branch_timing", referencedColumnName="id", onDelete="SET NULL", nullable=true)})
      *
-     * @Assert\NotBlank()
      *
      * @Serializer\Expose()
      */
     protected $branchTiming;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=20)
+     */
+    protected $status;
 
     /**
      * @var \DateTime
@@ -184,6 +236,14 @@ class Appointment
      * @Serializer\Expose()
      */
     protected $details;
+
+    /**
+     * Appointment Constructor.
+     */
+    public function __construct()
+    {
+        $this->status = self::STATUS_ACTIVE;
+    }
 
     /**
      * Get id.
@@ -313,54 +373,6 @@ class Appointment
     public function getVehicleTrim()
     {
         return $this->vehicleTrim;
-    }
-
-    /**
-     * Set vehicleMileageFrom.
-     *
-     * @param int $vehicleMileageFrom
-     *
-     * @return Appointment
-     */
-    public function setVehicleMileageFrom($vehicleMileageFrom)
-    {
-        $this->vehicleMileageFrom = $vehicleMileageFrom;
-
-        return $this;
-    }
-
-    /**
-     * Get vehicleMileageFrom.
-     *
-     * @return int
-     */
-    public function getVehicleMileageFrom()
-    {
-        return $this->vehicleMileageFrom;
-    }
-
-    /**
-     * Set vehicleMileageTo.
-     *
-     * @param int $vehicleMileageTo
-     *
-     * @return Appointment
-     */
-    public function setVehicleMileageTo($vehicleMileageTo)
-    {
-        $this->vehicleMileageTo = $vehicleMileageTo;
-
-        return $this;
-    }
-
-    /**
-     * Get vehicleMileageTo.
-     *
-     * @return int
-     */
-    public function getVehicleMileageTo()
-    {
-        return $this->vehicleMileageTo;
     }
 
     /**
@@ -553,5 +565,235 @@ class Appointment
     public function getDetails()
     {
         return $this->details;
+    }
+
+    /**
+     * Gets statuses.
+     *
+     * @return array
+     */
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_CANCELLED => 'Cancelled',
+            self::STATUS_OFFER_ACCEPTED => 'Offer Accepted',
+            self::STATUS_OFFER_REJECTED => 'Offer Rejected',
+            self::STATUS_INVALID => 'Invalid',
+        ];
+    }
+
+    /**
+     * Set status.
+     *
+     * @param string $status
+     *
+     * @return Appointment
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status.
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Get vehicleMake.
+     *
+     * @return Make
+     */
+    public function getVehicleMake()
+    {
+        return $this->vehicleMake;
+    }
+
+    /**
+     * Set vehicleMake.
+     *
+     * @param Make $vehicleMake
+     *
+     * @return $this
+     */
+    public function setVehicleMake(Make $vehicleMake)
+    {
+        $this->vehicleMake = $vehicleMake;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicleMileage.
+     *
+     * @return int
+     */
+    public function getVehicleMileage()
+    {
+        return $this->vehicleMileage;
+    }
+
+    /**
+     * Set vehicleMileage.
+     *
+     * @param $vehicleMileage
+     *
+     * @return $this
+     */
+    public function setVehicleMileage($vehicleMileage)
+    {
+        $this->vehicleMileage = $vehicleMileage;
+
+        return $this;
+    }
+
+    /**
+     * Set vehicleYear.
+     *
+     * @param int $vehicleYear
+     *
+     * @return Appointment
+     */
+    public function setVehicleYear($vehicleYear)
+    {
+        $this->vehicleYear = $vehicleYear;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicleYear.
+     *
+     * @return int
+     */
+    public function getVehicleYear()
+    {
+        return $this->vehicleYear;
+    }
+
+    /**
+     * Set vehicleTransmission.
+     *
+     * @param string $vehicleTransmission
+     *
+     * @return Appointment
+     */
+    public function setVehicleTransmission($vehicleTransmission)
+    {
+        $this->vehicleTransmission = $vehicleTransmission;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicleTransmission.
+     *
+     * @return string
+     */
+    public function getVehicleTransmission()
+    {
+        return $this->vehicleTransmission;
+    }
+
+    /**
+     * Get branch.
+     *
+     * @return Branch
+     */
+    public function getBranch()
+    {
+        return $this->branch;
+    }
+
+    /**
+     * Set branch.
+     *
+     * @param $branch
+     *
+     * @return $this
+     */
+    public function setBranch($branch)
+    {
+        $this->branch = $branch;
+
+        return $this;
+    }
+
+    /**
+     * Get date.
+     *
+     * @return \DateTime
+     */
+    public function getDateBooked()
+    {
+        return $this->dateBooked;
+    }
+
+    /**
+     * Set date.
+     *
+     * @param \DateTime $dateBooked
+     *
+     * @return $this
+     */
+    public function setDateBooked(\DateTime $dateBooked)
+    {
+        $this->dateBooked = $dateBooked;
+
+        return $this;
+    }
+
+    /**
+     * Get from.
+     *
+     * @return string
+     */
+    public function getFrom()
+    {
+        return $this->from;
+    }
+
+    /**
+     * Set from.
+     *
+     * @param string $from
+     *
+     * @return $this
+     */
+    public function setFrom($from)
+    {
+        $this->from = $from;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTo()
+    {
+        return $this->to;
+    }
+
+    /**
+     * Set to.
+     *
+     * @param $to
+     *
+     * @return $this
+     */
+    public function setTo($to)
+    {
+        $this->to = $to;
+
+        return $this;
     }
 }

@@ -74,6 +74,20 @@ class AppointmentDetails
     protected $branchTiming;
 
     /**
+     * AppointmentDetails Constructor.
+     *
+     * @param Appointment $appointment
+     * @param Branch      $branch
+     * @param Timing      $timing
+     */
+    public function __construct(Appointment $appointment, Branch $branch, Timing $timing)
+    {
+        $this->appointment = $appointment;
+        $this->branch = $branch;
+        $this->branchTiming = $timing;
+    }
+
+    /**
      * Set vehicleMakeName.
      *
      * @param string $vehicleMakeName

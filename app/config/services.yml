@@ -32,5 +32,11 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Branch Timings, group: "Appointments Section" }
 
+    admin.branch.appointment:
+        class: Wbc\BranchBundle\Admin\AppointmentAdmin
+        arguments: [~, Wbc\BranchBundle\Entity\Appointment, WbcBranchBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Appointments, group: "Appointments Section" }
+
 
 

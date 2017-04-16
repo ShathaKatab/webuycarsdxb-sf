@@ -20,5 +20,5 @@ parameters:
 
     # Domains
     web_domain: @domain.com
-    api_domain: @domain.com
-    mongodb_server: "mongodb://localhost/27017"
+    #api_domain: @domain.com
+    #mongodb_server: "mongodb://localhost/27017"

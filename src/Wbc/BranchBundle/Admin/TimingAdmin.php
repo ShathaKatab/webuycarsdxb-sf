@@ -8,9 +8,10 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Wbc\BranchBundle\Form\DayType;
+use Wbc\BranchBundle\Entity\Branch;
 
 /**
  * Class TimingAdmin.
@@ -27,22 +28,11 @@ class TimingAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('branch', EntityType::class, [
-            'class' => 'Wbc\BranchBundle\Entity\Branch',
+            'class' => Branch::class,
             'property' => 'name',
             'placeholder' => '-- Select a Branch --',
         ])
-            ->add('day', ChoiceType::class, [
-                'choices' => [
-                    6 => 'Saturday',
-                    7 => 'Sunday',
-                    1 => 'Monday',
-                    2 => 'Tuesday',
-                    3 => 'Wednesday',
-                    4 => 'Thursday',
-                    5 => 'Friday',
-                ],
-                'placeholder' => '-- Select a Day --',
-            ])
+            ->add('dayBooked', DayType::class)
             ->add('from', TextType::class, [
                 'help' => 'e.g. 09:00',
             ])
@@ -70,16 +60,8 @@ class TimingAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->add('branch.name')
-            ->add('day', 'choice', [
-                'choices' => [
-                    6 => 'Saturday',
-                    7 => 'Sunday',
-                    1 => 'Monday',
-                    2 => 'Tuesday',
-                    3 => 'Wednesday',
-                    4 => 'Thursday',
-                    5 => 'Friday',
-                ],
+            ->add('dayBooked', 'choice', [
+                'choices' => DayType::getDays(),
             ])
             ->add('from')
             ->add('to')
@@ -95,7 +77,7 @@ class TimingAdmin extends Admin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper->add('branch.name')
-            ->add('day')
+            ->add('dayBooked')
             ->add('from')
             ->add('to')
             ->add('numberOfSlots');

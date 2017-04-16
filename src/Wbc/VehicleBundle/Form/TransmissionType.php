@@ -3,6 +3,7 @@
 namespace Wbc\VehicleBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -19,8 +20,9 @@ class TransmissionType extends AbstractType
     {
         $resolver->setDefaults([
             'label' => 'Vehicle Transmission',
-            'choices' => ['automatic' => 'Automatic', 'manual' => 'Manual'],
-            'placeholder' => '', ]);
+            'choices' => self::getTransmissions(),
+            'placeholder' => '',
+        ]);
     }
 
     /**
@@ -28,7 +30,7 @@ class TransmissionType extends AbstractType
      */
     public function getParent()
     {
-        return 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
+        return ChoiceType::class;
     }
 
     /**
@@ -45,5 +47,13 @@ class TransmissionType extends AbstractType
     public function getName()
     {
         return $this->getBlockPrefix();
+    }
+
+    /**
+     * @return array
+     */
+    public static function getTransmissions()
+    {
+        return ['automatic' => 'Automatic', 'manual' => 'Manual', 'other' => 'Other',];
     }
 }
