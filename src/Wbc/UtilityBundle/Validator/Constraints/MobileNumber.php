@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints\Regex;
 class MobileNumber extends Regex
 {
     public $message = 'Mobile number is not valid';
-    public $pattern = '/^(0|((\+|00)?971))(2|3|4|6|7|9|50|52|55|56)\d{7}$/';
+    public $pattern = '/^(0|((\+|00)?971))(2|3|4|6|7|9|50|52|54|55|56)\d{7}$/';
     public $match = true;
 
     public function validatedBy()

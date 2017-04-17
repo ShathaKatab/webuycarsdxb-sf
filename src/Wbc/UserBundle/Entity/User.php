@@ -2,7 +2,6 @@
 
 namespace Wbc\UserBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -68,7 +67,7 @@ class User extends BaseUser
     /**
      * @var Profile
      *
-     * @ORM\OneToOne(targetEntity="Wbc\UserBundle\Entity\Profile", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Wbc\UserBundle\Entity\Profile", mappedBy="user", cascade={"persist"}, fetch="EAGER")
      *
      * @Serializer\Expose
      */
@@ -91,6 +90,11 @@ class User extends BaseUser
     protected $updatedAt;
 
     /**
+     * @var bool
+     */
+    protected $admin;
+
+    /**
      * @var string
      */
     protected $fullName;
@@ -98,9 +102,9 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
-        $this->listings = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
+        $this->profile = new Profile($this);
     }
 
     /**
@@ -262,5 +266,27 @@ class User extends BaseUser
     public function setFullName($fullName)
     {
         $this->fullName = $fullName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->hasRole('ROLE_SUPER_ADMIN');
+    }
+
+    /**
+     * @param bool $isAdmin
+     */
+    public function setAdmin($isAdmin)
+    {
+        $this->admin = $isAdmin;
+
+        if (boolval($isAdmin) === true) {
+            $this->addRole('ROLE_SUPER_ADMIN');
+        } else {
+            $this->removeRole('ROLE_SUPER_ADMIN');
+        }
     }
 }

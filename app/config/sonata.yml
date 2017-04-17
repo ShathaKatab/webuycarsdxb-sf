@@ -4,3 +4,49 @@ sonata_block:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
+sonata_admin:
+    dashboard:
+        blocks:
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: ["Appointments Section"]
+                roles: [ROLE_BUYER]
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: ["Branches Section"]
+                roles: [ROLE_SUPER_ADMIN]
+            -
+                position: right
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: ["Users Section"]
+                roles: [ROLE_SUPER_ADMIN]
+
+services:
+    admin.branch.appointment:
+        class: Wbc\BranchBundle\Admin\AppointmentAdmin
+        arguments: [~, Wbc\BranchBundle\Entity\Appointment, WbcBranchBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Appointments, group: "Appointments Section" }
+
+    admin.branch:
+        class: Wbc\BranchBundle\Admin\BranchAdmin
+        arguments: [~, Wbc\BranchBundle\Entity\Branch, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Branches, group: "Branches Section" }
+
+    admin.branch.timing:
+        class: Wbc\BranchBundle\Admin\TimingAdmin
+        arguments: [~, Wbc\BranchBundle\Entity\Timing, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Branch Timings, group: "Branches Section" }
+
+    admin.branch.user:
+        class: Wbc\UserBundle\Admin\UserAdmin
+        arguments: [~, Wbc\UserBundle\Entity\User, WbcUserBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Users, group: "Users Section" }
