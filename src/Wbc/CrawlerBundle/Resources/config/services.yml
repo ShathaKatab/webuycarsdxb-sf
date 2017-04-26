@@ -1,0 +1,4 @@
+services:
+#    wbc_crawler.example:
+#        class: Wbc\CrawlerBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

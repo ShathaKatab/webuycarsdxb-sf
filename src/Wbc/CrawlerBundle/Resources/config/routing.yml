@@ -1,0 +1,3 @@
+wbc_crawler_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: WbcCrawlerBundle:Default:index }
