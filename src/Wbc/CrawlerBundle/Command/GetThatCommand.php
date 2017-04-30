@@ -21,12 +21,6 @@ class GetThatCommand extends ClassifiedsCommand
     protected $source = 'getthat.com';
     protected $siteName = 'getthat';
     protected $adsUrl = 'https://tfa301y859-dsn.algolia.net/1/indexes/*/queries';
-    protected $parameters = [
-        'x-algolia-agent' => 'Algolia for vanilla JavaScript 3.22.1;JS Helper 2.20.1',
-        'x-algolia-application-id' => 'TFA301Y859',
-        'x-algolia-api-key' => 'ZjA4MjgyZTg3ZGJkMTA1OWQ5OTNkODJmMzgyZjAyZGY3YjMzMjEyMTVjZmViYTU3ZWZiNmEyZTFhNDIzOWM1YWZpbHRlcnM9aXNWaXNpYmxlJTNBJTIwdHJ1ZQ==',
-    ];
-
     protected $makes = ['Alfa Romeo', 'Audi', 'BMW', 'Bentley', 'Cadillac', 'Chevrolet', 'Chrysler', 'Daewoo', 'Daihatsu', 'Dodge', 'Ferrari', 'Ford', 'GMC', 'Great Wall', 'Honda', 'Hummer', 'Hyundai', 'Infiniti', 'Isuzu', 'Jaguar', 'Jeep', 'Kia', 'Land Rover', 'Lexus', 'Lincoln', 'Luxgen', 'MG', 'Mazda', 'Mercedes-Benz', 'Mini', 'Mitsubishi', 'Nissan', 'Peugeot', 'Pontiac', 'Porsche', 'Range Rover', 'Renault', 'Saab', 'Subaru', 'Suzuki', 'TATA', 'Toyota', 'Volkswagen', 'Volvo', 'ZX Auto'];
 
     protected function configure()
@@ -41,6 +35,7 @@ class GetThatCommand extends ClassifiedsCommand
     {
         $page = 0;
         $perPage = 1000;
+        $parameters = $this->getContainer()->getParameter('crawler_getthat_auth');
 
         foreach ($this->makes as $make) {
             $formData = [
@@ -57,7 +52,7 @@ class GetThatCommand extends ClassifiedsCommand
             $response = $this->guzzleClient->post($this->adsUrl, [
                 'body' => json_encode($formData),
                 'headers' => ['content-type' => 'application/json'],
-                'query' => $this->parameters,
+                'query' => $parameters,
             ]);
 
             try {

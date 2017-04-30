@@ -373,7 +373,7 @@ class ClassifiedsAd
      */
     public function setCylinders($cylinders)
     {
-        $this->cylinders = $cylinders;
+        $this->cylinders = intval($cylinders);
 
         return $this;
     }

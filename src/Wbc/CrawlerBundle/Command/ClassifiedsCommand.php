@@ -16,6 +16,8 @@ abstract class ClassifiedsCommand extends BaseCommand
 {
     protected $types = array('makes-models', 'ads');
     protected $siteName = '';
+    protected $yearFrom = 2000;
+    protected $yearTo = null;
 
     protected function configure()
     {
@@ -25,6 +27,7 @@ abstract class ClassifiedsCommand extends BaseCommand
     {
         parent::execute($input, $output);
 
+        $this->yearTo = (new \DateTime())->add(new \DateInterval('P1Y'))->format('Y');
         $type = $input->getArgument('type');
 
         if (!in_array($type, $this->types)) {

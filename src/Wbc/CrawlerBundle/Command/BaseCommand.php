@@ -15,11 +15,11 @@ use GuzzleHttp\Client;
 abstract class BaseCommand extends ContainerAwareCommand
 {
     protected $url = '';
-    protected $userAgent = 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0';
+    protected $userAgent = '';
     protected $source = '';
 
     /**
-     * @var \Doctrine\Common\Persistence\ObjectManager
+     * @var \Doctrine\ORM\EntityManager
      */
     protected $entityManager;
 
@@ -43,6 +43,7 @@ abstract class BaseCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->userAgent = $this->getContainer()->getParameter('crawler_user_agent');
         $this->entityManager = $this->getContainer()->get('doctrine')->getManager('default');
         $this->guzzleClient = new Client([
             'base_uri' => $this->url,
