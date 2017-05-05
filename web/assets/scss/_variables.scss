@@ -1,0 +1,39 @@
+@import "bootstrap/bootstrap/variables";
+@import "font-awesome/variables";
+
+//== Navbar
+$navbar-default-bg: #fff;
+$navbar-height:     120px;
+$navbar-padding-vertical: 7px;
+$grid-float-breakpoint: 1500px;
+$steps-height: 31px;
+$steps-container-top: $navbar-height/2 - $steps-height/2;
+
+
+//== Colors
+$apple-green-color: #7ed321;
+$sunflower-yellow-color: #ffcd00;
+$aqua-marine-color: #51e3c2;
+$dark-color: #222222;
+$grey-color: #f7f7f7;
+$greyish-brown-color: #535353;
+$greyish-brown-two-color: #555555;
+$grey-light-color: #d8d8d8;
+$white-color: #ffffff;
+$pinkish-grey-color: #ccc;
+$lightish-grey-color: #666;
+
+//== Typography
+$font-family-base: "Montserrat";
+$headings-font-family: "Somatic-Rounded";
+$headings-color: $dark-color;
+$icon-font-path: "../fonts/bootstrap/";
+$fa-font-path: "../fonts/font-awesome";
+$font-path-montserrat: "../fonts/montserrat";
+$font-path-somatic-rounded: "../fonts/somatic-rounded";
+$jumbotron-bg: $white-color;
+
+//== Elements
+$body-bg: $white-color;
+$form-control-height: 52px;
+$form-group-margin-bottom: 12px

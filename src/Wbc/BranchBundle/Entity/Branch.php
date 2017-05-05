@@ -14,7 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @author Majid Mvulle <majid@majidmvulle.com>
  *
  * @ORM\Table(name="branch")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Wbc\BranchBundle\Repository\BranchRepository")
  *
  * @Serializer\ExclusionPolicy("all")
  */
@@ -437,6 +437,12 @@ class Branch
 
     public function __toString()
     {
-        return $this->getName();
+        $name = $this->getName();
+
+        if ($name) {
+            return $this->getName();
+        }
+
+        return '';
     }
 }

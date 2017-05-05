@@ -1,4 +1,6 @@
 services:
-#    wbc_branch.example:
-#        class: Wbc\BranchBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    wbc.branch.branch_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - Wbc\BranchBundle\Entity\Branch

@@ -1,0 +1,36 @@
+.btn {
+  font-family: $headings-font-family;
+  width: 100%;
+  font-size: 100%;
+  border-radius: 100px;
+  color: $headings-color;
+  border-color: transparent;
+  line-height: 22px;
+
+  &:hover, &:focus, &:active, &:visited {
+    border-color: transparent;
+    color: inherit;
+    outline: 0;
+  }
+}
+
+.btn-primary {
+  background-color: #FFCD00;
+
+  &:hover, &:focus, &:active, &:visited {
+    color: inherit;;
+    background-color: #fbdb57;
+    border-color: transparent;
+    outline: 0;
+  }
+}
+
+.btn-lg, .btn-lg, .btn-group-lg > .btn {
+  padding: 19px 16px;
+}
+
+#sell-any-car-you-have {
+  button {
+    margin-top: -5px;
+  }
+}

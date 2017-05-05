@@ -1,0 +1,47 @@
+#jumbotron-steps-container {
+  .steps {
+    font-size: 16px;
+    height: $form-control-height;
+    line-height: 23px;
+    margin-bottom: $form-group-margin-bottom;
+    &.one {
+      background-color: $sunflower-yellow-color;
+      .number {
+        background-color: $white-color;
+      }
+    }
+
+    &.two {
+      background-color: $aqua-marine-color;
+      .number {
+        background-color: $white-color;
+      }
+    }
+
+    &.three {
+      background-color: $apple-green-color;
+      .number {
+        background-color: $white-color;
+      }
+    }
+
+    .number {
+      width: $form-control-height;
+      line-height: 45px;
+    }
+
+    .description {
+      padding-left: 68px;
+      line-height: 45px;
+    }
+
+    h2 {
+      margin-bottom: $line-height-computed / 2;
+    }
+  }
+
+}
+
+.jumbotron {
+  padding: (122 - $line-height-computed) 115px 0 115px;
+}

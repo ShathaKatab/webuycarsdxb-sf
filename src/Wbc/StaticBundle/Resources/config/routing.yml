@@ -1,0 +1,3 @@
+wbc_static_homepage:
+    type: annotation
+    resource: "@WbcStaticBundle/Controller/DefaultController.php"

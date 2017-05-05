@@ -1,0 +1,78 @@
+
+input.form-control {
+  border-radius: 2px;
+  background-color: $white-color;
+  border: solid 0.5px $pinkish-grey-color;
+  height: $form-control-height;
+}
+
+select.form-control {
+  -webkit-appearance: menulist-button;
+  height: $form-control-height;
+}
+
+select.form-control, input.form-control, textarea.form-control{
+  opacity: .5;
+}
+
+textarea{
+  resize: vertical;
+}
+
+#sell-any-car-you-have select.form-control{
+  opacity: 1;
+}
+
+.form-control {
+  font-family: $font-family-base;
+  box-shadow: none;
+  color: $lightish-grey-color;
+  font-size: 12px;
+  font-weight: 100;
+  line-height: 22px;
+  &:focus {
+    box-shadow: none;
+    border-color: inherit;
+  }
+}
+
+.form-group.submit {
+  margin-top: $form-group-margin-bottom + 8;
+}
+
+@media (min-width: 768px) {
+  .form-inline .form-control {
+    width: 100%;
+  }
+}
+
+#book-appointment-form{
+  form{
+    border-top: 1px solid $grey-light-color;
+    border-bottom: 1px solid $grey-light-color;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .p-italic{
+    padding-top: 30px;
+  }
+}
+
+#contact-us-form-container{
+  border-bottom: 1px solid $grey-light-color;
+  padding-bottom: 64px;
+
+  textarea{
+    height: $input-height-small * 4 + $form-group-margin-bottom * 5;
+  }
+
+  button{
+    margin-top: $form-group-margin-bottom + 9;
+  }
+}
+
+#contact-us-branches-container{
+  padding-top: 37px;
+  padding-bottom: 98px;
+}

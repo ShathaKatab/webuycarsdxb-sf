@@ -1,0 +1,28 @@
+.inline-block {
+  display: inline-block;
+}
+
+.bg-grey {
+  background-color: $grey-color;
+  color: $dark-color;
+}
+
+.bg-white {
+  background-color: $white-color;
+}
+
+.bg-aqua-marine {
+  background-color: $aqua-marine-color;
+}
+
+.bg-grey {
+  background-color: $grey-color;
+}
+
+.bg-dark-color {
+  background-color: $dark-color;
+}
+
+.border-lg-dark-color{
+  border: 1px solid $dark-color;
+}

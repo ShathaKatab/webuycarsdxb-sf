@@ -1,0 +1,80 @@
+@import "variables";
+@import "fonts";
+@import "bootstrap/bootstrap-sprockets";
+@import "bootstrap/bootstrap";
+@import "font-awesome/font-awesome";
+@import "navbar";
+@import "type";
+@import "jumbotron";
+@import "forms";
+@import "buttons";
+@import "utilities";
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url(#{$icon-font-path}#{$icon-font-name}.ttf) format('truetype');
+  src: url(#{$icon-font-path}#{$icon-font-name}.eot?#iefix) format('embedded-opentype'),
+  url(#{$icon-font-path}#{$icon-font-name}.woff) format('woff'),
+  url(#{$icon-font-path}#{$icon-font-name}.ttf) format('truetype'),
+  url(#{$icon-font-path}#{$icon-font-name}.svg##{$icon-font-svg-id}) format('svg');
+}
+
+.thumbnail{
+  border: none;
+  background-color: transparent;
+}
+
+#reviews{
+  background-color: $dark-color;
+  padding: 46px floor(($grid-gutter-width / 2)) 46px ceil(($grid-gutter-width / 2));
+
+  .img-circle{
+    max-width: 96px;
+    max-height: 96px;
+  }
+}
+
+#appointments-stats{
+  background: $apple-green-color url("../../images/appointments-bitmap.png") no-repeat;
+  background-size: 100%;
+  padding: 149px floor(($grid-gutter-width / 2)) 149px ceil(($grid-gutter-width / 2));
+}
+
+#mobile-friendly{
+  padding: 252px floor(($grid-gutter-width / 2)) 252px ceil(($grid-gutter-width / 2)) ;
+}
+
+#mobile-phone{
+  padding: 63px 38px;
+}
+
+#book-appointment-form{
+  padding: 94px 30px;
+}
+
+#book-appointment-button-container{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#book-appointment-map{
+  //  min-height: 650px;
+  max-height: 537px;
+  overflow: hidden;
+}
+
+#appointment-confirmation-map-container{
+  padding-top: ($line-height-computed + 90);
+}
+
+#appointment-confirmation-map{
+  max-height: 320px;
+  overflow: hidden;
+  padding-top: 18px;
+  margin-bottom: 120px;
+}
+
+#footer-contact {
+  background-color: $white-color;
+  padding: 103px floor(($grid-gutter-width / 2)) 103px ceil(($grid-gutter-width / 2));
+}

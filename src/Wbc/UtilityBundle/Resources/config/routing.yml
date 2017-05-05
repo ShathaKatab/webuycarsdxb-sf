@@ -1,3 +1,0 @@
-wbc_utility_homepage:
-    path:     /
-    defaults: { _controller: WbcUtilityBundle:Default:index }

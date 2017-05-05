@@ -40,3 +40,10 @@
 # Created by .ignore support plugin (hsz.mobi)
 
 .idea/
+
+/web/assets/app.js
+/web/assets/css
+/web/assets/bundles
+!/web/assets/angular/*
+!/web/assets/jquery/*
+

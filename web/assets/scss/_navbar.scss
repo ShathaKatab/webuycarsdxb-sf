@@ -1,0 +1,133 @@
+.navbar-default {
+  font-family: $headings-font-family;
+  color: $headings-color;
+  border-color: transparent;
+  box-shadow: 0 -2px 6px #000;
+  margin-bottom: 0;
+
+  a {
+    color: inherit;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .navbar-toggle {
+    border: none;
+    &:hover, &:focus {
+      border: inherit;
+      background-color: transparent;
+    }
+
+    .icon-bar:nth-of-type(2) {
+      top: 1px;
+    }
+    .icon-bar:nth-of-type(3) {
+      top: 2px;
+    }
+
+    .icon-bar {
+      background-color: $headings-color;
+      position: relative;
+      transition: all 500ms ease-in-out;
+    }
+  }
+
+  .navbar-toggle.active {
+    .icon-bar:nth-of-type(1) {
+      top: 6px;
+      transform: rotate(45deg);
+    }
+
+    .icon-bar:nth-of-type(2) {
+      background-color: transparent;
+    }
+
+    .icon-bar:nth-of-type(3) {
+      top: -6px;
+      transform: rotate(-45deg);
+    }
+  }
+
+  .navbar-nav {
+    > .active {
+      > a, a:hover, a:focus {
+        color: $headings-color;
+        background-color: transparent;
+
+      }
+    }
+
+  }
+}
+
+#header-form {
+  padding: 95px 0 150px 0;
+}
+
+#navbar-steps-container {
+  padding-top: $steps-container-top;
+  .steps.two:before, .steps.three:before{
+    width: 15px;
+    height: 11px;
+    content: " ";
+    background-image: url("../../images/right-arrow.svg");
+    position: absolute;
+    top: 11px;
+    left: -9px;
+  }
+}
+
+#navbar-phone-container {
+  padding-top: $steps-container-top;
+}
+
+.steps {
+  font-family: $headings-font-family;
+  font-size: 14px;
+  color: $headings-color;
+  border: 2px solid #000;
+  border-radius: 100px;
+  height: $steps-height;
+  width: 100%;
+  line-height: 27px;
+
+  .number {
+    height: inherit;
+    width: 31px;
+    margin-left: -2px;
+    margin-top: -2px;
+    padding: 0 12px;
+    border: inherit;
+    border-radius: inherit;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+  }
+}
+
+.navbar-default .navbar-nav > li > a{
+  color: $white-color;
+  &:hover, &:focus, &:active {
+    color: #bbbbbb;
+  }
+}
+.navbar-collapse{
+  width: 200px;
+  position: absolute;
+  right: 38%;
+  top: 102%;
+  background-color: $dark-color;
+  border-radius: 6%;
+  z-index: 9999;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.10);
+
+  a{
+    color: $white-color;
+    font-family: $font-family-base;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    &:hover, &:focus, &:active{
+      color: #bbbbbb;
+    }
+  }
+}
