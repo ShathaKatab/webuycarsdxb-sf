@@ -1,0 +1,131 @@
+{% extends '@WbcStatic/Default/base.html.twig' %}
+
+{% block header %}
+    <header>
+        <div class="jumbotron container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center">Selling your car should be as easy as 1 2 3!</h1>
+                </div>
+            </div>
+            <div id="header-form">
+                <div class="row">
+                    <div class="col-md-5 col-md-offset-1">
+                        <form class="form">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option value="">Vehicle Make</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option value="">Vehicle Model</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option value="">Vehicle Year</option>
+                                </select>
+                            </div>
+                            <div class="form-group submit">
+                                <button type="submit" class="btn btn-primary btn-lg">Get FREE Online Valuation
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="jumbotron-steps-container" class="col-md-4 col-md-offset-1">
+                        <div class="steps one">
+                            <h2 class="number pull-left">1</h2>
+
+                            <div class="description">Free Online Valuation</div>
+                        </div>
+                        <div class="steps two">
+                            <h2 class="number pull-left">2</h2>
+
+                            <div class="description">Book Appointment</div>
+                        </div>
+                        <div class="steps three">
+                            <h2 class="number pull-left">3</h2>
+
+                            <div class="description">Get Instant CASH!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    {% include 'WbcStaticBundle:partials:section-text.html.twig' with {'title': 'Porta Fusce Vulputate', 'content': '<p>Basking shark burrowing goby scythe butterfish thorny catfish gombessa moonfish." Snoek spiny
+                            eel jellynose
+                            fish freshwater hatchetfish zebra tilapia black dragonfish hammerhead shark cornetfish
+                            electric stargazer
+                            dartfish velvet catfish.</p>', 'buttonText': 'Get FREE Online Valuation'} %}
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div id="reviews" class="col-md-6">
+                    <h2 class="text-center color-white">Join over 5000 happy customers</h2>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <div class="thumbnail">
+                                <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}" alt="John Doe">
+                                <div class="caption">
+                                    <p class="color-white">Basking shark burrowing goby scythe butterfish thorny catfish gombessa moonfish."
+                                        Snoek spiny eel
+                                        jellynose fish freshwater hatchetfish zebra tilapia black dragonfish hammerhead
+                                        shark cornetfish
+                                        electric stargazer dartfish velvet catfish.</p>
+                                    <h3 class="text-center color-white">Steve Jobs</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="appointments-stats" class="col-md-6 appointments text-center">
+                    <div class="large-text">4,968</div>
+                    <p class="color-dark">appointments made so far</p>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <a href="/" class="btn btn-lg btn-default">Make a FREE Appointment</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container-fluid">
+            <div class="row">
+                <div id="mobile-friendly" class="col-md-6 col-md-offset-1">
+                    <h2>Mobile Friendly</h2>
+                    <p>Basking shark burrowing goby scythe butterfish thorny catfish gombessa moonfish." Snoek spiny eel
+                        jellynose fish freshwater hatchetfish zebra tilapia black dragonfish hammerhead shark cornetfish
+                        electric stargazer dartfish velvet catfish.</p>
+
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <a href="/" class="btn btn-lg btn-primary">Get FREE Online Valuation on the Go</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div id="mobile-phone">
+                        <img class="img-responsive" src="{{ asset('images/mobile-friendly.png') }}" srcset="{{ asset('images/mobile-friendly@2x.png') }}, {{ asset('images/mobile-friendly@3x.png') }}" alt="Mobile Friendly">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'WbcStaticBundle:partials:section-text.html.twig' with {'title': 'Join over 5,000 happy customers', 'content': '<p>Basking shark burrowing goby scythe butterfish thorny catfish gombessa moonfish." Snoek
+                                spiny eel jellynose
+                                fish freshwater hatchetfish zebra tilapia black dragonfish hammerhead shark cornetfish
+                                electric stargazer
+                                dartfish velvet catfish.</p>', 'buttonText': 'JOIN THEM'} %}
+
+    {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
+
+{% endblock %}
