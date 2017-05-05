@@ -47,3 +47,5 @@
 !/web/assets/angular/*
 !/web/assets/jquery/*
 
+.htaccess
+

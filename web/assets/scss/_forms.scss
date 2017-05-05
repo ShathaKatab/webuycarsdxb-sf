@@ -11,16 +11,8 @@ select.form-control {
   height: $form-control-height;
 }
 
-select.form-control, input.form-control, textarea.form-control{
-  opacity: .5;
-}
-
 textarea{
   resize: vertical;
-}
-
-#sell-any-car-you-have select.form-control{
-  opacity: 1;
 }
 
 .form-control {
