@@ -1,0 +1,20 @@
+{% extends '@WbcStatic/Default/base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+
+    <article class="text-center">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        {{ content|md2html }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
+
+{% endblock %}
