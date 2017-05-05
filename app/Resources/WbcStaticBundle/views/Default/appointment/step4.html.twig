@@ -1,0 +1,55 @@
+{% extends '@WbcStatic/Default/base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1>Hooray, John Doe!</h1>
+                    <p class="p-lg">
+                        The appointment for your <span class="text-bold">2014 Toyota 86</span><br>
+                        at <span class="text-bold">WeBuyCars - Al Barsha Mall, Dubai<br></span>
+                        on <span class="text-bold">Tuesday 20th April 2017</span><br>
+                        between <span class="text-bold">8:00AM - 9:00AM</span> is done
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-lg btn-primary">Edit the Appointment</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-lg btn-default border-lg-dark-color">
+                                <i class="fa fa-print" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Print
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div id="appointment-confirmation-map-container" class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>See how to get there and get paid</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div id="appointment-confirmation-map" class="col-md-10 col-md-offset-1">
+                    <img src="{{ asset('images/map-sample-horizontal.jpg') }}">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'WbcStaticBundle:partials:section-text.html.twig' with {'title': 'Porta Fusce Vulputate', 'content': '<p>Basking shark burrowing goby scythe butterfish thorny catfish gombessa moonfish." Snoek spiny
+                            eel jellynose
+                            fish freshwater hatchetfish zebra tilapia black dragonfish hammerhead shark cornetfish
+                            electric stargazer
+                            dartfish velvet catfish.</p>'} %}
+
+{% endblock %}
