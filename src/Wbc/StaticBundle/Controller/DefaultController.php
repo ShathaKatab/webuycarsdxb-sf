@@ -44,7 +44,7 @@ class DefaultController extends Controller
     public function articleAction($slug)
     {
         $slug = strtolower($slug);
-        $template = sprintf('WbcStaticBundle:Markdown:%s.md.twig', $slug);
+        $template = sprintf('WbcStaticBundle:markdown:%s.md.twig', $slug);
         $templating = $this->container->get('templating');
 
         if (!$templating->exists($template)) {
