@@ -1,6 +1,6 @@
 <?php
 
-namespace Wbc\UtilityBundle\Twig;
+namespace Wbc\BranchBundle\Twig;
 
 use Doctrine\ORM\EntityRepository;
 use JMS\DiExtraBundle\Annotation as DI;
@@ -16,9 +16,9 @@ use JMS\DiExtraBundle\Annotation as DI;
 class BranchTwigExtension extends \Twig_Extension
 {
     /**
-     * @var Markdown
+     * @var EntityRepository
      */
-    private $parser;
+    private $repository;
 
     /**
      * BranchTwigExtension Constructor.
