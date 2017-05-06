@@ -6,7 +6,16 @@ use Wbc\UtilityBundle\Validator\Constraints\MobileNumber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use JMS\DiExtraBundle\Annotation as DI;
 
+/**
+ * Class MobileNumberType.
+ *
+ * @author Majid Mvulle <majid@majidmvulle.com>
+ *
+ * @DI\FormType("wbc.utility.form.mobile_number")
+ * @DI\Tag(name="form.type", attributes={"alias": "wbc_utility_form_mobile_number"})
+ */
 class MobileNumberType extends AbstractType
 {
     /**
@@ -40,6 +49,6 @@ class MobileNumberType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'wbc_utility_mobile_number';
+        return 'wbc_utility_form_mobile_number';
     }
 }

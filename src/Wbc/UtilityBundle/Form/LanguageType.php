@@ -4,7 +4,16 @@ namespace Wbc\UtilityBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use JMS\DiExtraBundle\Annotation as DI;
 
+/**
+ * Class LanguageType.
+ *
+ * @author Majid Mvulle <majid@majidmvulle.com>
+ *
+ * @DI\FormType("wbc.utility.form.language")
+ * @DI\Tag(name="form.type", attributes={"alias": "wbc_utility_form_language"})
+ */
 class LanguageType extends AbstractType
 {
     /**
@@ -49,6 +58,6 @@ class LanguageType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'wbc_utility_language';
+        return 'wbc_utility_form_language';
     }
 }

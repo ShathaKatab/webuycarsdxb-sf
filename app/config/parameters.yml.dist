@@ -32,22 +32,29 @@ parameters:
         "x-algolia-api-key": "NzViZDhiMjdlYWU5OGVjOWRkYzQ5ZTE1NjNmZjFiMzgxZWY2NjZkZGFlMzFiYWU5NWM0NzcyNTMxNTU4M2Y4NXVzZXJUb2tlbj1jYWN1eG1naHNvd2d1dzJvMW4yNHhqeG5jZmhsMXVxeiZ2YWxpZFVudGlsPTE0OTM0MTY4MDA="
     crawler_user_agent: "Mozilla/5.0 (Windows NT 5.2; RW; rv:7.0a1) Gecko/20091211 SeaMonkey/9.23a1pre"
     site_title: "WeBuyCars"
-    company_name: "Fast Visit for estimating & evaluation Co."
+    company_name: "Smart Wheels Auctions Organization LLC."
     company_office_number: "Office #4711"
     company_office_building: "Aspin Tower"
     company_office_street: "Sheikh Zayed Road, Dubai UAE"
-    site_phone: "04 123 4567"
+    company_po_box: "212811"
+    company_office_phone: "+971 43 515 222"
+    site_phone: "04 351 5222"
     site_menu:
-        - slug: "about-us"
-          title: "About Us"
-        - slug: "how-it-works"
-          title: "How It Works"
-        - slug: "contact-us"
-          title: "Contact Us"
-        - slug: "terms-and-conditions"
-          title: "Terms & Conditions"
-        - slug: "privacy-policy"
-          title: "Privacy Policy"
+        -
+            slug: about-us
+            title: 'About Us'
+        -
+            slug: how-to-sell-my-car-in-dubai-made-easy-in-3-simple-steps
+            title: 'How to Sell My Car in Dubai Made Easy In 3 Simple Steps'
+        -
+            slug: contact-us
+            title: 'Contact Us'
+        -
+            slug: terms-and-conditions
+            title: 'Terms & Conditions'
+        -
+            slug: privacy-policy
+            title: 'Privacy Policy'
     site_facebook: "https://www.facebook.com/"
     site_twitter: "https://twitter.com/"
     site_instagram: "https://www.instagram.com/"

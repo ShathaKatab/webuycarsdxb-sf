@@ -4,11 +4,15 @@ namespace Wbc\UtilityBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use JMS\DiExtraBundle\Annotation as DI;
 
-/*
+/**
  * Class GenderType.
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
+ *
+ * @DI\FormType("wbc.utility.form.gender")
+ * @DI\Tag(name="form.type", attributes={"alias": "wbc_utility_form_gender"})
  */
 class GenderType extends AbstractType
 {
@@ -60,6 +64,6 @@ class GenderType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'wbc_utility_gender';
+        return 'wbc_utility_form_gender';
     }
 }

@@ -503,7 +503,7 @@ class ModelType
      */
     public function getName()
     {
-        return sprintf('%s - %s - %s - %s (%s)', $this->trim, $this->bodyType, $this->transmission, $this->isGcc ? 'GCC' : 'Non-GCC', number_format($this->engine/1000, 1));
+        return sprintf('%s - %s - %s (%sL)', $this->trim, $this->bodyType, $this->transmission, number_format($this->engine/1000, 1));
     }
 
     /**

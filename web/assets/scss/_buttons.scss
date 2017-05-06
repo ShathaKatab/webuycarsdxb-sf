@@ -17,11 +17,20 @@
 .btn-primary {
   background-color: #FFCD00;
 
-  &:hover, &:focus, &:active, &:visited {
-    color: inherit;;
+  &:hover, &:focus, &:active {
+    color: inherit;
     background-color: #fbdb57;
     border-color: transparent;
     outline: 0;
+  }
+
+  &:active{
+    &:focus{
+      color: inherit;
+      background-color: #fbdb57;
+      border-color: transparent;
+      outline: 0;
+    }
   }
 }
 

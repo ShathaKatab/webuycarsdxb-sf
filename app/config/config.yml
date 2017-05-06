@@ -41,6 +41,8 @@ twig:
         company_office_number: "%company_office_number%"
         company_office_building: "%company_office_building%"
         company_office_street: "%company_office_street%"
+        company_po_box: "%company_po_box%"
+        company_office_phone: "%company_office_phone%"
         site_menu: "%site_menu%"
         site_facebook: "%site_facebook%"
         site_instagram: "%site_instagram%"

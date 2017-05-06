@@ -54,6 +54,12 @@ class SpecificationType extends AbstractType
      */
     public static function getSpecifications()
     {
-        return ['gcc' => 'GCC Specs', 'usa' => 'US Specs', 'jpn' => 'Japanese Specs', 'other' => 'Other'];
+        return [
+            'gcc' => 'GCC Specs',
+            'usa' => 'US Specs',
+            'jpn' => 'Japanese Specs',
+            'euro' => 'European Specs',
+            'other' => 'Other',
+        ];
     }
 }

@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Wbc\VehicleBundle\WbcVehicleBundle(),
             new Wbc\CrawlerBundle\WbcCrawlerBundle(),
             new Wbc\StaticBundle\WbcStaticBundle(),
+            new Wbc\ValuationBundle\WbcValuationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

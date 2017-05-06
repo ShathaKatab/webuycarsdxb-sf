@@ -29,7 +29,10 @@ class DefaultController extends Controller
     }
 
     /**
+     * Contact Us.
+     *
      * @CF\Route("/contact-us", name="wbc_static_default_contact_us")
+     * @CF\Method({"GET", "POST"})
      *
      * @return array
      */
@@ -39,7 +42,10 @@ class DefaultController extends Controller
     }
 
     /**
+     * Article.
+     *
      * @CF\Route("/{slug}", requirements={"slug": "[a-zA-Z1-9\-_\/]+"}, name="wbc_static_default_article")
+     * @CF\Method("GET")
      */
     public function articleAction($slug)
     {

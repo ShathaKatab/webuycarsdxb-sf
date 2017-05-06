@@ -1,0 +1,62 @@
+{% extends '@WbcStatic/Default/base.html.twig' %}
+
+{% block body %}
+
+    {{ parent() }}
+
+    {% include 'WbcStaticBundle:partials:valuation.html.twig' %}
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div id="book-appointment-form" class="col-md-6 bg-grey">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="p-somatic color-dark">Book an Appointment</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-md-6">Pick a branch</label>
+
+                                    <div class="col-md-6">
+                                        <select class="form-control">
+                                            <option value="">Choose a Branch</option>
+                                            {% for branch in getBranches() %}
+                                                <option value="{{ branch.id }}">{{ branch.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-6">Pick a date & time</label>
+
+                                    <div class="col-md-6">
+                                        <input type="date" class="form-control" placeholder="Choose a date">
+                                    </div>
+                                </div>
+                            </form>
+                            <p class="p-italic">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
+                                vestibulum.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="book-appointment-map" class="col-md-6">
+                    <img src="{{ asset('images/map-sample.jpg') }}">
+                </div>
+            </div>
+            <div class="row">
+                <div id="book-appointment-button-container" class="col-md-4 col-md-offset-4">
+                    <button class="btn btn-lg btn-primary">Book an Appointment and Get Paid</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'WbcStaticBundle:partials:section-text.html.twig' with {
+    'title': 'Put some text here',
+    'content': '<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>'} %}
+
+{% endblock %}

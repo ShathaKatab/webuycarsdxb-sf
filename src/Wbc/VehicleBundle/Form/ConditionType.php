@@ -53,6 +53,6 @@ class ConditionType extends AbstractType
      */
     public static function getConditions()
     {
-        return ['fair' => 'Fair', 'good' => 'Good', 'excellent' => 'Excellent', 'other' => 'Other',];
+        return ['fair' => 'Fair', 'good' => 'Good', 'excellent' => 'Excellent'];
     }
 }

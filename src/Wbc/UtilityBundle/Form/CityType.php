@@ -4,35 +4,25 @@ namespace Wbc\UtilityBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use JMS\DiExtraBundle\Annotation as DI;
+use Wbc\UtilityBundle\Model\City;
 
 /**
  * Class CityType.
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
+ *
+ * @DI\FormType("wbc.utility.form.city")
+ * @DI\Tag(name="form.type", attributes={"alias": "wbc_utility_form_city"})
  */
 class CityType extends AbstractType
 {
-    /**
-     * @var array
-     */
-    protected $choices;
-
-    /**
-     * Constructor.
-     *
-     * @param array $choices
-     */
-    public function __construct(array $choices)
-    {
-        $this->choices = $choices;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['label' => 'City', 'choices' => $this->choices, 'empty_value' => '']);
+        $resolver->setDefaults(['label' => 'City', 'choices' => City::getCitiesList(), 'empty_value' => '']);
     }
 
     /**
@@ -48,7 +38,7 @@ class CityType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'wbc_utility_city';
+        return 'wbc_utility_form_city';
     }
 
     /**

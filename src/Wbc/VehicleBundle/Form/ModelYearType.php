@@ -13,14 +13,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ModelYearType extends AbstractType
 {
-    protected $choices;
-
-    public function __construct()
-    {
-        $years = range(date('Y') + 1, date('Y') - 90);
-        $this->choices = array_combine($years, $years);
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -28,7 +20,7 @@ class ModelYearType extends AbstractType
     {
         $resolver->setDefaults([
             'label' => 'Vehicle Model Year',
-            'choices' => $this->choices,
+            'choices' => static::getYears(),
             'placeholder' => '',
         ]);
     }
@@ -55,5 +47,17 @@ class ModelYearType extends AbstractType
     public function getName()
     {
         return $this->getBlockPrefix();
+    }
+
+    /**
+     * Gets Years.
+     *
+     * @return array
+     */
+    public static function getYears()
+    {
+        $years = range(date('Y') + 1, date('Y') - 90);
+
+        return array_combine($years, $years);
     }
 }

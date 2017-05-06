@@ -1,3 +1,9 @@
+header h1, header .h1, article h1, article .h1{
+  &.inherit-margin-top{
+    margin-top: inherit;
+  }
+}
+
 .inline-block {
   display: inline-block;
 }

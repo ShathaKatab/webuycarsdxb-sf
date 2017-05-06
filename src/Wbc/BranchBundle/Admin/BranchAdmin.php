@@ -10,7 +10,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Wbc\UtilityBundle\Form\MobileNumberType;
+use Wbc\UtilityBundle\Form\PhoneNumberType;
 
 /**
  * Class BranchAdmin.
@@ -49,7 +49,7 @@ class BranchAdmin extends Admin
                     'ras-al-khaimah' => 'Ras Al Khaimah',
                 ],
             ])
-            ->add('phoneNumber', MobileNumberType::class, [
+            ->add('phoneNumber', PhoneNumberType::class, [
                 'help' => 'e.g. 041234567',
             ]);
     }

@@ -4,11 +4,12 @@ namespace Wbc\BranchBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
-use Wbc\VehicleBundle\Entity\Make;
+use Wbc\ValuationBundle\Entity\Valuation;
 use Wbc\VehicleBundle\Entity\Model;
 use Wbc\VehicleBundle\Entity\ModelType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Wbc\UserBundle\Entity\User;
 
 /**
  * Class Appointment.
@@ -31,9 +32,9 @@ class Appointment
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="guid")
+     * @ORM\Id()
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     protected $id;
 
@@ -68,27 +69,14 @@ class Appointment
     protected $emailAddress;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nationality", type="string", length=2, nullable=true)
-     *
-     * @Assert\Length(min=2, max=2)
-     */
-    protected $nationality;
-
-    /**
-     * @var Make
-     *
-     * @ORM\ManyToOne(targetEntity="\Wbc\VehicleBundle\Entity\Make")
-     * @ORM\JoinColumn(name="vehicle_make_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
-     */
-    protected $vehicleMake;
-
-    /**
      * @var Model
      *
      * @ORM\ManyToOne(targetEntity="\Wbc\VehicleBundle\Entity\Model")
-     * @ORM\JoinColumn(name="vehicle_model_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     * @ORM\JoinColumn(name="vehicle_model_id", referencedColumnName="id")
+     *
+     * @Assert\NotBlank()
+     *
+     * @Serializer\Expose()
      */
     protected $vehicleModel;
 
@@ -97,6 +85,8 @@ class Appointment
      *
      * @ORM\ManyToOne(targetEntity="\Wbc\VehicleBundle\Entity\ModelType")
      * @ORM\JoinColumn(name="vehicle_model_type_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     *
+     * @Serializer\Expose()
      */
     protected $vehicleModelType;
 
@@ -114,24 +104,13 @@ class Appointment
     /**
      * @var string
      *
-     * @ORM\Column(name="vehicle_transmission", type="string", length=15)
+     * @ORM\Column(name="vehicle_transmission", type="string", length=15, nullable=true)
      *
-     * @Assert\NotBlank()
+     * @Assert\Choice(choices={"manual", "automatic"})
      *
      * @Serializer\Expose()
      */
     protected $vehicleTransmission;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="vehicle_trim", type="string", length=100)
-     *
-     * @Assert\NotBlank()
-     *
-     * @Serializer\Expose()
-     */
-    protected $vehicleTrim;
 
     /**
      * @var int
@@ -139,6 +118,7 @@ class Appointment
      * @ORM\Column(name="vehicle_mileage", type="bigint")
      *
      * @Assert\NotBlank()
+     * @Assert\Range(min=5000, max=250000)
      *
      * @Serializer\Expose()
      */
@@ -147,9 +127,9 @@ class Appointment
     /**
      * @var string
      *
-     * @ORM\Column(name="vehicle_specifications", type="string", length=10)
+     * @ORM\Column(name="vehicle_specifications", type="string", length=10, nullable=true)
      *
-     * @Assert\NotBlank()
+     * @Assert\Choice(choices={"gcc", "usa", "jpn", "euro", "other"})
      *
      * @Serializer\Expose()
      */
@@ -158,13 +138,25 @@ class Appointment
     /**
      * @var string
      *
-     * @ORM\Column(name="vehicle_body_condition", type="string", length=30)
+     * @ORM\Column(name="vehicle_body_condition", type="string", length=30, nullable=true)
      *
-     * @Assert\NotBlank()
+     * @Assert\Choice(choices={"good", "fair", "excellent"})
      *
      * @Serializer\Expose()
      */
     protected $vehicleBodyCondition;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vehicle_color", type="string", length=30, nullable=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Choice(choices={"white", "silver", "black", "grey", "blue", "red", "brown", "green"})
+     *
+     * @Serializer\Expose()
+     */
+    protected $vehicleColor;
 
     /**
      * @var Branch
@@ -194,17 +186,43 @@ class Appointment
      * @ORM\ManyToOne(targetEntity="\Wbc\BranchBundle\Entity\Timing")
      * @ORM\JoinColumn(name="branch_timing", referencedColumnName="id", onDelete="SET NULL", nullable=true)})
      *
-     *
      * @Serializer\Expose()
      */
     protected $branchTiming;
 
     /**
+     * @var AppointmentDetails
+     *
+     * @ORM\OneToOne(targetEntity="\Wbc\BranchBundle\Entity\AppointmentDetails", mappedBy="appointment")
+     *
+     * @Serializer\Expose()
+     */
+    protected $details;
+
+    /**
+     * @var Valuation
+     *
+     * @ORM\OneToOne(targetEntity="\Wbc\ValuationBundle\Entity\Valuation", inversedBy="appointment")
+     * @ORM\JoinColumn(name="valuation_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $valuation;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=20)
+     *
+     * @Assert\NotBlank()
      */
     protected $status;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="\Wbc\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id", nullable=true)
+     */
+    protected $createdBy;
 
     /**
      * @var \DateTime
@@ -229,20 +247,14 @@ class Appointment
     protected $updatedAt;
 
     /**
-     * @var AppointmentDetails
-     *
-     * @ORM\OneToOne(targetEntity="\Wbc\BranchBundle\Entity\AppointmentDetails", mappedBy="appointment")
-     *
-     * @Serializer\Expose()
-     */
-    protected $details;
-
-    /**
      * Appointment Constructor.
+     *
+     * @param Valuation $valuation
      */
-    public function __construct()
+    public function __construct(Valuation $valuation = null)
     {
         $this->status = self::STATUS_ACTIVE;
+        $this->setValuation($valuation);
     }
 
     /**
@@ -325,54 +337,6 @@ class Appointment
     public function getEmailAddress()
     {
         return $this->emailAddress;
-    }
-
-    /**
-     * Set nationality.
-     *
-     * @param string $nationality
-     *
-     * @return Appointment
-     */
-    public function setNationality($nationality)
-    {
-        $this->nationality = $nationality;
-
-        return $this;
-    }
-
-    /**
-     * Get nationality.
-     *
-     * @return string
-     */
-    public function getNationality()
-    {
-        return $this->nationality;
-    }
-
-    /**
-     * Set vehicleTrim.
-     *
-     * @param string $vehicleTrim
-     *
-     * @return Appointment
-     */
-    public function setVehicleTrim($vehicleTrim)
-    {
-        $this->vehicleTrim = $vehicleTrim;
-
-        return $this;
-    }
-
-    /**
-     * Get vehicleTrim.
-     *
-     * @return string
-     */
-    public function getVehicleTrim()
-    {
-        return $this->vehicleTrim;
     }
 
     /**
@@ -608,30 +572,6 @@ class Appointment
     }
 
     /**
-     * Get vehicleMake.
-     *
-     * @return Make
-     */
-    public function getVehicleMake()
-    {
-        return $this->vehicleMake;
-    }
-
-    /**
-     * Set vehicleMake.
-     *
-     * @param Make $vehicleMake
-     *
-     * @return $this
-     */
-    public function setVehicleMake(Make $vehicleMake)
-    {
-        $this->vehicleMake = $vehicleMake;
-
-        return $this;
-    }
-
-    /**
      * Get vehicleMileage.
      *
      * @return int
@@ -795,5 +735,89 @@ class Appointment
         $this->to = $to;
 
         return $this;
+    }
+
+    /**
+     * Set vehicleColor.
+     *
+     * @param string $vehicleColor
+     *
+     * @return Appointment
+     */
+    public function setVehicleColor($vehicleColor)
+    {
+        $this->vehicleColor = $vehicleColor;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicleColor.
+     *
+     * @return string
+     */
+    public function getVehicleColor()
+    {
+        return $this->vehicleColor;
+    }
+
+    /**
+     * Set valuation.
+     *
+     * @param Valuation $valuation
+     *
+     * @return Appointment
+     */
+    public function setValuation(Valuation $valuation = null)
+    {
+        $this->valuation = $valuation;
+
+        if ($valuation) {
+            $this->vehicleModel = $valuation->getVehicleModel();
+            $this->vehicleYear = $valuation->getVehicleYear();
+            $this->vehicleModelType = $valuation->getVehicleModelType();
+            $this->vehicleMileage = $valuation->getVehicleMileage();
+            $this->vehicleColor = $valuation->getVehicleColor();
+            $this->vehicleBodyCondition = $valuation->getVehicleBodyCondition();
+            $this->name = $valuation->getName();
+            $this->emailAddress = $valuation->getEmailAddress();
+            $this->mobileNumber = $valuation->getMobileNumber();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get valuation.
+     *
+     * @return Valuation
+     */
+    public function getValuation()
+    {
+        return $this->valuation;
+    }
+
+    /**
+     * Set createdBy.
+     *
+     * @param User $createdBy
+     *
+     * @return Appointment
+     */
+    public function setCreatedBy(User $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy.
+     *
+     * @return User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 }

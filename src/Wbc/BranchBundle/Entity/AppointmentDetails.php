@@ -52,6 +52,15 @@ class AppointmentDetails
     protected $vehicleModelName;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="vehicle_model_type_name", type="string", length=100)
+     *
+     * @Serializer\Expose()
+     */
+    protected $vehicleModelTypeName;
+
+    /**
      * @var Branch
      *
      * @ORM\Column(name="branch", type="branch_object")
@@ -205,5 +214,29 @@ class AppointmentDetails
     public function getAppointment()
     {
         return $this->appointment;
+    }
+
+    /**
+     * Set vehicleModelTypeName.
+     *
+     * @param string $vehicleModelTypeName
+     *
+     * @return AppointmentDetails
+     */
+    public function setVehicleModelTypeName($vehicleModelTypeName)
+    {
+        $this->vehicleModelTypeName = $vehicleModelTypeName;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicleModelTypeName.
+     *
+     * @return string
+     */
+    public function getVehicleModelTypeName()
+    {
+        return $this->vehicleModelTypeName;
     }
 }

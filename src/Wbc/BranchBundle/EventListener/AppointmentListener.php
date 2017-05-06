@@ -4,7 +4,6 @@ namespace Wbc\BranchBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Event\PreUpdateEventArgs;
 use JMS\DiExtraBundle\Annotation as DI;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\AppointmentDetails;
@@ -79,12 +78,13 @@ class AppointmentListener
             $objectManager->persist($details);
         }
 
-        if ($appointment->getVehicleMake()) {
-            $details->setVehicleMakeName($appointment->getVehicleMake()->getName());
+        if ($vehicleModel = $appointment->getVehicleModel()) {
+            $details->setVehicleMakeName($vehicleModel->getMake()->getName());
+            $details->setVehicleModelName($vehicleModel->getName());
         }
 
-        if ($appointment->getVehicleModel()) {
-            $details->setVehicleModelName($appointment->getVehicleModel()->getName());
+        if ($vehicleModelType = $appointment->getVehicleModelType()) {
+            $details->setVehicleModelTypeName($vehicleModelType->getName());
         }
 
         $objectManager->flush();

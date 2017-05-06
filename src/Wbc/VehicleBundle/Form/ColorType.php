@@ -20,17 +20,7 @@ class ColorType extends AbstractType
     {
         $resolver->setDefaults([
             'label' => 'Vehicle Body Color',
-            'choices' => [
-                'white' => 'White',
-                'silver' => 'Silver',
-                'black' => 'Black',
-                'grey' => 'Grey',
-                'blue' => 'Blue',
-                'red' => 'Red',
-                'brown' => 'Brown',
-                'green' => 'Green',
-                'other' => 'Other',
-            ],
+            'choices' => static::getColors(),
             'placeholder' => '',
         ]);
     }
@@ -57,5 +47,25 @@ class ColorType extends AbstractType
     public function getName()
     {
         return $this->getBlockPrefix();
+    }
+
+    /**
+     * Gets Colors.
+     *
+     * @return array
+     */
+    public static function getColors()
+    {
+        return [
+            'white' => 'White',
+            'silver' => 'Silver',
+            'black' => 'Black',
+            'grey' => 'Grey',
+            'blue' => 'Blue',
+            'red' => 'Red',
+            'brown' => 'Brown',
+            'green' => 'Green',
+            'other' => 'Other',
+        ];
     }
 }

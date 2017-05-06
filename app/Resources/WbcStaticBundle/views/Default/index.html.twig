@@ -1,7 +1,8 @@
 {% extends '@WbcStatic/Default/base.html.twig' %}
 
 {% block header %}
-    <header>
+    <header ng-controller="ValuationController">
+        <h1 ng-bind="phones"></h1>
         <div class="jumbotron container">
             <div class="row">
                 <div class="col-md-12">
@@ -11,27 +12,7 @@
             <div id="header-form">
                 <div class="row">
                     <div class="col-md-5 col-md-offset-1">
-                        <form class="form">
-                            <div class="form-group">
-                                <select class="form-control">
-                                    <option value="">Vehicle Make</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control">
-                                    <option value="">Vehicle Model</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control">
-                                    <option value="">Vehicle Year</option>
-                                </select>
-                            </div>
-                            <div class="form-group submit">
-                                <button type="submit" class="btn btn-primary btn-lg">Get FREE Online Valuation
-                                </button>
-                            </div>
-                        </form>
+                        {% include 'WbcStaticBundle:partials:vertical-valuation-form.html.twig' %}
                     </div>
                     <div id="jumbotron-steps-container" class="col-md-4 col-md-offset-1">
                         <div class="steps one">
@@ -58,11 +39,22 @@
 
 {% block body %}
     {{ parent() }}
-    {% include 'WbcStaticBundle:partials:section-text.html.twig' with {'title': 'Porta Fusce Vulputate', 'content': '<p>Basking shark burrowing goby scythe butterfish thorny catfish gombessa moonfish." Snoek spiny
-                            eel jellynose
-                            fish freshwater hatchetfish zebra tilapia black dragonfish hammerhead shark cornetfish
-                            electric stargazer
-                            dartfish velvet catfish.</p>', 'buttonText': 'Get FREE Online Valuation'} %}
+    {% include 'WbcStaticBundle:partials:section-text.html.twig' with {
+    'title': 'Why Should I Choose WeBuyCarsDxb.com to Sell My Car ',
+    'content': '<p class="text-left"><span class="text-bold">Free Car Valuation</span> – Valuate your car online for Free! Get an Initial quote in under 30 seconds! And visit us to sell your car.</p>
+                <p class="text-left"><span class="text-bold">Instant Cash</span> – Get cash on the spot for your car, no matter the make, model, year, or condition!</p>
+                <p class="text-left"><span class="text-bold">Fast Sale</span> – We buy any car in less than 30 minutes and you walk away with cash, hassle-free</p>
+                <p class="text-left"><span class="text-bold">Finance</span> – We help you settle car loans so you\'re not out of pocket</p>
+                <p class="text-left"><span class="text-bold">Reliable</span> – The preferred car buyers in Dubai by thousands of satisfied customers</p>
+                <p class="text-left"><span class="text-bold">Guaranteed Purchase</span> – We buy cars regardless of make, model, year, or condition</p>
+                <h2>Sell Your Car With Us in Less Than 30 Minutes</h2>
+                <p class="text-left">At <a href="/">Webuycarsdxb.com</a> we offer the most convenient and best way for you to <a href="how-to-sell-my-car-in-dubai-made-easy-in-3-simple-steps">sell any car</a> in UAE in less than 30 minutes at a fair price. We will inspect the car professionally at our branch and will handle all the paperwork and transfer process of your car, it couldn\'t be easier!</p>
+                <p class="text-left">The condition of your car does not matter to us. We buy cars for their fair and competitive market value and upon completion of the deal you get to walk away with Cash in hand.</p>
+                <p class="text-left">With our simple selling process, you don\'t have to go through any hassles of selling your car. Our fast and reliable service gives you an opportunity to easily sell any car with us quickly.</p>
+                <p class="text-left">So if you have a car to sell, then book an appointment and head over to our branch for your Free car inspection and today.</p>
+                ',
+    } %}
+
     <section>
         <div class="container-fluid">
             <div class="row">
@@ -100,10 +92,14 @@
         <div class="container-fluid">
             <div class="row">
                 <div id="mobile-friendly" class="col-md-6 col-md-offset-1">
-                    <h2>Mobile Friendly</h2>
-                    <p>Basking shark burrowing goby scythe butterfish thorny catfish gombessa moonfish." Snoek spiny eel
-                        jellynose fish freshwater hatchetfish zebra tilapia black dragonfish hammerhead shark cornetfish
-                        electric stargazer dartfish velvet catfish.</p>
+                    <h2>Selling Your Car now made even easier with our Mobile Friendly website</h2>
+                    <p>
+                        <ul>
+                        <li>Book your appointment while on the move</li>
+                        <li>Easy navigation</li>
+                        <li>Worldwide access to our website</li>
+                    </ul>
+                    </p>
 
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
@@ -120,11 +116,13 @@
         </div>
     </section>
 
-    {% include 'WbcStaticBundle:partials:section-text.html.twig' with {'title': 'Join over 5,000 happy customers', 'content': '<p>Basking shark burrowing goby scythe butterfish thorny catfish gombessa moonfish." Snoek
-                                spiny eel jellynose
-                                fish freshwater hatchetfish zebra tilapia black dragonfish hammerhead shark cornetfish
-                                electric stargazer
-                                dartfish velvet catfish.</p>', 'buttonText': 'JOIN THEM'} %}
+    {% include 'WbcStaticBundle:partials:section-text.html.twig' with {
+    'title': 'Join Over 5000 Happy Customers',
+    'content': '
+    <p>More than 5000 customers have selected us as a convenient way of selling a car in the UAE. Our Free car valuation process offers you a quick way to book an appointment with us and have your car inspected by our car experts.</p>
+    <p>So come be a part of over <span class="text-bold">5000 happy faces</span> and sell your car to us hassle-free today.</p>
+    ',
+    'buttonText': 'JOIN THEM'} %}
 
     {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
 

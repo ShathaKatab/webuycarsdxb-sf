@@ -1,0 +1,3 @@
+wbc_valuation:
+    type: annotation
+    resource: "@WbcValuationBundle/Controller/ValuationController.php"

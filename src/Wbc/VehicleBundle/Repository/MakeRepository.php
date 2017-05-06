@@ -23,6 +23,9 @@ class MakeRepository extends EntityRepository
         return $this->findBy(['active' => true], ['name' => 'ASC']);
     }
 
+    /**
+     * @return array
+     */
     public function findAllAsChoices()
     {
         $data = [];
