@@ -29,7 +29,7 @@ class ClassifiedsModelType
     private $id;
 
     /**
-     * @var ArrayCollection
+     * @var ClassifiedsModel
      *
      * @ORM\ManyToOne(targetEntity="Wbc\CrawlerBundle\Entity\ClassifiedsModel", inversedBy="modelTypes")
      * @ORM\JoinColumn(name="model_id", referencedColumnName="id")
@@ -223,11 +223,11 @@ class ClassifiedsModelType
     /**
      * Set model.
      *
-     * @param Model $model
+     * @param ClassifiedsModel $model
      *
      * @return ClassifiedsModelType
      */
-    public function setModel(Model $model = null)
+    public function setModel(ClassifiedsModel $model = null)
     {
         $this->model = $model;
 
@@ -237,7 +237,7 @@ class ClassifiedsModelType
     /**
      * Get model.
      *
-     * @return Model
+     * @return ClassifiedsModel
      */
     public function getModel()
     {
