@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DomCrawler\Crawler;
+use Wbc\CrawlerBundle\Entity\ClassifiedsModelType;
 
 /**
  * Class TaqyeemCommand.
@@ -267,7 +268,7 @@ class TaqyeemCommand extends BaseCommand
             $isGcc = $region == self::REGION_GCC ? true : false;
 
             if ($value) {
-                $modelType = $this->entityManager->getRepository('WbcVehicleBundle:ModelType')
+                $modelType = $this->entityManager->getRepository('WbcCrawlerBundle:ClassifiedsModelType')
                     ->findOneBy(array(
                         'isGcc' => $isGcc,
                         'model' => $model,
@@ -280,7 +281,7 @@ class TaqyeemCommand extends BaseCommand
                 if ($modelType) {
                     $this->outputInterface->writeLn(sprintf('<comment>->ModelType %s [%s] exists! Will update details!</comment>', $text, $value));
                 } else {
-                    $modelType = new ModelType();
+                    $modelType = new ClassifiedsModelType();
                     $modelType->setModel($model);
                 }
 
