@@ -4,7 +4,6 @@ namespace Wbc\CrawlerBundle\Command;
 
 use Wbc\CrawlerBundle\Entity\ClassifiedsMake;
 use Wbc\CrawlerBundle\Entity\ClassifiedsModel;
-use Wbc\CrawlerBundle\Entity\ClassifiedsModelType;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

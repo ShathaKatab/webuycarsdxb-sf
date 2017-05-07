@@ -71,6 +71,13 @@ class ClassifiedsModel
     protected $classifiedAds;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Wbc\CrawlerBundle\Entity\ClassifiedsModelType", mappedBy="model")
+     */
+    protected $modelTypes;
+
+    /**
      * Get id.
      *
      * @return int
@@ -205,6 +212,7 @@ class ClassifiedsModel
     public function __construct()
     {
         $this->classifiedAds = new ArrayCollection();
+        $this->modelTypes = new ArrayCollection();
     }
 
     /**
@@ -239,5 +247,39 @@ class ClassifiedsModel
     public function getClassifiedAds()
     {
         return $this->classifiedAds;
+    }
+
+    /**
+     * Add modelTypes.
+     *
+     * @param ClassifiedsModelType $modelTypes
+     *
+     * @return ClassifiedsModel
+     */
+    public function addModelType(ClassifiedsModelType $modelTypes)
+    {
+        $this->modelTypes[] = $modelTypes;
+
+        return $this;
+    }
+
+    /**
+     * Remove modelTypes.
+     *
+     * @param ClassifiedsModelType $modelTypes
+     */
+    public function removeModelType(ClassifiedsModelType $modelTypes)
+    {
+        $this->modelTypes->removeElement($modelTypes);
+    }
+
+    /**
+     * Get modelTypes.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getModelTypes()
+    {
+        return $this->modelTypes;
     }
 }
