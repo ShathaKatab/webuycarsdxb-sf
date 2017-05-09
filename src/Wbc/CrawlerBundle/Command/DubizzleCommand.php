@@ -137,7 +137,7 @@ class DubizzleCommand extends ClassifiedsCommand
         $this->outputInterface->writeln(sprintf('<info>Done Crawling MODELS from %s (%s)</info>', $this->siteName, $this->source));
     }
 
-    private function doAlgolia($model, $makeName, $modelName)
+    private function doAlgolia(ClassifiedsModel $model, $makeName, $modelName)
     {
         $parameters = $this->getContainer()->getParameter('crawler_dubizzle_auth');
         $firstPage = 0;
@@ -228,7 +228,8 @@ class DubizzleCommand extends ClassifiedsCommand
                     $classifiedAd->setPrice($ad['price']);
                 }
 
-                $classifiedAd->setModel($model);
+                $classifiedAd->setClassifiedsModel($model);
+                $classifiedAd->setModel($modelName);
                 if (isset($ad['site']['en'])) {
                     $classifiedAd->setCity($ad['site']['en']);
                 }
