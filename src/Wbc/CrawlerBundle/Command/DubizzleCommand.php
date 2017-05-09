@@ -249,7 +249,7 @@ class DubizzleCommand extends ClassifiedsCommand
                     $classifiedAd->setEngineSize($ad['details']['Engine Size']['en']['value']);
                 }
 
-                if ($ad['seller_type'] == 'DL') {
+                if ($ad['seller_type'] == 'DL' && isset($ad['details']['Agent']['en']['value'])) {
                     $classifiedAd->setDealerName($ad['details']['Agent']['en']['value']);
                 }
 
