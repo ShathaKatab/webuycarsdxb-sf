@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ site_title }}{% endblock %}</title>
+    <base href="{{ path('wbc_static_default_index') }}">
+    {% block stylesheets %}
+        {% stylesheets filter='scssphp' output='css/app.css'
+        'assets/scss/app.scss' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+
+<div>
+    {% trans_default_domain 'FOSUserBundle' %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="padding:10px; border: 1px solid #d8d8d8; margin-top: 100px; border-radius: 10px;">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-5 col-xs-offset-5">
+                        <a href="{{ path('wbc_static_default_index') }}"><img src="{{ asset('images/logo.svg') }}"></a>
+                    </div>
+                </div>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                    <a href="{{ path('fos_user_security_logout') }}">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                {% else %}
+                    <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                {% endif %}
+
+                {% if app.request.hasPreviousSession %}
+                    {% for type, messages in app.session.flashbag.all() %}
+                        {% for message in messages %}
+                            <div class="flash-{{ type }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+
+                {% if error %}
+                    <p class="text-invalid">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                {% endif %}
+
+                <form action="{{ path("fos_user_security_check") }}" method="post">
+                    {% if csrf_token %}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="username">{{ 'security.login.username'|trans }}</label>
+                        <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">{{ 'security.login.password'|trans }}</label>
+                        <input class="form-control" type="password" id="password" name="_password" required="required"/>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on"/> {{ 'security.login.remember_me'|trans }}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-lg btn-primary" id="_submit" name="submit">{{ 'security.login.submit'|trans }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+

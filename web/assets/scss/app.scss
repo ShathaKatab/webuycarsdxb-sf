@@ -9,6 +9,7 @@
 @import "forms";
 @import "buttons";
 @import "utilities";
+@import "angular-ui";
 
 @font-face {
   font-family: 'Glyphicons Halflings';
@@ -27,10 +28,27 @@
 #reviews{
   background-color: $dark-color;
   padding: 46px floor(($grid-gutter-width / 2)) 46px ceil(($grid-gutter-width / 2));
+  min-height: 504px;
 
   .img-circle{
     max-width: 96px;
     max-height: 96px;
+  }
+}
+
+.carousel-control{
+  background: none;
+  top: 30%;
+
+  &.left, &.right{
+    background: none;
+  }
+
+  &.left{
+    left: -12%;
+  }
+  &.right{
+    right: -12%;
   }
 }
 
@@ -59,12 +77,6 @@
 #book-appointment-button-container{
   padding-top: 40px;
   padding-bottom: 40px;
-}
-
-#book-appointment-map{
-  //  min-height: 650px;
-  max-height: 537px;
-  overflow: hidden;
 }
 
 #appointment-confirmation-map-container{

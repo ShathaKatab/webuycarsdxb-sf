@@ -59,3 +59,4 @@ parameters:
     site_twitter: "https://twitter.com/"
     site_instagram: "https://www.instagram.com/"
     site_linkedin: "https://www.linkedin.com/"
+    google_maps_api_key: "Some Google Maps API Key"

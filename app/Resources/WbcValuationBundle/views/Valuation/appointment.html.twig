@@ -8,7 +8,8 @@
 
     <section>
         <div class="container">
-            <div class="row">
+            <div class="row" ng-controller="ValuationStepThreeController as ctrl"
+                 ng-init="ctrl.branches={{ getBranches()|serialize }}">
                 <div id="book-appointment-form" class="col-md-6 bg-grey">
                     <div class="row">
                         <div class="col-md-12">
@@ -22,19 +23,26 @@
                                     <label class="col-md-6">Pick a branch</label>
 
                                     <div class="col-md-6">
-                                        <select class="form-control">
+                                        <select ng-model="ctrl.selectedBranch" class="form-control"
+                                                ng-options="branch.slug as branch.name for branch in ctrl.branches">
                                             <option value="">Choose a Branch</option>
-                                            {% for branch in getBranches() %}
-                                                <option value="{{ branch.id }}">{{ branch.name }}</option>
-                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-6">Pick a date & time</label>
-
                                     <div class="col-md-6">
-                                        <input type="date" class="form-control" placeholder="Choose a date">
+                                        <div uib-datepicker ng-model="ctrl.appointmentDate"
+                                             datepicker-options="options"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-6">Pick a Timing</label>
+                                    <div class="col-md-6">
+                                        <select ng-model="ctrl.selectedBranchTiming" class="form-control"
+                                                ng-options="branchTiming.id as branchTiming.name for branchTiming in ctrl.branchTimings">
+                                            <option value="">Choose a Branch Timing</option>
+                                        </select>
                                     </div>
                                 </div>
                             </form>
@@ -43,8 +51,11 @@
                         </div>
                     </div>
                 </div>
-                <div id="book-appointment-map" class="col-md-6">
-                    <img src="{{ asset('images/map-sample.jpg') }}">
+                <div id="book-appointment-map" class="col-md-6" ng-style="{height: ctrl.mapHeight}">
+                    <div map-lazy-load="https://maps.google.com/maps/api/js?key={{ google_maps_api_key }}"
+                         map-lazy-load-params="">
+                        <ng-map default-style="false" ng-style="{height: ctrl.mapHeight}"  id="map-lazy-load"></ng-map>
+                    </div>
                 </div>
             </div>
             <div class="row">

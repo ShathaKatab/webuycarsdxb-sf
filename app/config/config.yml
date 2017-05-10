@@ -48,6 +48,7 @@ twig:
         site_instagram: "%site_instagram%"
         site_twitter: "%site_twitter%"
         site_linkedin: "%site_linkedin%"
+        google_maps_api_key: "%google_maps_api_key%"
 
 # Assetic Configuration
 assetic:

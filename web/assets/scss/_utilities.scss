@@ -32,3 +32,39 @@ header h1, header .h1, article h1, article .h1{
 .border-lg-dark-color{
   border: 1px solid $dark-color;
 }
+
+#loading-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, .4);
+  z-index: 9999;
+}
+
+#loading-container .loading-content {
+  height: 135px;
+  width: 150px;
+  margin: auto auto;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .75);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+}
+
+#loading-container .loading-content .loading-image {
+  width: 64px;
+  height: 64px;
+  margin: 15% auto 15px auto;
+  background: url(../../images/loading.svg) no-repeat;
+}
+
+#loading-container .loading-content .loading-message {
+  text-transform: capitalize;
+}

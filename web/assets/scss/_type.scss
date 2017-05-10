@@ -118,6 +118,15 @@ article{
   }
 }
 
+.text-invalid{
+  color: $invalid-color;
+}
+
+.text-muted{
+  color: $dark-color;
+  opacity: .2;
+}
+
 #navbar-phone-container {
   font-size: 22px;
 }

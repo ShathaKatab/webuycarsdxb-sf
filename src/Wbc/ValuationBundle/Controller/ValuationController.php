@@ -56,7 +56,7 @@ class ValuationController extends Controller
             }
         }
 
-        return ['modelTypes' => count($modelTypesData) ? $modelTypesData : $modelTypes];
+        return ['vehicleModelTypes' => count($modelTypesData) ? $modelTypesData : $modelTypes, 'vehicleModel' => $model, 'vehicleYear' => $year];
     }
 
     /**

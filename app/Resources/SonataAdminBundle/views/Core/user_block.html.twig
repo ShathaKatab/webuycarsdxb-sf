@@ -1,0 +1,24 @@
+{% block user_block %}
+    {% if app.user %}
+        {% set _bg_class             = "bg-light-blue" %}
+        {% set _logout_text          = "Logout" %}
+
+        <li class="user-header {{ _bg_class }}">
+            <h3 class="text-bold">
+                {{ app.user.profile.firstName }} {{ app.user.profile.lastName }}
+                <small style="color: #fff">{{ app.user.email }}</small>
+            </h3>
+        </li>
+        <li class="user-footer">
+            {#<div class="pull-left">#}
+            {#<a href="{{ _profile_uri }}" class="btn btn-default btn-flat"><i#}
+            {#class="fa fa-user"></i> {{ _profile_text }}</a>#}
+            {#</div>#}
+
+            <div class="pull-right">
+                <a href="{{ url('fos_user_security_logout') }}" class="btn btn-default btn-flat"><i
+                            class="fa fa-sign-out fa-fw"></i> {{ _logout_text }}</a>
+            </div>
+        </li>
+    {% endif %}
+{% endblock %}

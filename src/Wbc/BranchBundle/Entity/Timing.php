@@ -308,7 +308,7 @@ class Timing
      */
     public function __toString()
     {
-        return $this->getName();
+        return $this->getName() ?: '';
     }
 
     /**
@@ -325,9 +325,9 @@ class Timing
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {

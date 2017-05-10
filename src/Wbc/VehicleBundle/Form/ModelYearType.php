@@ -56,8 +56,13 @@ class ModelYearType extends AbstractType
      */
     public static function getYears()
     {
+        $data = [];
         $years = range(date('Y') + 1, date('Y') - 90);
 
-        return array_combine($years, $years);
+        foreach ($years as $year) {
+            $data[] = ['id' => $year, 'year' => $year];
+        }
+
+        return $data;
     }
 }

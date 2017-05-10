@@ -2,6 +2,7 @@
 
 namespace Wbc\UtilityBundle\Form;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use JMS\DiExtraBundle\Annotation as DI;
@@ -15,7 +16,7 @@ use Wbc\UtilityBundle\Validator\Constraints\PhoneNumber;
  * @DI\FormType("wbc.utility.form.phone_number")
  * @DI\Tag(name="form.type", attributes={"alias": "wbc_utility_form_phone_number"})
  */
-class PhoneNumberType
+class PhoneNumberType extends AbstractType
 {
     /**
      * {@inheritdoc}

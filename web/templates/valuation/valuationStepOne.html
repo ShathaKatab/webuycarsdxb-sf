@@ -1,0 +1,20 @@
+<form name="valuationStepOneForm" ng-submit="ctrl.submit(valuationStepOneForm.$valid)" class="form {{ ctrl.formClass }}" novalidate>
+    <div class="form-group {{ ctrl.formGroupClass }}">
+        <select ng-class="{'form-control-invalid': valuationStepOneForm.$submitted && valuationStepOneForm.vehicleMake.$invalid }" name="vehicleMake" required ng-change="ctrl.changedVehicleMake()" ng-model="ctrl.vehicleMakeId" ng-options="vehicleMake.id as vehicleMake.name for vehicleMake in ctrl.vehicleMakes" class="form-control">
+            <option value="">Vehicle Make</option>
+        </select>
+    </div>
+    <div class="form-group {{ ctrl.formGroupClass }}">
+        <select ng-class="{'form-control-invalid': valuationStepOneForm.$submitted && valuationStepOneForm.vehicleModel.$invalid }" name="vehicleModel" required ng-model="ctrl.vehicleModelId" ng-options="vehicleModel.id as vehicleModel.name for vehicleModel in ctrl.vehicleModels" class="form-control">
+            <option value="">Vehicle Model</option>
+        </select>
+    </div>
+    <div class="form-group {{ ctrl.formGroupClass }}">
+        <select ng-class="{'form-control-invalid': valuationStepOneForm.$submitted && valuationStepOneForm.vehicleYear.$invalid }" name="vehicleYear" required ng-model="ctrl.vehicleYear" ng-options="vehicleYear.id as vehicleYear.year for vehicleYear in ctrl.vehicleYears" class="form-control">
+            <option value="">Vehicle Year</option>
+        </select>
+    </div>
+    <div class="form-group {{ ctrl.formGroupSubmitClass }} {{ ctrl.formGroupClass }}">
+        <button type="submit" class="btn btn-primary btn-lg">{{ ctrl.formButtonText }}</button>
+    </div>
+</form>

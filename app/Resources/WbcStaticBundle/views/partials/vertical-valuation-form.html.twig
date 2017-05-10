@@ -1,27 +1,5 @@
-<form class="form">
-    <div class="form-group">
-        <select class="form-control">
-            <option value="">Vehicle Make</option>
-            {% for make in getMakes() %}
-                <option value="{{ make.id }}">{{ make.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="form-group">
-        <select class="form-control">
-            <option value="">Vehicle Model</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <select class="form-control">
-            <option value="">Vehicle Year</option>
-            {% for key, year in getModelYears() %}
-                <option value="{{ year }}">{{ year }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="form-group submit">
-        <button type="submit" class="btn btn-primary btn-lg">Get FREE Online Valuation
-        </button>
-    </div>
-</form>
+<valuation-step-one vehicle-makes="{{ getMakes()|serialize }}"
+                    vehicle-years="{{ getModelYears()|serialize }}"
+                    form-button-text="Get FREE Online Valuation"
+                    form-group-submit-class="submit">
+</valuation-step-one>

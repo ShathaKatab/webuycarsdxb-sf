@@ -1,7 +1,7 @@
 {% extends '@WbcStatic/Default/base.html.twig' %}
 
 {% block header %}
-    <header ng-controller="ValuationController">
+    <header>
         <div class="jumbotron container">
             <div class="row">
                 <div class="col-md-12">
@@ -52,7 +52,7 @@
                 <p class="text-left">With our simple selling process, you don\'t have to go through any hassles of selling your car. Our fast and reliable service gives you an opportunity to easily sell any car with us quickly.</p>
                 <p class="text-left">So if you have a car to sell, then book an appointment and head over to our branch for your Free car inspection and today.</p>
                 ',
-        'buttonText': 'Get FREE Online Valuation'
+    'buttonText': 'Get FREE Online Valuation'
     } %}
 
     <section>
@@ -61,16 +61,92 @@
                 <div id="reviews" class="col-md-6">
                     <h2 class="text-center color-white">Join over 5000 happy customers</h2>
                     <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <div class="thumbnail">
-                                <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}" alt="John Doe">
-                                <div class="caption">
-                                    <p class="color-white">Basking shark burrowing goby scythe butterfish thorny catfish gombessa moonfish."
-                                        Snoek spiny eel
-                                        jellynose fish freshwater hatchetfish zebra tilapia black dragonfish hammerhead
-                                        shark cornetfish
-                                        electric stargazer dartfish velvet catfish.</p>
-                                    <h3 class="text-center color-white">Steve Jobs</h3>
+                        <div class="col-md-12">
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <div class="row">
+                                    <div class="col-md-10 col-md-offset-1">
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner" role="listbox">
+                                            <div class="item active">
+                                                <div class="thumbnail">
+                                                    <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}"
+                                                         alt="John Doe">
+
+                                                    <div class="caption">
+                                                        <p class="color-white">I sold my car here and it was a quick and
+                                                            tension free process. I did not have to go to RTA. The
+                                                            process was transparent. They looked after transferring the
+                                                            car out of my name and paid me in Cash.
+                                                        </p>
+
+                                                        <h3 class="text-center color-white">John Doe</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <div class="thumbnail">
+                                                    <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}"
+                                                         alt="John Doe">
+
+                                                    <div class="caption">
+                                                        <p class="color-white">WeBuyCarsDxb.com gave me a good price for
+                                                            my car, which helped me cover my loan. The deal was done in
+                                                            30 minutes and their representative came with me to the bank
+                                                            to pay off my loan.
+                                                        </p>
+
+                                                        <h3 class="text-center color-white">John Doe</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="item">
+                                                <div class="thumbnail">
+                                                    <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}"
+                                                    alt="John Doe">
+
+                                                    <div class="caption">
+                                                        <p class="color-white">Minimal paperwork. Quick process and good
+                                                            customer service. Best part is I didnt need to go to RTA and
+                                                            waste my time. They handled everything and paid me cash on
+                                                            the spot.
+                                                        </p>
+
+                                                        <h3 class="text-center color-white">John Doe</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="item">
+                                                <div class="thumbnail">
+                                                    <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}"
+                                                    alt="John Doe">
+
+                                                    <div class="caption">
+                                                        <p class="color-white">My colleague recommended this place to me
+                                                            and they lived up to my expectations. The whole process was
+                                                            fast and easy. After dealing with the nightmare of
+                                                            classifieds this was a breath of fresh air. I would
+                                                            definitely recommend them to anyone 100%
+                                                        </p>
+
+                                                        <h3 class="text-center color-white">John Doe</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Controls -->
+                                        <a class="left carousel-control" href="#carousel-example-generic" role="button"
+                                           data-slide="prev">
+                                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="right carousel-control" href="#carousel-example-generic" role="button"
+                                           data-slide="next">
+                                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +157,7 @@
                     <p class="color-dark">appointments made so far</p>
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
-                            <a href="/" class="btn btn-lg btn-default">Make a FREE Appointment</a>
+                            <a href="{{ path('wbc_valuation_index') }}" class="btn btn-lg btn-default">Make a FREE Appointment</a>
                         </div>
                     </div>
                 </div>
@@ -94,7 +170,7 @@
                 <div id="mobile-friendly" class="col-md-6 col-md-offset-1">
                     <h2>Selling Your Car now made even easier with our Mobile Friendly website</h2>
                     <p>
-                        <ul>
+                    <ul>
                         <li>Book your appointment while on the move</li>
                         <li>Easy navigation</li>
                         <li>Worldwide access to our website</li>
@@ -103,7 +179,7 @@
 
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
-                            <a href="/" class="btn btn-lg btn-primary">Get FREE Online Valuation on the Go</a>
+                            <a href="{{ path('wbc_valuation_index') }}" class="btn btn-lg btn-primary">Get FREE Online Valuation on the Go</a>
                         </div>
                     </div>
                 </div>

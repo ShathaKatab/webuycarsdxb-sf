@@ -25,6 +25,8 @@ sonata_admin:
                 settings:
                     groups: ["Users Section"]
                 roles: [ROLE_SUPER_ADMIN]
+    title: "WeBuyCars Admin"
+    title_logo: /images/admin-logo.png
 
 services:
     admin.branch.appointment:

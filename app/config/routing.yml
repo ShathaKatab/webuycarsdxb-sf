@@ -1,10 +1,14 @@
-wbc_valuation:
+wbc_vehicle:
     resource: "@WbcValuationBundle/Resources/config/routing.yml"
     prefix:   /valuation
 
+wbc_valuation:
+    resource: "@WbcVehicleBundle/Resources/config/routing.yml"
+    prefix:   /vehicles
+
 wbc_branch:
     resource: "@WbcBranchBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /branches
 
 wbc_utility:
     resource: "@WbcUtilityBundle/Resources/config/routing.yml"

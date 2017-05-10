@@ -15,7 +15,7 @@
 {% block body %}
 
     {{ parent() }}
-
+    <span ng-controller="ValuationStepFourController as ctrl">
     <section>
         <div class="container">
             <div class="row">
@@ -52,12 +52,16 @@
                 </div>
             </div>
             <div class="row">
-                <div id="appointment-confirmation-map" class="col-md-10 col-md-offset-1">
-                    <img src="{{ asset('images/map-sample-horizontal.jpg') }}">
+                <div id="appointment-confirmation-map" class="col-md-10 col-md-offset-1" style="height: 320px;">
+                    <div map-lazy-load="https://maps.google.com/maps/api/js?key={{ google_maps_api_key }}"
+                         map-lazy-load-params="">
+                        <ng-map default-style="false" ng-style="{height: '320px'}" id="map-lazy-load"></ng-map>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    </span>
 
     {% include 'WbcStaticBundle:partials:section-text.html.twig' with {'title': 'Porta Fusce Vulputate', 'content': '<p>Basking shark burrowing goby scythe butterfish thorny catfish gombessa moonfish." Snoek spiny
                             eel jellynose

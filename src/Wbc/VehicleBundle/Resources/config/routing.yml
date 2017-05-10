@@ -1,1 +1,3 @@
-
+wbc_vehicle:
+    type: annotation
+    resource: "@WbcVehicleBundle/Controller/VehicleController.php"

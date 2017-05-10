@@ -1,0 +1,3 @@
+wbc_branch:
+    type: annotation
+    resource: "@WbcBranchBundle/Controller/BranchController.php"

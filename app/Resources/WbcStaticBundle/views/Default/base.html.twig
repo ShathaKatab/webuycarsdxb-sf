@@ -80,6 +80,7 @@
 {% endblock %}
 {% block header %}{% endblock %}
 {% block body %}{% endblock %}
+{% block loader %}<wbc-loading visibility="hidden"></wbc-loading>{% endblock %}
 {% block footer %}
     <footer>
         <div class="container-fluid">
@@ -151,8 +152,20 @@
     'assets/vendor/jquery/dist/jquery.js'
     'assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js'
     'assets/vendor/angular/angular.js'
+    'assets/vendor/angular-resource/angular-resource.js'
+    'assets/vendor/angular-toArrayFilter/toArrayFilter.js'
+    'assets/vendor/angular-block-ui/dist/angular-block-ui.js'
+    'assets/vendor/ngmap/build/scripts/ng-map.js'
+    'assets/vendor/angular-bootstrap/ui-bootstrap-tpls.js'
     'assets/js/jquery/app.js'
     'assets/js/angular/app.js'
+    'assets/js/angular/directives/wbcLoading.directive.js'
+    'assets/js/angular/valuation/vehicleModel.service.js'
+    'assets/js/angular/valuation/branchTiming.service.js'
+    'assets/js/angular/valuation/valuationStepOne.component.js'
+    'assets/js/angular/valuation/valuationStepTwo.controller.js'
+    'assets/js/angular/valuation/valuationStepThree.controller.js'
+    'assets/js/angular/valuation/valuationStepFour.controller.js'
     %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
