@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Wbc\BranchBundle\Entity\Appointment;
+use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
 use Wbc\VehicleBundle\Entity\ModelType;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -132,7 +133,7 @@ class Valuation
     /**
      * @var Appointment
      *
-     * @ORM\OneToOne(targetEntity="\Wbc\BranchBundle\Entity\Appointment", mappedBy="valuation")
+     * @ORM\OneToOne(targetEntity="\Wbc\BranchBundle\Entity\Appointment", mappedBy="valuation", cascade={"persist"})
      */
     protected $appointment;
 
@@ -472,9 +473,10 @@ class Valuation
     }
 
     /**
-     * Set priceOnline
+     * Set priceOnline.
      *
      * @param string $priceOnline
+     *
      * @return Valuation
      */
     public function setPriceOnline($priceOnline)
@@ -485,9 +487,9 @@ class Valuation
     }
 
     /**
-     * Get priceOnline
+     * Get priceOnline.
      *
-     * @return string 
+     * @return string
      */
     public function getPriceOnline()
     {
@@ -495,9 +497,10 @@ class Valuation
     }
 
     /**
-     * Set priceInspection
+     * Set priceInspection.
      *
      * @param string $priceInspection
+     *
      * @return Valuation
      */
     public function setPriceInspection($priceInspection)
@@ -508,9 +511,9 @@ class Valuation
     }
 
     /**
-     * Get priceInspection
+     * Get priceInspection.
      *
-     * @return string 
+     * @return string
      */
     public function getPriceInspection()
     {
@@ -518,9 +521,10 @@ class Valuation
     }
 
     /**
-     * Set priceExpected
+     * Set priceExpected.
      *
      * @param string $priceExpected
+     *
      * @return Valuation
      */
     public function setPriceExpected($priceExpected)
@@ -531,12 +535,30 @@ class Valuation
     }
 
     /**
-     * Get priceExpected
+     * Get priceExpected.
      *
-     * @return string 
+     * @return string
      */
     public function getPriceExpected()
     {
         return $this->priceExpected;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getId() ? (string) $this->getId() : '';
+    }
+
+    /**
+     * Get Vehicle Make.
+     *
+     * @return Make
+     */
+    public function getVehicleMake()
+    {
+        return $this->vehicleModel ? $this->vehicleModel->getMake() : null;
     }
 }

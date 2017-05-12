@@ -2,9 +2,9 @@
 
 namespace Wbc\VehicleBundle\Form;
 
-use Sonata\AdminBundle\Form\Type\Filter\ChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * Class ColorType.
@@ -20,8 +20,9 @@ class ColorType extends AbstractType
     {
         $resolver->setDefaults([
             'label' => 'Vehicle Body Color',
-            'choices' => static::getColors(),
+            'choices' => self::getColors(),
             'placeholder' => '',
+            'data_class' => self::class,
         ]);
     }
 

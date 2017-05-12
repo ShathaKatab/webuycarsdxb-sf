@@ -20,8 +20,9 @@ class ModelYearType extends AbstractType
     {
         $resolver->setDefaults([
             'label' => 'Vehicle Model Year',
-            'choices' => static::getYears(),
+            'choices' => self::getYears(),
             'placeholder' => '',
+            'choices_as_values' => true
         ]);
     }
 
@@ -56,13 +57,6 @@ class ModelYearType extends AbstractType
      */
     public static function getYears()
     {
-        $data = [];
-        $years = range(date('Y') + 1, date('Y') - 90);
-
-        foreach ($years as $year) {
-            $data[] = ['id' => $year, 'year' => $year];
-        }
-
-        return $data;
+        return range(date('Y') + 1, date('Y') - 90);
     }
 }

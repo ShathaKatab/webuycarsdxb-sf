@@ -52,13 +52,16 @@ class MileageType extends AbstractType
     /**
      * @return array
      */
-    public static function getMileages(){
+    public static function getMileages()
+    {
         $listOfMileages = array_merge([5000], range(10000, 250000, 10000));
         $mileages = [];
         array_map(function ($value) use (&$mileages) {
             return $mileages[$value] = sprintf('Up to %s', number_format($value));
         }, $listOfMileages);
 
-        return array_merge($mileages, [260000 => 'Other']);
+        $mileages[260000] = 'Other';
+
+        return $mileages;
     }
 }

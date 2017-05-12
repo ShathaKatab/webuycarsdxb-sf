@@ -5,6 +5,7 @@ namespace Wbc\BranchBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as Serializer;
 use Wbc\ValuationBundle\Entity\Valuation;
+use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
 use Wbc\VehicleBundle\Entity\ModelType;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -41,7 +42,7 @@ class Appointment
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100, unique=true)
+     * @ORM\Column(name="name", type="string", length=100)
      *
      * @Assert\NotBlank()
      *
@@ -159,26 +160,14 @@ class Appointment
     protected $vehicleColor;
 
     /**
-     * @var Branch
-     */
-    protected $branch;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_booked", type="date")
+     *
+     * @Assert\NotBlank()
+     * @Assert\Date()
      */
     protected $dateBooked;
-
-    /**
-     * @var string
-     */
-    protected $from;
-
-    /**
-     * @var string
-     */
-    protected $to;
 
     /**
      * @var Timing
@@ -193,7 +182,7 @@ class Appointment
     /**
      * @var AppointmentDetails
      *
-     * @ORM\OneToOne(targetEntity="\Wbc\BranchBundle\Entity\AppointmentDetails", mappedBy="appointment")
+     * @ORM\OneToOne(targetEntity="\Wbc\BranchBundle\Entity\AppointmentDetails", mappedBy="appointment", cascade={"persist"})
      *
      * @Serializer\Expose()
      */
@@ -245,6 +234,21 @@ class Appointment
      * @Serializer\Expose()
      */
     protected $updatedAt;
+
+    /**
+     * @var Branch
+     */
+    protected $branch;
+
+    /**
+     * @var string
+     */
+    protected $from;
+
+    /**
+     * @var string
+     */
+    protected $to;
 
     /**
      * Appointment Constructor.
@@ -819,5 +823,15 @@ class Appointment
     public function getCreatedBy()
     {
         return $this->createdBy;
+    }
+
+    /**
+     * Get Vehicle Make.
+     *
+     * @return Make
+     */
+    public function getVehicleMake()
+    {
+        return $this->vehicleModel ? $this->vehicleModel->getMake() : null;
     }
 }

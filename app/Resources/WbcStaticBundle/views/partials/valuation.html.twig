@@ -9,7 +9,7 @@
                     <h1 class="inherit-margin-top">AED 45,500</h1>
                 </div>
                 <div class="col-md-12">
-                    <p>2014 - Toyota 86 - GTX - Manual - Partial Repaint</p>
+                    <p>{{ valuation.vehicleYear  }} - {{ valuation.vehicleMake.name }} {{ valuation.vehicleModel.name }} {% if valuation.vehicleModelType is not null %}{{ '- ' ~ valuation.vehicleModelType.trim }}{% endif %} -  {{ valuation.vehicleBodyCondition|capitalize ~ ' Condition' }}</p>
                 </div>
             </div>
         </div>

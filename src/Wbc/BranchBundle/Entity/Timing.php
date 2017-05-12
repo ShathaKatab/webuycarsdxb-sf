@@ -333,4 +333,16 @@ class Timing
     {
         return $this->id;
     }
+
+    /**
+     * Get Timing string for FE.
+     *
+     * @return string
+     */
+    public function getTimingString()
+    {
+        if (!is_null($this->from) && !is_null($this->to)) {
+            return sprintf('%s - %s', $this->from, $this->to);
+        }
+    }
 }

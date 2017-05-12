@@ -2,11 +2,14 @@
 
 namespace Wbc\BranchBundle\EventListener;
 
+use Wbc\BranchBundle\BranchEvents;
+use Wbc\BranchBundle\Events\AppointmentEvent;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use JMS\DiExtraBundle\Annotation as DI;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\AppointmentDetails;
+use Doctrine\ORM\EntityManager;
 
 /**
  * Class AppointmentListener.
@@ -22,6 +25,48 @@ use Wbc\BranchBundle\Entity\AppointmentDetails;
  */
 class AppointmentListener
 {
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * AppointmentListener Constructor.
+     *
+     * @DI\InjectParams({
+     *  "entityManager" = @DI\Inject("doctrine.orm.default_entity_manager")
+     * })
+     *
+     * @param EntityManager $entityManager
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * @DI\Observe(BranchEvents::BEFORE_APPOINTMENT_CREATE)
+     *
+     * @param AppointmentEvent $event
+     */
+    public function onBeforeCreate(AppointmentEvent $event)
+    {
+        $appointment = $event->getAppointment();
+
+        if (!$appointment instanceof Appointment) {
+            return;
+        }
+
+        $existingAppointment = $this->entityManager->getRepository('WbcBranchBundle:Appointment')->findOneBy([
+            'valuation' => $appointment->getValuation(),
+        ]);
+
+        if ($existingAppointment) {
+            $this->entityManager->remove($existingAppointment);
+            $this->entityManager->flush();
+        }
+    }
+
     /**
      * @param LifecycleEventArgs $args
      */

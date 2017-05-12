@@ -16,6 +16,9 @@
     {{ parent() }}
     <section>
         <div id="valuation-container" class="container text-center" ng-controller="ValuationStepTwoController as ctrl">
+            {% if form is not null %}
+                {{ form_errors(form) }}
+            {% endif %}
             <form name="valuationDetailsForm" ng-submit="ctrl.submitForm(valuationDetailsForm.$valid)" method="post" class="form" novalidate>
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
@@ -72,7 +75,7 @@
                                    required name="emailAddress" type="email" class="form-control" placeholder="Type your email address">
                         </div>
                         <div class="form-group">
-                            <input ng-model="ctrl.mobileNumber" ng-pattern="/^(0|((\+|00)?971))(50|52|54|55|56)\d{7}$/" ng-class="{'form-control-invalid': valuationDetailsForm.$submitted && valuationDetailsForm.mobileNumber.$invalid }"
+                            <input data-type="telephone" ng-model="ctrl.mobileNumber" ng-pattern="/^(0|((\+|00)?971))(50|52|54|55|56)\d{7}$/" ng-class="{'form-control-invalid': valuationDetailsForm.$submitted && valuationDetailsForm.mobileNumber.$invalid }"
                                    required name="mobileNumber" type="text" class="form-control" placeholder="Type your mobile phone number">
                         </div>
                         <div class="form-group submit">

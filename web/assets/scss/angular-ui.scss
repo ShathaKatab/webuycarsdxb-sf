@@ -1,80 +1,101 @@
-table {
-  background-color: $white-color;
-  font-family: $font-family-base;
-  font-size: 10px;
-  -webkit-tap-highlight-color: transparent;
-
-  thead {
-    background-color: $aqua-marine-color;
-    font-size: 16px;
-    line-height: 22px;
-
-    tr:nth-child(1){
-      height: 40px;
-    }
-
-    tr:nth-child(2){
-      background-color: $grey-color;
-      font-size: 10px;
+.angular-ui-datepicker{
+  &.form-control-invalid {
+    table {
+      border: 1px solid $invalid-color;
     }
   }
 
-  &:hover, &:focus, &:active{
-    outline: 0;
-    outline: none;
-  }
-}
+  table {
+    background-color: $white-color;
+    font-family: $font-family-base;
+    font-size: 10px;
+    -webkit-tap-highlight-color: transparent;
 
-.btn{
-  &.uib-title, &.uib-right, &.uib-left{
-    background-color: transparent;
+    thead {
+      background-color: $aqua-marine-color;
+      font-size: 16px;
+      line-height: 22px;
 
-    &:hover, &:active, &:focus{
-      background-color: transparent;
-      border-color: transparent;
-      outline: 0;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
-      box-shadow: none;
+      tr:nth-child(1){
+        height: 40px;
+      }
+
+      tr:nth-child(2){
+        background-color: $grey-color;
+        font-size: 10px;
+      }
     }
-  }
-}
 
-.btn[disabled]{
-  &.active{
-    background-color: transparent;
-    border-color: transparent;
-  }
-}
-
-.btn-default[disabled]{
-  &:hover{
-    background-color: transparent;
-    border-color: transparent;
-    outline: 0;
-  }
-}
-
-.btn-info{
-  &.active{
-    background-color: $apple-green-color;
-    border-color: $apple-green-color;
-    outline: 0;
-    outline: none;
-
-    &:hover{
-      background-color: $apple-green-color;
-      border-color: $apple-green-color;
+    &:hover, &:focus, &:active{
       outline: 0;
       outline: none;
     }
   }
-}
 
-.uib-title[disabled]{
-  opacity: 1;
-}
+  .btn-default {
+    &.active {
+      background-color: transparent;
+      border-color: transparent;
+      box-shadow: none;
+      &:hover {
+        background-color: #e6e6e6;
+      }
+    }
+  }
 
-.text-info{
-  color: inherit;
+  .btn, .btn-default{
+    &.uib-title, &.uib-right, &.uib-left{
+      background-color: transparent;
+
+      &:hover, &:active, &:focus{
+        background-color: transparent;
+        border-color: transparent;
+        outline: 0;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+  }
+
+  .btn[disabled]{
+    &.active{
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
+
+  .btn-default[disabled]{
+    &:hover{
+      background-color: transparent;
+      border-color: transparent;
+      outline: 0;
+    }
+  }
+
+  .btn-info{
+    background-color: transparent;
+
+    &.active{
+      background-color: $apple-green-color;
+      border-color: $apple-green-color;
+      outline: 0;
+      outline: none;
+
+      &:hover{
+        background-color: $apple-green-color;
+        border-color: $apple-green-color;
+        outline: 0;
+        outline: none;
+      }
+    }
+  }
+
+  .uib-title[disabled]{
+    opacity: 1;
+  }
+
+  .text-info{
+    color: inherit;
+  }
 }

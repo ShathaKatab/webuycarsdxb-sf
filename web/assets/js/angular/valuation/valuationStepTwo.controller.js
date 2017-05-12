@@ -4,7 +4,7 @@
 
 angular
     .module('webuycarsApp')
-    .controller('ValuationStepTwoController', ['$scope', '$document', function ($scope, $document) {
+    .controller('ValuationStepTwoController', ['$scope', function ($scope) {
         $scope.vehicleModelType = null;
         $scope.vehicleMileage = null;
         $scope.vehicleColor = null;
