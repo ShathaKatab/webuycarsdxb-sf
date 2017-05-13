@@ -1,6 +1,6 @@
 <?php
 
-namespace BranchBundle\Twig;
+namespace Wbc\BranchBundle\Twig;
 
 use JMS\DiExtraBundle\Annotation as DI;
 
