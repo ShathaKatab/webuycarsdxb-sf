@@ -1,0 +1,11 @@
+User-Agent: *
+Disallow:
+Disallow: /login
+Disallow: /admin
+Disallow: /logout
+Disallow: /login_check
+Disallow: /profile
+Disallow: /register
+Disallow: /resetting
+Disallow: /vehicles
+Disallow: /branches

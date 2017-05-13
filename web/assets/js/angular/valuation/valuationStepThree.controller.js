@@ -162,7 +162,7 @@ angular
 
                         window.setTimeout(function () {
                             $window.location.href = headers('Location');
-                        }, 1000);
+                        }, 500);
                     });
                 }
             };

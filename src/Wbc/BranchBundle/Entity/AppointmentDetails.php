@@ -54,7 +54,7 @@ class AppointmentDetails
     /**
      * @var string
      *
-     * @ORM\Column(name="vehicle_model_type_name", type="string", length=100)
+     * @ORM\Column(name="vehicle_model_type_name", type="string", length=100, nullable=true)
      *
      * @Serializer\Expose()
      */

@@ -1,4 +1,8 @@
 {% extends '@WbcStatic/Default/base.html.twig' %}
+{% block title %}<title>Get Your Free online Car Valuation | {{ site_title }}</title>{% endblock %}
+{% block meta %}
+    <meta name="description" content="Free car valuation on WeBuyCarsDxb.com. Know your used car value in few seconds and book your appointment now. Purchase guaranteed.">
+{% endblock %}
 
 {% block body %}
 
@@ -63,8 +67,6 @@
                                     </div>
                                 </div>
                             </form>
-                            <p class="p-italic">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
-                                vestibulum.</p>
                         </div>
                     </div>
                 </div>
@@ -84,7 +86,15 @@
     </section>
 
     {% include 'WbcStaticBundle:partials:section-text.html.twig' with {
-    'title': 'Put some text here',
-    'content': '<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo.</p>'} %}
+    'title': 'Disclaimer',
+    'content': '<p class="p-italic">We assume the below conditions while providing you with an
+                                online valuation of your car:</p>
+                            <ul>
+                                <li class="p p-italic text-left">Your car has original paint, service records and no damage to the interior or mechanical parts.</li>
+                                <li class="p p-italic text-left">Your car has never been used for private hire, or as a police vehicle, or for rental, or as a subject to insurance write off, or to learn driving.</li>
+                                <li class="p p-italic text-left">Your car isn’t a non-runner.</li>
+                                <li class="p p-italic text-left">In case the above assumptions do not apply during the time of inspection, the
+                                    final offer may vary from the online valuation price.</li>
+                            </ul>'} %}
 
 {% endblock %}

@@ -1,5 +1,13 @@
 {% extends '@WbcStatic/Default/base.html.twig' %}
 
+{% block seoHead %}
+    {% if metaPath is defined %}
+        {% include metaPath %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
 {% block body %}
     {{ parent() }}
 

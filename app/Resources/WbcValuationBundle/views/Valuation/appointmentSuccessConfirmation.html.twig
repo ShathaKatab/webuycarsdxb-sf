@@ -1,5 +1,8 @@
 {% extends '@WbcStatic/Default/base.html.twig' %}
-
+{% block title %}<title>Get Your Free online Car Valuation | {{ site_title }}</title>{% endblock %}
+{% block meta %}
+    <meta name="description" content="Free car valuation on WeBuyCarsDxb.com. Know your used car value in few seconds and book your appointment now. Purchase guaranteed.">
+{% endblock %}
 {% block header %}
     <header>
         <div class="container text-center">
@@ -15,7 +18,7 @@
 {% block body %}
 
     {{ parent() }}
-    <span ng-controller="ValuationStepFourController as ctrl" ng-init="ctrl.branchName = '{{ appointment.branch.name }}'; ctrl.latitude = {{ appointment.branch.latitude}}; ctrl.longitude = {{ appointment.branch.longitude }};">
+    <span ng-controller="ValuationStepFourController as ctrl" ng-init="ctrl.branchName = '{{ appointment.branch.name }}'; ctrl.latitude = {{ appointment.branch.latitude}}; ctrl.longitude = {{ appointment.branch.longitude }}; ctrl.sitePhone = '{{ site_phone }}'">
     <section>
         <div class="container">
             <div class="row">
@@ -62,12 +65,18 @@
             </div>
         </div>
     </section>
-    </span>
 
-    {% include 'WbcStaticBundle:partials:section-text.html.twig' with {'title': 'Porta Fusce Vulputate', 'content': '<p>Basking shark burrowing goby scythe butterfish thorny catfish gombessa moonfish." Snoek spiny
-                            eel jellynose
-                            fish freshwater hatchetfish zebra tilapia black dragonfish hammerhead shark cornetfish
-                            electric stargazer
-                            dartfish velvet catfish.</p>'} %}
 
+    {% include 'WbcStaticBundle:partials:section-text.html.twig' with {
+    'title': 'Things to bring to your appointment',
+    'content': '<ul>
+                    <li class="text-left">Registration Card of Vehicle (Mulkiya)</li>
+                    <li class="text-left">Driving License, Emirates ID, or Passport</li>
+                    <li class="text-left">Your car service history booklet (if any)</li>
+                    <li class="text-left">Original and spare car keys</li>
+                    <li class="text-left">The Bank Release confirmation if your car is being financed by the bank</li>
+                </ul>
+                <p>If you have any questions, please feel free to call us on <a href="tel: {{ ctrl.sitePhone }}">{{ ctrl.sitePhone }}</a></p>
+                '} %}
+</span>
 {% endblock %}

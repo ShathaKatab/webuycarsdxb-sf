@@ -18,7 +18,7 @@ angular
 
             this.submit = function(isValid){
                 if(isValid){
-                    $window.location.href = '/valuation/model/'+this.vehicleModelId+'/'+this.vehicleYear;
+                    $window.location.href = '/car-valuation/model/'+this.vehicleModelId+'/'+this.vehicleYear;
                 }
             };
         }],

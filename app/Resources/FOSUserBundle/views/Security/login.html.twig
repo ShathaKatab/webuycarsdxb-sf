@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{{ site_title }}{% endblock %}</title>
+    {% block title %}{% endblock %}
     <base href="{{ path('wbc_static_default_index') }}">
     {% block stylesheets %}
         {% stylesheets filter='scssphp' output='css/app.css'

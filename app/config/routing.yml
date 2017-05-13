@@ -1,6 +1,6 @@
 wbc_vehicle:
     resource: "@WbcValuationBundle/Resources/config/routing.yml"
-    prefix:   /valuation
+    prefix:   /car-valuation
 
 wbc_valuation:
     resource: "@WbcVehicleBundle/Resources/config/routing.yml"

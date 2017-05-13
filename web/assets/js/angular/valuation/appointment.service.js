@@ -5,5 +5,5 @@ angular
     .module('webuycarsApp')
     .factory('Appointment', ['$resource',
         function($resource){
-            return $resource('valuation/:valuationId/appointment');
+            return $resource('car-valuation/:valuationId/appointment');
         }]);

@@ -52,11 +52,18 @@ class DefaultController extends Controller
         $slug = strtolower($slug);
         $template = sprintf('WbcStaticBundle:markdown:%s.md.twig', $slug);
         $templating = $this->container->get('templating');
+        $metaPath = sprintf('WbcStaticBundle:markdown/meta:%s.html.twig', $slug);
 
         if (!$templating->exists($template)) {
             throw new NotFoundHttpException('Page not found!');
         }
 
-        return ['content' => $templating->render($template)];
+        $data = ['content' => $templating->render($template)];
+
+        if ($templating->exists($metaPath)) {
+            $data['metaPath'] = $metaPath;
+        }
+
+        return $data;
     }
 }

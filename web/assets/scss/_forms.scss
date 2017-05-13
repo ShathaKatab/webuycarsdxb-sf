@@ -52,6 +52,9 @@ textarea{
 
   .p-italic{
     padding-top: 30px;
+    &.p{
+      padding-top: 0;
+    }
   }
 }
 
