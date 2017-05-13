@@ -61,4 +61,6 @@ parameters:
     site_linkedin: "https://www.linkedin.com/"
     google_maps_api_key: "Some Google Maps API Key"
     initial_total_appointments: 4968
+    from_email: "donotreply@webuycarsdxb.com"
+    from_sender_name: "WeBuyCarsDxb.com"
     contact_us_email: "awwad912@gmail.com"
