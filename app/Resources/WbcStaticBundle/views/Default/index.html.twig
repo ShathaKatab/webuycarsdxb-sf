@@ -107,7 +107,7 @@
                                             <div class="item">
                                                 <div class="thumbnail">
                                                     <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}"
-                                                    alt="Atul Gupta">
+                                                         alt="Atul Gupta">
 
                                                     <div class="caption">
                                                         <p class="color-white">Minimal paperwork. Quick process and good
@@ -124,7 +124,7 @@
                                             <div class="item">
                                                 <div class="thumbnail">
                                                     <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}"
-                                                    alt="Elham Fakhoury">
+                                                         alt="Elham Fakhoury">
 
                                                     <div class="caption">
                                                         <p class="color-white">My colleague recommended this place to me
@@ -158,13 +158,10 @@
                     </div>
                 </div>
                 <div id="appointments-stats" class="col-md-6 appointments text-center">
-                    <div class="large-text">4,968</div>
-                    <p class="color-dark">appointments made so far</p>
-                    <div class="row">
-                        <div class="col-md-6 col-md-offset-3">
-                            <a href="{{ path('wbc_valuation_index') }}" class="btn btn-lg btn-default">Make a FREE Appointment</a>
-                        </div>
-                    </div>
+                    <appointments-made initial-appointments-made="{{ initial_total_appointments }}"
+                                       total-appointments="{{ totalAppointments() }}"
+                                       appointments-index-url="'{{ path('wbc_valuation_index') }}'">
+                    </appointments-made>
                 </div>
             </div>
         </div>

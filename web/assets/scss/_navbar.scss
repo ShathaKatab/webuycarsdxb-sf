@@ -67,7 +67,7 @@
 }
 
 #navbar-steps-container {
-  padding-top: $steps-container-top;
+  padding-top: $steps-container-top - 30; //-30 for 3 cars
   .steps.two:before, .steps.three:before{
     width: 15px;
     height: 11px;

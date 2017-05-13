@@ -16,7 +16,7 @@ use Wbc\UserBundle\Entity\User;
  * Class Appointment.
  *
  * @ORM\Table(name="appointment")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Wbc\BranchBundle\Repository\AppointmentRepository")
  *
  * @Serializer\ExclusionPolicy("all")
  *

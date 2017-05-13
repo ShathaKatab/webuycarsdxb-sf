@@ -8,26 +8,59 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h1>Contact Us</h1>
+                        {% if form is defined and form is not null %}
+                            <div class="alert alert-danger" role="alert">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                <span class="sr-only">Errors:</span>
+                                {{ form_errors(form) }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" ng-controller="ContactUsController as ctrl">
                     <div id="contact-us-form-container" class="col-md-8 col-md-offset-2">
                         <div class="row">
-                            <form>
+                            <form name="contactUsForm" ng-submit="ctrl.submitForm(contactUsForm.$valid)" method="post" novalidate>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Name">
+                                        <input ng-model="ctrl.name"
+                                               ng-class="{'form-control-invalid': contactUsForm.$submitted && contactUsForm.name.$invalid }"
+                                               name="name"
+                                               required
+                                               class="form-control"
+                                               type="text"
+                                               placeholder="Name">
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" type="email" placeholder="Email">
+                                        <input ng-model="ctrl.emailAddress"
+                                               ng-class="{'form-control-invalid': contactUsForm.$submitted && contactUsForm.emailAddress.$invalid }"
+                                               name="emailAddress"
+                                               required
+                                               class="form-control"
+                                               type="email"
+                                               placeholder="Email Address">
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-control" type="text" placeholder="Phone number">
+                                        <input ng-model="ctrl.phoneNumber"
+                                               ng-class="{'form-control-invalid': contactUsForm.$submitted && contactUsForm.phoneNumber.$invalid }"
+                                               name="phoneNumber"
+                                               ng-pattern="/^(0|((\+|00)?971))(2|3|4|6|7|9|50|52|54|55|56)\d{7}$/"
+                                               required
+                                               class="form-control"
+                                               type="text"
+                                               placeholder="Phone number">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <textarea class="form-control" placeholder="Message"></textarea>
+                                        <textarea ng-model="ctrl.vehicleModelType"
+                                                  ng-class="{'form-control-invalid': contactUsForm.$submitted && contactUsForm.message.$invalid }"
+                                                  name="message"
+                                                  required
+                                                  class="form-control"
+                                                  placeholder="Message"
+                                                  ng-minlength="20"
+                                                ></textarea>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg">Contact Us</button>
@@ -52,7 +85,7 @@
                                         </a></h4>
                                     <h4 class="text-left"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{ branch.address }}
                                     </h4>
-                                    <h4 class="text-left"><i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;{{ branch.citySlug }}
+                                    <h4 class="text-left"><i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;{{ branch.citySlug | citySlug }}
                                     </h4>
                                 </div>
 

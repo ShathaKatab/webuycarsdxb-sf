@@ -28,7 +28,7 @@
 #reviews{
   background-color: $dark-color;
   padding: 46px floor(($grid-gutter-width / 2)) 46px ceil(($grid-gutter-width / 2));
-  min-height: 504px;
+  height: 504px;
 
   .img-circle{
     max-width: 96px;
@@ -56,6 +56,7 @@
   background: $apple-green-color url("../../images/appointments-bitmap.png") no-repeat;
   background-size: 100%;
   padding: 149px floor(($grid-gutter-width / 2)) 149px ceil(($grid-gutter-width / 2));
+  height: 504px;
 }
 
 #mobile-friendly{

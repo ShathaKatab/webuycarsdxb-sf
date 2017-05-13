@@ -49,6 +49,9 @@ twig:
         site_twitter: "%site_twitter%"
         site_linkedin: "%site_linkedin%"
         google_maps_api_key: "%google_maps_api_key%"
+        initial_total_appointments: "%initial_total_appointments%"
+        from_email: "%from_email%"
+        from_sender_name: "%from_sender_name%"
 
 # Assetic Configuration
 assetic:
@@ -124,8 +127,8 @@ fos_user:
     firewall_name: main
     user_class: Wbc\UserBundle\Entity\User
     from_email:
-        address: "donotreply@webuycarsdxb.com"
-        sender_name: "WeBuyCarsDXB"
+        address: "%from_email%"
+        sender_name: "%from_sender_name%"
 #    registration:
 #        form:
 #           type: Jbmc\UserBundle\Form\RegistrationType

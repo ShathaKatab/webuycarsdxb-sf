@@ -4,7 +4,9 @@ namespace Wbc\StaticBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as CF;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Wbc\StaticBundle\Form\ContactUsType;
 
 /**
  * Class DefaultController.
@@ -34,11 +36,45 @@ class DefaultController extends Controller
      * @CF\Route("/contact-us", name="wbc_static_default_contact_us")
      * @CF\Method({"GET", "POST"})
      *
+     * @param Request $request
+     *
      * @return array
      */
-    public function contactUsAction()
+    public function contactUsAction(Request $request)
     {
-        return [];
+        $form = null;
+
+        if ($request->getMethod() == Request::METHOD_POST) {
+            $data = $request->request->all();
+
+            $form = $this->createForm(new ContactUsType());
+
+            $form->submit($data);
+
+            if ($form->isValid()) {
+                $formData = $form->getData();
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject(sprintf('New Message from Contact Us on %s', $this->getParameter('site_title')))
+                    ->setFrom([$this->getParameter('from_email')], [$this->getParameter('from_sender_name')])
+                    ->setTo($this->getParameter('contact_us_email'))
+                    ->setBody($this->renderView('Emails/contactUs.html.twig', [
+                        'name' => $formData['name'],
+                        'emailAddress' => $formData['emailAddress'],
+                        'phoneNumber' => $formData['phoneNumber'],
+                        'message' => $formData['message'],
+                    ]),
+                        'text/html');
+
+                $this->get('mailer')->send($message);
+
+                $this->addFlash('success', 'Your contact message has been sent!');
+
+                return $this->redirect($this->generateUrl('wbc_static_default_index'));
+            }
+        }
+
+        return ['form' => $form ? $form->createView() : null];
     }
 
     /**

@@ -10,13 +10,18 @@
 
     {% include 'WbcStaticBundle:partials:valuation.html.twig' %}
 
+    {% if form is defined and form is not null %}
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Errors:</span>
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
+
     <section ng-controller="ValuationStepThreeController as ctrl"
              ng-init="ctrl.branches={{ getBranches()|serialize }}; ctrl.valuationId = '{{ valuation.id }}'">
         <div class="container">
             <div class="row">
-                {% if form is not null %}
-                    {{ form_errors(form) }}
-                {% endif %}
                 <div id="book-appointment-form" class="col-md-6 bg-grey">
                     <div class="row">
                         <div class="col-md-12">

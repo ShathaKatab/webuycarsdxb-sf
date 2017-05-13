@@ -60,3 +60,5 @@ parameters:
     site_instagram: "https://www.instagram.com/"
     site_linkedin: "https://www.linkedin.com/"
     google_maps_api_key: "Some Google Maps API Key"
+    initial_total_appointments: 4968
+    contact_us_email: "awwad912@gmail.com"
