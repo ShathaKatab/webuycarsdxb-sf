@@ -130,16 +130,16 @@
             <div class="row">
                 <div class="col-md-6">
                     <ul class="list-inline list-unstyled">
-                        {% if site_facebook is defined %}
+                        {% if site_facebook is defined and site_facebook is not null %}
                             <li><a target="_blank" href="{{ site_facebook }}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                         {% endif %}
-                        {% if site_twitter is defined %}
+                        {% if site_twitter is defined and site_twitter is not null %}
                             <li><a target="_blank" href="{{ site_twitter }}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                         {% endif %}
-                        {% if site_instagram is defined %}
+                        {% if site_instagram is defined and site_instagram is not null %}
                             <li><a target="_blank" href="{{ site_instagram }}"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
                         {% endif %}
-                        {% if site_linkedin is defined %}
+                        {% if site_linkedin is defined and site_linkedin is not null %}
                             <li><a target="_blank" href="{{ site_linkedin }}"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                         {% endif %}
 

@@ -146,4 +146,14 @@ jms_serializer:
         directories:
             FOSUB:
                 namespace_prefix: FOS\UserBundle
-                path: %kernel.root_dir%/serializer/FOSUB
+                path: "%kernel.root_dir%/serializer/FOSUB"
+
+lexik_maintenance:
+    authorized:
+        ips: "%lexik_ips%"
+    response:
+        code: 503
+        status: "Website under maintenance. Please try again later."
+    driver:
+        class: '\Lexik\Bundle\MaintenanceBundle\Drivers\FileDriver'
+        options: {file_path: "%kernel.root_dir%/cache/lock"}

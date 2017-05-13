@@ -43,23 +43,79 @@
 
 {% block body %}
     {{ parent() }}
-    {% include 'WbcStaticBundle:partials:section-text.html.twig' with {
-    'title': 'Why Should I Choose WeBuyCarsDxb.com to Sell My Car ',
-    'content': '<p class="text-left"><span class="text-bold">Free Car Valuation</span> – Valuate your car online for Free! Get an Initial quote in under 30 seconds! And visit us to sell your car.</p>
-                <p class="text-left"><span class="text-bold">Instant Cash</span> – Get cash on the spot for your car, no matter the make, model, year, or condition!</p>
-                <p class="text-left"><span class="text-bold">Fast Sale</span> – We buy any car in less than 30 minutes and you walk away with cash, hassle-free</p>
-                <p class="text-left"><span class="text-bold">Finance</span> – We help you settle car loans so you\'re not out of pocket</p>
-                <p class="text-left"><span class="text-bold">Reliable</span> – The preferred car buyers in Dubai by thousands of satisfied customers</p>
-                <p class="text-left"><span class="text-bold">Guaranteed Purchase</span> – We buy cars regardless of make, model, year, or condition</p>
-                <h2>Sell Your Car With Us in Less Than 30 Minutes</h2>
-                <p class="text-left">At <a href="/">Webuycarsdxb.com</a> we offer the most convenient and best way for you to <a href="/how-to-sell-my-car-in-dubai">sell any car</a> in UAE in less than 30 minutes at a fair price. We will inspect the car professionally at our branch and will handle all the paperwork and transfer process of your car, it couldn\'t be easier!</p>
-                <p class="text-left">The condition of your car does not matter to us. We buy cars for their fair and competitive market value and upon completion of the deal you get to walk away with Cash in hand.</p>
-                <p class="text-left">With our simple selling process, you don\'t have to go through any hassles of selling your car. Our fast and reliable service gives you an opportunity to easily sell any car with us quickly.</p>
-                <p class="text-left">So if you have a car to sell, then book an appointment and head over to our branch for your Free car inspection and today.</p>
-                ',
-    'buttonText': 'Get FREE Online Valuation'
-    } %}
 
+    <section class="section-text bg-grey">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>Why Should I Choose WeBuyCarsDxb.com to Sell My Car</h2>
+
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="text-bold">Free Car Valuation</p>
+                                    <p>Valuate your car online for Free! Get an Initial quote in under 30 seconds!
+                                        And visit us to sell your car.</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-bold">Instant Cash</p>
+                                    <p>Get cash on the spot for your car, no matter the make, model, year, or condition!</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="text-bold">Fast Sale</p>
+                                    <p>We buy any car in less than 30 minutes. You walk away with cash, hassle-free</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-bold">Finance</p>
+                                    <p>We help you settle car loans so you're not out of pocket</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="text-bold">Reliable</p>
+                                    <p>The preferred car buyers in Dubai by thousands of satisfied customers</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-bold">Guaranteed Purchase</p>
+                                    <p>We buy cars regardless of make, model, year, or condition</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <h2>Why Should I Choose WeBuyCarsDxb.com to Sell My Car</h2>
+
+                    <p>At <a href="/">Webuycarsdxb.com</a> we offer the most convenient and best way
+                        for you to <a href="/how-to-sell-my-car-in-dubai">sell any car</a> in UAE in less than 30
+                        minutes at a fair price. We will inspect the car professionally at our branch and will handle
+                        all the paperwork and transfer process of your car, it couldn't be easier!</p>
+
+                    <p>The condition of your car does not matter to us. We buy cars for their fair and
+                        competitive market value and upon completion of the deal you get to walk away with Cash in
+                        hand.</p>
+
+                    <p>With our simple selling process, you don't have to go through any hassles of
+                        selling your car. Our fast and reliable service gives you an opportunity to easily sell any car
+                        with us quickly.</p>
+
+                    <p>So if you have a car to sell, then book an appointment and head over to our
+                        branch for your Free car inspection and today.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <a href="{{ path('wbc_valuation_index') }}"
+                       class="btn btn-primary btn-lg">Get FREE Online Valuation</a>
+                </div>
+            </div>
+        </div>
+    </section>
     <section>
         <div class="container-fluid">
             <div class="row">
@@ -74,7 +130,7 @@
                                         <div class="carousel-inner" role="listbox">
                                             <div class="item active">
                                                 <div class="thumbnail">
-                                                    <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}"
+                                                    <img class="img-circle" src="{{ asset('images/reviews/malcolm.jpg') }}"
                                                          alt="Malcolm Dunne">
 
                                                     <div class="caption">
@@ -90,7 +146,7 @@
                                             </div>
                                             <div class="item">
                                                 <div class="thumbnail">
-                                                    <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}"
+                                                    <img class="img-circle" src="{{ asset('images/reviews/lisa.jpg') }}"
                                                          alt="Lisa Padurska">
 
                                                     <div class="caption">
@@ -106,7 +162,7 @@
                                             </div>
                                             <div class="item">
                                                 <div class="thumbnail">
-                                                    <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}"
+                                                    <img class="img-circle" src="{{ asset('images/reviews/atul.jpg') }}"
                                                          alt="Atul Gupta">
 
                                                     <div class="caption">
@@ -123,7 +179,7 @@
 
                                             <div class="item">
                                                 <div class="thumbnail">
-                                                    <img class="img-circle" src="{{ asset('images/reviews/john-doe-2.jpg') }}"
+                                                    <img class="img-circle" src="{{ asset('images/reviews/elham.jpg') }}"
                                                          alt="Elham Fakhoury">
 
                                                     <div class="caption">
