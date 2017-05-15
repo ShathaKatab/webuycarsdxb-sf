@@ -133,8 +133,6 @@ class ValuationManager
                                             FROM valuation_training_data
                                             WHERE model_id = :modelId');
 
-        $statement->bindValue(':yearMin', $year - 1, \PDO::PARAM_INT);
-        $statement->bindValue(':yearMax', $year + 1, \PDO::PARAM_INT);
         $statement->bindValue(':modelId', $modelId, \PDO::PARAM_INT);
         $statement->execute();
 
