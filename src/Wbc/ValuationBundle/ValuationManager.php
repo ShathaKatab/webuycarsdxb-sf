@@ -131,8 +131,15 @@ class ValuationManager
                                                 CAST(body_condition AS UNSIGNED) AS g_body_condition,
                                                 CAST(price AS UNSIGNED) AS z_price
                                             FROM valuation_training_data
-                                            WHERE model_id = :modelId');
+                                            WHERE
+                                                year BETWEEN :yearMin AND :yearMax
+                                            AND mileage BETWEEN :mileageMin AND :mileageMax
+                                            AND model_id = :modelId');
 
+        $statement->bindValue(':yearMin', $year - 1, \PDO::PARAM_INT);
+        $statement->bindValue(':yearMax', $year + 1, \PDO::PARAM_INT);
+        $statement->bindValue(':mileageMin', $mileage - 10000, \PDO::PARAM_INT);
+        $statement->bindValue(':mileageMax', $mileage + 10000, \PDO::PARAM_INT);
         $statement->bindValue(':modelId', $modelId, \PDO::PARAM_INT);
         $statement->execute();
 
