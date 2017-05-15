@@ -51,6 +51,7 @@ class ValuationManager
     {
         $this->entityManager = $entityManager;
         $this->valuationCommand = $valuationCommand;
+        $this->valuationDiscountPercentage = $valuationDiscountPercentage;
     }
 
     public function setPrice(Valuation $valuation)
