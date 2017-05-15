@@ -27,6 +27,8 @@ class VehicleController extends Controller
      */
     public function vehicleModelsForMakeAction(Make $make)
     {
-        return new Response($this->get('serializer')->serialize($make->getModels(), 'json'), Response::HTTP_OK, ['content-type' => 'application/json']);
+        $models = $this->get('doctrine.orm.default_entity_manager')->getRepository('WbcVehicleBundle:Model')->findByMakeId($make->getId());
+
+        return new Response($this->get('serializer')->serialize($models, 'json'), Response::HTTP_OK, ['content-type' => 'application/json']);
     }
 }

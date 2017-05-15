@@ -16,6 +16,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class ClassifiedsAd
 {
+    const SOURCE_DUBIZZLE = 'dubizzle.com';
+    const SOURCE_GETTHAT = 'getthat.com';
+
     /**
      * @var int
      *

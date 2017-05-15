@@ -6,10 +6,10 @@
                     <h2>Your Vehicle Value</h2>
                 </div>
                 <div class="col-md-12">
-                    <h1 class="inherit-margin-top">AED 45,500</h1>
+                    <h1 class="inherit-margin-top">AED {{ valuation.priceOnline|number_format }}</h1>
                 </div>
                 <div class="col-md-12">
-                    <p>{{ valuation.vehicleYear  }} - {{ valuation.vehicleMake.name }} {{ valuation.vehicleModel.name }} {% if valuation.vehicleModelType is not null %}{{ '- ' ~ valuation.vehicleModelType.trim }}{% endif %} -  {{ valuation.vehicleBodyCondition|capitalize ~ ' Condition' }}</p>
+                    <p>{{ valuation.vehicleYear  }} - {{ valuation.vehicleMake.name }} {{ valuation.vehicleModel.name }} {% if valuation.vehicleModelType is not null %}{{ '- ' ~ valuation.vehicleModelType.trim }}{% endif %} - {{ valuation.vehicleColor|capitalize ~ ' Color' }} -  {{ valuation.vehicleBodyCondition|capitalize ~ ' Condition' }}</p>
                 </div>
             </div>
         </div>

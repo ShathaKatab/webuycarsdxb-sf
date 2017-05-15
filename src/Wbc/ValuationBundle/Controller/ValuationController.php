@@ -71,6 +71,9 @@ class ValuationController extends Controller
                 $entityManager->persist($valuation);
                 $entityManager->flush();
 
+                $valuationManager = $this->get('wbc.valuation_manager');
+                $valuationManager->setPrice($valuation);
+
                 return $this->redirect($this->generateUrl('wbc_valuation_appointment', [
                     'valuationId' => $valuation->getId(),
                 ]));
