@@ -130,9 +130,7 @@ class ValuationManager
                                                 CAST(body_condition AS UNSIGNED) AS g_body_condition,
                                                 CAST(price AS UNSIGNED) AS z_price
                                             FROM valuation_training_data
-                                            WHERE
-                                                year BETWEEN :yearMin AND :yearMax
-                                            AND model_id = :modelId');
+                                            WHERE model_id = :modelId');
 
         $statement->bindValue(':yearMin', $year - 1, \PDO::PARAM_INT);
         $statement->bindValue(':yearMax', $year + 1, \PDO::PARAM_INT);
