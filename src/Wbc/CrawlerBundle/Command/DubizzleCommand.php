@@ -9,6 +9,7 @@ use Wbc\CrawlerBundle\Entity\ClassifiedsAd;
 use Wbc\CrawlerBundle\Entity\ClassifiedsMake;
 use Wbc\CrawlerBundle\Entity\ClassifiedsModel;
 use Stringy\Stringy as s;
+use Wbc\ValuationBundle\Entity\TrainingData;
 
 /**
  * Class DubizzleCommand.
@@ -18,7 +19,7 @@ use Stringy\Stringy as s;
 class DubizzleCommand extends ClassifiedsCommand
 {
     protected $url = 'https://uae.dubizzle.com';
-    protected $source = 'dubizzle.com';
+    protected $source = ClassifiedsAd::SOURCE_DUBIZZLE;
     protected $siteName = 'Dubizzle';
     protected $adsUrl = 'https://wd0ptz13zs-dsn.algolia.net/1/indexes/*/queries';
 
@@ -38,6 +39,7 @@ class DubizzleCommand extends ClassifiedsCommand
 
         $criteria = new \Doctrine\Common\Collections\Criteria();
         $criteria->where($criteria->expr()->eq('source', $this->source));
+        $criteria->andWhere($criteria->expr()->gte('name', 'Mazda'));
         $criteria->orderBy(['name' => 'ASC']);
 
         $makes = $this->entityManager->getRepository('WbcCrawlerBundle:ClassifiedsMake')->matching($criteria);

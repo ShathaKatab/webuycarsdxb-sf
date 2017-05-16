@@ -175,6 +175,18 @@ class Valuation
     protected $updatedAt;
 
     /**
+     * @var Make
+     */
+    protected $vehicleMake;
+
+    public function __construct()
+    {
+        if ($this->vehicleModel) {
+            $this->vehicleMake = $this->vehicleModel->getMake();
+        }
+    }
+
+    /**
      * Get id.
      *
      * @return guid
@@ -553,12 +565,26 @@ class Valuation
     }
 
     /**
-     * Get Vehicle Make.
-     *
      * @return Make
      */
     public function getVehicleMake()
     {
-        return $this->vehicleModel ? $this->vehicleModel->getMake() : null;
+        if (!$this->vehicleMake && $this->vehicleModel) {
+            $this->vehicleMake = $this->vehicleModel->getMake();
+        }
+
+        return $this->vehicleMake;
+    }
+
+    /**
+     * @param Make $vehicleMake
+     *
+     * @return $this
+     */
+    public function setVehicleMake(Make $vehicleMake)
+    {
+        $this->vehicleMake = $vehicleMake;
+
+        return $this;
     }
 }

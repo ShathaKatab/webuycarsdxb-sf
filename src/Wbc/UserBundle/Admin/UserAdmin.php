@@ -24,6 +24,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
  */
 class UserAdmin extends AbstractAdmin
 {
+    protected $datagridValues = ['_page' => 1, '_per_page' => 25, '_sort_order' => 'DESC', '_sort_by' => 'createdAt',];
+
     /**
      * @param User        $object
      * @param UserManager $manager

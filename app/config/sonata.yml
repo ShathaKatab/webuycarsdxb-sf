@@ -25,6 +25,13 @@ sonata_admin:
                 settings:
                     groups: ["Users Section"]
                 roles: [ROLE_SUPER_ADMIN]
+            -
+                position: right
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: ["Valuations"]
+                roles: [ROLE_SUPER_ADMIN]
+
     title: "WeBuyCars Admin"
     title_logo: /images/admin-logo.png
 
@@ -52,3 +59,15 @@ services:
         arguments: [~, Wbc\UserBundle\Entity\User, WbcUserBundle:CRUD]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Users, group: "Users Section" }
+
+    admin.valuation:
+        class: Wbc\ValuationBundle\Admin\ValuationAdmin
+        arguments: [~, Wbc\ValuationBundle\Entity\Valuation, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Valuation, group: "Valuations"}
+
+    admin.valuation.valuation_configuration:
+        class: Wbc\ValuationBundle\Admin\ValuationConfigurationAdmin
+        arguments: [~, Wbc\ValuationBundle\Entity\ValuationConfiguration, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Valuation Configuration, group: "Valuations"}

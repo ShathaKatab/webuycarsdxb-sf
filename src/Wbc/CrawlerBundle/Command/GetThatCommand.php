@@ -18,7 +18,7 @@ use Stringy\Stringy as s;
 class GetThatCommand extends ClassifiedsCommand
 {
     protected $url = 'https://getthat.com/autos';
-    protected $source = 'getthat.com';
+    protected $source = ClassifiedsAd::SOURCE_GETTHAT;
     protected $siteName = 'getthat';
     protected $adsUrl = 'https://tfa301y859-dsn.algolia.net/1/indexes/*/queries';
     protected $makes = ['Alfa Romeo', 'Audi', 'BMW', 'Bentley', 'Cadillac', 'Chevrolet', 'Chrysler', 'Daewoo', 'Daihatsu', 'Dodge', 'Ferrari', 'Ford', 'GMC', 'Great Wall', 'Honda', 'Hummer', 'Hyundai', 'Infiniti', 'Isuzu', 'Jaguar', 'Jeep', 'Kia', 'Land Rover', 'Lexus', 'Lincoln', 'Luxgen', 'MG', 'Mazda', 'Mercedes-Benz', 'Mini', 'Mitsubishi', 'Nissan', 'Peugeot', 'Pontiac', 'Porsche', 'Range Rover', 'Renault', 'Saab', 'Subaru', 'Suzuki', 'TATA', 'Toyota', 'Volkswagen', 'Volvo', 'ZX Auto'];

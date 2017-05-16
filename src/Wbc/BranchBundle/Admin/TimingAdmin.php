@@ -2,7 +2,7 @@
 
 namespace Wbc\BranchBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -18,8 +18,15 @@ use Wbc\BranchBundle\Entity\Branch;
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
  */
-class TimingAdmin extends Admin
+class TimingAdmin extends AbstractAdmin
 {
+    protected $datagridValues = [
+        '_page' => 1,
+        '_per_page' => 25,
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'createdAt',
+    ];
+
     /**
      * Fields to be shown on create/edit forms.
      *

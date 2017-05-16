@@ -2,7 +2,7 @@
 
 namespace Wbc\BranchBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -17,7 +17,7 @@ use Wbc\UtilityBundle\Form\PhoneNumberType;
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
  */
-class BranchAdmin extends Admin
+class BranchAdmin extends AbstractAdmin
 {
     /**
      * Fields to be shown on create/edit forms.

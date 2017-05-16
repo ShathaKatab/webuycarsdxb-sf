@@ -19,6 +19,8 @@ use Wbc\ValuationBundle\Entity\Valuation;
  */
 class ValuationManager
 {
+    const MIN_ALLOWABLE_PRICE = 500;
+
     /**
      * @var EntityManager
      */
@@ -79,7 +81,13 @@ class ValuationManager
         if (json_last_error() === JSON_ERROR_NONE && isset($output['price'])) {
             $price = $this->roundUpToAny(intval($output['price']));
 
-            if ($price) {
+            if ($price && $price > self::MIN_ALLOWABLE_PRICE) {
+                $discounts = $this->getValuationConfigurationDiscounts($valuation);
+
+                foreach ($discounts as $discount) {
+                    $price = $price + $price * intval($discount['discount']) / 100;
+                }
+
                 $price = $price + $price * $this->valuationDiscountPercentage / 100;
                 $valuation->setPriceOnline($price);
                 $this->entityManager->flush();
@@ -117,7 +125,7 @@ class ValuationManager
             'd_mileage' => intval($mileage),
             'f_color' => intval($color),
             'g_body_condition' => intval($bodyCondition),
-            'z_price' => null,
+            'z_price' => 0,
         ];
 
         $connection = $this->entityManager->getConnection();
@@ -169,6 +177,29 @@ class ValuationManager
         $fs->dumpFile($filePath, json_encode($trainingData), 0777);
 
         return $filePath;
+    }
+
+    private function getValuationConfigurationDiscounts(Valuation $valuation)
+    {
+        $year = $valuation->getVehicleYear();
+        $makeId = $valuation->getVehicleMake()->getId();
+        $modelId = $valuation->getVehicleModel()->getId();
+
+        $connection = $this->entityManager->getConnection();
+        $statement = $connection->prepare('
+                SELECT discount
+                FROM valuation_configuration
+                WHERE (vehicle_year = :year AND vehicle_make_id IS NULL AND vehicle_model_id IS NULL)
+                OR (vehicle_make_id = :makeId AND vehicle_model_id IS NULL AND vehicle_year IS NULL)
+                OR (vehicle_model_id = :modelId AND vehicle_year IS NULL)
+                OR (vehicle_model_id = :modelId AND vehicle_year = :year)
+        ');
+        $statement->bindValue(':year', $year, \PDO::PARAM_INT);
+        $statement->bindValue(':makeId', $makeId, \PDO::PARAM_INT);
+        $statement->bindValue(':modelId', $modelId, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
     }
 
     private function roundUpToAny($n, $x = 5)

@@ -4,7 +4,7 @@ namespace Wbc\BranchBundle\Admin;
 
 use Doctrine\ORM\EntityRepository;
 use Wbc\BranchBundle\Entity\Timing;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -12,8 +12,6 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Intl\Intl;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Form\BranchType;
 use Wbc\BranchBundle\Form\DayType;
@@ -26,8 +24,15 @@ use Wbc\VehicleBundle\Entity\Model;
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
  */
-class AppointmentAdmin extends Admin
+class AppointmentAdmin extends AbstractAdmin
 {
+    protected $datagridValues = [
+        '_page' => 1,
+        '_per_page' => 25,
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'createdAt',
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -102,7 +107,6 @@ class AppointmentAdmin extends Admin
             ->add('name')
             ->add('mobileNumber')
             ->add('emailAddress')
-            ->add('nationality', CountryType::class, ['placeholder' => 'Choose Nationality'])
             ->end()
             ->end()
             ->tab('Appointment Information')
@@ -160,7 +164,6 @@ class AppointmentAdmin extends Admin
             ->add('details.vehicleMakeName', null, ['label' => 'Make'])
             ->add('details.vehicleModelName', null, ['label' => 'Model'])
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'editable' => true])
-            ->add('nationality', 'choice', ['choices' => Intl::getRegionBundle()->getCountryNames()])
             ->add('createdAt', null, ['label' => 'Created'])
             ->add('updatedAt', null, ['label' => 'Updated'])
             ->add('_action', 'actions', [
@@ -195,7 +198,6 @@ class AppointmentAdmin extends Admin
             ->add('name')
             ->add('mobileNumber')
             ->add('emailAddress')
-            ->add('nationality', 'choice', ['choices' => Intl::getRegionBundle()->getCountryNames()])
             ->end()
             ->end();
 

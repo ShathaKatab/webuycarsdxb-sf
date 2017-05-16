@@ -14,8 +14,16 @@ $(document).ready(function () {
     var branchTimingSelect = $("select[name$='branchTiming]']");
     var branchTimingSelector2 = branchTimingSelect.prev($('.select2-container')).find($('span.select2-chosen'));
 
+    var isValuationConfiguration = window.location.href.includes('valuationconfiguration');
+
     if(modelTypeSelect.val() && !modelTypeSelector2.text()){
         modelTypeSelector2.text(modelTypeSelect.find("option[value="+modelTypeSelect.val()+"]").text());
+    }
+
+    if(isValuationConfiguration){
+        modelSelect.show();
+        modelSelect.removeAttr('required');
+        modelSelect.hide();
     }
 
     $("select[name$='vehicleMake]']").on('change', function () {
@@ -56,7 +64,12 @@ $(document).ready(function () {
     });
 
 
-    modelSelect.on('change', function () {
+    modelSelect.on('change', function (e) {
+        if(isValuationConfiguration){
+            e.stopPropagation();
+            return;
+        }
+
         clearTransmissionAndSpecifications();
         var modelIdValue = this.value;
         modelTypeSelect.find('option').remove();
