@@ -138,6 +138,10 @@ article{
 
 #navbar-phone-container {
   font-size: 22px;
+  @media (max-width: $screen-sm-max) {
+    font-size: 18px;
+    padding-top: 6px;
+  }
 }
 
 header h1, article h1{
@@ -149,8 +153,14 @@ section.section-text {
 }
 
 #sell-any-car-you-have {
-  padding: (113 - 20px) 150px 118px 150px;
-  p {
+  @media (min-width: $screen-sm-min) {
+    padding: (113 - 20px) 150px 118px 150px;
+  }
+  @media (max-width: $screen-sm-max) {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+    p {
     margin-bottom: 35px;
   }
 }
@@ -176,7 +186,7 @@ section.section-text {
 // == Footer
 #footer-menu {
   background-color: $aqua-marine-color;
-  padding: 224px floor(($grid-gutter-width / 2)) 223px ceil(($grid-gutter-width / 2));
+  padding: 224px floor(($grid-gutter-width / 2)) 229px ceil(($grid-gutter-width / 2));
 
   a {
     font-size: 20px;
@@ -190,10 +200,17 @@ section.section-text {
       color: #2c2c2c;
     }
   }
+
+  @media (max-width: $screen-sm-max) {
+    padding-top: $screen-sm-max-padding-top;
+    padding-bottom: $screen-sm-max-padding-bottom;
+  }
 }
 
 #footer-strip {
-  padding: 25px 150px 0 150px;
+  @media (min-width: $screen-sm-min) {
+    padding: 25px 150px 0 150px;
+  }
   opacity: .5;
   color: $dark-color;
   border-top: 1px solid #ccc;
@@ -214,5 +231,4 @@ section.section-text {
       color: #666;
     }
   }
-
 }

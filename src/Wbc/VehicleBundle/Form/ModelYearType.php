@@ -22,7 +22,12 @@ class ModelYearType extends AbstractType
             'label' => 'Vehicle Model Year',
             'choices' => self::getYears(),
             'placeholder' => '',
-            'choices_as_values' => true
+            'choices_as_values' => true,
+            'choice_label' => function ($value, $key, $index) {
+                if ($value) {
+                    return $value;
+                }
+            },
         ]);
     }
 

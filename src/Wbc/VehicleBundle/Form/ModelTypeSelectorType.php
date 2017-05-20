@@ -52,7 +52,7 @@ class ModelTypeSelectorType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['invalid_message' => 'The selected Vehicle Model Type does not exist']);
+        $resolver->setDefaults(['invalid_message' => 'The selected Vehicle Model Type does not exist', 'label' => 'Vehicle Trim']);
     }
 
     /**

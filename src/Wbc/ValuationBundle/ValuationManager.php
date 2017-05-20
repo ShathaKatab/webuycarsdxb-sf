@@ -4,6 +4,7 @@ namespace Wbc\ValuationBundle;
 
 use Doctrine\ORM\EntityManager;
 use JMS\DiExtraBundle\Annotation as DI;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
@@ -37,28 +38,37 @@ class ValuationManager
     private $valuationDiscountPercentage;
 
     /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
      * ValuationManager Constructor.
      *
      * @DI\InjectParams({
      * "entityManager" = @DI\Inject("doctrine.orm.default_entity_manager"),
      * "valuationCommand" = @DI\Inject("%valuation_command%"),
-     * "valuationDiscountPercentage" = @DI\Inject("%valuation_discount_percentage%")
+     * "valuationDiscountPercentage" = @DI\Inject("%valuation_discount_percentage%"),
+     * "logger" = @DI\Inject("logger")
      * })
      *
-     * @param EntityManager $entityManager
-     * @param string        $valuationCommand
-     * @param int           $valuationDiscountPercentage
+     * @param EntityManager   $entityManager
+     * @param string          $valuationCommand
+     * @param int             $valuationDiscountPercentage
+     * @param LoggerInterface $logger
      */
-    public function __construct(EntityManager $entityManager, $valuationCommand, $valuationDiscountPercentage)
+    public function __construct(EntityManager $entityManager, $valuationCommand, $valuationDiscountPercentage, LoggerInterface $logger)
     {
         $this->entityManager = $entityManager;
         $this->valuationCommand = $valuationCommand;
         $this->valuationDiscountPercentage = $valuationDiscountPercentage;
+        $this->logger = $logger;
     }
 
     public function setPrice(Valuation $valuation)
     {
         $filePath = $this->generateTrainingDataFile($valuation);
+        $output = null;
 
         //No Training Data available, just bounce
         if (!$filePath) {
@@ -67,30 +77,34 @@ class ValuationManager
 
         $command = strtr($this->valuationCommand, ['%filePath%' => escapeshellarg($filePath)]);
 
-        $process = new Process($command);
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
+        try {
+            $process = new Process($command);
+            $process->run();
+            if (!$process->isSuccessful()) {
+                throw new ProcessFailedException($process);
+            }
+            $output = $process->getOutput();
+        } catch (ProcessFailedException $e) {
+            $this->logger->critical($e->getMessage());
         }
 
-        $output = $process->getOutput();
+        if ($output) {
+            $output = json_decode($output, true);
 
-        $output = json_decode($output, true);
+            if (json_last_error() === JSON_ERROR_NONE && isset($output['price'])) {
+                $price = $this->roundUpToAny(intval($output['price']));
 
-        if (json_last_error() === JSON_ERROR_NONE && isset($output['price'])) {
-            $price = $this->roundUpToAny(intval($output['price']));
+                if ($price && $price > self::MIN_ALLOWABLE_PRICE) {
+                    $discounts = $this->getValuationConfigurationDiscounts($valuation);
 
-            if ($price && $price > self::MIN_ALLOWABLE_PRICE) {
-                $discounts = $this->getValuationConfigurationDiscounts($valuation);
+                    foreach ($discounts as $discount) {
+                        $price = $price + $price * intval($discount['discount']) / 100;
+                    }
 
-                foreach ($discounts as $discount) {
-                    $price = $price + $price * intval($discount['discount']) / 100;
+                    $price = $price + $price * $this->valuationDiscountPercentage / 100;
+                    $valuation->setPriceOnline($price);
+                    $this->entityManager->flush();
                 }
-
-                $price = $price + $price * $this->valuationDiscountPercentage / 100;
-                $valuation->setPriceOnline($price);
-                $this->entityManager->flush();
             }
         }
     }

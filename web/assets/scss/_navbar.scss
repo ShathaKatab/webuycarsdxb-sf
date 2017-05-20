@@ -32,6 +32,11 @@
       position: relative;
       transition: all 500ms ease-in-out;
     }
+
+    @media (max-width: $screen-sm-max) {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
   }
 
   .navbar-toggle.active {
@@ -58,12 +63,16 @@
 
       }
     }
-
   }
+
 }
 
 #header-form {
   padding: 95px 0 150px 0;
+  @media (max-width: $screen-sm-max) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 #navbar-steps-container {
@@ -81,6 +90,9 @@
 
 #navbar-phone-container {
   padding-top: $steps-container-top;
+  @media (max-width: $screen-sm-max) {
+    padding-top: 0;
+  }
 }
 
 .steps {
@@ -114,8 +126,8 @@
 .navbar-collapse{
   width: 200px;
   position: absolute;
-  right: 38%;
-  top: 102%;
+  right: 0;
+  top: 80px;
   background-color: $dark-color;
   border-radius: 6%;
   z-index: 9999;
@@ -130,4 +142,8 @@
       color: #bbbbbb;
     }
   }
+}
+
+.navbar-brand{
+  padding-top: 15px;
 }

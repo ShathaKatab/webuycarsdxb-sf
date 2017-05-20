@@ -62,7 +62,10 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('vehicleYear', WbcVehicleType\ModelYearType::class)
             ->add('vehicleMake', WbcVehicleType\MakeType::class)
             ->add('vehicleModel', ChoiceType::class)
-            ->add('vehicleModelType', ChoiceType::class);
+            ->add('vehicleModelType', WbcVehicleType\ModelTypeSelectorType::class, [
+                'label' => 'Vehicle Trim',
+                'required' => false])
+            ;
 
         if ($subject) {
             if ($subject->getVehicleMake() || $request->isMethod('POST')) {
@@ -85,6 +88,8 @@ class AppointmentAdmin extends AbstractAdmin
                 $formMapper->add('vehicleModelType', EntityType::class, [
                     'placeholder' => '',
                     'class' => ModelType::class,
+                    'label' => 'Vehicle Trim',
+                    'required' => false,
                     'query_builder' => $request->isMethod('POST') ? null : function (EntityRepository $entityRepository) use ($subject) {
                         return $entityRepository->createQueryBuilder('m')
                             ->where('m.model = :model')
@@ -94,10 +99,9 @@ class AppointmentAdmin extends AbstractAdmin
             }
         }
 
-        $formMapper->add('vehicleTransmission', WbcVehicleType\TransmissionType::class)
-            ->add('vehicleTrim', WbcVehicleType\TrimType::class)
+        $formMapper->add('vehicleTransmission', WbcVehicleType\TransmissionType::class, ['required' => false])
             ->add('vehicleMileage', WbcVehicleType\MileageType::class)
-            ->add('vehicleSpecifications', WbcVehicleType\SpecificationType::class)
+            ->add('vehicleSpecifications', WbcVehicleType\SpecificationType::class, ['required' => false])
             ->add('vehicleBodyCondition', WbcVehicleType\ConditionType::class)
             ->end()
             ->end();
@@ -135,7 +139,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->with('')
             ->add('status', ChoiceType::class, [
                 'choices' => Appointment::getStatuses(),
-                'empty_data' => Appointment::STATUS_ACTIVE,
+                'empty_data' => Appointment::STATUS_NEW,
             ])
             ->end()
             ->end()
@@ -184,9 +188,8 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('vehicleYear')
             ->add('vehicleMake')
             ->add('vehicleModel')
-            ->add('vehicleModelType')
+            ->add('vehicleModelType', null, ['label' => 'Vehicle Trim'])
             ->add('vehicleTransmission', 'choice', ['choices' => WbcVehicleType\TransmissionType::getTransmissions()])
-            ->add('vehicleTrim', 'choice', ['choices' => WbcVehicleType\TrimType::getTrims()])
             ->add('vehicleMileage', 'choice', ['choices' => WbcVehicleType\MileageType::getMileages()])
             ->add('vehicleSpecifications', 'choice', ['choices' => WbcVehicleType\SpecificationType::getSpecifications()])
             ->add('vehicleBodyCondition', 'choice', ['choices' => WbcVehicleType\ConditionType::getConditions()])
@@ -207,7 +210,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('branchTiming.dayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Day Booked'])
             ->add('dateBooked')
             ->add('branchTiming')
-            ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'empty_data' => Appointment::STATUS_ACTIVE])
+            ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'empty_data' => Appointment::STATUS_NEW])
             ->end()
             ->end();
     }

@@ -42,4 +42,9 @@
   button {
     margin-top: -5px;
   }
+  @media (max-width: $screen-sm-max) {
+    button{
+      margin-top: 0;
+    }
+  }
 }

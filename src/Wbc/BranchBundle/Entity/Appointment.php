@@ -24,11 +24,13 @@ use Wbc\UserBundle\Entity\User;
  */
 class Appointment
 {
-    const STATUS_ACTIVE = 'active';
+    const STATUS_NEW = 'active';
+    const STATUS_CONFIRMED = 'confirmed';
     const STATUS_CANCELLED = 'cancelled';
+    const STATUS_INVALID_CONTACT = 'invalid_contact';
+    const STATUS_CALLBACK = 'callback';
+    const STATUS_INSPECTED = 'inspected';
     const STATUS_OFFER_ACCEPTED = 'offer_accepted';
-    const STATUS_OFFER_REJECTED = 'offer_rejected';
-    const STATUS_INVALID = 'invalid';
 
     /**
      * @var int
@@ -236,6 +238,15 @@ class Appointment
     protected $updatedAt;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="notes", type="text", nullable=true)
+     *
+     * @Serializer\Expose()
+     */
+    protected $notes;
+
+    /**
      * @var Branch
      */
     protected $branch;
@@ -257,7 +268,7 @@ class Appointment
      */
     public function __construct(Valuation $valuation = null)
     {
-        $this->status = self::STATUS_ACTIVE;
+        $this->status = self::STATUS_NEW;
         $this->setValuation($valuation);
     }
 
@@ -543,11 +554,13 @@ class Appointment
     public static function getStatuses()
     {
         return [
-            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_NEW => 'New',
+            self::STATUS_CONFIRMED => 'Confirmed',
             self::STATUS_CANCELLED => 'Cancelled',
+            self::STATUS_INVALID_CONTACT => 'Invalid Contact',
+            self::STATUS_CALLBACK => 'Call Back',
+            self::STATUS_INSPECTED => 'Inspected',
             self::STATUS_OFFER_ACCEPTED => 'Offer Accepted',
-            self::STATUS_OFFER_REJECTED => 'Offer Rejected',
-            self::STATUS_INVALID => 'Invalid',
         ];
     }
 
@@ -833,5 +846,29 @@ class Appointment
     public function getVehicleMake()
     {
         return $this->vehicleModel ? $this->vehicleModel->getMake() : null;
+    }
+
+    /**
+     * Set notes.
+     *
+     * @param string $notes
+     *
+     * @return Appointment
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Get notes.
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }

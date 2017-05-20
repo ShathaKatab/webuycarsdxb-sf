@@ -26,7 +26,7 @@ class AppointmentRepository extends EntityRepository
 
         $queryBuilder->select('count(a.id)')
             ->from('WbcBranchBundle:Appointment', 'a')
-            ->where($queryBuilder->expr()->notIn('a.status', [Appointment::STATUS_INVALID]));
+            ->where($queryBuilder->expr()->notIn('a.status', [Appointment::STATUS_INVALID_CONTACT, Appointment::STATUS_CANCELLED]));
 
         return intval($queryBuilder->getQuery()->getSingleScalarResult());
     }

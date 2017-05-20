@@ -1,0 +1,32 @@
+{% extends '@WbcStatic/Default/base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+
+    <article class="text-center">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1>
+                            {% block statusCode %}
+                                {{ status_code }}
+                            {% endblock %}
+                            <br>
+                            <small>
+                                {% block statusText %}
+                                    {{ status_text }}
+                                {% endblock %}
+                            </small>
+                        </h1>
+                        <p class="text-center">Try to reach us via email on the <a href={{ path('wbc_static_default_contact_us') }}>Contact Us</a> form<br>
+                            Or give us a call at: <a href="tel: {{ site_phone }}">{{ site_phone }}</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
+
+{% endblock %}

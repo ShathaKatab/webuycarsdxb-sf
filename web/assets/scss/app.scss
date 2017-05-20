@@ -44,23 +44,27 @@
     background: none;
   }
 
-  &.left{
-    left: -12%;
-  }
-  &.right{
-    right: -12%;
-  }
+//  &.left{
+//    left: -5%;
+//  }
+//  &.right{
+//    right: -5%;
+//  }
 }
 
 #appointments-stats{
   background: $apple-green-color url("../../images/appointments-bitmap.png") no-repeat;
-  background-size: 100%;
+  background-size: cover;
   padding: 149px floor(($grid-gutter-width / 2)) 149px ceil(($grid-gutter-width / 2));
   height: 504px;
 }
 
 #mobile-friendly{
   padding: 252px floor(($grid-gutter-width / 2)) 252px ceil(($grid-gutter-width / 2)) ;
+  @media (max-width: $screen-sm-max) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 #mobile-phone{
@@ -94,4 +98,8 @@
 #footer-contact {
   background-color: $white-color;
   padding: 103px floor(($grid-gutter-width / 2)) 103px ceil(($grid-gutter-width / 2));
+}
+
+#second-row-container{
+  margin-top: 10px;
 }
