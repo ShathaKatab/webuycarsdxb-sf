@@ -18,6 +18,7 @@ class ClassifiedsAd
 {
     const SOURCE_DUBIZZLE = 'dubizzle.com';
     const SOURCE_GETTHAT = 'getthat.com';
+    const SOURCE_MANHEIM = 'manheim.com';
 
     /**
      * @var int
