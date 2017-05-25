@@ -2,7 +2,6 @@
 
 namespace Wbc\CrawlerBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
@@ -55,7 +54,7 @@ class ClassifiedsModelType
     /**
      * @var string
      *
-     * @ORM\Column(name="engine", type="smallint", length=5)
+     * @ORM\Column(name="engine", type="smallint", length=5, nullable=true)
      * @Serializer\Expose()
      */
     private $engine;
@@ -117,7 +116,7 @@ class ClassifiedsModelType
     /**
      * @var bool
      *
-     * @ORM\Column(name="is_gcc", type="boolean", options={"default": true})
+     * @ORM\Column(name="is_gcc", type="boolean", nullable=true)
      * @Serializer\Expose()
      */
     private $isGcc;
@@ -349,11 +348,25 @@ class ClassifiedsModelType
      */
     public function setYears($years)
     {
-        $this->years = array_unique($years);
+        $this->years = array_values(array_unique($years));
 
         return $this;
     }
 
+    /**
+     * Adds a year.
+     *
+     * @param int $year
+     *
+     * @return ClassifiedsModelType
+     */
+    public function addYear($year)
+    {
+        $this->years[] = $year;
+        $this->years = array_values(array_unique($this->years));
+
+        return $this;
+    }
     /**
      * Get years.
      *

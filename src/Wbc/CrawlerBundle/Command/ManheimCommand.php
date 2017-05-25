@@ -2,10 +2,13 @@
 
 namespace Wbc\CrawlerBundle\Command;
 
+use Symfony\Component\Console\Output\OutputInterface;
 use Wbc\CrawlerBundle\Entity\ClassifiedsAd;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use Wbc\CrawlerBundle\Entity\ClassifiedsMake;
 use Wbc\CrawlerBundle\Entity\ClassifiedsModel;
+use Wbc\CrawlerBundle\Entity\ClassifiedsModelType;
 
 /**
  * Class ManheimCommand.
@@ -14,9 +17,10 @@ use Wbc\CrawlerBundle\Entity\ClassifiedsModel;
  */
 class ManheimCommand extends ClassifiedsCommand
 {
-    protected $url = 'https://uae.dubizzle.com';
+    protected $url = 'https://gapi-prod.aws.manheim.com/gateway/';
     protected $source = ClassifiedsAd::SOURCE_MANHEIM;
     protected $siteName = 'Manheim';
+    protected $years;
 
     protected function configure()
     {
@@ -26,29 +30,60 @@ class ManheimCommand extends ClassifiedsCommand
             ->addOption('overwrite', null, InputOption::VALUE_OPTIONAL, 'Either true or false; if false existing rows will be ignored');
     }
 
+    protected function processAds()
+    {
+        return;
+        $this->outputInterface->writeln(sprintf('<info>Crawling Ads from %s (%s)</info>', $this->siteName, $this->source));
+        $currentPage = 0;
+        $connection = $this->entityManager->getConnection();
+        $criteria = new \Doctrine\Common\Collections\Criteria();
+        $criteria->where($criteria->expr()->eq('source', $this->source));
+
+        $makes = $this->entityManager->getRepository('WbcCrawlerBundle:ClassifiedsMake')->matching($criteria);
+        foreach ($makes as $make) {
+            $models = $make->getModels();
+
+            $this->outputInterface->writeln('<info>Start transaction</info>');
+            $connection->beginTransaction();
+
+            try {
+                /**@var ClassifiedsModel $model */
+                foreach ($models as $model) {
+                    $makeName = $make->getName();
+                    $modelName = $model->getName();
+                    $this->outputInterface->writeln(sprintf('<comment>Crawling %s - %s from %d -> %d</comment>', $makeName, $modelName, $this->yearFrom, $this->yearTo));
+
+//                    $this->doAlgolia($model, $makeName, $modelName);
+                }
+                $this->entityManager->flush();
+                $this->outputInterface->writeln('<info>Commit transaction</info>');
+                $connection->commit();
+            } catch (\RuntimeException $e) {
+            }
+        }
+    }
+
     protected function processMakesmodels()
     {
-        //fetch models only
-        $this->outputInterface->writeln(sprintf('<info>Crawling MODELS from %s (%s)</info>', $this->siteName, $this->source));
+        $makesUrl = 'https://webservices.manheim.com/MMRDecoderWebService/decoders/makeList?year=%d&country=US';
+        $modelsUrl = 'https://webservices.manheim.com/MMRDecoderWebService/decoders/modelList/make/%s?year=%d&country=US';
+        $modelTypesUrl = 'https://webservices.manheim.com/MMRDecoderWebService/decoders/styleList/make/%s/model/%s/year/%d?country=US';
+        $this->fetchMakes($makesUrl, '');
+        $this->fetchModels($modelsUrl);
+        $this->fetchModelTypes($modelTypesUrl);
+    }
+
+    protected function fetchMakes($url, $discoverer)
+    {
+        $this->outputInterface->writeln(sprintf('<info>Crawling MAKES from %s (%s)</info>', $this->siteName, $this->source));
         $this->outputInterface->writeln('<info>Start transaction</info>');
         $this->entityManager->getConnection()->beginTransaction();
-
-        $url = 'https://www.manheim.com/members/powersearch/getModelsVehicleTypes.do';
-        $cookie = $this->getContainer()->getParameter('crawler_manheim_cookie');
-        $userAgent = $this->getContainer()->getParameter('crawler_user_agent');
+        $total = 0;
+        $years = array_reverse(range($this->yearTo, $this->yearFrom));
 
         try {
-            $makes = $this->entityManager->getRepository('WbcCrawlerBundle:ClassifiedsMake')->findBy(['source' => $this->source]);
-
-            foreach ($makes as $make) {
-                $response = $this->guzzleClient->post($url, [
-                    'body' => sprintf('make=%d&vehicleType=104000001&vehicleType=104000002&vehicleType=104000003&vehicleType=104000004', $make->getSourceId()),
-                    'headers' => [
-                        'Cookie' => $cookie,
-                        'User-Agent' => $userAgent,
-                        'Content-Type' => 'application/x-www-form-urlencoded',
-                    ],
-                ]);
+            foreach ($years as $year) {
+                $response = $this->getResponse(['requests' => [['href' => sprintf($url, $year)]]]);
 
                 $results = json_decode($response->getBody(), true);
 
@@ -57,21 +92,31 @@ class ManheimCommand extends ClassifiedsCommand
                     throw new \RuntimeException('No results!');
                 }
 
-                foreach ($results['models'] as $result) {
-                    if ($result['label'] == 'ALL' || $result['value'] == 'ALL') {
+                $makes = $results['responses'][0]['body']['make'];
+
+                foreach ($makes as $make) {
+                    $existingMake = $this->entityManager->getRepository('WbcCrawlerBundle:ClassifiedsMake')
+                        ->findOneBy(['source' => $this->source, 'sourceId' => $make['id']]);
+
+                    if ($existingMake) {
                         continue;
                     }
 
-                    $classifiedsModel = new ClassifiedsModel();
-                    $classifiedsModel->setName($result['label']);
-                    $classifiedsModel->setSourceId($result['value']);
-                    $classifiedsModel->setMake($make);
-                    $this->entityManager->persist($classifiedsModel);
+                    $theMake = new ClassifiedsMake();
+                    $theMake->setSource($this->source);
+                    $theMake->setSourceId($make['id']);
+                    $theMake->setName($make['name']);
+
+                    $this->outputInterface->writeLn(sprintf('<info>Added: %s</info>', $theMake->getName()));
+
+                    $this->entityManager->persist($theMake);
+                    ++$total;
                 }
 
                 $this->entityManager->flush();
-                $this->outputInterface->writeLn(sprintf('<comment>ClassifiedsModels for ClassifiedsMake: %s</comment>', $make->getName()));
             }
+
+            $this->outputInterface->writeLn(sprintf('<comment>%d ClassifiedsMakes added from: %s</comment>', $total, $this->source));
 
             $this->outputInterface->writeln('<info>Commit transaction</info>');
             $this->entityManager->getConnection()->commit();
@@ -81,6 +126,158 @@ class ManheimCommand extends ClassifiedsCommand
             $this->outputInterface->writeln(sprintf('<error>Reason: %s</error>', $e->getMessage()));
         }
 
-        $this->outputInterface->writeln(sprintf('<info>Done Crawling MODELS from %s (%s)</info>', $this->siteName, $this->source));
+        $this->outputInterface->writeln(sprintf('<info>Done Crawling MAKES from %s (%s)</info>', $this->siteName, $this->source));
+    }
+
+    protected function fetchModels($url)
+    {
+        $this->outputInterface->writeln(sprintf('<info>Crawling MODELS from %s (%s)</info>', $this->siteName, $this->source));
+        $this->outputInterface->writeln('<info>Start transaction</info>');
+        $this->entityManager->getConnection()->beginTransaction();
+        $total = 0;
+
+        try {
+            $makes = $this->entityManager->getRepository('WbcCrawlerBundle:ClassifiedsMake')->findBy(['source' => $this->source]);
+            $years = array_reverse(range($this->yearTo, $this->yearFrom));
+
+            foreach ($makes as $make) {
+                foreach ($years as $year) {
+                    $response = $this->getResponse(['requests' => [['href' => sprintf($url, $make->getSourceId(), $year)]]]);
+                    $results = json_decode($response->getBody(), true);
+
+                    if (!is_array($results)) {
+                        //bounce
+                        throw new \RuntimeException('No results!');
+                    }
+
+                    $models = $results['responses'][0]['body']['model'];
+
+                    foreach ($models as $model) {
+                        $queryBuilder = $this->entityManager->createQueryBuilder()
+                            ->select('model')
+                            ->from('WbcCrawlerBundle:ClassifiedsModel', 'model')
+                            ->innerJoin('model.make', 'make', 'WITH', 'make.source = :source')
+                            ->where('model.sourceId = :sourceId')
+                            ->setParameter(':source', $this->source)
+                            ->setParameter(':sourceId', $model['id']);
+
+                        $existingModel = $queryBuilder->getQuery()->getOneOrNullResult();
+
+                        if ($existingModel) {
+                            continue;
+                        }
+
+                        $theModel = new ClassifiedsModel();
+                        $theModel->setName($model['name']);
+                        $theModel->setSourceId($model['id']);
+                        $theModel->setMake($make);
+
+                        $this->entityManager->persist($theModel);
+                        ++$total;
+                    }
+
+                    $this->entityManager->flush();
+                    $this->outputInterface->writeLn(sprintf('<comment>ClassifiedsModels saved for ClassifiedsMake => %s and year => %d</comment>', $make->getName(), $year));
+                }
+            }
+
+            $this->outputInterface->writeLn(sprintf('<comment>%d ClassifiedsModels added from: %s</comment>', $total, $this->source));
+            $this->outputInterface->writeln('<info>Commit transaction</info>');
+            $this->entityManager->getConnection()->commit();
+        } catch (\RuntimeException $e) {
+            $this->outputInterface->writeln('<info>Rollback transaction</info>');
+            $this->entityManager->getConnection()->rollback();
+            $this->outputInterface->writeln(sprintf('<error>Reason: %s</error>', $e->getMessage()));
+        }
+    }
+
+    protected function fetchModelTypes($url)
+    {
+        $this->outputInterface->writeln(sprintf('<info>Crawling MODEL TYPES from %s (%s)</info>', $this->siteName, $this->source));
+        $this->outputInterface->writeln('<info>Start transaction</info>');
+        $this->entityManager->getConnection()->beginTransaction();
+        $total = 0;
+
+        $queryBuilder = $this->entityManager->createQueryBuilder()
+            ->select('model')
+            ->from('WbcCrawlerBundle:ClassifiedsModel', 'model')
+            ->innerJoin('model.make', 'make', 'WITH', 'make.source = :source')
+            ->setParameter(':source', $this->source);
+
+        $models = $queryBuilder->getQuery()->getResult();
+        $years = array_reverse(range($this->yearTo, $this->yearFrom));
+
+        try {
+            foreach ($models as $model) {
+                foreach ($years as $year) {
+                    $make = $model->getMake();
+
+                    $response = $this->getResponse(['requests' => [['href' => sprintf($url, $make->getSourceId(), $model->getSourceId(), $year)]]]);
+                    $results = json_decode($response->getBody(), true);
+
+                    if (!is_array($results)) {
+                        //bounce
+                        throw new \RuntimeException('No results!');
+                    }
+
+                    $modelTypes = $results['responses'][0]['body']['style'];
+
+                    foreach ($modelTypes as $modelType) {
+                        $queryBuilder = $this->entityManager->createQueryBuilder()
+                            ->select('modelType')
+                            ->from('WbcCrawlerBundle:ClassifiedsModelType', 'modelType')
+                            ->innerJoin('modelType.model', 'model', 'WITH', 'modelType.model = model')
+                            ->innerJoin('model.make', 'make', 'WITH', 'make.source = :source')
+                            ->where('modelType.trimSourceId = :sourceId')
+                            ->setParameter(':source', $this->source)
+                            ->setParameter(':sourceId', $modelType['id']);
+
+                        $existingModelType = $queryBuilder->getQuery()->getOneOrNullResult();
+
+                        if ($existingModelType) {
+                            $existingModelType->addYear($year);
+                            continue;
+                        }
+
+                        $theModelType = new ClassifiedsModelType();
+                        $theModelType->setModel($model);
+                        $theModelType->setTrim($modelType['name']);
+                        $theModelType->setTrimSourceId($modelType['id']);
+                        $theModelType->setYears([$year]);
+
+                        $this->entityManager->persist($theModelType);
+                        ++$total;
+                    }
+
+                    $this->entityManager->flush();
+                }
+
+                $this->outputInterface->writeLn(sprintf('<comment>ClassifiedsModelTypes saved for ClassifiedsModel => %s</comment>', $model->getName()));
+                $this->outputInterface->writeln('<info>Commit transaction</info>');
+                $this->entityManager->getConnection()->commit();
+
+                $this->outputInterface->writeln('<info>Start transaction</info>');
+                $this->entityManager->getConnection()->beginTransaction();
+            }
+
+        } catch (\RuntimeException $e) {
+            $this->outputInterface->writeln('<info>Rollback transaction</info>');
+            $this->entityManager->getConnection()->rollback();
+            $this->outputInterface->writeln(sprintf('<error>Reason: %s</error>', $e->getMessage()));
+        }
+        $this->outputInterface->writeLn(sprintf('<comment>%d ClassifiedsModelTypes added from: %s</comment>', $total, $this->source));
+
+    }
+
+    private function getResponse(array $body)
+    {
+        return $this->guzzleClient->post($this->url, [
+            'body' => json_encode($body),
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => $this->getContainer()->getParameter('crawler_manheim_authorization'),
+                'User-Agent' => $this->getContainer()->getParameter('crawler_user_agent'),
+            ],
+        ]);
     }
 }

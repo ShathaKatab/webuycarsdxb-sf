@@ -39,7 +39,7 @@ class DubizzleCommand extends ClassifiedsCommand
 
         $criteria = new \Doctrine\Common\Collections\Criteria();
         $criteria->where($criteria->expr()->eq('source', $this->source));
-        $criteria->andWhere($criteria->expr()->gte('name', 'Mazda'));
+//        $criteria->andWhere($criteria->expr()->gte('name', 'Mazda'));
         $criteria->orderBy(['name' => 'ASC']);
 
         $makes = $this->entityManager->getRepository('WbcCrawlerBundle:ClassifiedsMake')->matching($criteria);
