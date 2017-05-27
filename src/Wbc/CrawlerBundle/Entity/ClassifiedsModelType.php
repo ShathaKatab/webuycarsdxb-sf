@@ -138,6 +138,14 @@ class ClassifiedsModelType
     private $updatedAt;
 
     /**
+     * ClassifiedsModelType constructor.
+     */
+    public function __construct()
+    {
+        $this->years = [];
+    }
+
+    /**
      * Get id.
      *
      * @return int

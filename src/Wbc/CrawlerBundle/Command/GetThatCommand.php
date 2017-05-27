@@ -70,7 +70,7 @@ class GetThatCommand extends ClassifiedsCommand
                     $classifiedAd->setTitle($ad['title']);
                     $classifiedAd->setMake($ad['make']);
                     $classifiedAd->setModel($ad['model']);
-                    $classifiedAd->setTrim($ad['trim']);
+                    $classifiedAd->setModelType($ad['trim']);
                     $classifiedAd->setYear($ad['makeYear']);
 
                     if (!empty($ad['cylinders']) && is_numeric($ad['cylinders'])) {

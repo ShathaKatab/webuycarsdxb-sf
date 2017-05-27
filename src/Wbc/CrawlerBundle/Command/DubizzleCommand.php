@@ -175,7 +175,7 @@ class DubizzleCommand extends ClassifiedsCommand
                 }
 
                 if (isset($ad['details']['Motors Trim']['en']['value'])) {
-                    $classifiedAd->setTrim($ad['details']['Motors Trim']['en']['value']);
+                    $classifiedAd->setModelType($ad['details']['Motors Trim']['en']['value']);
                 }
 
                 if (isset($ad['details']['Year']['en']['value'])) {

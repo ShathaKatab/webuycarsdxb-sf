@@ -19,6 +19,10 @@ class ClassifiedsAd
     const SOURCE_DUBIZZLE = 'dubizzle.com';
     const SOURCE_GETTHAT = 'getthat.com';
     const SOURCE_MANHEIM = 'manheim.com';
+    const MILEAGE_KM = 'km';
+    const MILEAGE_MILES = 'miles';
+    const CURRENCY_AED = 'AED';
+    const CURRENCY_USD = 'USD';
 
     /**
      * @var int
@@ -32,7 +36,7 @@ class ClassifiedsAd
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     protected $title;
 
@@ -60,17 +64,25 @@ class ClassifiedsAd
     /**
      * @var ClassifiedsModel
      *
-     * @ORM\ManyToOne(targetEntity="\Wbc\CrawlerBundle\Entity\ClassifiedsModel", inversedBy="classifiedsAds", fetch="EAGER")
-     * @ORM\JoinColumn(name="classifieds_model_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="\Wbc\CrawlerBundle\Entity\ClassifiedsModel", fetch="EAGER")
+     * @ORM\JoinColumn(name="classifieds_model_id", referencedColumnName="id", nullable=true)
      */
     protected $classifiedsModel;
 
     /**
+     * @var ClassifiedsModelType
+     *
+     * @ORM\ManyToOne(targetEntity="\Wbc\CrawlerBundle\Entity\ClassifiedsModelType", fetch="EAGER")
+     * @ORM\JoinColumn(name="classifieds_model_type_id", referencedColumnName="id", nullable=true)
+     */
+    protected $classifiedsModelType;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="trim", type="string", length=100, nullable=true)
+     * @ORM\Column(name="model_type", type="string", length=100, nullable=true)
      */
-    protected $trim;
+    protected $modelType;
 
     /**
      * @var int
@@ -106,6 +118,13 @@ class ClassifiedsAd
      * @ORM\Column(name="mileage", type="integer", nullable=true)
      */
     protected $mileage;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="mileage_suffix", type="string", length=5, options={"default": "km"}, nullable=true)
+     */
+    protected $mileageSuffix;
 
     /**
      * @var string
@@ -257,9 +276,10 @@ class ClassifiedsAd
     public function __construct($source)
     {
         $this->source = $source;
-        $this->currency = 'AED';
+        $this->currency = self::CURRENCY_AED;
         $this->isUsed = true;
         $this->imageUrls = [];
+        $this->mileageSuffix = self::MILEAGE_KM;
     }
 
     /**
@@ -279,7 +299,7 @@ class ClassifiedsAd
      *
      * @return ClassifiedsAd
      */
-    public function setTitle($title)
+    public function setTitle($title = null)
     {
         $this->title = $title;
 
@@ -318,30 +338,6 @@ class ClassifiedsAd
     public function getUrl()
     {
         return $this->url;
-    }
-
-    /**
-     * Set trim.
-     *
-     * @param string $trim
-     *
-     * @return ClassifiedsAd
-     */
-    public function setTrim($trim)
-    {
-        $this->trim = $trim;
-
-        return $this;
-    }
-
-    /**
-     * Get trim.
-     *
-     * @return string
-     */
-    public function getTrim()
-    {
-        return $this->trim;
     }
 
     /**
@@ -1036,5 +1032,77 @@ class ClassifiedsAd
     public function getSource()
     {
         return $this->source;
+    }
+
+    /**
+     * Set mileageSuffix.
+     *
+     * @param string $mileageSuffix
+     *
+     * @return ClassifiedsAd
+     */
+    public function setMileageSuffix($mileageSuffix)
+    {
+        $this->mileageSuffix = $mileageSuffix;
+
+        return $this;
+    }
+
+    /**
+     * Get mileageSuffix.
+     *
+     * @return string
+     */
+    public function getMileageSuffix()
+    {
+        return $this->mileageSuffix;
+    }
+
+    /**
+     * Set classifiedsModelType.
+     *
+     * @param \Wbc\CrawlerBundle\Entity\ClassifiedsModelType $classifiedsModelType
+     *
+     * @return ClassifiedsAd
+     */
+    public function setClassifiedsModelType(\Wbc\CrawlerBundle\Entity\ClassifiedsModelType $classifiedsModelType = null)
+    {
+        $this->classifiedsModelType = $classifiedsModelType;
+
+        return $this;
+    }
+
+    /**
+     * Get classifiedsModelType.
+     *
+     * @return \Wbc\CrawlerBundle\Entity\ClassifiedsModelType
+     */
+    public function getClassifiedsModelType()
+    {
+        return $this->classifiedsModelType;
+    }
+
+    /**
+     * Set modelType.
+     *
+     * @param string $modelType
+     *
+     * @return ClassifiedsAd
+     */
+    public function setModelType($modelType)
+    {
+        $this->modelType = $modelType;
+
+        return $this;
+    }
+
+    /**
+     * Get modelType.
+     *
+     * @return string
+     */
+    public function getModelType()
+    {
+        return $this->modelType;
     }
 }

@@ -89,6 +89,13 @@ class TrainingData
     /**
      * @var string
      *
+     * @ORM\Column(name="currency", type="string", length=100)
+     */
+    protected $currency;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="source", type="string", length=60)
      */
     protected $source;
@@ -495,5 +502,29 @@ class TrainingData
     public function getCrawlerClassifiedsAd()
     {
         return $this->crawlerClassifiedsAd;
+    }
+
+    /**
+     * Set currency.
+     *
+     * @param string $currency
+     *
+     * @return TrainingData
+     */
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
+
+        return $this;
+    }
+
+    /**
+     * Get currency.
+     *
+     * @return string
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 }

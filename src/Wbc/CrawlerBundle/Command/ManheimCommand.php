@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Wbc\CrawlerBundle\Entity\ClassifiedsMake;
 use Wbc\CrawlerBundle\Entity\ClassifiedsModel;
 use Wbc\CrawlerBundle\Entity\ClassifiedsModelType;
-
+use function Stringy\create as s;
 /**
  * Class ManheimCommand.
  *
@@ -32,33 +32,95 @@ class ManheimCommand extends ClassifiedsCommand
 
     protected function processAds()
     {
-        return;
         $this->outputInterface->writeln(sprintf('<info>Crawling Ads from %s (%s)</info>', $this->siteName, $this->source));
-        $currentPage = 0;
         $connection = $this->entityManager->getConnection();
-        $criteria = new \Doctrine\Common\Collections\Criteria();
-        $criteria->where($criteria->expr()->eq('source', $this->source));
 
-        $makes = $this->entityManager->getRepository('WbcCrawlerBundle:ClassifiedsMake')->matching($criteria);
-        foreach ($makes as $make) {
-            $models = $make->getModels();
+        $queryBuilder = $this->entityManager->createQueryBuilder()
+            ->select('modelType')
+            ->from('WbcCrawlerBundle:ClassifiedsModelType', 'modelType')
+            ->innerJoin('WbcCrawlerBundle:ClassifiedsModel', 'model', 'WITH', 'modelType.model = model')
+            ->innerJoin('WbcCrawlerBundle:ClassifiedsMake', 'make', 'WITH', 'model.make = make AND make.source = :source')
+//            ->where('modelType.id > 13518')
+            ->setParameter(':source', $this->source)
+        ;
+
+        $modelTypes = $queryBuilder->getQuery()->getResult();
+        /*** @var ClassifiedsModelType $modelType*/
+        foreach ($modelTypes as $modelType) {
+            $model = $modelType->getModel();
+            $make = $model->getMake();
+            $years = $modelType->getYears();
+            asort($years);
 
             $this->outputInterface->writeln('<info>Start transaction</info>');
             $connection->beginTransaction();
 
             try {
-                /**@var ClassifiedsModel $model */
-                foreach ($models as $model) {
-                    $makeName = $make->getName();
-                    $modelName = $model->getName();
-                    $this->outputInterface->writeln(sprintf('<comment>Crawling %s - %s from %d -> %d</comment>', $makeName, $modelName, $this->yearFrom, $this->yearTo));
+                $this->outputInterface->writeln(sprintf('<comment>Crawling %s - %s - %s from %d -> %d</comment>', $make->getName(), $model->getName(), $modelType->getTrim(), min($years), max($years)));
 
-//                    $this->doAlgolia($model, $makeName, $modelName);
+                foreach ($years as $year) {
+                    $href0 = ['href' => sprintf('https://api.manheim.com/valuations/id/%d%s%s%s?country=US&region=NA&include=retail,historical,forecast', $year, $make->getSourceId(), $model->getSourceId(), $modelType->getTrimSourceId())];
+                    $href1 = ['href' => sprintf('https://api.manheim.com/valuation-samples/id/%d%s%s%s?country=US&orderBy=purchaseDate desc&start=1&limit=100', $year, $make->getSourceId(), $model->getSourceId(), $modelType->getTrimSourceId())];
+                    $response = $this->getResponse(['requests' => [$href0, $href1]]);
+                    $results = json_decode($response->getBody(), true);
+
+                    if (!is_array($results)) {
+                        //bounce
+                        throw new \RuntimeException('No results!');
+                    }
+
+                    $ads = $results['responses'][1]['body']['items'];
+
+                    foreach ($ads as $ad) {
+                        $transmission = trim(strtolower($ad['vehicleDetails']['transmission']));
+                        $bodyCondition = trim(strtolower($ad['vehicleDetails']['condition']));
+
+                        if (s($transmission)->contains('speed') || s($transmission)->contains('manual')) {
+                            $transmission = 'manual';
+                        } else {
+                            $transmission = 'automatic';
+                        }
+
+                        switch ($bodyCondition) {
+                            case 'avg':
+                                $bodyCondition = 'good';
+                                break;
+                            case 'above':
+                                $bodyCondition = 'excellent';
+                                break;
+                            default:
+                                $bodyCondition = 'fair';
+                        }
+
+                        $classifiedAd = new ClassifiedsAd($this->source);
+                        $classifiedAd->setTransmission($transmission);
+                        $classifiedAd->setCylinders(trim(intval(preg_replace('/[^0-9]+/', '', $ad['vehicleDetails']['engine']), 10)));
+                        $classifiedAd->setExteriorColor(trim(strtolower($ad['vehicleDetails']['color'])));
+                        $classifiedAd->setMileage(trim($ad['vehicleDetails']['odometer']));
+                        $classifiedAd->setMileageSuffix(ClassifiedsAd::MILEAGE_MILES);
+                        $classifiedAd->setBodyCondition($bodyCondition);
+                        $classifiedAd->setSourceCreatedAt(new \DateTime(trim($ad['purchaseDate'])));
+                        $classifiedAd->setPrice(trim($ad['purchasePrice']));
+                        $classifiedAd->setCurrency(ClassifiedsAd::CURRENCY_USD);
+                        $classifiedAd->setMake($make->getName());
+                        $classifiedAd->setModel($model->getName());
+                        $classifiedAd->setClassifiedsModel($model);
+                        $classifiedAd->setModelType($modelType->getName());
+                        $classifiedAd->setClassifiedsModelType($modelType);
+                        $classifiedAd->setYear($year);
+
+                        $this->entityManager->persist($classifiedAd);
+                    }
                 }
+
                 $this->entityManager->flush();
                 $this->outputInterface->writeln('<info>Commit transaction</info>');
                 $connection->commit();
             } catch (\RuntimeException $e) {
+                $this->outputInterface->writeln('<info>Rollback transaction</info>');
+                $this->entityManager->getConnection()->rollback();
+                $this->outputInterface->writeln(sprintf('<error>Reason: %s</error>', $e->getMessage()));
+                exit(1);
             }
         }
     }
@@ -124,6 +186,7 @@ class ManheimCommand extends ClassifiedsCommand
             $this->outputInterface->writeln('<info>Rollback transaction</info>');
             $this->entityManager->getConnection()->rollback();
             $this->outputInterface->writeln(sprintf('<error>Reason: %s</error>', $e->getMessage()));
+            exit(1);
         }
 
         $this->outputInterface->writeln(sprintf('<info>Done Crawling MAKES from %s (%s)</info>', $this->siteName, $this->source));
@@ -188,6 +251,7 @@ class ManheimCommand extends ClassifiedsCommand
             $this->outputInterface->writeln('<info>Rollback transaction</info>');
             $this->entityManager->getConnection()->rollback();
             $this->outputInterface->writeln(sprintf('<error>Reason: %s</error>', $e->getMessage()));
+            exit(1);
         }
     }
 
@@ -259,14 +323,13 @@ class ManheimCommand extends ClassifiedsCommand
                 $this->outputInterface->writeln('<info>Start transaction</info>');
                 $this->entityManager->getConnection()->beginTransaction();
             }
-
         } catch (\RuntimeException $e) {
             $this->outputInterface->writeln('<info>Rollback transaction</info>');
             $this->entityManager->getConnection()->rollback();
             $this->outputInterface->writeln(sprintf('<error>Reason: %s</error>', $e->getMessage()));
+            exit(1);
         }
         $this->outputInterface->writeLn(sprintf('<comment>%d ClassifiedsModelTypes added from: %s</comment>', $total, $this->source));
-
     }
 
     private function getResponse(array $body)
