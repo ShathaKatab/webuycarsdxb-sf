@@ -107,8 +107,10 @@ class TrainingDataCommand extends ContainerAwareCommand
                 $this->entityManager->persist($trainingData);
                 ++$row;
 
-                if ($row % 1000 === 0) {
+                if ($row % 200 === 0) {
                     $this->entityManager->flush();
+                    $this->entityManager->clear();
+                    gc_collect_cycles();
                 }
             }
         }
