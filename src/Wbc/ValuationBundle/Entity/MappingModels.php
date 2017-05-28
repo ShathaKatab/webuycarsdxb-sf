@@ -46,6 +46,13 @@ class MappingModels
     protected $dubizzleModelName;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="manheim_model_name", type="string", length=60, nullable=true)
+     */
+    protected $manheimModelName;
+
+    /**
      * MappingModels Constructor.
      *
      * @param Model $model
@@ -149,5 +156,29 @@ class MappingModels
     public function getModel()
     {
         return $this->model;
+    }
+
+    /**
+     * Set manheimModelName.
+     *
+     * @param string $manheimModelName
+     *
+     * @return MappingModels
+     */
+    public function setManheimModelName($manheimModelName)
+    {
+        $this->manheimModelName = $manheimModelName;
+
+        return $this;
+    }
+
+    /**
+     * Get manheimModelName.
+     *
+     * @return string
+     */
+    public function getManheimModelName()
+    {
+        return $this->manheimModelName;
     }
 }

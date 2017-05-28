@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use Wbc\CrawlerBundle\Entity\ClassifiedsAd;
 use Wbc\ValuationBundle\Entity\TrainingData;
 use Wbc\ValuationBundle\Entity\Valuation;
 
@@ -43,25 +44,33 @@ class ValuationManager
     private $logger;
 
     /**
+     * @var float
+     */
+    private $usdExchangeRate;
+
+    /**
      * ValuationManager Constructor.
      *
      * @DI\InjectParams({
      * "entityManager" = @DI\Inject("doctrine.orm.default_entity_manager"),
      * "valuationCommand" = @DI\Inject("%valuation_command%"),
      * "valuationDiscountPercentage" = @DI\Inject("%valuation_discount_percentage%"),
+     * "usdExchangeRate" = @DI\Inject("%usd_exchange_rate%"),
      * "logger" = @DI\Inject("logger")
      * })
      *
      * @param EntityManager   $entityManager
      * @param string          $valuationCommand
      * @param int             $valuationDiscountPercentage
+     * @param float           $usdExchangeRate
      * @param LoggerInterface $logger
      */
-    public function __construct(EntityManager $entityManager, $valuationCommand, $valuationDiscountPercentage, LoggerInterface $logger)
+    public function __construct(EntityManager $entityManager, $valuationCommand, $valuationDiscountPercentage, $usdExchangeRate, LoggerInterface $logger)
     {
         $this->entityManager = $entityManager;
         $this->valuationCommand = $valuationCommand;
         $this->valuationDiscountPercentage = $valuationDiscountPercentage;
+        $this->usdExchangeRate = $usdExchangeRate;
         $this->logger = $logger;
     }
 
@@ -111,10 +120,10 @@ class ValuationManager
 
     protected function generateTrainingDataFile(Valuation $valuation)
     {
-        $modelId = $valuation->getVehicleModel()->getId();
-        $makeId = $valuation->getVehicleMake()->getId();
-        $year = $valuation->getVehicleYear();
-        $mileage = $valuation->getVehicleMileage();
+        $modelId = intval($valuation->getVehicleModel()->getId());
+        $makeId = intval($valuation->getVehicleMake()->getId());
+        $year = intval($valuation->getVehicleYear());
+        $mileage = intval($valuation->getVehicleMileage());
 
         $color = strtolower($valuation->getVehicleColor());
 
@@ -133,39 +142,19 @@ class ValuationManager
         }
 
         $testData = [
-            'a_make' => intval($makeId),
-            'b_model' => intval($modelId),
-            'c_year' => intval($year),
-            'd_mileage' => intval($mileage),
+            'a_make' => $makeId,
+            'b_model' => $modelId,
+            'c_year' => $year,
+            'd_mileage' => $mileage,
             'f_color' => intval($color),
             'g_body_condition' => intval($bodyCondition),
             'z_price' => 0,
         ];
 
-        $connection = $this->entityManager->getConnection();
+        $dubizzleTrainingData = $this->getValuationData(ClassifiedsAd::SOURCE_DUBIZZLE, $year, $mileage, $modelId);
+        $manheimTrainingData = $this->getValuationData(ClassifiedsAd::SOURCE_MANHEIM, $year, $mileage, $modelId, $this->usdExchangeRate);
 
-        $statement = $connection->prepare('SELECT
-                                                CAST(make_id AS UNSIGNED) AS a_make,
-                                                CAST(model_id AS UNSIGNED) AS b_model,
-                                                CAST(year AS UNSIGNED) AS c_year,
-                                                CAST(mileage AS UNSIGNED) AS d_mileage,
-                                                CAST(color AS UNSIGNED) AS f_color,
-                                                CAST(body_condition AS UNSIGNED) AS g_body_condition,
-                                                CAST(price AS UNSIGNED) AS z_price
-                                            FROM valuation_training_data
-                                            WHERE
-                                                year BETWEEN :yearMin AND :yearMax
-                                            AND mileage BETWEEN :mileageMin AND :mileageMax
-                                            AND model_id = :modelId');
-
-        $statement->bindValue(':yearMin', $year - 1, \PDO::PARAM_INT);
-        $statement->bindValue(':yearMax', $year + 1, \PDO::PARAM_INT);
-        $statement->bindValue(':mileageMin', $mileage - 10000, \PDO::PARAM_INT);
-        $statement->bindValue(':mileageMax', $mileage + 10000, \PDO::PARAM_INT);
-        $statement->bindValue(':modelId', $modelId, \PDO::PARAM_INT);
-        $statement->execute();
-
-        $trainingData = $statement->fetchAll();
+        $trainingData = array_merge($dubizzleTrainingData, $manheimTrainingData);
 
         if (!$trainingData) {
             return;
@@ -193,6 +182,60 @@ class ValuationManager
         return $filePath;
     }
 
+    /**
+     * @param string $source
+     * @param int    $year
+     * @param int    $mileage
+     * @param int    $modelId
+     * @param int    $exchangeRate
+     * @param int    $limit
+     *
+     * @return array
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    private function getValuationData($source, $year, $mileage, $modelId, $exchangeRate = 1, $limit = 100)
+    {
+        $connection = $this->entityManager->getConnection();
+        $statement = $connection->prepare('SELECT
+                                                CAST(make_id AS UNSIGNED) AS a_make,
+                                                CAST(model_id AS UNSIGNED) AS b_model,
+                                                CAST(year AS UNSIGNED) AS c_year,
+                                                CAST(mileage AS UNSIGNED) AS d_mileage,
+                                                CAST(color AS UNSIGNED) AS f_color,
+                                                CAST(body_condition AS UNSIGNED) AS g_body_condition,
+                                                (CAST(price AS UNSIGNED) * :exchangeRate) AS z_price
+                                            FROM valuation_training_data
+                                            WHERE
+                                                year BETWEEN :yearMin AND :yearMax
+                                            AND mileage BETWEEN :mileageMin AND :mileageMax
+                                            AND model_id = :modelId
+                                            AND source = :source
+                                            ORDER BY FIELD(c_year, :year)
+                                            LIMIT :limit
+                                            ');
+
+        $statement->bindParam(':exchangeRate', $exchangeRate);
+        $statement->bindValue(':source', $source, \PDO::PARAM_STR);
+        $statement->bindValue(':year', $year, \PDO::PARAM_INT);
+        $statement->bindValue(':yearMin', $year - 1, \PDO::PARAM_INT);
+        $statement->bindValue(':yearMax', $year + 1, \PDO::PARAM_INT);
+        $statement->bindValue(':mileageMin', $mileage - 20000, \PDO::PARAM_INT);
+        $statement->bindValue(':mileageMax', $mileage + 20000, \PDO::PARAM_INT);
+        $statement->bindValue(':modelId', $modelId, \PDO::PARAM_INT);
+        $statement->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    /**
+     * @param Valuation $valuation
+     *
+     * @return array
+     *
+     * @throws \Doctrine\DBAL\DBALException
+     */
     private function getValuationConfigurationDiscounts(Valuation $valuation)
     {
         $year = $valuation->getVehicleYear();

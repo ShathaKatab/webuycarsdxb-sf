@@ -46,6 +46,13 @@ class MappingMakes
     protected $dubizzleMakeName;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="manheim_make_name", type="string", length=60, nullable=true)
+     */
+    protected $manheimMakeName;
+
+    /**
      * MappingMakes Constructor.
      *
      * @param Make $make
@@ -149,5 +156,29 @@ class MappingMakes
     public function getMake()
     {
         return $this->make;
+    }
+
+    /**
+     * Set manheimMakeName.
+     *
+     * @param string $manheimMakeName
+     *
+     * @return MappingMakes
+     */
+    public function setManheimMakeName($manheimMakeName)
+    {
+        $this->manheimMakeName = $manheimMakeName;
+
+        return $this;
+    }
+
+    /**
+     * Get manheimMakeName.
+     *
+     * @return string
+     */
+    public function getManheimMakeName()
+    {
+        return $this->manheimMakeName;
     }
 }
