@@ -154,7 +154,7 @@ class ValuationManager
         $dubizzleTrainingData = $this->getValuationData(ClassifiedsAd::SOURCE_DUBIZZLE, $year, $mileage, $modelId);
         $manheimTrainingData = $this->getValuationData(ClassifiedsAd::SOURCE_MANHEIM, $year, $mileage, $modelId, $this->usdExchangeRate);
 
-        $trainingData = array_merge($dubizzleTrainingData, $manheimTrainingData);
+        $trainingData = array_merge($manheimTrainingData, $dubizzleTrainingData);
 
         if (!$trainingData) {
             return;
@@ -206,22 +206,23 @@ class ValuationManager
                                                 CAST(body_condition AS UNSIGNED) AS g_body_condition,
                                                 (CAST(price AS UNSIGNED) * :exchangeRate) AS z_price
                                             FROM valuation_training_data
-                                            WHERE
-                                                year BETWEEN :yearMin AND :yearMax
-                                            AND mileage BETWEEN :mileageMin AND :mileageMax
+                                            WHERE year = :year
                                             AND model_id = :modelId
+                                            AND mileage BETWEEN :mileageMin AND :mileageMax
                                             AND source = :source
-                                            ORDER BY FIELD(c_year, :year)
+                                            ORDER BY FIELD(d_mileage, :mileage, :mileageMax, :mileageMin)
                                             LIMIT :limit
                                             ');
 
+        //FIELD(c_year, :year, :yearMin, :yearMax),
         $statement->bindParam(':exchangeRate', $exchangeRate);
         $statement->bindValue(':source', $source, \PDO::PARAM_STR);
         $statement->bindValue(':year', $year, \PDO::PARAM_INT);
         $statement->bindValue(':yearMin', $year - 1, \PDO::PARAM_INT);
         $statement->bindValue(':yearMax', $year + 1, \PDO::PARAM_INT);
-        $statement->bindValue(':mileageMin', $mileage - 20000, \PDO::PARAM_INT);
-        $statement->bindValue(':mileageMax', $mileage + 20000, \PDO::PARAM_INT);
+        $statement->bindValue(':mileage', $mileage, \PDO::PARAM_INT);
+        $statement->bindValue(':mileageMin', $mileage - 15000, \PDO::PARAM_INT);
+        $statement->bindValue(':mileageMax', $mileage + 30000, \PDO::PARAM_INT);
         $statement->bindValue(':modelId', $modelId, \PDO::PARAM_INT);
         $statement->bindValue(':limit', $limit, \PDO::PARAM_INT);
         $statement->execute();
