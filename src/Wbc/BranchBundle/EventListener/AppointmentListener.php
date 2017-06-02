@@ -2,7 +2,7 @@
 
 namespace Wbc\BranchBundle\EventListener;
 
-use UtilityBundle\TwilioManager;
+use Wbc\UtilityBundle\TwilioManager;
 use Wbc\BranchBundle\BranchEvents;
 use Wbc\BranchBundle\Events\AppointmentEvent;
 use Doctrine\Common\Persistence\ObjectManager;
