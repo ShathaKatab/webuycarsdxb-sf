@@ -51,7 +51,7 @@
                     <div class="col-md-3 col-md-offset-0 col-xs-6 col-xs-offset-3">
                         <div class="navbar-header">
                             <a class="navbar-brand" href="{{ path('wbc_static_default_index') }}">
-                                <img class="img-responsive" alt="{{ site_title }}" src="{{ asset('images/webuycarsdxb-logo.png') }}">
+                                <img class="img-responsive" onerror="this.src='{{ asset('images/webuycarsdxb-logo.png') }}'" alt="{{ site_title }}" src="{{ asset('images/webuycarsdxb-logo.svg') }}">
                             </a>
                         </div>
                     </div>
@@ -107,7 +107,8 @@
                             <div class="navbar-header">
                                 <a class="navbar-brand" href="{{ path('wbc_static_default_index') }}">
                                     <img class="img-responsive" alt="{{ site_title }}"
-                                         src="{{ asset('images/webuycarsdxb-logo.png') }}">
+                                         onerror="this.src='{{ asset('images/webuycarsdxb-logo.png') }}'"
+                                         src="{{ asset('images/webuycarsdxb-logo.svg') }}">
                                 </a>
                             </div>
                         </div>
@@ -187,7 +188,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
                             <div class="thumbnail">
-                                <img class="img-responsive" src="{{ asset('images/webuycarsdxb-logo.png') }}" alt="{{ site_title }}">
+                                <img class="img-responsive" onerror="this.src='{{ asset('images/webuycarsdxb-logo.png') }}'" src="{{ asset('images/webuycarsdxb-logo.svg') }}" alt="{{ site_title }}">
 
                                 <div class="caption">
                                     <h2 class="text-left">Headquarters</h2>

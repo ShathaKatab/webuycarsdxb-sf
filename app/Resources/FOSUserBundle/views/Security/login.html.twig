@@ -24,7 +24,7 @@
             <div class="col-md-6 col-md-offset-3" style="padding:10px; border: 1px solid #d8d8d8; margin-top: 100px; border-radius: 10px;">
                 <div class="row">
                     <div class="col-xs-6 col-xs-offset-3">
-                        <a href="{{ path('wbc_static_default_index') }}"><img class="img-responsive" src="{{ asset('images/webuycarsdxb-logo.png') }}"></a>
+                        <a href="{{ path('wbc_static_default_index') }}"><img class="img-responsive" onerror="this.src='{{ asset('images/webuycarsdxb-logo.png') }}'" src="{{ asset('images/webuycarsdxb-logo.svg') }}"></a>
                     </div>
                 </div>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
