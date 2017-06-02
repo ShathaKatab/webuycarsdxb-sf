@@ -33,6 +33,9 @@ class BranchAdmin extends AbstractAdmin
             ->add('longitude', TextType::class, [
                 'help' => 'e.g. 55.204752',
             ])
+            ->add('googleMapLink', TextareaType::class, [
+                'help' => 'use a shortened URL, e.g. https://goo.gl/maps/oAC8C6fzGyn'
+            ])
             ->add('address', TextareaType::class, [
                 'help' => 'e.g. Ground Floor, 23rd Street, Al Barsha 2 (Al Barsha Mall)',
             ])
@@ -85,6 +88,7 @@ class BranchAdmin extends AbstractAdmin
                 ],
             ])
             ->add('phoneNumber')
+            ->add('googleMapLink')
             ->add('active', 'boolean', ['editable' => true])
             ->add('createdAt')
             ->add('updatedAt');

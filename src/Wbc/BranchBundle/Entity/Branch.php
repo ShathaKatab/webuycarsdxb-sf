@@ -104,6 +104,12 @@ class Branch
 
     /**
      * @var string
+     * @ORM\Column(name="google_map_link", type="text")
+     */
+    protected $googleMapLink;
+
+    /**
+     * @var string
      *
      * @ORM\Column(name="phone_number", type="string", length=15)
      *
@@ -444,5 +450,29 @@ class Branch
         }
 
         return '';
+    }
+
+    /**
+     * Set googleMapLink.
+     *
+     * @param string $googleMapLink
+     *
+     * @return Branch
+     */
+    public function setGoogleMapLink($googleMapLink)
+    {
+        $this->googleMapLink = $googleMapLink;
+
+        return $this;
+    }
+
+    /**
+     * Get googleMapLink.
+     *
+     * @return string
+     */
+    public function getGoogleMapLink()
+    {
+        return $this->googleMapLink;
     }
 }

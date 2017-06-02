@@ -60,11 +60,8 @@ class TimingListener
             return;
         }
 
-        $from = $object->getFrom();
-        $to = $object->getTo();
-
-        $fromTime = sprintf('%02d:%02d', intval($from / 60), intval($from % 60));
-        $toTime = sprintf('%02d:%02d', intval($to / 60), intval($to % 60));
+        $fromTime = Timing::formatIntegerToTimeString($object->getFrom());
+        $toTime = Timing::formatIntegerToTimeString($object->getTo());;
 
         $object->setFrom($fromTime);
         $object->setTo($toTime);

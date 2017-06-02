@@ -12,6 +12,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Form\BranchType;
 use Wbc\BranchBundle\Form\DayType;
@@ -64,8 +65,8 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('vehicleModel', ChoiceType::class)
             ->add('vehicleModelType', WbcVehicleType\ModelTypeSelectorType::class, [
                 'label' => 'Vehicle Trim',
-                'required' => false])
-            ;
+                'required' => false, ])
+        ;
 
         if ($subject) {
             if ($subject->getVehicleMake() || $request->isMethod('POST')) {
@@ -135,15 +136,23 @@ class AppointmentAdmin extends AbstractAdmin
             ]);
         }
 
-        $formMapper->end()
-            ->with('')
-            ->add('status', ChoiceType::class, [
-                'choices' => Appointment::getStatuses(),
-                'empty_data' => Appointment::STATUS_NEW,
-            ])
-            ->end()
-            ->end()
-        ;
+        if ($subject && $subject->getValuation()) {
+            $formMapper->end()
+                ->with('')
+                ->add('valuation.priceOnline', null, [
+                    'label' => 'Price Online (AED)',
+                    'read_only' => true,
+                    'disabled' => true,
+                    'required' => false,
+                ])
+                ->add('status', ChoiceType::class, [
+                    'choices' => Appointment::getStatuses(),
+                    'empty_data' => Appointment::STATUS_NEW,
+                ])
+                ->add('notes', TextareaType::class)
+                ->end()
+                ->end();
+        }
     }
 
     /**
@@ -168,6 +177,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('details.vehicleMakeName', null, ['label' => 'Make'])
             ->add('details.vehicleModelName', null, ['label' => 'Model'])
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'editable' => true])
+            ->add('valuation.priceOnline', 'currency', ['currency' => 'AED'])
             ->add('createdAt', null, ['label' => 'Created'])
             ->add('updatedAt', null, ['label' => 'Updated'])
             ->add('_action', 'actions', [
@@ -210,7 +220,9 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('branchTiming.dayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Day Booked'])
             ->add('dateBooked')
             ->add('branchTiming')
+            ->add('valuation.priceOnline', 'currency', ['currency' => 'AED'])
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'empty_data' => Appointment::STATUS_NEW])
+            ->add('notes')
             ->end()
             ->end();
     }

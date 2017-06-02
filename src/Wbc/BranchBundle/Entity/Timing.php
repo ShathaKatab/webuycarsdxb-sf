@@ -342,7 +342,21 @@ class Timing
     public function getTimingString()
     {
         if (!is_null($this->from) && !is_null($this->to)) {
-            return sprintf('%s - %s', $this->from, $this->to);
+            return sprintf('%s - %s', self::formatIntegerToTimeString($this->from), self::formatIntegerToTimeString($this->to));
         }
+    }
+
+    /**
+     * @param int $integerTime
+     *
+     * @return string
+     */
+    public static function formatIntegerToTimeString($integerTime)
+    {
+        if (is_int($integerTime)) {
+            return sprintf('%02d:%02d', intval($integerTime / 60), intval($integerTime % 60));
+        }
+
+        return $integerTime;
     }
 }

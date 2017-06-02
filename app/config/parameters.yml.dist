@@ -67,3 +67,6 @@ parameters:
     lexik_ips: ['127.0.0.1', '94.207.215.153']
     valuation_command: '/Library/Frameworks/Python.framework/Versions/3.4/bin/python3 /Users/majid/PycharmProjects/webuycars_py/valuation.py -f %%filePath%%'
     crawler_manheim_authorization: ''
+    twilio_sid: ''
+    twilio_token: ''
+    twilio_from_number: ''

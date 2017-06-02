@@ -871,4 +871,14 @@ class Appointment
     {
         return $this->notes;
     }
+
+    /**
+     * Gets SmsTimingString.
+     *
+     * @return string
+     */
+    public function getSmsTimingString()
+    {
+        return sprintf('%s @ "%s"', $this->dateBooked->format('d/m/y'), $this->branchTiming->getTimingString());
+    }
 }
