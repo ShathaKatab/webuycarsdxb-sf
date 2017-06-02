@@ -60,27 +60,23 @@ class ValuationManager
      * @DI\InjectParams({
      * "entityManager" = @DI\Inject("doctrine.orm.default_entity_manager"),
      * "valuationCommand" = @DI\Inject("%valuation_command%"),
-     * "valuationDiscountPercentage" = @DI\Inject("%valuation_discount_percentage%"),
-     * "usdExchangeRate" = @DI\Inject("%usd_exchange_rate%"),
-     * "logger" = @DI\Inject("logger"),
-     * "container" = @DI\Inject("service_container")
+     * "container" = @DI\Inject("service_container"),
+     * "logger" = @DI\Inject("logger")
      * })
      *
      * @param EntityManager      $entityManager
      * @param string             $valuationCommand
-     * @param int                $valuationDiscountPercentage
-     * @param float              $usdExchangeRate
      * @param LoggerInterface    $logger
      * @param ContainerInterface $container
      */
-    public function __construct(EntityManager $entityManager, $valuationCommand, $valuationDiscountPercentage, $usdExchangeRate, LoggerInterface $logger, ContainerInterface $container)
+    public function __construct(EntityManager $entityManager, $valuationCommand, ContainerInterface $container, LoggerInterface $logger)
     {
         $this->entityManager = $entityManager;
         $this->valuationCommand = $valuationCommand;
-        $this->valuationDiscountPercentage = $valuationDiscountPercentage;
-        $this->usdExchangeRate = $usdExchangeRate;
         $this->logger = $logger;
         $this->container = $container;
+        $this->valuationDiscountPercentage = floatval($this->container->get('craue_config')->get('valuationDiscountPercentage'));
+        $this->usdExchangeRate = floatval($this->container->get('craue_config')->get('usdExchangeRate'));
     }
 
     public function setPrice(Valuation $valuation)

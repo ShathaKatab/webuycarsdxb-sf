@@ -66,6 +66,4 @@ parameters:
     contact_us_email: "awwad912@gmail.com"
     lexik_ips: ['127.0.0.1', '94.207.215.153']
     valuation_command: '/Library/Frameworks/Python.framework/Versions/3.4/bin/python3 /Users/majid/PycharmProjects/webuycars_py/valuation.py -f %%filePath%%'
-    valuation_discount_percentage: 0
     crawler_manheim_authorization: ''
-    usd_exchange_rate: 3.67
