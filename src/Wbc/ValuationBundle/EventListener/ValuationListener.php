@@ -1,6 +1,6 @@
 <?php
 
-namespace ValuationBundle\EventListener;
+namespace Wbc\ValuationBundle\EventListener;
 
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use JMS\DiExtraBundle\Annotation as DI;
