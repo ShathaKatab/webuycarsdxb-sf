@@ -1,6 +1,6 @@
 <?php
 
-namespace UtilityBundle;
+namespace Wbc\UtilityBundle;
 
 use JMS\DiExtraBundle\Annotation as DI;
 use Twilio\Rest\Client;
