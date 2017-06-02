@@ -9,7 +9,11 @@
                     <h2>You may still book an appointment to have it manually valuated.</h2>
                 </div>
                 <div class="col-md-12">
-                    <p>{{ valuation.vehicleYear }} - {{ valuation.vehicleMake.name }} {{ valuation.vehicleModel.name }} {% if valuation.vehicleModelType is not null %}{{ '- ' ~ valuation.vehicleModelType.trim }}{% endif %} - {{ valuation.vehicleColor|capitalize ~ ' Color' }} -  {{ valuation.vehicleBodyCondition|capitalize ~ ' Condition' }}</p>
+                    <p>{{ valuation.vehicleYear }}
+                        - {{ valuation.vehicleMake.name }} {{ valuation.vehicleModel.name }} {% if valuation.vehicleModelType is not null %}{{ '- ' ~ valuation.vehicleModelType.trim }}{% endif %}
+                        - {{ valuation.vehicleMileage|number_format ~ ' kms' }}
+                        - {{ valuation.vehicleColor|capitalize ~ ' Color' }}
+                        -  {{ valuation.vehicleBodyCondition|capitalize ~ ' Condition' }}</p>
                 </div>
             </div>
         </div>

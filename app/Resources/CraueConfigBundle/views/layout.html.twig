@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    {% block stylesheets %}
+        {% stylesheets filter='scssphp' output='css/app.css'
+        '@CraueConfigBundle/Resources/assets/css/form.css'
+        'assets/scss/app.scss' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+</head>
+<body>
+{% for type, flashMessages in app.session.flashbag.all() %}
+    {% for flashMessage in flashMessages %}
+        <div class="{{ type }}">
+            {{- flashMessage -}}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+{% block craue_config_content %}
+{% endblock %}
+</body>
+</html>

@@ -1,3 +1,8 @@
+craue_config_settings:
+  resource: "@CraueConfigBundle/Resources/config/routing/settings.xml"
+  prefix: /settings
+  schemes: [https]
+
 wbc_vehicle:
     resource: "@WbcValuationBundle/Resources/config/routing.yml"
     prefix:   /car-valuation

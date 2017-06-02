@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3"
+             style="padding:10px; border: 1px solid #d8d8d8; margin-top: 100px; border-radius: 10px;">
+            <h1 class="text-center">
+                Parameters<br>
+            <small><a href="{{ path('sonata_admin_dashboard') }}"> <- Back to Admin</a></small>
+            </h1>
+            <div class="row">
+                {{ form_start(form, {'attr': {'class': 'craue_config_settings_modify form'}}) }}
+                {{ form_errors(form) }}
+
+                {% for section in sections | craue_sortSections %}
+                    {% if section is not empty %}
+                        <fieldset>
+                        <legend>{{ section | trans({}, 'CraueConfigBundle') }}</legend>
+                    {% endif %}
+
+                    {% for setting in form.settings if setting.vars.value.section == section %}
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                {{ form_row(setting.value) }}
+
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {% if section is not empty %}
+                        </fieldset>
+                    {% endif %}
+                {% endfor %}
+
+                {{ form_rest(form) }}
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary btn-lg" type="submit">{{ 'Apply' | trans({}, 'CraueConfigBundle') }}</button>
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>

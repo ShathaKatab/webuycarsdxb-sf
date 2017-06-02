@@ -53,8 +53,10 @@ class ValuationConfigurationAdmin extends AbstractAdmin
             },
             'required' => false,
         ])
-            ->add('vehicleMake', WbcVehicleType\MakeType::class, ['required' => false,])
+            ->add('vehicleMake', WbcVehicleType\MakeType::class, ['required' => false])
             ->add('vehicleModel', ChoiceType::class, ['required' => false, 'data' => ''])
+            ->add('vehicleColor', WbcVehicleType\ColorType::class, ['required' => false])
+            ->add('vehicleBodyCondition', WbcVehicleType\ConditionType::class, ['required' => false])
             ->add('discount', NumberType::class, ['label' => 'Discount (%)'])
         ;
         if ($subject) {
@@ -72,9 +74,10 @@ class ValuationConfigurationAdmin extends AbstractAdmin
         $list->add('vehicleYear')
             ->add('vehicleMake')
             ->add('vehicleModel')
+            ->add('vehicleColor')
+            ->add('vehicleBodyCondition')
             ->add('discount', NumberType::class, ['label' => 'Discount (%)'])
             ->add('_action', 'actions', ['actions' => ['show' => [], 'edit' => [], 'delete' => []]]);
-        ;
     }
 
     protected function configureShowFields(ShowMapper $show)
@@ -82,6 +85,8 @@ class ValuationConfigurationAdmin extends AbstractAdmin
         $show->add('vehicleYear')
             ->add('vehicleMake')
             ->add('vehicleModel')
+            ->add('vehicleColor')
+            ->add('vehicleBodyCondition')
             ->add('discount', NumberType::class, ['label' => 'Discount (%)']);
     }
 }

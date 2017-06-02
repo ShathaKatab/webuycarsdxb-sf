@@ -50,6 +50,20 @@ class ValuationConfiguration
     protected $vehicleYear;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="vehicle_color", type="string", length=30, nullable=true)
+     */
+    protected $vehicleColor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vehicle_body_condition", type="string", length=30, nullable=true)
+     */
+    protected $vehicleBodyCondition;
+
+    /**
      * @var float
      *
      * @ORM\Column(name="discount", type="decimal", precision=11, scale=2)
@@ -224,5 +238,53 @@ class ValuationConfiguration
     public function getVehicleModel()
     {
         return $this->vehicleModel;
+    }
+
+    /**
+     * Set vehicleColor.
+     *
+     * @param string $vehicleColor
+     *
+     * @return ValuationConfiguration
+     */
+    public function setVehicleColor($vehicleColor)
+    {
+        $this->vehicleColor = $vehicleColor;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicleColor.
+     *
+     * @return string
+     */
+    public function getVehicleColor()
+    {
+        return $this->vehicleColor;
+    }
+
+    /**
+     * Set vehicleBodyCondition.
+     *
+     * @param string $vehicleBodyCondition
+     *
+     * @return ValuationConfiguration
+     */
+    public function setVehicleBodyCondition($vehicleBodyCondition)
+    {
+        $this->vehicleBodyCondition = $vehicleBodyCondition;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicleBodyCondition.
+     *
+     * @return string
+     */
+    public function getVehicleBodyCondition()
+    {
+        return $this->vehicleBodyCondition;
     }
 }
