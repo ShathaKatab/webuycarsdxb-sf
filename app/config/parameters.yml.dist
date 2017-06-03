@@ -34,8 +34,8 @@ parameters:
     site_title: "WeBuyCars"
     company_name: "Smart Wheels Auctions Organization LLC."
     company_office_number: "Office #4711"
-    company_office_building: "Aspin Tower"
-    company_office_street: "Sheikh Zayed Road, Dubai UAE"
+    company_office_building: "ASPIN TOWER"
+    company_office_street: 'SHK. ZAYED RD.'
     company_po_box: "212811"
     company_office_phone: "+971 43 515 222"
     site_phone: "04 351 5222"
