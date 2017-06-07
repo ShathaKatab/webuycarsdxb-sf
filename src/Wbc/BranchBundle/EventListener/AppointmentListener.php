@@ -37,6 +37,9 @@ class AppointmentListener
      */
     private $smsManager;
 
+    /**
+     * @var TwigEngine
+     */
     private $templating;
 
     /**

@@ -3,6 +3,7 @@
 namespace Wbc\UtilityBundle;
 
 use JMS\DiExtraBundle\Annotation as DI;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Twilio\Rest\Client;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\NumberParseException;
@@ -27,7 +28,15 @@ class TwilioManager
      */
     private $client;
 
+    /**
+     * @var PhoneNumberUtil
+     */
     private $phoneUtil;
+
+    /**
+     * @var string
+     */
+    private $env;
 
     /**
      * TwilioManager Constructor.
@@ -41,12 +50,14 @@ class TwilioManager
      * @param $sid
      * @param $token
      * @param $fromNumber
+     * @param KernelInterface $kernel
      */
-    public function __construct($sid, $token, $fromNumber)
+    public function __construct($sid, $token, $fromNumber, KernelInterface $kernel)
     {
         $this->fromNumber = $fromNumber;
         $this->client = new Client($sid, $token);
         $this->phoneUtil = PhoneNumberUtil::getInstance();
+        $this->env = $kernel->getEnvironment();
     }
 
     /**
@@ -60,6 +71,10 @@ class TwilioManager
     public function sendSms($toPhoneNumber, $message)
     {
         $response = null;
+
+        if ($this->env !== 'prod') {
+            return $response;
+        }
 
         try {
             $phoneNumberProto = $this->phoneUtil->parse($toPhoneNumber, 'AE');

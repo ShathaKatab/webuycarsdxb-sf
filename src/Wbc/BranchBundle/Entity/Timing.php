@@ -325,6 +325,19 @@ class Timing
     }
 
     /**
+     * @Serializer\VirtualProperty
+     * @Serializer\SerializedName("shortName")
+     *
+     * @return string
+     */
+    public function getShortName()
+    {
+        if (!is_null($this->dayBooked) && !is_null($this->from) && !is_null($this->to)) {
+            return sprintf('%s (%s - %s)', DayType::getDays()[$this->dayBooked], $this->from, $this->to);
+        }
+    }
+
+    /**
      * Get id.
      *
      * @return int

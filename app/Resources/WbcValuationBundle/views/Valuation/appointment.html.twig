@@ -38,9 +38,9 @@
                                   method="post"
                                   class="form-horizontal" novalidate>
                                 <div class="form-group">
-                                    <label class="col-md-6">Pick a Branch</label>
+                                    <label class="col-md-5">Pick a Branch</label>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <select ng-model="ctrl.selectedBranch"
                                                 ng-class="{'form-control-invalid': valuationAppointmentForm.$submitted && valuationAppointmentForm.selectedBranch.$invalid }"
                                                 class="form-control"
@@ -52,8 +52,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-6">Pick a Date</label>
-                                    <div class="col-md-6">
+                                    <label class="col-md-5">Pick a Date</label>
+                                    <div class="col-md-7">
                                         <div uib-datepicker
                                              class="angular-ui-datepicker"
                                              ng-model="ctrl.appointmentDate"
@@ -64,10 +64,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-6">Pick a Timing</label>
-                                    <div class="col-md-6">
+                                    <label class="col-md-5">Pick a Timing</label>
+                                    <div class="col-md-7">
                                         <select ng-model="ctrl.selectedBranchTiming" class="form-control"
-                                                ng-options="branchTiming.id as branchTiming.name for branchTiming in ctrl.branchTimings"
+                                                ng-options="branchTiming.id as branchTiming.shortName for branchTiming in ctrl.branchTimings"
                                                 required
                                                 name="selectedBranchTiming"
                                                 ng-class="{'form-control-invalid': valuationAppointmentForm.$submitted && valuationAppointmentForm.selectedBranchTiming.$invalid }">
