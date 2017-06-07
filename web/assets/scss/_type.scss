@@ -39,7 +39,7 @@ p, .p {
   font-size: 16px;
   line-height: 26px;
   text-align: center;
-  font-weight: 300;
+  font-weight: $font-weight;
   margin-bottom: ($line-height-computed + 10);
 
   &.p-lg {
@@ -55,7 +55,6 @@ p, .p {
   &.p-italic{
     font-size: 12px;
     line-height: 16px;
-    opacity: .5;
     font-style: italic;
     color: $greyish-brown-two-color
   }
@@ -65,7 +64,7 @@ p, .p {
 
   a{
     color: $aqua-marine-color;
-    font-weight: 200;
+    font-weight: $font-weight;
 
     &:hover{
       text-decoration: underline;
@@ -112,7 +111,7 @@ article{
 
 .color-dark {
   color: $dark-color;
-  font-weight: 300;
+  font-weight: $font-weight;
 }
 
 .color-white {
@@ -191,7 +190,7 @@ section.section-text {
   a {
     font-size: 20px;
     line-height: 30px;
-    font-weight: 300;
+    font-weight: $font-weight;
     font-family: $font-family-base;
     color: $greyish-brown-color;
 
