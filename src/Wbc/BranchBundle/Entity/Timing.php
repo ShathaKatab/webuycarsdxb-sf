@@ -372,4 +372,14 @@ class Timing
 
         return $integerTime;
     }
+
+    /**
+     * @param \DateTime $dateTime
+     *
+     * @return int
+     */
+    public static function formatDateTimeToInteger(\DateTime $dateTime)
+    {
+        return intval($dateTime->format('H')) * 60 + intval($dateTime->format('i'));
+    }
 }

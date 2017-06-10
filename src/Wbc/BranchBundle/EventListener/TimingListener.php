@@ -61,7 +61,7 @@ class TimingListener
         }
 
         $fromTime = Timing::formatIntegerToTimeString($object->getFrom());
-        $toTime = Timing::formatIntegerToTimeString($object->getTo());;
+        $toTime = Timing::formatIntegerToTimeString($object->getTo());
 
         $object->setFrom($fromTime);
         $object->setTo($toTime);
@@ -82,11 +82,11 @@ class TimingListener
             $toDateTime = new \DateTime($to);
 
             if ($fromDateTime) {
-                $from = intval($fromDateTime->format('H')) * 60 + intval($fromDateTime->format('i'));
+                $from = Timing::formatDateTimeToInteger($fromDateTime);
             }
 
             if ($toDateTime) {
-                $to = intval($toDateTime->format('H')) * 60 + intval($toDateTime->format('i'));
+                $to = Timing::formatDateTimeToInteger($toDateTime);
             }
 
             $timing->setFrom($from);
