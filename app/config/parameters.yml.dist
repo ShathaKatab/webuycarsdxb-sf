@@ -47,6 +47,9 @@ parameters:
             slug: how-to-sell-my-car-in-dubai
             title: 'Sell Any Car To Us'
         -
+            slug: how-we-operate
+            title: 'How We Operate'
+        -
             slug: contact-us
             title: 'Contact Us'
         -
