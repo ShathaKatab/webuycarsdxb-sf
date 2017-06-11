@@ -121,7 +121,7 @@ class AppointmentAdmin extends AbstractAdmin
                 'dp_min_date' => new \DateTime(),
                 'dp_max_date' => '+30',
                 'dp_use_current' => false,
-                'format' => 'EE dd-MMM-YYYY',
+                'format' => 'EE dd-MMM-yyyy',
             ])
             ->add('branchTiming', ChoiceType::class);
 
