@@ -154,7 +154,7 @@ class AppointmentAdmin extends AbstractAdmin
                     'choices' => Appointment::getStatuses(),
                     'empty_data' => Appointment::STATUS_NEW,
                 ])
-                ->add('notes', TextareaType::class)
+                ->add('notes', TextareaType::class, ['required' => false])
                 ->end()
                 ->end();
         }
