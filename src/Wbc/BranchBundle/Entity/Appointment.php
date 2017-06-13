@@ -262,6 +262,11 @@ class Appointment
     protected $to;
 
     /**
+     * @var Make
+     */
+    protected $vehicleMake;
+
+    /**
      * Appointment Constructor.
      *
      * @param Valuation $valuation
@@ -839,13 +844,27 @@ class Appointment
     }
 
     /**
+     * Set Vehicle Make.
+     *
+     * @param Make $make
+     *
+     * @return $this
+     */
+    public function setVehicleMake(Make $make)
+    {
+        $this->vehicleMake = $make;
+
+        return $this;
+    }
+
+    /**
      * Get Vehicle Make.
      *
      * @return Make
      */
     public function getVehicleMake()
     {
-        return $this->vehicleModel ? $this->vehicleModel->getMake() : null;
+        return $this->vehicleMake;
     }
 
     /**

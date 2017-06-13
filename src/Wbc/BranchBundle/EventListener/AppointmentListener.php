@@ -98,9 +98,14 @@ class AppointmentListener
 
         $branch = $object->getBranch();
         $branchTiming = $object->getBranchTiming();
+        $vehicleModel = $object->getVehicleModel();
 
         if (!$branch && $branchTiming) {
             $object->setBranch($branchTiming->getBranch());
+        }
+
+        if ($vehicleModel) {
+            $object->setVehicleMake($vehicleModel->getMake());
         }
     }
 

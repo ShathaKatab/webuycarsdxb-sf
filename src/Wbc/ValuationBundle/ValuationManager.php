@@ -325,80 +325,35 @@ class ValuationManager
         $configs = $statement->fetchAll();
 
         foreach ($configs as $config) {
-            $bitwise = 0;
-
-            if ($config['vehicle_make_id'] == $makeId) {
-                $bitwise += 1;
+            if ($config['vehicle_make_id'] === null
+                && $config['vehicle_model_id'] === null
+                && $config['vehicle_year'] === null
+                && $config['vehicle_color'] === null
+                && $config['vehicle_body_condition'] === null) {
+                continue;
             }
 
-            if ($config['vehicle_model_id'] == $modelId) {
-                $bitwise += 2;
+            if ($config['vehicle_make_id'] !== null && $config['vehicle_make_id'] !== $makeId) {
+                continue;
             }
 
-            if ($config['vehicle_year'] == $year) {
-                $bitwise += 4;
+            if ($config['vehicle_model_id'] !== null && $config['vehicle_model_id'] !== $modelId) {
+                continue;
             }
 
-            if ($config['vehicle_color'] == $color) {
-                $bitwise += 8;
+            if ($config['vehicle_year'] !== null && $config['vehicle_year'] !== $year) {
+                continue;
             }
 
-            if ($config['vehicle_body_condition'] == $bodyCondition) {
-                $bitwise += 16;
+            if ($config['vehicle_color'] !== null && $config['vehicle_color'] !== $color) {
+                continue;
             }
 
-            switch ($bitwise) {
-                case 1://matches make_id
-                    $discount += $config['discount'];
-                    break;
-                case 2://matches model_id
-                    $discount += $config['discount'];
-                    break;
-                case 4://matches year
-                    $discount += $config['discount'];
-                    break;
-                case 8: //matches color
-                    $discount += $config['discount'];
-                    break;
-                case 16: //matches body condition
-                    $discount += $config['discount'];
-                    break;
-                case (1 + 2 + 4 + 8 + 16): //matches everything
-                    $discount += $config['discount'];
-                    break;
-                default:
-                    if (($bitwise & (2 + 4 + 8 + 16)) == (2 + 4 + 8 + 16)) {
-                        //matches model, year, color, body_condition
-                        $discount += $config['discount'];
-                    } elseif (($bitwise & (2 + 4)) == (2 + 4)) {
-                        //matches model, year
-                        $discount += $config['discount'];
-                    } elseif (($bitwise & (2 + 8)) == (2 + 8)) {
-                        //matches model, color
-                        $discount += $config['discount'];
-                    } elseif (($bitwise & (2 + 8 + 16)) == (2 + 8 + 16)) {
-                        //matches model, color, body_condition
-                        $discount += $config['discount'];
-                    } elseif (($bitwise & (2 + 16)) == (2 + 16)) {
-                        //matches model, body_condition
-                        $discount += $config['discount'];
-                    } elseif (($bitwise & (4 + 8 + 16)) == (4 + 8 + 16)) {
-                        //matches year, color, body_condition
-                        $discount += $config['discount'];
-                    } elseif (($bitwise & (4 + 8)) == (4 + 8)) {
-                        //matches year, color
-                        $discount += $config['discount'];
-                    } elseif (($bitwise & (4 + 16)) == (4 + 16)) {
-                        //matches year, body_condition
-                        $discount += $config['discount'];
-                    } elseif (($bitwise & (8 + 16)) == (8 + 16)) {
-                        //matches color, body_condition
-                        $discount += $config['discount'];
-                    } elseif ($bitwise === 3) {
-                        //matches model and make
-                        $discount += $config['discount'];
-                    }
+            if ($config['vehicle_body_condition'] !== null && $config['vehicle_body_condition'] !== $bodyCondition) {
+                continue;
             }
+
+            $discount += $config['discount'];
         }
 
         return floatval($discount);
