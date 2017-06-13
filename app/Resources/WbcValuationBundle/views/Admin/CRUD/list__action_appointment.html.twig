@@ -1,0 +1,12 @@
+{% if object.appointment is not null %}
+    <a href="{{ path('admin_wbc_branch_appointment_show', {id: object.appointment.id}) }}" class="btn btn-sm btn-info view_link"
+       title="Show Appointment">
+        <i class="fa fa-calendar"></i> Show Appointment
+    </a>
+{% else %}
+    <a href="{{ path('admin_wbc_valuation_valuation_generateAppointment', {id: object.id}) }}"
+       class="btn btn-sm btn-danger view_link"
+       title="Generate Appointment">
+        <i class="fa fa-calendar"></i> Generate Appointment
+    </a>
+{% endif %}

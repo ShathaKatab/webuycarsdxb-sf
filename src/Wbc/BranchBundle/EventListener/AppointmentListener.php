@@ -121,7 +121,10 @@ class AppointmentListener
         }
 
         $this->updateAppointmentDetails($object, $args->getObjectManager());
-        $this->smsManager->sendSms($object->getMobileNumber(), $this->templating->render('WbcBranchBundle::appointmentSms.txt.twig', ['appointment' => $object, 'siteDomain' => 'WEBUYCARSDXB.COM']));
+
+        if ($object->getBranch() && $object->getSmsTimingString() && $object->getName()) {
+            $this->smsManager->sendSms($object->getMobileNumber(), $this->templating->render('WbcBranchBundle::appointmentSms.txt.twig', ['appointment' => $object, 'siteDomain' => 'WEBUYCARSDXB.COM']));
+        }
     }
 
     /**

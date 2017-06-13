@@ -62,7 +62,7 @@ services:
 
     admin.valuation:
         class: Wbc\ValuationBundle\Admin\ValuationAdmin
-        arguments: [~, Wbc\ValuationBundle\Entity\Valuation, ~]
+        arguments: [~, Wbc\ValuationBundle\Entity\Valuation, WbcValuationBundle:ValuationAdmin]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Valuation, group: "Valuations"}
 

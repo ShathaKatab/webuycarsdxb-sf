@@ -63,7 +63,7 @@ class AppointmentDetails
     /**
      * @var Branch
      *
-     * @ORM\Column(name="branch", type="branch_object")
+     * @ORM\Column(name="branch", type="branch_object", nullable=true)
      *
      * @Assert\NotBlank()
      *
@@ -74,7 +74,7 @@ class AppointmentDetails
     /**
      * @var Timing
      *
-     * @ORM\Column(name="branch_timing", type="branch_timing_object")
+     * @ORM\Column(name="branch_timing", type="branch_timing_object", nullable=true)
      *
      * @Assert\NotBlank()
      *
@@ -89,7 +89,7 @@ class AppointmentDetails
      * @param Branch      $branch
      * @param Timing      $timing
      */
-    public function __construct(Appointment $appointment, Branch $branch, Timing $timing)
+    public function __construct(Appointment $appointment, Branch $branch = null, Timing $timing = null)
     {
         $this->appointment = $appointment;
         $this->branch = $branch;

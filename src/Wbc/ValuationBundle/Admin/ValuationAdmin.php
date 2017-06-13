@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\VehicleBundle\Form\ColorType;
 use Wbc\VehicleBundle\Form\ConditionType;
 
@@ -32,8 +33,15 @@ class ValuationAdmin extends AbstractAdmin
             ->add('vehicleYear')
             ->add('vehicleMileage', null, ['label' => 'Mileage (Kms)'])
             ->add('priceOnline', 'currency', ['currency' => 'AED'])
+            ->add('hasAppointment', 'boolean')
             ->add('createdAt', null, ['label' => 'Created'])
-            ->add('_action', 'actions', ['actions' => ['show' => [], 'edit' => []]]);
+            ->add('_action', 'actions', ['actions' => [
+                'show' => [],
+                'edit' => [],
+                'appointment' => [
+                    'template' => 'WbcValuationBundle:Admin/CRUD:list__action_appointment.html.twig',
+                ],
+            ]]);
     }
 
     protected function configureShowFields(ShowMapper $show)
@@ -54,6 +62,6 @@ class ValuationAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('create')->remove('delete')->remove('edit');
+        $collection->remove('create')->remove('delete')->remove('edit')->add('generateAppointment', $this->getRouterIdParameter().'/generateAppointment');
     }
 }

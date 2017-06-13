@@ -587,4 +587,18 @@ class Valuation
 
         return $this;
     }
+
+    /**
+     * Has Appointment.
+     *
+     * @return bool
+     */
+    public function hasAppointment()
+    {
+        if ($this->appointment !== null) {
+            return true;
+        }
+
+        return false;
+    }
 }
