@@ -18,6 +18,7 @@ use Wbc\BranchBundle\Form\BranchType;
 use Wbc\BranchBundle\Form\DayType;
 use Wbc\VehicleBundle\Entity\ModelType;
 use Wbc\VehicleBundle\Form as WbcVehicleType;
+use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
 
 /**
@@ -62,22 +63,36 @@ class AppointmentAdmin extends AbstractAdmin
             ->with('Vehicle Details')
             ->add('vehicleYear', WbcVehicleType\ModelYearType::class)
             ->add('vehicleMake', WbcVehicleType\MakeType::class)
-            ->add('vehicleModel', ChoiceType::class)
-            ->add('vehicleModelType', WbcVehicleType\ModelTypeSelectorType::class, [
-                'label' => 'Vehicle Trim',
-                'required' => false, ])
+            ->add('vehicleModel', EntityType::class, [
+                'placeholder' => '',
+                'class' => Model::class,
+                'query_builder' => function (EntityRepository $entityRepository) {
+                    return $entityRepository->createQueryBuilder('m')->where('m.id IS NULL'); //don't populate anything
+                },
+            ])
+            ->add('vehicleModelType', EntityType::class, [
+                'required' => false,
+                'placeholder' => '',
+                'class' => ModelType::class,
+                'query_builder' => function (EntityRepository $entityRepository) {
+                    return $entityRepository->createQueryBuilder('m')->where('m.id IS NULL'); //don't populate anything
+                },
+            ])
         ;
 
         if ($subject) {
-            if ($subject->getVehicleMake() || $request->isMethod('POST')) {
+            $vehicleMake = $subject->getVehicleMake();
+            $vehicleModel = $subject->getVehicleModel();
+
+            if ($vehicleMake || $request->isMethod('POST')) {
                 $formMapper->add('vehicleModel', EntityType::class, [
                     'placeholder' => '',
                     'class' => Model::class,
-                    'query_builder' => $request->isMethod('POST') ? null : function (EntityRepository $entityRepository) use ($subject) {
+                    'query_builder' => $request->isMethod('POST') ? null : function (EntityRepository $entityRepository) use ($subject, $vehicleMake) {
                         return $entityRepository->createQueryBuilder('m')
                             ->where('m.make = :make')
                             ->andWhere('m.active = :active')
-                            ->setParameter('make', $subject->getVehicleMake())
+                            ->setParameter('make', $vehicleMake)
                             ->setParameter('active', true)
                             ->orderBy('m.name', 'ASC');
 
@@ -85,16 +100,16 @@ class AppointmentAdmin extends AbstractAdmin
                 ]);
             }
 
-            if ($subject->getVehicleModel() || $request->isMethod('POST')) {
+            if ($vehicleModel || $request->isMethod('POST')) {
                 $formMapper->add('vehicleModelType', EntityType::class, [
                     'placeholder' => '',
                     'class' => ModelType::class,
                     'label' => 'Vehicle Trim',
                     'required' => false,
-                    'query_builder' => $request->isMethod('POST') ? null : function (EntityRepository $entityRepository) use ($subject) {
+                    'query_builder' => $request->isMethod('POST') ? null : function (EntityRepository $entityRepository) use ($subject, $vehicleModel) {
                         return $entityRepository->createQueryBuilder('m')
                             ->where('m.model = :model')
-                            ->setParameter('model', $subject->getVehicleModel());
+                            ->setParameter('model', $vehicleModel);
                     },
                 ]);
             }
@@ -104,6 +119,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('vehicleMileage', WbcVehicleType\MileageType::class)
             ->add('vehicleSpecifications', WbcVehicleType\SpecificationType::class, ['required' => false])
             ->add('vehicleBodyCondition', WbcVehicleType\ConditionType::class)
+            ->add('vehicleColor', WbcVehicleType\ColorType::class)
             ->end()
             ->end();
 
@@ -165,7 +181,76 @@ class AppointmentAdmin extends AbstractAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $datagridMapper->add('name');
+        $now = new \DateTime();
+
+        $datagridMapper->add('name')
+            ->add('mobileNumber')
+            ->add('vehicleMake', 'doctrine_orm_callback', [
+                'callback' => function ($queryBuilder, $alias, $field, $value) {
+                    if (!$value || ($value && !$value['value'] instanceof Make)) {
+                        return false;
+                    }
+
+                    $queryBuilder->innerJoin($alias.'.vehicleModel', 'vehicleModel')
+                        ->andWhere('vehicleModel.make = :make')
+                        ->setParameter(':make', $value['value']);
+
+                    return true;
+                },
+                'field_type' => 'entity',
+                'field_options' => [
+                    'class' => Make::class,
+                ],
+            ])
+            ->add('vehicleModel')
+            ->add('vehicleYear')
+            ->add('dateRange', 'doctrine_orm_callback', [
+                'label' => 'Booked Today/Tomorrow',
+                'callback' => function ($queryBuilder, $alias, $field, $value) use ($now) {
+                    $dateBooked = null;
+
+                    if (!$value['value']) {
+                        return;
+                    }
+
+                    if ($value['value'] === 'today') {
+                        $dateBooked = (new \DateTime())->format('Y-m-d');
+                    } elseif ($value['value'] === 'tomorrow') {
+                        $dateBooked = (new \DateTime('+1 day'))->format('Y-m-d');
+                    }
+
+                    if ($dateBooked) {
+                        $queryBuilder->andWhere($alias.'.dateBooked = :dateBooked')
+                            ->setParameter(':dateBooked', $dateBooked);
+                    }
+
+                    return true;
+                },
+                'field_type' => 'choice',
+                'field_options' => [
+                    'choices' => [
+                        'today' => 'Today',
+                        'tomorrow' => 'Tomorrow',
+                    ],
+                ],
+            ])
+            ->add('dateBooked', 'doctrine_orm_date_range', [
+                'label' => 'Date Range',
+                'field_type' => 'sonata_type_date_range_picker',
+                'start_options' => [
+                    'years' => range($now->format('Y'), intval($now->format('Y')) + 1),
+                    'dp_min_date' => (new \DateTime('-1 month'))->format('d/M/Y'),
+                    'dp_max_date' => (new \DateTime('+1 month'))->format('d/M/Y'),
+                    'dp_default_date' => $now->format('m/d/Y'),
+                ],
+                'end_options' => [
+                    'years' => range($now->format('Y'), intval($now->format('Y')) + 1),
+                    'dp_min_date' => (new \DateTime('-1 month'))->format('d/M/Y'),
+                    'dp_max_date' => (new \DateTime('+1 month'))->format('d/M/Y'),
+                    'dp_default_date' => $now->format('m/d/Y'),
+                ],
+            ])
+        ;
     }
 
     /**
@@ -176,15 +261,15 @@ class AppointmentAdmin extends AbstractAdmin
         $listMapper->addIdentifier('id')
             ->add('name')
             ->add('mobileNumber', null, ['label' => 'Mobile'])
-            ->add('emailAddress')
-            ->add('branchTiming.dayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Day Booked'])
-            ->add('dateBooked')
             ->add('details.vehicleMakeName', null, ['label' => 'Make'])
             ->add('details.vehicleModelName', null, ['label' => 'Model'])
+            ->add('vehicleYear', null, ['label' => 'Year'])
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'editable' => true])
-            ->add('valuation.priceOnline', 'currency', ['currency' => 'AED'])
+            ->add('valuation.priceOnline', 'currency', ['currency' => 'AED', 'label' => 'Online Valuation'])
+            ->add('dateBooked')
+            ->add('branchTiming.timingString', null, ['label' => 'Timing'])
             ->add('createdAt', null, ['label' => 'Created'])
-            ->add('updatedAt', null, ['label' => 'Updated'])
+            ->add('createdBy', null, ['placeholder' => 'User'])
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],

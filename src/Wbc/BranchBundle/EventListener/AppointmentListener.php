@@ -2,6 +2,7 @@
 
 namespace Wbc\BranchBundle\EventListener;
 
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wbc\UtilityBundle\TwilioManager;
 use Wbc\BranchBundle\BranchEvents;
 use Wbc\BranchBundle\Events\AppointmentEvent;
@@ -12,12 +13,13 @@ use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\AppointmentDetails;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\TwigBundle\TwigEngine;
+use Wbc\ValuationBundle\Entity\Valuation;
 
 /**
  * Class AppointmentListener.
  *
  * @DI\DoctrineListener(
- *     events = {"postPersist", "postUpdate", "postLoad"},
+ *     events = {"prePersist", "postPersist", "postUpdate", "postLoad"},
  *     connection = "default",
  *     lazy = true,
  *     priority = 0,
@@ -43,23 +45,31 @@ class AppointmentListener
     private $templating;
 
     /**
+     * @var TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * AppointmentListener Constructor.
      *
      * @DI\InjectParams({
      *  "entityManager" = @DI\Inject("doctrine.orm.default_entity_manager"),
      *  "twilioManager" = @DI\Inject("wbc.utility.twilio_manager"),
-     *  "templating" = @DI\Inject("templating")
+     *  "templating" = @DI\Inject("templating"),
+     *  "tokenStorage" = @DI\Inject("security.token_storage")
      * })
      *
-     * @param EntityManager $entityManager
-     * @param TwilioManager $twilioManager
-     * @param TwigEngine    $templating
+     * @param EntityManager         $entityManager
+     * @param TwilioManager         $twilioManager
+     * @param TwigEngine            $templating
+     * @param TokenStorageInterface $tokenStorage
      */
-    public function __construct(EntityManager $entityManager, TwilioManager $twilioManager, TwigEngine $templating)
+    public function __construct(EntityManager $entityManager, TwilioManager $twilioManager, TwigEngine $templating, TokenStorageInterface $tokenStorage)
     {
         $this->entityManager = $entityManager;
         $this->smsManager = $twilioManager;
         $this->templating = $templating;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -112,7 +122,7 @@ class AppointmentListener
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postPersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args)
     {
         $object = $args->getObject();
 
@@ -120,7 +130,32 @@ class AppointmentListener
             return;
         }
 
+        $token = $this->tokenStorage->getToken();
+
+        if ($token) {
+            $object->setCreatedBy($token->getUser());
+        }
+    }
+
+    /**
+     * @param LifecycleEventArgs $args
+     */
+    public function postPersist(LifecycleEventArgs $args)
+    {
+        $object = $args->getObject();
+        $objectManager = $args->getObjectManager();
+
+        if (!$object instanceof Appointment) {
+            return;
+        }
+
         $this->updateAppointmentDetails($object, $args->getObjectManager());
+
+        if (!$object->getValuation()) {
+            $valuation = new Valuation($object);
+            $objectManager->persist($valuation);
+            $objectManager->flush();
+        }
 
         if ($object->getBranch() && $object->getSmsTimingString() && $object->getName()) {
             $this->smsManager->sendSms($object->getMobileNumber(), $this->templating->render('WbcBranchBundle::appointmentSms.txt.twig', ['appointment' => $object, 'siteDomain' => 'WEBUYCARSDXB.COM']));

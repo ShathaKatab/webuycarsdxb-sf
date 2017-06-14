@@ -64,6 +64,7 @@ class ValuationListener
         if (!$object instanceof Valuation) {
             return;
         }
+
         $this->setValuationPrice($object);
     }
 

@@ -22,7 +22,7 @@ class ColorType extends AbstractType
             'label' => 'Vehicle Body Color',
             'choices' => self::getColors(),
             'placeholder' => '',
-            'data_class' => self::class,
+            'data_class' => null,
         ]);
     }
 

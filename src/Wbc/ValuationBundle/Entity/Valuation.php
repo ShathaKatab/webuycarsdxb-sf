@@ -179,11 +179,18 @@ class Valuation
      */
     protected $vehicleMake;
 
-    public function __construct()
+    /**
+     * Valuation Constructor.
+     *
+     * @param Appointment $appointment
+     */
+    public function __construct(Appointment $appointment = null)
     {
         if ($this->vehicleModel) {
             $this->vehicleMake = $this->vehicleModel->getMake();
         }
+
+        $this->setAppointment($appointment);
     }
 
     /**
@@ -470,6 +477,20 @@ class Valuation
     public function setAppointment(Appointment $appointment = null)
     {
         $this->appointment = $appointment;
+
+        if ($appointment) {
+            $this->vehicleModel = $appointment->getVehicleModel();
+            $this->vehicleYear = $appointment->getVehicleYear();
+            $this->vehicleModelType = $appointment->getVehicleModelType();
+            $this->vehicleMileage = $appointment->getVehicleMileage();
+            $this->vehicleColor = $appointment->getVehicleColor();
+            $this->vehicleBodyCondition = $appointment->getVehicleBodyCondition();
+            $this->name = $appointment->getName();
+            $this->emailAddress = $appointment->getEmailAddress();
+            $this->mobileNumber = $appointment->getMobileNumber();
+
+            $this->appointment->setValuation($this);
+        }
 
         return $this;
     }

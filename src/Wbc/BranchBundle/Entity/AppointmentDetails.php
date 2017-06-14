@@ -91,7 +91,7 @@ class AppointmentDetails
      */
     public function __construct(Appointment $appointment, Branch $branch = null, Timing $timing = null)
     {
-        $this->appointment = $appointment;
+        $this->setAppointment($appointment);
         $this->branch = $branch;
         $this->branchTiming = $timing;
     }
@@ -202,6 +202,7 @@ class AppointmentDetails
     public function setAppointment(Appointment $appointment)
     {
         $this->appointment = $appointment;
+        $this->appointment->setDetails($this);
 
         return $this;
     }
