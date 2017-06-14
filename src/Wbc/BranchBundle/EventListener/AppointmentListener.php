@@ -3,6 +3,7 @@
 namespace Wbc\BranchBundle\EventListener;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Wbc\UserBundle\Entity\User;
 use Wbc\UtilityBundle\TwilioManager;
 use Wbc\BranchBundle\BranchEvents;
 use Wbc\BranchBundle\Events\AppointmentEvent;
@@ -132,7 +133,7 @@ class AppointmentListener
 
         $token = $this->tokenStorage->getToken();
 
-        if ($token) {
+        if ($token && $token->getUser() instanceof User) {
             $object->setCreatedBy($token->getUser());
         }
     }
