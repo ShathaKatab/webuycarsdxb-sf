@@ -333,15 +333,15 @@ class ValuationManager
                 continue;
             }
 
-            if ($config['vehicle_make_id'] !== null && $config['vehicle_make_id'] !== $makeId) {
+            if ($config['vehicle_make_id'] !== null && intval($config['vehicle_make_id']) !== $makeId) {
                 continue;
             }
 
-            if ($config['vehicle_model_id'] !== null && $config['vehicle_model_id'] !== $modelId) {
+            if ($config['vehicle_model_id'] !== null && intval($config['vehicle_model_id']) !== $modelId) {
                 continue;
             }
 
-            if ($config['vehicle_year'] !== null && $config['vehicle_year'] !== $year) {
+            if ($config['vehicle_year'] !== null && intval($config['vehicle_year']) !== $year) {
                 continue;
             }
 
@@ -353,7 +353,7 @@ class ValuationManager
                 continue;
             }
 
-            $discount += $config['discount'];
+            $discount += floatval($config['discount']);
         }
 
         return floatval($discount);
