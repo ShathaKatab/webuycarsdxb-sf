@@ -5,6 +5,7 @@ namespace Wbc\ValuationBundle\Form;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Wbc\BranchBundle\Form\BranchSelectorType;
@@ -28,6 +29,7 @@ class AppointmentType extends AbstractType
             ->add('branch', BranchSelectorType::class, ['label' => 'Branch'])
             ->add('branchTiming', EntityType::class, ['class' => Timing::class, 'label' => 'Branch Timing'])
             ->add('dateBooked', DateType::class, ['format' => DateType::HTML5_FORMAT, 'label' => 'Date'])
+            ->add('emailAddress', EmailType::class, ['label' => 'Email Address'])
         ;
     }
 

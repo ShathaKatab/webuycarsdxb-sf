@@ -58,8 +58,12 @@ p, .p {
     font-style: italic;
     color: $greyish-brown-two-color
   }
-  &.text-left{
+  &.text-left, &.text-error{
     text-align: left;
+  }
+  &.text-error{
+    font-size: 85%;
+    margin-bottom: 0;
   }
 
   a{
@@ -135,6 +139,10 @@ article{
   opacity: .2;
 }
 
+.text-error{
+  color: $invalid-color;
+}
+
 #navbar-phone-container {
   font-size: 22px;
   @media (max-width: $screen-sm-max) {
@@ -159,7 +167,7 @@ section.section-text {
     padding-top: 30px;
     padding-bottom: 30px;
   }
-    p {
+  p {
     margin-bottom: 35px;
   }
 }

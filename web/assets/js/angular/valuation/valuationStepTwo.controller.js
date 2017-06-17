@@ -10,7 +10,6 @@ angular
         $scope.vehicleColor = null;
         $scope.vehicleBodyCondition = null;
         $scope.name = null;
-        $scope.emailAddress = null;
         $scope.mobileNumber = null;
 
         this.submitForm = function (isValid) {

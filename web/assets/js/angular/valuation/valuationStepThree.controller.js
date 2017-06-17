@@ -21,6 +21,7 @@ angular
             vm.appointmentDate = null;
             vm.branchTimings = [];
             vm.selectedBranchTiming = null;
+            vm.emailAddress = null;
             vm.markers = [];
             vm.selectedBranchObject = {};
             vm.selectedPosition = {};
@@ -153,6 +154,8 @@ angular
 
                     appointmentObject.branchTiming = vm.selectedBranchTiming;
                     appointmentObject.branch = vm.selectedBranch;
+
+                    appointmentObject.emailAddress = vm.emailAddress;
 
                     var loader = angular.element($document[0].getElementById('loading-container'));
                     loader.show();

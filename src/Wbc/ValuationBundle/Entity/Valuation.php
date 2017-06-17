@@ -114,9 +114,8 @@ class Valuation
     /**
      * @var string
      *
-     * @ORM\Column(name="email_address", type="string", length=100)
+     * @ORM\Column(name="email_address", type="string", length=100, nullable=true)
      *
-     * @Assert\NotBlank()
      * @Assert\Email()
      */
     protected $emailAddress;

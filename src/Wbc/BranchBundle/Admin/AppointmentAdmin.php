@@ -326,4 +326,10 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}');
     }
+
+    public function getExportFields()
+    {
+        return ['id', 'name', 'mobileNumber', 'vehicleMake', 'vehicleModel', 'vehicleYear', 'valuation.priceOnline', 'dateBooked', 'branchTiming', 'createdAt', 'createdBy'];
+    }
+
 }
