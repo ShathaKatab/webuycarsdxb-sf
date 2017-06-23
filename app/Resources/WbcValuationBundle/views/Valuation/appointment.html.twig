@@ -50,8 +50,8 @@
                                                     ng-options="branch.slug as branch.name for branch in ctrl.branches">
                                                 <option value="">Choose a Branch</option>
                                             </select>
-                                            <p class="text-error ng-hide"
-                                               ng-show="valuationAppointmentForm.$submitted && valuationAppointmentForm.selectedBranch.$invalid">
+                                            <p class="text-error hidden"
+                                               ng-class="{'hidden': !valuationAppointmentForm.$submitted || valuationAppointmentForm.selectedBranch.$valid }">
                                                 Select a Branch</p>
                                         </div>
                                     </div>
@@ -65,8 +65,8 @@
                                                  required
                                                  ng-class="{'form-control-invalid': valuationAppointmentForm.$submitted && valuationAppointmentForm.appointmentDate.$invalid }"
                                                  datepicker-options="options"></div>
-                                            <p class="text-error ng-hide"
-                                               ng-show="valuationAppointmentForm.$submitted && valuationAppointmentForm.appointmentDate.$invalid">
+                                            <p class="text-error hidden"
+                                               ng-class="{'hidden': !valuationAppointmentForm.$submitted || valuationAppointmentForm.appointmentDate.$valid }">
                                                 Select an Appointment Date</p>
                                         </div>
                                     </div>
@@ -80,8 +80,8 @@
                                                     ng-class="{'form-control-invalid': valuationAppointmentForm.$submitted && valuationAppointmentForm.selectedBranchTiming.$invalid }">
                                                 <option value="">Choose a Branch Timing</option>
                                             </select>
-                                            <p class="text-error ng-hide"
-                                               ng-show="valuationAppointmentForm.$submitted && valuationAppointmentForm.selectedBranchTiming.$invalid">
+                                            <p class="text-error hidden"
+                                               ng-class="{'hidden': !valuationAppointmentForm.$submitted || valuationAppointmentForm.selectedBranchTiming.$valid }">
                                                 Select a Timing</p>
                                         </div>
                                     </div>
@@ -92,8 +92,8 @@
                                                    ng-class="{'form-control-invalid': valuationAppointmentForm.$submitted && valuationAppointmentForm.emailAddress.$invalid }"
                                                    required name="emailAddress" type="email" class="form-control"
                                                    placeholder="Type your email address">
-                                            <p class="text-error ng-hide"
-                                               ng-show="valuationAppointmentForm.$submitted && valuationAppointmentForm.emailAddress.$invalid">Type a valid Email Address</p>
+                                            <p class="text-error hidden"
+                                               ng-class="{'hidden': !valuationAppointmentForm.$submitted || valuationAppointmentForm.emailAddress.$valid }">Type a valid Email Address</p>
                                         </div>
                                     </div>
                                 </form>

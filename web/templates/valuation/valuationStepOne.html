@@ -3,16 +3,16 @@
         <select ng-class="{'form-control-invalid': valuationStepOneForm.$submitted && valuationStepOneForm.vehicleMake.$invalid }" name="vehicleMake" required ng-change="ctrl.changedVehicleMake()" ng-model="ctrl.vehicleMakeId" ng-options="vehicleMake.id as vehicleMake.name for vehicleMake in ctrl.vehicleMakes" class="form-control">
             <option value="">Vehicle Make</option>
         </select>
-        <p class="text-error ng-hide"
-           ng-show="valuationStepOneForm.$submitted && valuationStepOneForm.vehicleMake.$invalid ">Select a Vehicle Make</p>
+        <p class="text-error hidden"
+           ng-class="{'hidden': !valuationStepOneForm.$submitted || valuationStepOneForm.vehicleMake.$valid }">Select a Vehicle Make</p>
     </div>
     <div class="form-group {{ ctrl.formGroupClass }}">
         <select ng-class="{'form-control-invalid': valuationStepOneForm.$submitted && valuationStepOneForm.vehicleModel.$invalid }" name="vehicleModel" required ng-model="ctrl.vehicleModelId" ng-options="vehicleModel.id as vehicleModel.name for vehicleModel in ctrl.vehicleModels" class="form-control">
             <option value="">Vehicle Model</option>
         </select>
 
-        <p class="text-error ng-hide"
-           ng-show="valuationStepOneForm.$submitted && valuationStepOneForm.vehicleModel.$invalid ">Select a Vehicle
+        <p class="text-error hidden"
+           ng-class="{'hidden': !valuationStepOneForm.$submitted || valuationStepOneForm.vehicleModel.$valid }">Select a Vehicle
             Model</p>
     </div>
     <div class="form-group {{ ctrl.formGroupClass }}">
@@ -20,8 +20,8 @@
             <option value="">Vehicle Year</option>
         </select>
 
-        <p class="text-error ng-hide"
-           ng-show="valuationStepOneForm.$submitted && valuationStepOneForm.vehicleYear.$invalid ">Select a Vehicle
+        <p class="text-error hidden"
+           ng-class="{'hidden': !valuationStepOneForm.$submitted || valuationStepOneForm.vehicleYear.$valid }">Select a Vehicle
             Year</p>
     </div>
     <div class="form-group {{ ctrl.formGroupSubmitClass }} {{ ctrl.formGroupClass }}">
