@@ -54,6 +54,7 @@ twig:
         initial_total_appointments: "%initial_total_appointments%"
         from_email: "%from_email%"
         from_sender_name: "%from_sender_name%"
+        tech_email: "%tech_email%"
 
 # Assetic Configuration
 assetic:

@@ -6,3 +6,7 @@
 {% block statusText %}
     The website is currently offline. Try again later!
 {% endblock %}
+{% block message %}
+    <p class="text-center">Try to reach our tech team via email at <a  href="mailto: {{ tech_email }}">{{ tech_email }}</a><br>
+        Or give us a call at: <a href="tel: {{ site_phone }}">{{ site_phone }}</a></p>
+{% endblock %}

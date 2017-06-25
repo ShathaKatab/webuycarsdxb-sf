@@ -19,8 +19,10 @@
                                 {% endblock %}
                             </small>
                         </h1>
-                        <p class="text-center">Try to reach us via email on the <a href={{ path('wbc_static_default_contact_us') }}>Contact Us</a> form<br>
-                            Or give us a call at: <a href="tel: {{ site_phone }}">{{ site_phone }}</a></p>
+                        {% block message %}
+                            <p class="text-center">Try to reach us via email on the <a href={{ path('wbc_static_default_contact_us') }}>Contact Us</a> form<br>
+                                Or give us a call at: <a href="tel: {{ site_phone }}">{{ site_phone }}</a></p>
+                        {% endblock %}
                     </div>
                 </div>
             </div>
