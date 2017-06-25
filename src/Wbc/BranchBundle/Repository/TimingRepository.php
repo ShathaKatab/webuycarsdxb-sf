@@ -33,7 +33,7 @@ class TimingRepository extends EntityRepository
             ->orderBy('t.dayBooked', 'ASC')
             ->addOrderBy('t.from', 'ASC');
 
-        if ($timeConstrained && intval($dayBooked) === $now->format('N')) {
+        if ($timeConstrained && intval($dayBooked) == $now->format('N')) {
             $queryBuilder->andWhere('t.from >= :fromTime')
                 ->setParameter(':fromTime', Timing::formatDateTimeToInteger($now));
         }
