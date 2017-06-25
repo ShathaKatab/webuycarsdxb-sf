@@ -26,7 +26,8 @@
             </div>
         </section>
     </article>
-
-    {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
+    {% if status_code != 503 %}
+        {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
+    {% endif %}
 
 {% endblock %}
