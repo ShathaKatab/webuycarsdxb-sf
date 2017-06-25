@@ -44,15 +44,21 @@ class ValuationAdmin extends AbstractAdmin
             }, 'field_type' => 'entity', 'field_options' => ['class' => Make::class]])
             ->add('vehicleModel')
             ->add('vehicleYear')
-            ->add('dateRange', 'doctrine_orm_callback', [
-                'label' => 'Created Today',
+            ->add('hasAppointment', 'doctrine_orm_callback', [
+                'label' => 'Has Appointment',
                 'callback' => function ($queryBuilder, $alias, $field, $value) use ($now) {
-                    if (!$value['value']) {
+                    if ($value['value'] === null) {
                         return;
                     }
 
-                    if ($value['value'] === 'today') {
-                        $queryBuilder->andWhere($alias.'.createdAt = :createdAt')->setParameter(':createdAt', (new \DateTime())->format('Y-m-d'));
+                    $theValue = boolval($value['value']);
+
+                    if ($theValue === true) {
+                        $queryBuilder->innerJoin($alias.'.appointment', 'appointment')
+                            ->andWhere('appointment IS NOT NULL');
+                    } elseif ($theValue === false) {
+                        $queryBuilder->leftJoin($alias.'.appointment', 'appointment')
+                            ->andWhere('appointment IS NULL');
                     }
 
                     return true;
@@ -60,12 +66,13 @@ class ValuationAdmin extends AbstractAdmin
                 'field_type' => 'choice',
                 'field_options' => [
                     'choices' => [
-                        'today' => 'Today',
+                        1 => 'yes',
+                        0 => 'no',
                     ],
                 ],
             ])
             ->add('createdAt', 'doctrine_orm_date_range', [
-                'label' => 'Date Created At Range',
+                'label' => 'Date Created At',
                 'field_type' => 'sonata_type_date_range_picker',
                 'start_options' => [
                     'years' => range($now->format('Y'), intval($now->format('Y')) + 1),

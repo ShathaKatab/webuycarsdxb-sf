@@ -2,12 +2,11 @@
 
 namespace Wbc\ValuationBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
+use Wbc\ValuationBundle\Entity\Valuation;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Wbc\ValuationBundle\Entity\Valuation;
 use Wbc\VehicleBundle\Form\ColorType;
 use Wbc\VehicleBundle\Form\ConditionType;
 use Wbc\VehicleBundle\Form\MileageType;
@@ -21,17 +20,18 @@ use Wbc\UtilityBundle\Form\MobileNumberType;
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
  */
-class ValuationType extends AbstractType
+class ValuationStepTwoType extends ValuationStepOneType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('vehicleModel', ModelSelectorType::class, [
-            'invalid_message' => 'Vehicle Model is not valid',
-            'label' => 'Vehicle Model',
-        ])
+        $builder->remove('vehicleMake')
+            ->add('vehicleModel', ModelSelectorType::class, [
+                'invalid_message' => 'Vehicle Model is not valid',
+                'label' => 'Vehicle Model',
+            ])
             ->add('vehicleYear', ModelYearType::class, [
                 'invalid_message' => 'Vehicle Year is not valid',
                 'label' => 'Vehicle Year',
@@ -54,17 +54,8 @@ class ValuationType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Valuation::class,
-            'csrf_protection' => false,
-        ]);
-    }
+        parent::configureOptions($resolver);
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return '';
+        $resolver->setDefault('data_class', Valuation::class);
     }
 }

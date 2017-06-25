@@ -77,12 +77,15 @@
                                                     ng-options="branchTiming.id as branchTiming.shortName for branchTiming in ctrl.branchTimings"
                                                     required
                                                     name="selectedBranchTiming"
-                                                    ng-class="{'form-control-invalid': valuationAppointmentForm.$submitted && valuationAppointmentForm.selectedBranchTiming.$invalid }">
+                                                    ng-class="{'form-control-invalid': valuationAppointmentForm.$submitted && valuationAppointmentForm.selectedBranchTiming.$invalid, 'disabled': !ctrl.isTimingSlotsAvailable }">
                                                 <option value="">Choose a Branch Timing</option>
                                             </select>
                                             <p class="text-error hidden"
                                                ng-class="{'hidden': !valuationAppointmentForm.$submitted || valuationAppointmentForm.selectedBranchTiming.$valid }">
                                                 Select a Timing</p>
+                                            <p class="text-error hidden"
+                                               ng-class="{'hidden': ctrl.isTimingSlotsAvailable }">
+                                                There are no available time slots for <br><strong ng-bind="ctrl.selectedBranchObject.name"></strong> on <br><strong ng-bind="ctrl.appointmentDate|date:'fullDate'"></strong>.</p>
                                         </div>
                                     </div>
                                     <div class="form-group">

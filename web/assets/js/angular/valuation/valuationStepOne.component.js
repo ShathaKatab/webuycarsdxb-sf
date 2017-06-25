@@ -7,6 +7,9 @@ angular
     .component('valuationStepOne', {
         templateUrl: 'templates/valuation/valuationStepOne.html',
         controller:['$document', '$window', 'VehicleModel', function ValuationStepOneController($document, $window, VehicleModel){
+            this.vehicleMakeId = null;
+            this.vehicleModelId = null;
+            this.vehicleYear = null;
             this.vehicleModels = [];
             this.changedVehicleMake = function(){
                 var loader = angular.element($document[0].getElementById('loading-container'));
@@ -16,11 +19,12 @@ angular
                 });
             };
 
-            this.submit = function(isValid){
-                if(isValid){
-                    $window.location.href = '/car-valuation/model/'+this.vehicleModelId+'/'+this.vehicleYear;
+            this.submit = function(theForm, $event){
+                theForm.$submitted = true;
+                if(theForm.$invalid){
+                    $event.preventDefault();
                 }
-            };
+            }
         }],
         controllerAs: 'ctrl',
         bindings: {
@@ -29,6 +33,7 @@ angular
             formButtonText: '@',
             formGroupClass: '@',
             formClass: '@',
-            formGroupSubmitClass: '@'
+            formGroupSubmitClass: '@',
+            formActionUrl: '='
         }
     });

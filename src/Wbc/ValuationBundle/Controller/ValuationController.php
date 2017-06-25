@@ -13,7 +13,8 @@ use Symfony\Component\Routing\Router;
 use Wbc\ValuationBundle\Form\AppointmentType;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\ValuationBundle\Entity\Valuation;
-use Wbc\ValuationBundle\Form\ValuationType;
+use Wbc\ValuationBundle\Form\ValuationStepOneType;
+use Wbc\ValuationBundle\Form\ValuationStepTwoType;
 use Wbc\VehicleBundle\Entity\Model;
 
 /**
@@ -31,11 +32,31 @@ class ValuationController extends Controller
      * @CF\Route("", name="wbc_valuation_index")
      * @CF\Method({"GET", "POST"})
      *
+     * @param Request $request
+     *
      * @return array
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return [];
+        $form = null;
+
+        if ($request->getMethod() === Request::METHOD_POST) {
+            $data = $request->request->all();
+            $form = $this->createForm(new ValuationStepOneType());
+
+            $form->submit($data);
+
+            if ($form->isValid()) {
+                $formData = $form->getData();
+
+                return $this->redirect($this->generateUrl('wbc_valuation_details', [
+                    'modelId' => $formData['vehicleModel']->getId(),
+                    'year' => $formData['vehicleYear'],
+                ]));
+            }
+        }
+
+        return ['form' => $form ? $form->createView() : null];
     }
 
     /**
@@ -62,7 +83,7 @@ class ValuationController extends Controller
 
             $valuation = new Valuation();
 
-            $form = $this->createForm(new ValuationType(), $valuation);
+            $form = $this->createForm(new ValuationStepTwoType(), $valuation);
 
             $form->submit($data);
 

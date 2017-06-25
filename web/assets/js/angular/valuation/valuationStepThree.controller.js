@@ -25,6 +25,7 @@ angular
             vm.markers = [];
             vm.selectedBranchObject = {};
             vm.selectedPosition = {};
+            vm.isTimingSlotsAvailable = true;
 
             vm.valuationId = null;
 
@@ -42,11 +43,13 @@ angular
             });
 
             $scope.$watch('ctrl.selectedBranch', function(){
+                vm.isTimingSlotsAvailable = true;
                 vm.selectedBranchChanged();
                 vm.fetchBranchTimings();
             });
 
             $scope.$watch('ctrl.appointmentDate', function(){
+                vm.isTimingSlotsAvailable = true;
                 vm.fetchBranchTimings();
             });
 
@@ -95,8 +98,9 @@ angular
                     var loader = angular.element($document[0].getElementById('loading-container'));
                     loader.show();
 
-                    vm.branchTimings = BranchTiming.query({branchSlug: vm.selectedBranch, appointmentDay: appointmentDay}, function(){
+                    vm.branchTimings = BranchTiming.query({branchSlug: vm.selectedBranch, appointmentDay: appointmentDay}, function(response){
                         loader.hide();
+                        vm.isTimingSlotsAvailable = Boolean(response.length);
                     });
                 }
             };
@@ -121,11 +125,7 @@ angular
             };
 
             vm.selectedBranchChanged = function(){
-                var filteredData = $filter('filter')(vm.branches, {
-                    slug: vm.selectedBranch
-                });
-
-                vm.selectedBranchObject = filteredData[0];
+                vm.selectedBranchObject = $filter('filter')(vm.branches, {slug: vm.selectedBranch})[0];
 
                 NgMap.getMap().then(function (map) {
                     if (vm.selectedBranchObject && vm.selectedBranchObject.marker) {
@@ -165,7 +165,11 @@ angular
 
                         window.setTimeout(function () {
                             $window.location.href = headers('Location');
-                        }, 500);
+                        }, 100);
+                    }, function(error){
+                        loader.hide();
+
+                        alert('Error: Unable to create an Appointment');
                     });
                 }
             };
