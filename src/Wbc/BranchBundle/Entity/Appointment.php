@@ -3,14 +3,14 @@
 namespace Wbc\BranchBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
+use Wbc\UserBundle\Entity\User;
 use Wbc\ValuationBundle\Entity\Valuation;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
 use Wbc\VehicleBundle\Entity\ModelType;
-use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Wbc\UserBundle\Entity\User;
 
 /**
  * Class Appointment.
@@ -24,13 +24,11 @@ use Wbc\UserBundle\Entity\User;
  */
 class Appointment
 {
-    const STATUS_NEW = 'active';
+    const STATUS_NEW = 'new';
     const STATUS_CONFIRMED = 'confirmed';
     const STATUS_CANCELLED = 'cancelled';
     const STATUS_INVALID_CONTACT = 'invalid_contact';
     const STATUS_CALLBACK = 'callback';
-    const STATUS_INSPECTED = 'inspected';
-    const STATUS_OFFER_ACCEPTED = 'offer_accepted';
 
     /**
      * @var int
@@ -564,8 +562,6 @@ class Appointment
             self::STATUS_CANCELLED => 'Cancelled',
             self::STATUS_INVALID_CONTACT => 'Invalid Contact',
             self::STATUS_CALLBACK => 'Call Back',
-            self::STATUS_INSPECTED => 'Inspected',
-            self::STATUS_OFFER_ACCEPTED => 'Offer Accepted',
         ];
     }
 

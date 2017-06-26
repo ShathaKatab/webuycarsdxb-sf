@@ -42,11 +42,9 @@ class TimingListener
     {
         $object = $args->getObject();
 
-        if (!$object instanceof Timing) {
-            return;
+        if ($object instanceof Timing && ($args->hasChangedField('from') || $args->hasChangedField('to'))) {
+            $this->formatTimeToInteger($object);
         }
-
-        $this->formatTimeToInteger($object);
     }
 
     /**

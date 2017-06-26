@@ -1,33 +1,40 @@
 <?php
 
-namespace Wbc\ValuationBundle\Entity;
+namespace Wbc\BranchBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
-use Wbc\BranchBundle\Entity\Appointment;
-use Wbc\VehicleBundle\Entity\Make;
+use Symfony\Component\Validator\Constraints as Assert;
+use Wbc\UserBundle\Entity\User;
 use Wbc\VehicleBundle\Entity\Model;
 use Wbc\VehicleBundle\Entity\ModelType;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class Valuation.
+ * Class Inspection.
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
  *
- * @ORM\Table(name="valuation")
- * @ORM\Entity(repositoryClass="Wbc\ValuationBundle\Repository\ValuationRepository")
+ * @ORM\Table(name="inspection")
+ * @ORM\Entity()
+ *
  * @Serializer\ExclusionPolicy("all")
  */
-class Valuation
+class Inspection
 {
+    const STATUS_NEW = 'new';
+    const STATUS_INVALID = 'invalid';
+    const STATUS_OFFER_ACCEPTED = 'offer_accepted';
+    const STATUS_OFFER_REJECTED = 'offer_rejected';
+
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(type="guid")
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="UUID")
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     *
+     * @Serializer\Expose()
      */
     protected $id;
 
@@ -44,22 +51,10 @@ class Valuation
     protected $vehicleModel;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="vehicle_year", type="smallint")
-     *
-     * @Assert\NotBlank()
-     * @Assert\Range(min=1928)
-     *
-     * @Serializer\Expose()
-     */
-    protected $vehicleYear;
-
-    /**
      * @var ModelType
      *
      * @ORM\ManyToOne(targetEntity="\Wbc\VehicleBundle\Entity\ModelType")
-     * @ORM\JoinColumn(name="vehicle_model_type_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="vehicle_model_type_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      *
      * @Serializer\Expose()
      */
@@ -68,13 +63,58 @@ class Valuation
     /**
      * @var int
      *
-     * @ORM\Column(name="vehicle_mileage", type="bigint")
+     * @ORM\Column(name="vehicle_year", type="smallint")
      *
      * @Assert\NotBlank()
      *
      * @Serializer\Expose()
      */
+    protected $vehicleYear;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vehicle_transmission", type="string", length=15, nullable=true)
+     *
+     * @Assert\Choice(choices={"manual", "automatic"})
+     *
+     * @Serializer\Expose()
+     */
+    protected $vehicleTransmission;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="vehicle_mileage", type="bigint")
+     *
+     * @Assert\NotBlank()
+     * @Assert\Range(min=5000, max=250000)
+     *
+     * @Serializer\Expose()
+     */
     protected $vehicleMileage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vehicle_specifications", type="string", length=10, nullable=true)
+     *
+     * @Assert\Choice(choices={"gcc", "usa", "jpn", "euro", "other"})
+     *
+     * @Serializer\Expose()
+     */
+    protected $vehicleSpecifications;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vehicle_body_condition", type="string", length=30, nullable=true)
+     *
+     * @Assert\Choice(choices={"good", "fair", "excellent"})
+     *
+     * @Serializer\Expose()
+     */
+    protected $vehicleBodyCondition;
 
     /**
      * @var string
@@ -89,99 +129,90 @@ class Valuation
     protected $vehicleColor;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="vehicle_body_condition", type="string", length=30, nullable=true)
-     *
-     * @Assert\NotBlank()
-     * @Assert\Choice(choices={"good", "fair", "excellent"})
-     *
-     * @Serializer\Expose()
-     */
-    protected $vehicleBodyCondition;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=100)
-     *
-     * @Assert\NotBlank()
-     *
-     * @Serializer\Expose()
-     */
-    protected $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email_address", type="string", length=100, nullable=true)
-     *
-     * @Assert\Email()
-     */
-    protected $emailAddress;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mobile_number", type="string", length=15)
-     *
-     * @Assert\NotBlank()
-     */
-    protected $mobileNumber;
-
-    /**
      * @var Appointment
      *
-     * @ORM\OneToOne(targetEntity="\Wbc\BranchBundle\Entity\Appointment", mappedBy="valuation", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\Wbc\BranchBundle\Entity\Appointment")
+     * @ORM\JoinColumn(name="appointment_id", referencedColumnName="id")
      */
     protected $appointment;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="price_online", type="decimal", precision=11, scale=2, nullable=true)
+     * @ORM\Column(name="price_offered", type="decimal", precision=11, scale=2, nullable=true)
+     *
+     * @Serializer\Expose()
      */
-    protected $priceOnline;
+    protected $priceOffered;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="price_expected", type="decimal", precision=11, scale=2, nullable=true)
+     */
+    protected $priceExpected;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="\Wbc\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id", nullable=false)
+     */
+    protected $createdBy;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=20)
+     *
+     * @Assert\NotBlank()
+     */
+    protected $status;
 
     /**
      * @var \DateTime
      *
-     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime")
+     *
+     * @Gedmo\Timestampable(on="create")
+     *
+     * @Serializer\Expose()
      */
     protected $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime")
+     *
+     * @Gedmo\Timestampable(on="update")
+     *
+     * @Serializer\Expose()
      */
     protected $updatedAt;
 
     /**
-     * @var Make
+     * @var Deal
+     *
+     * @ORM\OneToOne(targetEntity="Wbc\BranchBundle\Entity\Deal", mappedBy="inspection")
      */
-    protected $vehicleMake;
+    protected $deal;
 
     /**
-     * Valuation Constructor.
+     * Inspection Constructor.
      *
      * @param Appointment $appointment
      */
     public function __construct(Appointment $appointment = null)
     {
-        if ($this->vehicleModel) {
-            $this->vehicleMake = $this->vehicleModel->getMake();
-        }
-
         $this->setAppointment($appointment);
+        $this->status = self::STATUS_NEW;
     }
 
     /**
      * Get id.
      *
-     * @return guid
+     * @return int
      */
     public function getId()
     {
@@ -193,7 +224,7 @@ class Valuation
      *
      * @param int $vehicleYear
      *
-     * @return Valuation
+     * @return Inspection
      */
     public function setVehicleYear($vehicleYear)
     {
@@ -213,11 +244,35 @@ class Valuation
     }
 
     /**
+     * Set vehicleTransmission.
+     *
+     * @param string $vehicleTransmission
+     *
+     * @return Inspection
+     */
+    public function setVehicleTransmission($vehicleTransmission)
+    {
+        $this->vehicleTransmission = $vehicleTransmission;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicleTransmission.
+     *
+     * @return string
+     */
+    public function getVehicleTransmission()
+    {
+        return $this->vehicleTransmission;
+    }
+
+    /**
      * Set vehicleMileage.
      *
      * @param int $vehicleMileage
      *
-     * @return Valuation
+     * @return Inspection
      */
     public function setVehicleMileage($vehicleMileage)
     {
@@ -237,27 +292,27 @@ class Valuation
     }
 
     /**
-     * Set vehicleColor.
+     * Set vehicleSpecifications.
      *
-     * @param string $vehicleColor
+     * @param string $vehicleSpecifications
      *
-     * @return Valuation
+     * @return Inspection
      */
-    public function setVehicleColor($vehicleColor)
+    public function setVehicleSpecifications($vehicleSpecifications)
     {
-        $this->vehicleColor = $vehicleColor;
+        $this->vehicleSpecifications = $vehicleSpecifications;
 
         return $this;
     }
 
     /**
-     * Get vehicleColor.
+     * Get vehicleSpecifications.
      *
      * @return string
      */
-    public function getVehicleColor()
+    public function getVehicleSpecifications()
     {
-        return $this->vehicleColor;
+        return $this->vehicleSpecifications;
     }
 
     /**
@@ -265,7 +320,7 @@ class Valuation
      *
      * @param string $vehicleBodyCondition
      *
-     * @return Valuation
+     * @return Inspection
      */
     public function setVehicleBodyCondition($vehicleBodyCondition)
     {
@@ -285,75 +340,75 @@ class Valuation
     }
 
     /**
-     * Set name.
+     * Set vehicleColor.
      *
-     * @param string $name
+     * @param string $vehicleColor
      *
-     * @return Valuation
+     * @return Inspection
      */
-    public function setName($name)
+    public function setVehicleColor($vehicleColor)
     {
-        $this->name = $name;
+        $this->vehicleColor = $vehicleColor;
 
         return $this;
     }
 
     /**
-     * Get name.
+     * Get vehicleColor.
      *
      * @return string
      */
-    public function getName()
+    public function getVehicleColor()
     {
-        return $this->name;
+        return $this->vehicleColor;
     }
 
     /**
-     * Set emailAddress.
+     * Set priceOffered.
      *
-     * @param string $emailAddress
+     * @param string $priceOffered
      *
-     * @return Valuation
+     * @return Inspection
      */
-    public function setEmailAddress($emailAddress)
+    public function setPriceOffered($priceOffered)
     {
-        $this->emailAddress = $emailAddress;
+        $this->priceOffered = $priceOffered;
 
         return $this;
     }
 
     /**
-     * Get emailAddress.
+     * Get priceOffered.
      *
      * @return string
      */
-    public function getEmailAddress()
+    public function getPriceOffered()
     {
-        return $this->emailAddress;
+        return $this->priceOffered;
     }
 
     /**
-     * Set mobileNumber.
+     * Set priceExpected.
      *
-     * @param string $mobileNumber
+     * @param string $priceExpected
      *
-     * @return Valuation
+     * @return Inspection
      */
-    public function setMobileNumber($mobileNumber)
+    public function setPriceExpected($priceExpected)
     {
-        $this->mobileNumber = $mobileNumber;
+        $this->priceExpected = $priceExpected;
 
         return $this;
     }
 
     /**
-     * Get mobileNumber.
+     * Get priceExpected.
      *
      * @return string
      */
-    public function getMobileNumber()
+    public function getPriceExpected()
     {
-        return $this->mobileNumber;
+        return $this->priceExpected;
     }
 
     /**
@@ -361,7 +416,7 @@ class Valuation
      *
      * @param \DateTime $createdAt
      *
-     * @return Valuation
+     * @return Inspection
      */
     public function setCreatedAt(\DateTime $createdAt)
     {
@@ -385,7 +440,7 @@ class Valuation
      *
      * @param \DateTime $updatedAt
      *
-     * @return Valuation
+     * @return Inspection
      */
     public function setUpdatedAt(\DateTime $updatedAt)
     {
@@ -409,7 +464,7 @@ class Valuation
      *
      * @param Model $vehicleModel
      *
-     * @return Valuation
+     * @return Inspection
      */
     public function setVehicleModel(Model $vehicleModel = null)
     {
@@ -433,7 +488,7 @@ class Valuation
      *
      * @param ModelType $vehicleModelType
      *
-     * @return Valuation
+     * @return Inspection
      */
     public function setVehicleModelType(ModelType $vehicleModelType = null)
     {
@@ -457,7 +512,7 @@ class Valuation
      *
      * @param Appointment $appointment
      *
-     * @return Valuation
+     * @return Inspection
      */
     public function setAppointment(Appointment $appointment = null)
     {
@@ -465,16 +520,13 @@ class Valuation
 
         if ($appointment) {
             $this->vehicleModel = $appointment->getVehicleModel();
-            $this->vehicleYear = $appointment->getVehicleYear();
-            $this->vehicleModelType = $appointment->getVehicleModelType();
             $this->vehicleMileage = $appointment->getVehicleMileage();
-            $this->vehicleColor = $appointment->getVehicleColor();
+            $this->vehicleModelType = $appointment->getVehicleModelType();
             $this->vehicleBodyCondition = $appointment->getVehicleBodyCondition();
-            $this->name = $appointment->getName();
-            $this->emailAddress = $appointment->getEmailAddress();
-            $this->mobileNumber = $appointment->getMobileNumber();
-
-            $this->appointment->setValuation($this);
+            $this->vehicleColor = $appointment->getVehicleColor();
+            $this->vehicleYear = $appointment->getVehicleYear();
+            $this->vehicleTransmission = $appointment->getVehicleTransmission();
+            $this->vehicleSpecifications = $appointment->getVehicleSpecifications();
         }
 
         return $this;
@@ -491,120 +543,74 @@ class Valuation
     }
 
     /**
-     * Set priceOnline.
+     * Set createdBy.
      *
-     * @param string $priceOnline
+     * @param User $createdBy
      *
-     * @return Valuation
+     * @return Inspection
      */
-    public function setPriceOnline($priceOnline)
+    public function setCreatedBy(User $createdBy)
     {
-        $this->priceOnline = $priceOnline;
+        $this->createdBy = $createdBy;
 
         return $this;
     }
 
     /**
-     * Get priceOnline.
+     * Get createdBy.
+     *
+     * @return User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set deal.
+     *
+     * @param Deal $deal
+     *
+     * @return Inspection
+     */
+    public function setDeal(Deal $deal = null)
+    {
+        $this->deal = $deal;
+
+        return $this;
+    }
+
+    /**
+     * Get deal.
+     *
+     * @return Deal
+     */
+    public function getDeal()
+    {
+        return $this->deal;
+    }
+
+    /**
+     * Set status.
+     *
+     * @param string $status
+     *
+     * @return Inspection
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status.
      *
      * @return string
      */
-    public function getPriceOnline()
+    public function getStatus()
     {
-        return $this->priceOnline;
-    }
-
-    /**
-     * Set priceInspection.
-     *
-     * @param string $priceInspection
-     *
-     * @return Valuation
-     */
-    public function setPriceInspection($priceInspection)
-    {
-        $this->priceInspection = $priceInspection;
-
-        return $this;
-    }
-
-    /**
-     * Get priceInspection.
-     *
-     * @return string
-     */
-    public function getPriceInspection()
-    {
-        return $this->priceInspection;
-    }
-
-    /**
-     * Set priceExpected.
-     *
-     * @param string $priceExpected
-     *
-     * @return Valuation
-     */
-    public function setPriceExpected($priceExpected)
-    {
-        $this->priceExpected = $priceExpected;
-
-        return $this;
-    }
-
-    /**
-     * Get priceExpected.
-     *
-     * @return string
-     */
-    public function getPriceExpected()
-    {
-        return $this->priceExpected;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->getId() ? (string) $this->getId() : '';
-    }
-
-    /**
-     * @return Make
-     */
-    public function getVehicleMake()
-    {
-        if (!$this->vehicleMake && $this->vehicleModel) {
-            $this->vehicleMake = $this->vehicleModel->getMake();
-        }
-
-        return $this->vehicleMake;
-    }
-
-    /**
-     * @param Make $vehicleMake
-     *
-     * @return $this
-     */
-    public function setVehicleMake(Make $vehicleMake)
-    {
-        $this->vehicleMake = $vehicleMake;
-
-        return $this;
-    }
-
-    /**
-     * Has Appointment.
-     *
-     * @return bool
-     */
-    public function hasAppointment()
-    {
-        if ($this->appointment !== null) {
-            return true;
-        }
-
-        return false;
+        return $this->status;
     }
 }
