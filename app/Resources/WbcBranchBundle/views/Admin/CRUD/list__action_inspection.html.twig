@@ -1,0 +1,7 @@
+{% if object.status == 'checked-in'%}
+    <a href="{{ path('admin_wbc_branch_appointment_generateInspection', {id: object.id}) }}"
+       class="btn btn-sm btn-danger view_link convert-to-inspection"
+       title="Convert to Inspection">
+        Convert to Inspection
+    </a>
+{% endif %}

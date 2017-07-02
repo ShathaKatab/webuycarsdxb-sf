@@ -48,6 +48,8 @@ class Version20170626191132 extends AbstractMigration implements ContainerAwareI
         $this->addSql('ALTER TABLE inspection ADD CONSTRAINT FK_F9F13485B03A8386 FOREIGN KEY (created_by_id) REFERENCES fos_user (id)');
         $this->addSql('ALTER TABLE valuation DROP price_inspection, DROP price_expected');
         $this->addSql('UPDATE appointment SET status = "new" WHERE status = "active"');
+        $this->addSql('ALTER TABLE deal ADD name VARCHAR(100) NOT NULL, ADD mobile_number VARCHAR(15) NOT NULL, ADD email_address VARCHAR(100) NOT NULL');
+        $this->addSql('ALTER TABLE deal ADD updated_at DATETIME NOT NULL');
     }
 
     public function postUp(Schema $schema)

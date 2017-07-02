@@ -32,6 +32,36 @@ class Deal
     protected $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=100)
+     *
+     * @Assert\NotBlank()
+     *
+     * @Serializer\Expose()
+     */
+    protected $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mobile_number", type="string", length=15)
+     *
+     * @Assert\NotBlank()
+     */
+    protected $mobileNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email_address", type="string", length=100)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     */
+    protected $emailAddress;
+
+    /**
      * @var Inspection
      *
      * @ORM\OneToOne(targetEntity="Wbc\BranchBundle\Entity\Inspection", inversedBy="deal")
@@ -78,13 +108,24 @@ class Deal
     protected $createdAt;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     *
+     * @Gedmo\Timestampable(on="update")
+     *
+     * @Serializer\Expose()
+     */
+    protected $updatedAt;
+
+    /**
      * Deal Constructor.
      *
      * @param Inspection $inspection
      */
     public function __construct(Inspection $inspection = null)
     {
-        $this->inspection = $inspection;
+        $this->setInspection($inspection);
     }
 
     /**
@@ -156,6 +197,16 @@ class Deal
     {
         $this->inspection = $inspection;
 
+        if ($inspection) {
+            $appointment = $inspection->getAppointment();
+
+            if ($appointment) {
+                $this->name = $appointment->getName();
+                $this->emailAddress = $appointment->getEmailAddress();
+                $this->mobileNumber = $appointment->getMobileNumber();
+            }
+        }
+
         return $this;
     }
 
@@ -191,5 +242,206 @@ class Deal
     public function getCreatedBy()
     {
         return $this->createdBy;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
+     * @return Deal
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set mobileNumber.
+     *
+     * @param string $mobileNumber
+     *
+     * @return Deal
+     */
+    public function setMobileNumber($mobileNumber)
+    {
+        $this->mobileNumber = $mobileNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get mobileNumber.
+     *
+     * @return string
+     */
+    public function getMobileNumber()
+    {
+        return $this->mobileNumber;
+    }
+
+    /**
+     * Set emailAddress.
+     *
+     * @param string $emailAddress
+     *
+     * @return Deal
+     */
+    public function setEmailAddress($emailAddress)
+    {
+        $this->emailAddress = $emailAddress;
+
+        return $this;
+    }
+
+    /**
+     * Get emailAddress.
+     *
+     * @return string
+     */
+    public function getEmailAddress()
+    {
+        return $this->emailAddress;
+    }
+
+    /**
+     * Gets Appointment.
+     *
+     * @return Appointment
+     */
+    public function getAppointment()
+    {
+        if ($this->inspection) {
+            return $this->inspection->getAppointment();
+        }
+    }
+
+    /**
+     * Gets Timing String.
+     *
+     * @return string
+     */
+    public function getTimingString()
+    {
+        $appointment = $this->getAppointment();
+
+        if ($appointment) {
+            return $appointment->getBranchTiming()->getTimingString();
+        }
+    }
+
+    /**
+     * Gets date booked.
+     *
+     * @return string
+     */
+    public function getDateBookedString()
+    {
+        $appointment = $this->getAppointment();
+
+        if ($appointment) {
+            return $appointment->getDateBooked()->format('M d, Y');
+        }
+    }
+
+    public function getAppointmentName()
+    {
+        $appointment = $this->getAppointment();
+
+        if ($appointment) {
+            return $appointment->getName();
+        }
+    }
+
+    public function getAppointmentMobileNumber()
+    {
+        $appointment = $this->getAppointment();
+        if ($appointment) {
+            return $appointment->getMobileNumber();
+        }
+    }
+
+    public function getAppointmentEmailAddress()
+    {
+        $appointment = $this->getAppointment();
+        if ($appointment) {
+            return $appointment->getEmailAddress();
+        }
+    }
+
+    public function getAppointmentBranch()
+    {
+        $appointment = $this->getAppointment();
+        if ($appointment) {
+            return $appointment->getBranch();
+        }
+    }
+
+    public function getAppointmentDayBooked()
+    {
+        $appointment = $this->getAppointment();
+        if ($appointment) {
+            return $appointment->getDayBooked();
+        }
+    }
+
+    public function getAppointmentDateBooked()
+    {
+        $appointment = $this->getAppointment();
+        if ($appointment) {
+            return $appointment->getDateBooked();
+        }
+    }
+
+    public function getAppointmentBranchTiming()
+    {
+        $appointment = $this->getAppointment();
+        if ($appointment) {
+            return $appointment->getBranchTiming();
+        }
+    }
+
+    public function getAppointmentNotes()
+    {
+        $appointment = $this->getAppointment();
+        if ($appointment) {
+            return $appointment->getNotes();
+        }
+    }
+
+    /**
+     * Set updatedAt.
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Deal
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt.
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

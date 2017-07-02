@@ -29,6 +29,7 @@ class Appointment
     const STATUS_CANCELLED = 'cancelled';
     const STATUS_INVALID_CONTACT = 'invalid_contact';
     const STATUS_CALLBACK = 'callback';
+    const STATUS_CHECKED_IN = 'checked-in';
 
     /**
      * @var int
@@ -562,6 +563,7 @@ class Appointment
             self::STATUS_CANCELLED => 'Cancelled',
             self::STATUS_INVALID_CONTACT => 'Invalid Contact',
             self::STATUS_CALLBACK => 'Call Back',
+            self::STATUS_CHECKED_IN => 'Checked In',
         ];
     }
 
@@ -895,5 +897,27 @@ class Appointment
     public function getSmsTimingString()
     {
         return sprintf('%s @ "%s"', $this->dateBooked->format('d/m/y'), $this->branchTiming->getTimingString());
+    }
+
+    /**
+     * Gets online price.
+     *
+     * @return float
+     */
+    public function getPriceOnline()
+    {
+        if ($this->valuation) {
+            return $this->valuation->getPriceOnline();
+        }
+    }
+
+    /**
+     * Gets day booked.
+     *
+     * @return int
+     */
+    public function getDayBooked()
+    {
+        return $this->branchTiming->getDayBooked();
     }
 }

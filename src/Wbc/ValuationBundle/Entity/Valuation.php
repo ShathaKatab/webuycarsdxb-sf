@@ -5,11 +5,11 @@ namespace Wbc\ValuationBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
 use Wbc\VehicleBundle\Entity\ModelType;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Valuation.
@@ -176,6 +176,11 @@ class Valuation
         }
 
         $this->setAppointment($appointment);
+    }
+
+    public function __toString()
+    {
+        return $this->getId() ? (string) $this->getId() : '';
     }
 
     /**
@@ -493,13 +498,13 @@ class Valuation
     /**
      * Set priceOnline.
      *
-     * @param string $priceOnline
+     * @param float $priceOnline
      *
      * @return Valuation
      */
     public function setPriceOnline($priceOnline)
     {
-        $this->priceOnline = $priceOnline;
+        $this->priceOnline = (float) $priceOnline;
 
         return $this;
     }
@@ -507,67 +512,11 @@ class Valuation
     /**
      * Get priceOnline.
      *
-     * @return string
+     * @return float
      */
     public function getPriceOnline()
     {
-        return $this->priceOnline;
-    }
-
-    /**
-     * Set priceInspection.
-     *
-     * @param string $priceInspection
-     *
-     * @return Valuation
-     */
-    public function setPriceInspection($priceInspection)
-    {
-        $this->priceInspection = $priceInspection;
-
-        return $this;
-    }
-
-    /**
-     * Get priceInspection.
-     *
-     * @return string
-     */
-    public function getPriceInspection()
-    {
-        return $this->priceInspection;
-    }
-
-    /**
-     * Set priceExpected.
-     *
-     * @param string $priceExpected
-     *
-     * @return Valuation
-     */
-    public function setPriceExpected($priceExpected)
-    {
-        $this->priceExpected = $priceExpected;
-
-        return $this;
-    }
-
-    /**
-     * Get priceExpected.
-     *
-     * @return string
-     */
-    public function getPriceExpected()
-    {
-        return $this->priceExpected;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->getId() ? (string) $this->getId() : '';
+        return (float) ($this->priceOnline);
     }
 
     /**

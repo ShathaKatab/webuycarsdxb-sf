@@ -2,11 +2,15 @@
 
 namespace Wbc\BranchBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration as CF;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\Branch;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration as CF;
+use Wbc\BranchBundle\Entity\Deal;
+use Wbc\BranchBundle\Entity\Inspection;
 
 /**
  * Class CRUDController.
@@ -62,5 +66,44 @@ class CRUDController extends Controller
             $this->get('doctrine.orm.default_entity_manager')
                 ->getRepository('WbcBranchBundle:Timing')
                 ->findAllByBranchAndDay($branch, $request->get('day')), 'json'));
+    }
+
+    /**
+     * Generates an Inspection from an Appointment.
+     *
+     * @CF\ParamConverter("appointment", class="WbcBranchBundle:Appointment")
+     *
+     * @param Appointment $appointment
+     *
+     * @return Response
+     */
+    public function generateInspectionAction(Appointment $appointment)
+    {
+        $entityManager = $this->get('doctrine.orm.default_entity_manager');
+        $inspection = new Inspection($appointment);
+        $inspection->setCreatedBy($this->getUser());
+        $entityManager->persist($inspection);
+        $entityManager->flush();
+
+        return new RedirectResponse($this->generateUrl('admin_wbc_branch_inspection_edit', ['id' => $inspection->getId()]));
+    }
+
+    /**
+     * Generates a Deal from an Inspection.
+     *
+     * @CF\ParamConverter("inspection", class="WbcBranchBundle:Inspection")
+     *
+     * @param Inspection $inspection
+     *
+     * @return Response
+     */
+    public function generateDealAction(Inspection $inspection)
+    {
+        $entityManager = $this->get('doctrine.orm.default_entity_manager');
+        $deal = new Deal($inspection);
+        $deal->setCreatedBy($this->getUser());
+        $entityManager->persist($deal);
+        $entityManager->flush();
+        return new RedirectResponse($this->generateUrl('admin_wbc_branch_deal_edit', ['id' => $deal->getId()]));
     }
 }

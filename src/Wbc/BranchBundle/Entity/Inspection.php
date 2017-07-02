@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wbc\UserBundle\Entity\User;
+use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
 use Wbc\VehicleBundle\Entity\ModelType;
 
@@ -484,6 +485,18 @@ class Inspection
     }
 
     /**
+     * Gets vehicle make.
+     *
+     * @return Make
+     */
+    public function getVehicleMake()
+    {
+        if ($this->vehicleModel) {
+            return $this->vehicleModel->getMake();
+        }
+    }
+
+    /**
      * Set vehicleModelType.
      *
      * @param ModelType $vehicleModelType
@@ -612,5 +625,52 @@ class Inspection
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Gets online valuation price.
+     *
+     * @return float
+     */
+    public function getPriceOnline()
+    {
+        if ($this->appointment) {
+            $valuation = $this->appointment->getValuation();
+
+            if ($valuation) {
+                return $valuation->getPriceOnline();
+            }
+        }
+    }
+
+    /**
+     * Gets timing string.
+     *
+     * @return string
+     */
+    public function getTimingString()
+    {
+        if ($this->appointment) {
+            $timing = $this->appointment->getBranchTiming();
+
+            if ($timing) {
+                return $timing->getTimingString();
+            }
+        }
+    }
+
+    /**
+     * Gets statuses.
+     *
+     * @return array
+     */
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_NEW => 'New',
+            self::STATUS_OFFER_ACCEPTED => 'Offer Accepted',
+            self::STATUS_OFFER_REJECTED => 'Offer Rejected',
+            self::STATUS_INVALID => 'Invalid',
+        ];
     }
 }
