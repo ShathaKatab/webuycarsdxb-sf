@@ -44,7 +44,8 @@ class TwilioManager
      * @DI\InjectParams({
      * "sid" = @DI\Inject("%twilio_sid%"),
      * "token" = @DI\Inject("%twilio_token%"),
-     * "fromNumber" = @DI\Inject("%twilio_from_number%")
+     * "fromNumber" = @DI\Inject("%twilio_from_number%"),
+     * "kernel" = @DI\Inject("kernel")
      * })
      *
      * @param $sid

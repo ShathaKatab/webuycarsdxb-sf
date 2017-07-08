@@ -1,0 +1,16 @@
+<p>Hello,</p>
+
+<p>You have received a new Valuation from {{ site_title }} as below:</p>
+<p>
+    <strong>Name:</strong> {{ valuation.name }} <br>
+    <strong>Mobile Number:</strong> {{ valuation.mobileNumber }} <br>
+    <strong>Vehicle Make:</strong> {{ valuation.vehicleModel.make.name }} <br>
+    <strong>Vehicle Model:</strong> {{ valuation.vehicleModel.name }} <br>
+    <strong>Vehicle Year:</strong> {{ valuation.vehicleYear }} <br>
+    <strong>Vehicle Mileage:</strong> {{ valuation.vehicleMileage }} <br>
+    <strong>Price Online:</strong> AED {{ valuation.priceOnline|number_format }} <br>
+    <strong>Created At:</strong> {{ valuation.createdAt|date }}
+</p>
+{{ app.request.getSchemeAndHttpHost() ~ path('admin_wbc_valuation_valuation_list') }}
+<p>Regards,</p>
+<h3>{{ site_title }}</h3>

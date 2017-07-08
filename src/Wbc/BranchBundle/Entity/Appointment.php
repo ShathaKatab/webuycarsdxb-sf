@@ -30,6 +30,7 @@ class Appointment
     const STATUS_INVALID_CONTACT = 'invalid_contact';
     const STATUS_CALLBACK = 'callback';
     const STATUS_CHECKED_IN = 'checked-in';
+    const STATUS_DUPLICATE = 'duplicate';
 
     /**
      * @var int
@@ -564,6 +565,7 @@ class Appointment
             self::STATUS_INVALID_CONTACT => 'Invalid Contact',
             self::STATUS_CALLBACK => 'Call Back',
             self::STATUS_CHECKED_IN => 'Checked In',
+            self::STATUS_DUPLICATE => 'Duplicate',
         ];
     }
 

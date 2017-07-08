@@ -88,7 +88,7 @@ class UserAdmin extends AbstractAdmin
             'required' => false,
         ])
             ->add('roles', ChoiceType::class, [
-                'choices' => ['ROLE_SUPER_ADMIN' => 'Super Admin', 'ROLE_BUYER' => 'Buyer'],
+                'choices' => ['ROLE_SUPER_ADMIN' => 'Super Admin', 'ROLE_BUYER' => 'Buyer', 'ROLE_APPOINTMENT_SMS' => 'Appointment SMS'],
                 'expanded' => false,
                 'multiple' => true,
                 'required' => false,

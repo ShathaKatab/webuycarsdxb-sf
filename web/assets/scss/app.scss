@@ -79,11 +79,6 @@
   padding: 94px 30px;
 }
 
-#book-appointment-button-container{
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
-
 #appointment-confirmation-map-container{
   padding-top: ($line-height-computed + 90);
 }
@@ -102,6 +97,11 @@
 
 #second-row-container{
   margin-top: 10px;
+}
+
+.book-appointment-button-container {
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .img-responsive {

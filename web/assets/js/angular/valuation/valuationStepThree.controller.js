@@ -4,8 +4,8 @@
 
 angular
     .module('webuycarsApp')
-    .controller('ValuationStepThreeController', ['$scope', '$filter', '$document', '$window', 'NgMap', 'BranchTiming', 'Appointment',
-        function ($scope, $filter, $document, $window, NgMap, BranchTiming, Appointment) {
+    .controller('ValuationStepThreeController', ['$scope', '$filter', '$document', '$window', '$location', '$anchorScroll', 'NgMap', 'BranchTiming', 'Appointment',
+        function ($scope, $filter, $document, $window, $location, $anchorScroll, NgMap, BranchTiming, Appointment) {
             var vm = this;
             var defaultLat = 25.206497;
             var defaultLng = 55.268743;
@@ -171,6 +171,13 @@ angular
 
                         alert('Error: Unable to create an Appointment');
                     });
+                }else{
+                    vm.scrollTo('pick-a-branch');
                 }
+            };
+
+            vm.scrollTo = function(hash){
+                $location.hash(hash);
+                $anchorScroll();
             };
         }]);

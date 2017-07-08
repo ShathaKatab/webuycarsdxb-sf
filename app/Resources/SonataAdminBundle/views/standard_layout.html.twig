@@ -382,6 +382,10 @@ file that was distributed with this source code.
                 return;
             }
         });
+
+        $('.sonata-toggle-filter').on('click', function(e){
+            $('.dropdown.sonata-actions.open .dropdown-toggle').dropdown('toggle');
+        });
     })
 </script>
 

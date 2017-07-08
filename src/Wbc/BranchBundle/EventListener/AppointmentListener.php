@@ -2,18 +2,18 @@
 
 namespace Wbc\BranchBundle\EventListener;
 
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Wbc\UserBundle\Entity\User;
-use Wbc\UtilityBundle\TwilioManager;
-use Wbc\BranchBundle\BranchEvents;
-use Wbc\BranchBundle\Events\AppointmentEvent;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use JMS\DiExtraBundle\Annotation as DI;
+use Symfony\Bundle\TwigBundle\TwigEngine;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Wbc\BranchBundle\BranchEvents;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\AppointmentDetails;
-use Doctrine\ORM\EntityManager;
-use Symfony\Bundle\TwigBundle\TwigEngine;
+use Wbc\BranchBundle\Events\AppointmentEvent;
+use Wbc\UserBundle\Entity\User;
+use Wbc\UtilityBundle\TwilioManager;
 use Wbc\ValuationBundle\Entity\Valuation;
 
 /**
@@ -159,7 +159,26 @@ class AppointmentListener
         }
 
         if ($object->getBranch() && $object->getSmsTimingString() && $object->getName()) {
-            $this->smsManager->sendSms($object->getMobileNumber(), $this->templating->render('WbcBranchBundle::appointmentSms.txt.twig', ['appointment' => $object, 'siteDomain' => 'WEBUYCARSDXB.COM']));
+            $this->smsManager->sendSms($object->getMobileNumber(),
+                $this->templating->render('WbcBranchBundle::appointmentSms.txt.twig', [
+                    'appointment' => $object,
+                    'siteDomain' => 'WEBUYCARSDXB.COM',
+                ]));
+
+            $queryBuilder = $this->entityManager->createQueryBuilder();
+            $queryBuilder->select('u')
+                ->from('WbcUserBundle:User', 'u')
+                ->where($queryBuilder->expr()->like('u.roles', $queryBuilder->expr()->literal('%ROLE_APPOINTMENT_SMS%')));
+            $roleAppointmentSmsUsers = $queryBuilder->getQuery()->getResult();
+
+            foreach ($roleAppointmentSmsUsers as $user) {
+                $profile = $user->getProfile();
+
+                if ($profile) {
+                    $this->smsManager->sendSms($profile->getMobileNumber(),
+                        $this->templating->render('WbcBranchBundle:Admin:appointmentSms.txt.twig', ['appointment' => $object]));
+                }
+            }
         }
     }
 

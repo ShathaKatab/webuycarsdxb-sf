@@ -55,6 +55,17 @@ class InspectionAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
+    public function getDataSourceIterator()
+    {
+        $iterator = parent::getDataSourceIterator();
+        $iterator->setDateTimeFormat('M d, Y');
+
+        return $iterator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var $subject \Wbc\BranchBundle\Entity\Inspection */

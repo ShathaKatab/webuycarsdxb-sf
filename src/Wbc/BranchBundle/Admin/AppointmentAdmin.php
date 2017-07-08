@@ -44,6 +44,8 @@ class AppointmentAdmin extends AbstractAdmin
             case 'create':
             case 'edit':
                 return 'WbcBranchBundle:Admin:edit.html.twig';
+            case 'base_list_field':
+                return 'WbcBranchBundle:Admin:base_list_field.html.twig';
             default:
                 return parent::getTemplate($name);
         }
@@ -51,7 +53,18 @@ class AppointmentAdmin extends AbstractAdmin
 
     public function getExportFields()
     {
-        return ['id', 'name', 'mobileNumber', 'vehicleMake', 'vehicleModel', 'vehicleYear', 'valuation.priceOnline', 'dateBooked', 'branchTiming', 'createdAt', 'createdBy'];
+        return ['name', 'mobileNumber', 'vehicleMake', 'vehicleModel', 'vehicleYear', 'valuation.priceOnline', 'dateBooked', 'branchTiming', 'createdAt', 'createdBy'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataSourceIterator()
+    {
+        $iterator = parent::getDataSourceIterator();
+        $iterator->setDateTimeFormat('M d, Y');
+
+        return $iterator;
     }
 
     /**
@@ -276,7 +289,7 @@ class AppointmentAdmin extends AbstractAdmin
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
-                    'inspection' => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_inspection.html.twig',],
+                    'inspection' => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_inspection.html.twig'],
                 ], ]);
     }
 
@@ -327,6 +340,6 @@ class AppointmentAdmin extends AbstractAdmin
         $collection->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
-            ->add('generateInspection', $this->getRouterIdParameter() . '/generateInspection');
+            ->add('generateInspection', $this->getRouterIdParameter().'/generateInspection');
     }
 }

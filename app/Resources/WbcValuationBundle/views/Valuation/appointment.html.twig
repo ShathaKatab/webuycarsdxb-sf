@@ -25,6 +25,13 @@
     <section ng-controller="ValuationStepThreeController as ctrl"
              ng-init="ctrl.branches={{ getBranches()|serialize }}; ctrl.valuationId = '{{ valuation.id }}'">
         <div class="container">
+            <div class="row visible-xs-block visible-sm-block">
+                <div class="book-appointment-button-container col-md-5">
+                    <button ng-click="ctrl.triggerFormSubmit()" class="btn btn-lg btn-primary">
+                        Book an Appointment and Get Paid
+                    </button>
+                </div>
+            </div>
             <div class="row">
                 <div id="book-appointment-form" class="col-md-6 bg-grey">
                     <div class="row">
@@ -39,7 +46,7 @@
                                       method="post"
                                       class="form-horizontal" novalidate>
                                     <div class="form-group">
-                                        <label class="col-md-5">Pick a Branch</label>
+                                        <label id="pick-a-branch" class="col-md-5">Pick a Branch</label>
 
                                         <div class="col-md-7">
                                             <select ng-model="ctrl.selectedBranch"
@@ -100,6 +107,13 @@
                                         </div>
                                     </div>
                                 </form>
+                                <div class="row">
+                                    <div class="book-appointment-button-container col-md-10 col-md-offset-1">
+                                        <button ng-click="ctrl.triggerFormSubmit()" class="btn btn-lg btn-primary">
+                                            Book an Appointment and Get Paid
+                                        </button>
+                                    </div>
+                                </div>
                             </ng-cloak>
                         </div>
                     </div>
@@ -112,7 +126,7 @@
                 </div>
             </div>
             <div class="row">
-                <div id="book-appointment-button-container" class="col-md-4 col-md-offset-4">
+                <div class="book-appointment-button-container col-md-4 col-md-offset-4">
                     <button ng-click="ctrl.triggerFormSubmit()" class="btn btn-lg btn-primary">Book an Appointment and Get Paid</button>
                 </div>
             </div>

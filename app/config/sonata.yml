@@ -46,6 +46,7 @@ sonata_admin:
 
     title: "WeBuyCars Admin"
     title_logo: /images/admin-logo.png
+    persist_filters: true
 
 services:
     admin.branch.appointment:

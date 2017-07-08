@@ -1,0 +1,7 @@
+Name: {{ appointment.name }}
+Mobile: {{ appointment.mobileNumber }}
+Make: {{ appointment.vehicleModel.make.name }}
+Model: {{ appointment.vehicleModel.name }}
+Year: {{ appointment.vehicleYear }}
+Timing: {{ appointment.smsTimingString }}
+{{ app.request.getSchemeAndHttpHost() ~ path('admin_wbc_branch_appointment_list') }}

@@ -74,3 +74,4 @@ parameters:
     twilio_token: ''
     twilio_from_number: ''
     tech_email: 'developer@webuycarsdxb.com'
+    valuation_emails: [sultanasad@mail.com]

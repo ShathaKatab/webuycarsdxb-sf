@@ -29,6 +29,25 @@ class ValuationAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
+    public function getExportFields()
+    {
+        return ['name', 'mobileNumber', 'emailAddress', 'vehicleMake', 'vehicleModel', 'vehicleMileage', 'priceOnline', 'hasAppointment', 'createdAt'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDataSourceIterator()
+    {
+        $iterator = parent::getDataSourceIterator();
+        $iterator->setDateTimeFormat('M d, Y');
+
+        return $iterator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $now = new \DateTime();
@@ -51,7 +70,7 @@ class ValuationAdmin extends AbstractAdmin
                         return;
                     }
 
-                    $theValue = boolval($value['value']);
+                    $theValue = (bool) ($value['value']);
 
                     if ($theValue === true) {
                         $queryBuilder->innerJoin($alias.'.appointment', 'appointment')
@@ -75,12 +94,12 @@ class ValuationAdmin extends AbstractAdmin
                 'label' => 'Date Created At',
                 'field_type' => 'sonata_type_date_range_picker',
                 'start_options' => [
-                    'years' => range($now->format('Y'), intval($now->format('Y')) + 1),
+                    'years' => range($now->format('Y'), (int) ($now->format('Y')) + 1),
                     'dp_min_date' => (new \DateTime('-1 month'))->format('d/M/Y'),
                     'dp_max_date' => (new \DateTime('+1 month'))->format('d/M/Y'),
                     'dp_default_date' => $now->format('m/d/Y'), ],
                 'end_options' => [
-                    'years' => range($now->format('Y'), intval($now->format('Y')) + 1),
+                    'years' => range($now->format('Y'), (int) ($now->format('Y')) + 1),
                     'dp_min_date' => (new \DateTime('-1 month'))->format('d/M/Y'),
                     'dp_max_date' => (new \DateTime('+1 month'))->format('d/M/Y'),
                     'dp_default_date' => $now->format('m/d/Y'),
@@ -122,6 +141,7 @@ class ValuationAdmin extends AbstractAdmin
             ->add('emailAddress')
             ->add('vehicleModel.make')
             ->add('vehicleModel.name')
+            ->add('vehicleModelType.name')
             ->add('vehicleYear')
             ->add('vehicleMileage', null, ['label' => 'Mileage (Kms)'])
             ->add('vehicleBodyCondition', 'choice', ['choices' => ConditionType::getConditions()])
@@ -136,13 +156,5 @@ class ValuationAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create')->remove('delete')->remove('edit')->add('generateAppointment', $this->getRouterIdParameter().'/generateAppointment');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getExportFields()
-    {
-        return ['id', 'name', 'mobileNumber', 'emailAddress', 'vehicleMake', 'vehicleModel', 'vehicleMileage', 'priceOnline', 'hasAppointment', 'createdAt'];
     }
 }
