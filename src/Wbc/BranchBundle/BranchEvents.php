@@ -10,4 +10,5 @@ namespace Wbc\BranchBundle;
 final class BranchEvents
 {
     const BEFORE_APPOINTMENT_CREATE = 'before.appointment.create';
+    const ON_APPOINTMENT_GENERATE_INSPECTION = 'on.appointment.generate.inspection';
 }

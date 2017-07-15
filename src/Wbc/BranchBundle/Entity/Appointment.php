@@ -2,6 +2,7 @@
 
 namespace Wbc\BranchBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
@@ -31,6 +32,7 @@ class Appointment
     const STATUS_CALLBACK = 'callback';
     const STATUS_CHECKED_IN = 'checked-in';
     const STATUS_DUPLICATE = 'duplicate';
+    const STATUS_INSPECTED = 'inspected';
 
     /**
      * @var int
@@ -247,6 +249,13 @@ class Appointment
     protected $notes;
 
     /**
+     * @var Inspection
+     *
+     * @ORM\OneToMany(targetEntity="\Wbc\BranchBundle\Entity\Inspection", mappedBy="appointment", fetch="EAGER")
+     */
+    protected $inspections;
+
+    /**
      * @var Branch
      */
     protected $branch;
@@ -275,6 +284,7 @@ class Appointment
     {
         $this->status = self::STATUS_NEW;
         $this->setValuation($valuation);
+        $this->inspections = new ArrayCollection();
     }
 
     /**
@@ -566,6 +576,7 @@ class Appointment
             self::STATUS_CALLBACK => 'Call Back',
             self::STATUS_CHECKED_IN => 'Checked In',
             self::STATUS_DUPLICATE => 'Duplicate',
+            self::STATUS_INSPECTED => 'Inspected',
         ];
     }
 
@@ -921,5 +932,59 @@ class Appointment
     public function getDayBooked()
     {
         return $this->branchTiming->getDayBooked();
+    }
+
+    /**
+     * Add inspection.
+     *
+     * @param Inspection $inspection
+     *
+     * @return Appointment
+     */
+    public function addInspection(Inspection $inspection)
+    {
+        $this->inspections[] = $inspection;
+
+        return $this;
+    }
+
+    /**
+     * Remove inspection.
+     *
+     * @param Inspection $inspection
+     */
+    public function removeInspection(Inspection $inspection)
+    {
+        $this->inspections->removeElement($inspection);
+    }
+
+    /**
+     * Get inspections.
+     *
+     * @return ArrayCollection
+     */
+    public function getInspections()
+    {
+        return $this->inspections;
+    }
+
+    /**
+     * Checks whether there are inspections.
+     *
+     * @return bool
+     */
+    public function hasInspections()
+    {
+        return (bool) ($this->inspections->count());
+    }
+
+    /**
+     * Gets first inspection.
+     *
+     * @return Inspection|null
+     */
+    public function getInspection()
+    {
+        return $this->inspections->first();
     }
 }

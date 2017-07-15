@@ -327,7 +327,7 @@ class InspectionAdmin extends AbstractAdmin
             ->add('priceOnline', null, ['label' => 'Online Price (AED)'])
             ->add('priceOffered', null, ['label' => 'Offered Price (AED)'])
             ->add('priceExpected', null, ['label' => 'Expected Price (AED)'])
-            ->add('status', ChoiceType::class, ['choices' => Inspection::getStatuses()])
+            ->add('status', 'choice', ['choices' => Inspection::getStatuses()])
             ->end()
             ->with('Vehicle Details')
             ->add('vehicleYear')

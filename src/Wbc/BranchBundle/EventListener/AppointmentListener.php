@@ -196,6 +196,22 @@ class AppointmentListener
         $this->updateAppointmentDetails($object, $args->getObjectManager());
     }
 
+    /**
+     * @DI\Observe(BranchEvents::ON_APPOINTMENT_GENERATE_INSPECTION)
+     *
+     * @param AppointmentEvent $event
+     */
+    public function onAppointmentGenerateInspection(AppointmentEvent $event)
+    {
+        $appointment = $event->getAppointment();
+        $appointment->setStatus(Appointment::STATUS_INSPECTED);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @param Appointment   $appointment
+     * @param ObjectManager $objectManager
+     */
     private function updateAppointmentDetails(Appointment $appointment, ObjectManager $objectManager)
     {
         $details = $appointment->getDetails();

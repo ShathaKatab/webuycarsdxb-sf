@@ -1,4 +1,4 @@
-<td class="{% if object.status=='cancelled' %}bg-danger{% endif %} {% if object.status=='confirmed' %}bg-success{% endif %} sonata-ba-list-field sonata-ba-list-field-{{ field_description.type }}"
+<td class="{% if object.status=='inspected' %}bg-warning{% endif %} {% if object.status=='cancelled' %}bg-danger{% endif %} {% if object.status=='confirmed' %}bg-success{% endif %} sonata-ba-list-field sonata-ba-list-field-{{ field_description.type }}"
     objectId="{{ admin.id(object) }}"{% if field_description.options.row_align is defined %} style="text-align:{{ field_description.options.row_align }}"{% endif %}>
     {% set route = field_description.options.route.name|default(null) %}
 

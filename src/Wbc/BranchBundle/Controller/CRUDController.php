@@ -7,10 +7,12 @@ use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Wbc\BranchBundle\BranchEvents;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\Branch;
 use Wbc\BranchBundle\Entity\Deal;
 use Wbc\BranchBundle\Entity\Inspection;
+use Wbc\BranchBundle\Events\AppointmentEvent;
 
 /**
  * Class CRUDController.
@@ -85,6 +87,9 @@ class CRUDController extends Controller
         $entityManager->persist($inspection);
         $entityManager->flush();
 
+        $this->get('event_dispatcher')
+            ->dispatch(BranchEvents::ON_APPOINTMENT_GENERATE_INSPECTION, new AppointmentEvent($appointment));
+
         return new RedirectResponse($this->generateUrl('admin_wbc_branch_inspection_edit', ['id' => $inspection->getId()]));
     }
 
@@ -104,6 +109,7 @@ class CRUDController extends Controller
         $deal->setCreatedBy($this->getUser());
         $entityManager->persist($deal);
         $entityManager->flush();
+
         return new RedirectResponse($this->generateUrl('admin_wbc_branch_deal_edit', ['id' => $deal->getId()]));
     }
 }

@@ -132,7 +132,7 @@ class Inspection
     /**
      * @var Appointment
      *
-     * @ORM\ManyToOne(targetEntity="\Wbc\BranchBundle\Entity\Appointment")
+     * @ORM\ManyToOne(targetEntity="\Wbc\BranchBundle\Entity\Appointment", inversedBy="inspections")
      * @ORM\JoinColumn(name="appointment_id", referencedColumnName="id")
      */
     protected $appointment;

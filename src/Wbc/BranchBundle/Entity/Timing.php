@@ -3,8 +3,8 @@
 namespace Wbc\BranchBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as Serializer;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wbc\BranchBundle\Form\DayType;
 
@@ -133,6 +133,11 @@ class Timing
         $this->branch = $branch;
         $this->dayBooked = $dayBooked;
         $this->from = $from;
+    }
+
+    public function __toString()
+    {
+        return $this->getName() ?: '';
     }
 
     /**
@@ -304,14 +309,6 @@ class Timing
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function __toString()
-    {
-        return $this->getName() ?: '';
-    }
-
-    /**
      * @Serializer\VirtualProperty
      * @Serializer\SerializedName("name")
      *
@@ -319,7 +316,7 @@ class Timing
      */
     public function getName()
     {
-        if ($this->branch && !is_null($this->dayBooked) && !is_null($this->from) && !is_null($this->to)) {
+        if ($this->branch && null !== $this->dayBooked && null !== $this->from && null !== $this->to) {
             return sprintf('%s - %s (%s - %s)', $this->branch->getName(), DayType::getDays()[$this->dayBooked], $this->from, $this->to);
         }
     }
@@ -332,7 +329,7 @@ class Timing
      */
     public function getShortName()
     {
-        if (!is_null($this->dayBooked) && !is_null($this->from) && !is_null($this->to)) {
+        if (null !== $this->dayBooked && null !== $this->from && null !== $this->to) {
             return sprintf('%s (%s - %s)', DayType::getDays()[$this->dayBooked], $this->from, $this->to);
         }
     }
@@ -354,7 +351,7 @@ class Timing
      */
     public function getTimingString()
     {
-        if (!is_null($this->from) && !is_null($this->to)) {
+        if (null !== $this->from && null !== $this->to) {
             return sprintf('%s - %s', self::formatIntegerToTimeString($this->from), self::formatIntegerToTimeString($this->to));
         }
     }
@@ -367,7 +364,9 @@ class Timing
     public static function formatIntegerToTimeString($integerTime)
     {
         if (is_int($integerTime)) {
-            return sprintf('%02d:%02d', intval($integerTime / 60), intval($integerTime % 60));
+            $timeString = sprintf('%02d:%02d', (int) ($integerTime / 60), (int) ($integerTime % 60));
+
+            return strtoupper((new \DateTime($timeString))->format('h:i a'));
         }
 
         return $integerTime;
@@ -380,6 +379,6 @@ class Timing
      */
     public static function formatDateTimeToInteger(\DateTime $dateTime)
     {
-        return intval($dateTime->format('H')) * 60 + intval($dateTime->format('i'));
+        return (int) ($dateTime->format('H')) * 60 + (int) ($dateTime->format('i'));
     }
 }
