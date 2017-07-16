@@ -173,21 +173,24 @@ class AppointmentAdmin extends AbstractAdmin
             ]);
         }
 
-        $formMapper->end()
-            ->with('')
-            ->add('valuation.priceOnline', null, [
-                'label' => 'Price Online (AED)',
-                'read_only' => true,
-                'disabled' => true,
-                'required' => false,
-            ])
-            ->add('status', ChoiceType::class, [
-                'choices' => Appointment::getStatuses(),
-                'empty_data' => Appointment::STATUS_NEW,
-            ])
-            ->add('notes', TextareaType::class, ['required' => false])
-            ->end()
-            ->end();
+        if ($subject->getValuation()) {
+            $formMapper->end()
+                ->with('')
+                ->add('valuation.priceOnline', null, [
+                    'label' => 'Price Online (AED)',
+                    'read_only' => true,
+                    'disabled' => true,
+                    'required' => false,
+                ])
+                ->add('status', ChoiceType::class, [
+                    'choices' => Appointment::getStatuses(),
+                    'empty_data' => Appointment::STATUS_NEW,
+                ])
+                ->add('notes', TextareaType::class, ['required' => false])
+                ->end();
+        }
+
+        $formMapper->end();
     }
 
     /**

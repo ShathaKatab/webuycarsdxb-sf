@@ -1,5 +1,5 @@
 {% if object.status == 'checked-in' or object.status == 'inspected' %}
-    {% if object.inspection is not null %}
+    {% if object.inspection is not null and object.inspection != false %}
         <a href="{{ path('admin_wbc_branch_inspection_show', {id: object.inspection.id}) }}"
            class="btn btn-sm btn-info view_link"
            title="Show Inspection">
