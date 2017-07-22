@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\Timing;
@@ -143,7 +144,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->with('Customer Details')
             ->add('name')
             ->add('mobileNumber')
-            ->add('emailAddress')
+            ->add('emailAddress', EmailType::class, ['required' => false])
             ->end()
             ->end()
             ->tab('Appointment Information')
