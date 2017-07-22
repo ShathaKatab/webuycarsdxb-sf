@@ -19,6 +19,14 @@ use JMS\Serializer\Annotation as Serializer;
 class ModelType
 {
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToOne(targetEntity="Wbc\VehicleBundle\Entity\Model", inversedBy="modelTypes")
+     * @ORM\JoinColumn(name="model_id", referencedColumnName="id")
+     * @Serializer\Expose()
+     */
+    protected $model;
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -27,15 +35,6 @@ class ModelType
      * @Serializer\Expose()
      */
     private $id;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToOne(targetEntity="Wbc\VehicleBundle\Entity\Model", inversedBy="modelTypes")
-     * @ORM\JoinColumn(name="model_id", referencedColumnName="id")
-     * @Serializer\Expose()
-     */
-    protected $model;
 
     /**
      * @var string
@@ -137,6 +136,13 @@ class ModelType
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
+
+    public function __toString()
+    {
+        $name = $this->getName();
+
+        return $name ?: '';
+    }
 
     /**
      * Get id.
@@ -503,16 +509,16 @@ class ModelType
      */
     public function getName()
     {
-        return sprintf('%s - %s - %s (%sL)', $this->trim, $this->bodyType, $this->transmission, number_format($this->engine/1000, 1));
+        return sprintf('%s - %s - %s (%sL)', $this->trim, $this->bodyType, $this->transmission, number_format($this->engine / 1000, 1));
     }
 
     /**
-     * {@inheritdoc}
+     * Returns flattened years for admin view.
+     *
+     * @return string
      */
-    public function __toString()
+    public function getFlattenedYears()
     {
-        return $this->getName();
+        return implode(',', $this->years);
     }
-
-
 }

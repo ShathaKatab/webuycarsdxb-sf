@@ -276,6 +276,8 @@ class AppointmentAdmin extends AbstractAdmin
      */
     protected function configureListFields(ListMapper $listMapper)
     {
+        $filterParams = $this->getFilterParameters();
+
         $listMapper->addIdentifier('id')
             ->add('name')
             ->add('mobileNumber', null, ['label' => 'Mobile'])
@@ -285,8 +287,24 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'editable' => true])
             ->add('valuation.priceOnline', 'currency', ['currency' => 'AED', 'label' => 'Online Valuation'])
             ->add('dateBooked')
-            ->add('branchTiming.timingString', null, ['label' => 'Timing'])
-            ->add('createdAt', null, ['label' => 'Created'])
+        ;
+
+        if (isset($filterParams['dateRange']['value']) && $filterParams['dateRange']['value'] === 'today') {
+            $listMapper->add('branchTiming.adminListTiming', 'text', [
+                'label' => 'Timing',
+                'sortable' => true,
+                'sort_field_mapping' => ['fieldName' => 'from'],
+                'sort_parent_association_mappings' => [['fieldName' => 'branchTiming']],
+                'template' => 'WbcBranchBundle:Admin/CRUD:list__field_timing.html.twig',
+            ]);
+        } else {
+            $listMapper->add('branchTiming.adminListTiming', 'text', [
+                'label' => 'Timing',
+                'template' => 'WbcBranchBundle:Admin/CRUD:list__field_timing.html.twig',
+            ]);
+        }
+
+        $listMapper->add('createdAt', null, ['label' => 'Created'])
             ->add('createdBy', null, ['placeholder' => 'User'])
             ->add('_action', 'actions', [
                 'actions' => [

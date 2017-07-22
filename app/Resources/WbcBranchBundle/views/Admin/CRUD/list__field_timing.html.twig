@@ -1,0 +1,10 @@
+{% extends '@WbcBranch/Admin/base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object.branchTiming is not null and object.branchTiming != false %}
+        {% if object.dateBooked|date('m/d/Y') == "now"|date('m/d/Y') and object.branchTiming.hasTimeSurpassed == false %}
+            <img style="width: 10px; height: 10px; vertical-align: middle;" src="{{ asset('images/roundgreen-blinker.gif') }}">
+        {% endif %}
+        {{ object.branchTiming.adminListTiming }}
+    {% endif %}
+{% endblock %}

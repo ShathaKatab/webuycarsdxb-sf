@@ -95,6 +95,10 @@ class InspectionAdmin extends AbstractAdmin
                 'choices' => Inspection::getStatuses(),
                 'empty_data' => Inspection::STATUS_NEW,
             ])
+            ->add('notes', TextareaType::class, [
+                'label' => 'Inspection Notes',
+                'required' => false,
+            ])
             ->end()
             ->with('Vehicle Details')
             ->add('vehicleYear', WbcVehicleType\ModelYearType::class)
@@ -328,6 +332,7 @@ class InspectionAdmin extends AbstractAdmin
             ->add('priceOffered', null, ['label' => 'Offered Price (AED)'])
             ->add('priceExpected', null, ['label' => 'Expected Price (AED)'])
             ->add('status', 'choice', ['choices' => Inspection::getStatuses()])
+            ->add('notes', 'textarea')
             ->end()
             ->with('Vehicle Details')
             ->add('vehicleYear')
@@ -351,7 +356,7 @@ class InspectionAdmin extends AbstractAdmin
             ->add('appointment.dayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Day Booked'])
             ->add('appointment.dateBooked')
             ->add('appointment.branchTiming')
-            ->add('appointment.notes')
+            ->add('appointment.notes', 'textarea')
 
             ->end()
             ->end();

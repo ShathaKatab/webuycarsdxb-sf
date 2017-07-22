@@ -200,6 +200,15 @@ class Inspection
     protected $deal;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="notes", type="text", nullable=true)
+     *
+     * @Serializer\Expose()
+     */
+    protected $notes;
+
+    /**
      * Inspection Constructor.
      *
      * @param Appointment $appointment
@@ -672,5 +681,29 @@ class Inspection
             self::STATUS_OFFER_REJECTED => 'Offer Rejected',
             self::STATUS_INVALID => 'Invalid',
         ];
+    }
+
+    /**
+     * Set notes.
+     *
+     * @param string $notes
+     *
+     * @return Inspection
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Get notes.
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }

@@ -43,6 +43,12 @@ sonata_admin:
                 settings:
                     groups: ["Users"]
                 roles: [ROLE_SUPER_ADMIN]
+            -
+                position: right
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: ["Vehicles"]
+                roles: [ROLE_SUPER_ADMIN]
 
     title: "WeBuyCars Admin"
     title_logo: /images/admin-logo.png
@@ -97,3 +103,18 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Deal, group: "Deals" }
 
+    admin.vehicle.make:
+        class: Wbc\VehicleBundle\Admin\MakeAdmin
+        arguments: [~, Wbc\VehicleBundle\Entity\Make, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Makes, group: "Vehicles" }
+    admin.vehicle.model:
+        class: Wbc\VehicleBundle\Admin\ModelAdmin
+        arguments: [~, Wbc\VehicleBundle\Entity\Model, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Models, group: "Vehicles" }
+    admin.vehicle.model_type:
+        class: Wbc\VehicleBundle\Admin\ModelTypeAdmin
+        arguments: [~, Wbc\VehicleBundle\Entity\ModelType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Trims, group: "Vehicles" }

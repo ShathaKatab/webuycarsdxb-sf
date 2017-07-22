@@ -381,4 +381,24 @@ class Timing
     {
         return (int) ($dateTime->format('H')) * 60 + (int) ($dateTime->format('i'));
     }
+
+    /**
+     * Formatted timing for the admin list view.
+     *
+     * @return string
+     */
+    public function getAdminListTiming()
+    {
+        return $this->getTimingString();
+    }
+
+    /**
+     * Utility method to check if now has surpassed `from` of this Timing.
+     *
+     * @return bool
+     */
+    public function hasTimeSurpassed()
+    {
+        return $this->from > $this->formatDateTimeToInteger(new \DateTime());
+    }
 }

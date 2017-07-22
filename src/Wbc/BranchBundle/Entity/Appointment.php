@@ -908,7 +908,9 @@ class Appointment
      */
     public function getSmsTimingString()
     {
-        return sprintf('%s @ "%s"', $this->dateBooked->format('d/m/y'), $this->branchTiming->getTimingString());
+        if ($this->dateBooked && $this->branchTiming) {
+            return sprintf('%s @ "%s"', $this->dateBooked->format('d/m/y'), $this->branchTiming->getTimingString());
+        }
     }
 
     /**
