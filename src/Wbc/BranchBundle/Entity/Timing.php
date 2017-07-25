@@ -399,6 +399,6 @@ class Timing
      */
     public function hasTimeSurpassed()
     {
-        return $this->formatDateTimeToInteger(new \DateTime()) > $this->from;
+        return $this->formatDateTimeToInteger(new \DateTime()) > $this->formatDateTimeToInteger(new \DateTime($this->from));
     }
 }
