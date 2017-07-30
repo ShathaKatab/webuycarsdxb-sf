@@ -151,8 +151,6 @@ class AppointmentAdmin extends AbstractAdmin
             ->with('Timings')
             ->add('branch', BranchType::class)
             ->add('dateBooked', 'sonata_type_date_picker', [
-                'dp_min_date' => new \DateTime(),
-                'dp_max_date' => '+30',
                 'dp_use_current' => false,
                 'format' => 'EE dd-MMM-yyyy',
             ])
