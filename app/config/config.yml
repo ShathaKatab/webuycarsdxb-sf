@@ -3,7 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: sonata.yml }
-    - { resource: doctrine_extensions.yml }
 
 parameters:
     locale: en
@@ -65,7 +64,7 @@ assetic:
     filters:
         cssrewrite: ~
         scssphp:
-            formatter: "Leafo\ScssPhp\Formatter\Compressed"
+            formatter: 'Leafo\ScssPhp\Formatter\Compressed'
             jsqueeze: ~
         jsqueeze: ~
         #closure:
