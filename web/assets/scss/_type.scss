@@ -42,6 +42,10 @@ p, .p {
   font-weight: $font-weight;
   margin-bottom: ($line-height-computed + 10);
 
+  &.p-compact{
+    margin-bottom: 10px;
+  }
+
   &.p-lg {
     font-size: 20px;
     line-height: 30px;
@@ -85,7 +89,9 @@ label{
   padding-bottom: 15px;
 }
 
-ul{
+ul, ol{
+  margin-bottom: ($line-height-computed + 10);
+
   li{
     font-weight: $font-weight;
     font-size: 16px;

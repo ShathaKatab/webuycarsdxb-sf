@@ -5,14 +5,7 @@
                 <h1>Sell Any Car You Have</h1>
 
                 <p>Simply choose your vehicle make, model and year to start valuation process</p>
-
-                <valuation-step-one form-action-url="'{{ path('wbc_valuation_index') }}'"
-                                    form-class="form-inline"
-                                    form-group-class="col-md-3 col-xs-12"
-                                    form-button-text="Get FREE Online Valuation"
-                                    vehicle-makes="{{ getMakes()|serialize }}"
-                                    vehicle-years="{{ getModelYears()|serialize }}">
-                </valuation-step-one>
+                {% include 'WbcStaticBundle:partials:bare-inline-valuation-form.html.twig' %}
             </div>
         </div>
     </div>

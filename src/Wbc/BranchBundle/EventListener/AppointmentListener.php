@@ -162,7 +162,6 @@ class AppointmentListener
             $this->smsManager->sendSms($object->getMobileNumber(),
                 $this->templating->render('WbcBranchBundle::appointmentSms.txt.twig', [
                     'appointment' => $object,
-                    'siteDomain' => 'WEBUYCARSDXB.COM',
                 ]));
 
             $queryBuilder = $this->entityManager->createQueryBuilder();

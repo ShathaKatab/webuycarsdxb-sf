@@ -31,6 +31,7 @@ parameters:
         "x-algolia-application-id": "WD0PTZ13ZS"
         "x-algolia-api-key": "NzViZDhiMjdlYWU5OGVjOWRkYzQ5ZTE1NjNmZjFiMzgxZWY2NjZkZGFlMzFiYWU5NWM0NzcyNTMxNTU4M2Y4NXVzZXJUb2tlbj1jYWN1eG1naHNvd2d1dzJvMW4yNHhqeG5jZmhsMXVxeiZ2YWxpZFVudGlsPTE0OTM0MTY4MDA="
     crawler_user_agent: "Mozilla/5.0 (Windows NT 5.2; RW; rv:7.0a1) Gecko/20091211 SeaMonkey/9.23a1pre"
+    site_domain: webuycarsdxb.com
     site_title: "WeBuyCars"
     company_name: "Smart Wheels Auctions Organization LLC."
     company_office_number: "Office #4711"
@@ -39,6 +40,7 @@ parameters:
     company_po_box: "212811"
     company_office_phone: "+971 43 515 222"
     site_phone: "04 351 5222"
+    site_email: "info@webuycarsdxb.com"
     site_menu:
         -
             slug: about-us
@@ -58,6 +60,9 @@ parameters:
         -
             slug: privacy-policy
             title: 'Privacy Policy'
+        -
+            slug: frequently-asked-questions
+            title: 'Frequently Asked Questions'
     site_facebook: "https://www.facebook.com/"
     site_twitter: "https://twitter.com/"
     site_instagram: "https://www.instagram.com/"
