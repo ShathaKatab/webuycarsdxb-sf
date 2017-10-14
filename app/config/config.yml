@@ -54,6 +54,7 @@ twig:
         from_email: "%from_email%"
         from_sender_name: "%from_sender_name%"
         tech_email: "%tech_email%"
+        google_reviews_url: "%google_reviews_url%"
 
 # Assetic Configuration
 assetic:
