@@ -2,8 +2,8 @@
 
 namespace Wbc\UserBundle\Entity;
 
-use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 
@@ -105,6 +105,14 @@ class User extends BaseUser
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
         $this->profile = new Profile($this);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getFullName();
     }
 
     /**
@@ -231,6 +239,8 @@ class User extends BaseUser
 
     /**
      * @see \Serializable::unserialize()
+     *
+     * @param mixed $serialized
      */
     public function unserialize($serialized)
     {
@@ -283,7 +293,7 @@ class User extends BaseUser
     {
         $this->admin = $isAdmin;
 
-        if (boolval($isAdmin) === true) {
+        if ((bool) $isAdmin === true) {
             $this->addRole('ROLE_SUPER_ADMIN');
         } else {
             $this->removeRole('ROLE_SUPER_ADMIN');

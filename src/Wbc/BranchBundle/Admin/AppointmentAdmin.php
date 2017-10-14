@@ -54,7 +54,7 @@ class AppointmentAdmin extends AbstractAdmin
 
     public function getExportFields()
     {
-        return ['name', 'mobileNumber', 'vehicleMake', 'vehicleModel', 'vehicleYear', 'valuation.priceOnline', 'dateBooked', 'branchTiming', 'createdAt', 'createdBy'];
+        return ['name', 'mobileNumber', 'vehicleMake', 'vehicleModel', 'vehicleYear', 'valuation.priceOnline', 'dateBooked', 'branchTiming', 'status', 'createdAt', 'createdBy'];
     }
 
     /**
@@ -174,7 +174,7 @@ class AppointmentAdmin extends AbstractAdmin
 
         if ($subject->getValuation()) {
             $formMapper->end()
-                ->with('')
+                ->with('Other Details')
                 ->add('valuation.priceOnline', null, [
                     'label' => 'Price Online (AED)',
                     'read_only' => true,
@@ -186,6 +186,7 @@ class AppointmentAdmin extends AbstractAdmin
                     'empty_data' => Appointment::STATUS_NEW,
                 ])
                 ->add('notes', TextareaType::class, ['required' => false])
+                ->add('createdBy', null, ['read_only' => true, 'disabled' => true, 'required' => false])
                 ->end();
         }
 
@@ -266,6 +267,11 @@ class AppointmentAdmin extends AbstractAdmin
                     'dp_default_date' => $now->format('m/d/Y'),
                 ],
             ])
+            ->add('createdBy')
+            ->add('status', 'doctrine_orm_choice', [
+                'field_options' => ['choices' => Appointment::getStatuses()],
+                'field_type' => 'choice',
+            ])
         ;
     }
 
@@ -303,7 +309,7 @@ class AppointmentAdmin extends AbstractAdmin
         }
 
         $listMapper->add('createdAt', null, ['label' => 'Created'])
-            ->add('createdBy', null, ['placeholder' => 'User'])
+            ->add('createdBy')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
@@ -348,6 +354,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('valuation.priceOnline', 'currency', ['currency' => 'AED'])
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'empty_data' => Appointment::STATUS_NEW])
             ->add('notes')
+            ->add('createdBy')
             ->end()
             ->end();
     }
