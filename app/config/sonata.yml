@@ -31,7 +31,7 @@ sonata_admin:
                 roles: [ROLE_VALUATION_READER, ROLE_VALUATION_EDITOR, ROLE_VALUATION_ADMIN]
                 icon:   '<i class="fa fa-usd"></i>'
                 on_top: true
-            Valuations:
+            Valuations Configurations:
                 label: Valuations Configurations
                 items: [admin.valuation.valuation_configuration]
                 roles: [ROLE_VALUATION_ADMIN]
