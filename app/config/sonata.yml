@@ -6,31 +6,83 @@ sonata_block:
             contexts:   [admin]
 sonata_admin:
     dashboard:
+        groups:
+            Appointments:
+                label: Appointments
+                items: [admin.branch.appointment]
+                roles: [ROLE_APPOINTMENT_READER, ROLE_APPOINTMENT_EDITOR, ROLE_APPOINTMENT_ADMIN]
+                on_top: true
+                icon:   '<i class="fa fa-calendar-check-o"></i>'
+            Inspections:
+                label: Inspections
+                items: [admin.branch.inspection]
+                roles: [ROLE_INSPECTION_READER, ROLE_INSPECTION_EDITOR, ROLE_INSPECTION_ADMIN]
+                on_top: true
+                icon:   '<i class="fa fa-check-circle-o"></i>'
+            Deals:
+                label: Deals
+                items: [admin.branch.deal]
+                roles: [ROLE_DEAL_READER, ROLE_DEAL_EDITOR, ROLE_DEAL_ADMIN]
+                on_top: true
+                icon:   '<i class="fa fa-list-ul"></i>'
+            Valuations:
+                label: Valuations
+                items: [admin.valuation]
+                roles: [ROLE_VALUATION_READER, ROLE_VALUATION_EDITOR, ROLE_VALUATION_ADMIN]
+                icon:   '<i class="fa fa-usd"></i>'
+                on_top: true
+            Valuations:
+                label: Valuations Configurations
+                items: [admin.valuation.valuation_configuration]
+                roles: [ROLE_VALUATION_ADMIN]
+                icon:   '<i class="fa fa-cogs"></i>'
+                on_top: true
+            Branches:
+                label: Branches
+                items: [admin.branch, admin.branch.timing]
+                roles: [ROLE_SUPER_ADMIN]
+                icon:   '<i class="fa fa-building"></i>'
+            Users:
+                label: Users
+                items: [admin.user]
+                roles: [ROLE_SUPER_ADMIN]
+                on_top: true
+                icon:   '<i class="fa fa-user-circle-o"></i>'
+            Vehicles:
+                label: Vehicles
+                items: [admin.vehicle.make, admin.vehicle.model, admin.vehicle.model_type]
+                roles: [ROLE_SUPER_ADMIN]
+                icon:   '<i class="fa fa-car"></i>'
         blocks:
             -
                 position: left
                 type: sonata.admin.block.admin_list
                 settings:
                     groups: ["Appointments"]
-                roles: [ROLE_BUYER]
+                roles: [ROLE_APPOINTMENT_READER, ROLE_APPOINTMENT_EDITOR, ROLE_SUPER_ADMIN]
             -
                 position: left
                 type: sonata.admin.block.admin_list
                 settings:
                     groups: ["Inspections"]
-                roles: [ROLE_BUYER]
+                roles: [ROLE_INSPECTION_READER, ROLE_INSPECTION_EDITOR, ROLE_SUPER_ADMIN]
             -
                 position: left
                 type: sonata.admin.block.admin_list
                 settings:
                     groups: ["Deals"]
-                roles: [ROLE_BUYER]
+                roles: [ROLE_DEAL_READER, ROLE_DEAL_EDITOR, ROLE_SUPER_ADMIN]
             -
                 position: left
                 type: sonata.admin.block.admin_list
                 settings:
                     groups: ["Valuations"]
-                roles: [ROLE_SUPER_ADMIN]
+                roles:
+                    - ROLE_VALUATION_CONFIGURATION_READER
+                    - ROLE_VALUATION_CONFIGURATION_EDITOR
+                    - ROLE_VALUATION_READER
+                    - ROLE_VALUATION_EDITOR
+                    - ROLE_SUPER_ADMIN
             -
                 position: right
                 type: sonata.admin.block.admin_list
@@ -73,7 +125,7 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: Branch Timings, group: "Branches" }
 
-    admin.branch.user:
+    admin.user:
         class: Wbc\UserBundle\Admin\UserAdmin
         arguments: [~, Wbc\UserBundle\Entity\User, WbcUserBundle:CRUD]
         tags:

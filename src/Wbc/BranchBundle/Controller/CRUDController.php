@@ -90,7 +90,7 @@ class CRUDController extends Controller
         $this->get('event_dispatcher')
             ->dispatch(BranchEvents::ON_APPOINTMENT_GENERATE_INSPECTION, new AppointmentEvent($appointment));
 
-        return new RedirectResponse($this->generateUrl('admin_wbc_branch_inspection_edit', ['id' => $inspection->getId()]));
+        return new RedirectResponse($this->generateUrl('admin_wbc_branch_inspection_show', ['id' => $inspection->getId()]));
     }
 
     /**
@@ -110,6 +110,6 @@ class CRUDController extends Controller
         $entityManager->persist($deal);
         $entityManager->flush();
 
-        return new RedirectResponse($this->generateUrl('admin_wbc_branch_deal_edit', ['id' => $deal->getId()]));
+        return new RedirectResponse($this->generateUrl('admin_wbc_branch_deal_show', ['id' => $deal->getId()]));
     }
 }

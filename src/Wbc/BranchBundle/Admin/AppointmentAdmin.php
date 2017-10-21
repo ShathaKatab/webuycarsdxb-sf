@@ -368,5 +368,18 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
             ->add('generateInspection', $this->getRouterIdParameter().'/generateInspection');
+
+        $container = $this->getConfigurationPool()->getContainer();
+
+        if ($container->get('security.token_storage')->getToken()) {
+            $authorizationChecker = $container->get('security.authorization_checker');
+            if (!$authorizationChecker->isGranted('ROLE_APPOINTMENT_EDITOR')) {
+                $collection->remove('edit')->remove('create');
+            }
+
+            if (!$authorizationChecker->isGranted('ROLE_APPOINTMENT_ADMIN')) {
+                $collection->remove('delete')->remove('export');
+            }
+        }
     }
 }

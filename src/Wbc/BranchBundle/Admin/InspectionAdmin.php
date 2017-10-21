@@ -375,5 +375,18 @@ class InspectionAdmin extends AbstractAdmin
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
             ->add('generateDeal', $this->getRouterIdParameter().'/generateDeal')
         ;
+
+        $container = $this->getConfigurationPool()->getContainer();
+
+        if ($container->get('security.token_storage')->getToken()) {
+            $authorizationChecker = $container->get('security.authorization_checker');
+
+            if (!$authorizationChecker->isGranted('ROLE_INSPECTION_EDITOR')) {
+                $collection->remove('edit')->remove('create');
+            }
+            if (!$authorizationChecker->isGranted('ROLE_INSPECTION_ADMIN')) {
+                $collection->remove('delete')->remove('export');
+            }
+        }
     }
 }

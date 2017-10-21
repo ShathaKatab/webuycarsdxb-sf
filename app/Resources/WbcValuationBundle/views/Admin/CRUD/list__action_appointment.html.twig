@@ -3,7 +3,7 @@
        title="Show Appointment">
         <i class="fa fa-calendar"></i> Show Appointment
     </a>
-{% else %}
+{% elseif is_granted('ROLE_SONATA_ADMIN_ADMIN_BRANCH_APPOINTMENT_CREATE') %}
     <a href="{{ path('admin_wbc_valuation_valuation_generateAppointment', {id: object.id}) }}"
        class="btn btn-sm btn-danger view_link"
        title="Generate Appointment">

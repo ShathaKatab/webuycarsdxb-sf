@@ -65,7 +65,8 @@ class UserAdmin extends AbstractAdmin
     {
         $subject = $this->getSubject();
 
-        $formMapper->add('email', EmailType::class, ['label' => 'Email Address'])
+        $formMapper->add('enabled', CheckboxType::class, ['label' => 'Enable Account?', 'required' => false])
+            ->add('email', EmailType::class, ['label' => 'Email Address'])
             ->add('profile.firstName', TextType::class, ['label' => 'First Name'])
             ->add('profile.lastName', null, ['label' => 'Last Name'])
             ->add('profile.mobileNumber', MobileNumberType::class, [
@@ -82,14 +83,11 @@ class UserAdmin extends AbstractAdmin
             ]);
         }
 
-        $formMapper->add('enabled', CheckboxType::class, [
-            'data' => true,
-            'label' => 'Enable?',
-            'required' => false,
-        ])
-            ->add('roles', ChoiceType::class, [
-                'choices' => ['ROLE_SUPER_ADMIN' => 'Super Admin', 'ROLE_BUYER' => 'Buyer', 'ROLE_APPOINTMENT_SMS' => 'Appointment SMS'],
-                'expanded' => false,
+        $roles = User::getBaseRoles();
+
+        $formMapper->add('roles', ChoiceType::class, [
+                'choices' => array_combine($roles, $roles),
+                'expanded' => true,
                 'multiple' => true,
                 'required' => false,
             ])
@@ -116,7 +114,7 @@ class UserAdmin extends AbstractAdmin
             ->add('profile.mobileNumber', null, ['label' => 'Mobile'])
             ->add('enabled', 'boolean', ['editable' => true])
             ->add('lastLogin')
-            ->add('isAdmin', 'boolean', ['editable' => true, 'label' => 'Super Admin?'])
+            ->add('isAdmin', 'boolean', ['label' => 'Super Admin?'])
             ->add('createdAt')
             ->add('_action', 'actions', [
                 'actions' => [

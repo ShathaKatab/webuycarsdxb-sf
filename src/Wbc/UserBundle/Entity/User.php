@@ -5,7 +5,6 @@ namespace Wbc\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Gedmo\Mapping\Annotation as Gedmo;
-use JMS\Serializer\Annotation as Serializer;
 
 /**
  * User.
@@ -15,15 +14,6 @@ use JMS\Serializer\Annotation as Serializer;
  * @ORM\Table(name="fos_user", uniqueConstraints={@ORM\UniqueConstraint(name="wbc_user_unique_idx", columns={"username",
  * "username_canonical", "email", "email_canonical"})})
  * @ORM\Entity
- * @ORM\AttributeOverrides({
- *      @ORM\AttributeOverride(name="username", column=@ORM\Column(name="username", length=60)),
- *      @ORM\AttributeOverride(name="usernameCanonical", column=@ORM\Column(name="username_canonical", length=60)),
- *      @ORM\AttributeOverride(name="password", column=@ORM\Column(name="password", length=64)),
- *      @ORM\AttributeOverride(name="email", column=@ORM\Column(name="email", length=60)),
- *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(name="email_canonical", length=60))
- * })
- *
- * @Serializer\ExclusionPolicy("all")
  */
 class User extends BaseUser
 {
@@ -37,39 +27,9 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var string
-     */
-    protected $username;
-
-    /**
-     * @var string
-     */
-    protected $usernameCanonical;
-
-    /**
-     * @var string
-     */
-    protected $password;
-
-    /**
-     * @var string
-     *
-     * @Serializer\Expose
-     * @Serializer\Groups({"owner-view"})
-     */
-    protected $email;
-
-    /**
-     * @var string
-     */
-    protected $emailCanonical;
-
-    /**
      * @var Profile
      *
      * @ORM\OneToOne(targetEntity="Wbc\UserBundle\Entity\Profile", mappedBy="user", cascade={"persist"}, fetch="EAGER")
-     *
-     * @Serializer\Expose
      */
     protected $profile;
 
@@ -298,5 +258,19 @@ class User extends BaseUser
         } else {
             $this->removeRole('ROLE_SUPER_ADMIN');
         }
+    }
+
+    /**
+     * @return array
+     */
+    public static function getBaseRoles()
+    {
+        return [
+            'ROLE_APPOINTMENT_SMS',
+            'ROLE_ACCOUNTANT',
+            'ROLE_PURCHASING',
+            'ROLE_CALL_CENTER',
+            'ROLE_SUPER_ADMIN',
+        ];
     }
 }
