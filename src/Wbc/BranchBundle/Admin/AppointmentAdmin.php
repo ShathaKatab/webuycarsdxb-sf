@@ -17,6 +17,7 @@ use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\Timing;
 use Wbc\BranchBundle\Form\BranchType;
 use Wbc\BranchBundle\Form\DayType;
+use Wbc\UserBundle\Entity\User;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
 use Wbc\VehicleBundle\Entity\ModelType;
@@ -267,7 +268,13 @@ class AppointmentAdmin extends AbstractAdmin
                     'dp_default_date' => $now->format('m/d/Y'),
                 ],
             ])
-            ->add('createdBy')
+            ->add('createdBy', null, [], 'entity', [
+                'class' => User::class,
+                'query_builder' => function (EntityRepository $repository) {
+                    return $repository->createQueryBuilder('u')
+                        ->where('u.enabled = true');
+                },
+            ])
             ->add('status', 'doctrine_orm_choice', [
                 'field_options' => ['choices' => Appointment::getStatuses()],
                 'field_type' => 'choice',
@@ -368,18 +375,5 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
             ->add('generateInspection', $this->getRouterIdParameter().'/generateInspection');
-
-        $container = $this->getConfigurationPool()->getContainer();
-
-        if ($container->get('security.token_storage')->getToken()) {
-            $authorizationChecker = $container->get('security.authorization_checker');
-            if (!$authorizationChecker->isGranted('ROLE_APPOINTMENT_EDITOR')) {
-                $collection->remove('edit')->remove('create');
-            }
-
-            if (!$authorizationChecker->isGranted('ROLE_APPOINTMENT_ADMIN')) {
-                $collection->remove('delete')->remove('export');
-            }
-        }
     }
 }

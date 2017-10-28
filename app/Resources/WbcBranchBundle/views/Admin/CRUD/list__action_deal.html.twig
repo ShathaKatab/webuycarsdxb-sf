@@ -6,7 +6,7 @@
            title="Show Deal">
             Show Deal
         </a>
-    {% elseif is_granted('ROLE_SONATA_ADMIN_ADMIN_BRANCH_DEAL_CREATE') %}
+    {% elseif is_granted('ROLE_ADMIN_BRANCH_DEAL_CREATE') %}
         <a href="{{ path('admin_wbc_branch_inspection_generateDeal', {id: object.id}) }}"
            class="btn btn-sm btn-danger view_link convert-to-deal"
            title="Convert to Deal">

@@ -34,7 +34,7 @@ sonata_admin:
             Valuations Configurations:
                 label: Valuations Configurations
                 items: [admin.valuation.valuation_configuration]
-                roles: [ROLE_VALUATION_ADMIN]
+                roles: [ROLE_VALUATION_CONFIGURATION_READER]
                 icon:   '<i class="fa fa-cogs"></i>'
                 on_top: true
             Branches:
@@ -59,30 +59,31 @@ sonata_admin:
                 type: sonata.admin.block.admin_list
                 settings:
                     groups: ["Appointments"]
-                roles: [ROLE_APPOINTMENT_READER, ROLE_APPOINTMENT_EDITOR, ROLE_SUPER_ADMIN]
+                roles: [ROLE_ADMIN_BRANCH_APPOINTMENT_LIST]
             -
                 position: left
                 type: sonata.admin.block.admin_list
                 settings:
                     groups: ["Inspections"]
-                roles: [ROLE_INSPECTION_READER, ROLE_INSPECTION_EDITOR, ROLE_SUPER_ADMIN]
+                roles: [ROLE_ADMIN_BRANCH_INSPECTION_LIST]
             -
                 position: left
                 type: sonata.admin.block.admin_list
                 settings:
                     groups: ["Deals"]
-                roles: [ROLE_DEAL_READER, ROLE_DEAL_EDITOR, ROLE_SUPER_ADMIN]
+                roles: [ROLE_ADMIN_BRANCH_DEAL_LIST]
             -
                 position: left
                 type: sonata.admin.block.admin_list
                 settings:
                     groups: ["Valuations"]
-                roles:
-                    - ROLE_VALUATION_CONFIGURATION_READER
-                    - ROLE_VALUATION_CONFIGURATION_EDITOR
-                    - ROLE_VALUATION_READER
-                    - ROLE_VALUATION_EDITOR
-                    - ROLE_SUPER_ADMIN
+                roles: [ROLE_ADMIN_VALUATION_LIST]
+            -
+                position: right
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: ["Valuation Configuration"]
+                roles: [ROLE_ADMIN_VALUATION_VALUATION_CONFIGURATION_LIST]
             -
                 position: right
                 type: sonata.admin.block.admin_list
@@ -105,6 +106,23 @@ sonata_admin:
     title: "WeBuyCars Admin"
     title_logo: /images/admin-logo.png
     persist_filters: true
+    security:
+        handler: sonata.admin.security.handler.role
+
+        # acl security information
+        information:
+            GUEST: [VIEW, LIST]
+            STAFF: [EDIT, LIST, CREATE]
+            EDITOR: [OPERATOR, EXPORT]
+            ADMIN: [MASTER]
+
+        # permissions not related to an object instance and also to be available when objects do not exist
+        # the DELETE admin permission means the user is allowed to batch delete objects
+        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+
+        # permission related to the objects
+        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
+
 
 services:
     admin.branch.appointment:
@@ -141,7 +159,7 @@ services:
         class: Wbc\ValuationBundle\Admin\ValuationConfigurationAdmin
         arguments: [~, Wbc\ValuationBundle\Entity\ValuationConfiguration, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Valuation Configuration, group: "Valuations"}
+            - { name: sonata.admin, manager_type: orm, label: Valuation Configuration, group: "Valuation Configuration"}
 
     admin.branch.inspection:
         class: Wbc\BranchBundle\Admin\InspectionAdmin

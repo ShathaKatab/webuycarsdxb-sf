@@ -386,19 +386,5 @@ class DealAdmin extends AbstractAdmin
             ->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}');
-
-        $container = $this->getConfigurationPool()->getContainer();
-
-        if ($container->get('security.token_storage')->getToken()) {
-            $authorizationChecker = $container->get('security.authorization_checker');
-
-            if (!$authorizationChecker->isGranted('ROLE_DEAL_EDITOR')) {
-                $collection->remove('edit')->remove('create');
-            }
-
-            if (!$authorizationChecker->isGranted('ROLE_DEAL_ADMIN')) {
-                $collection->remove('delete')->remove('export');
-            }
-        }
     }
 }

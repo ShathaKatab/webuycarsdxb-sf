@@ -155,16 +155,9 @@ class ValuationAdmin extends AbstractAdmin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('create')->remove('delete')->remove('edit')->add('generateAppointment', $this->getRouterIdParameter().'/generateAppointment');
-
-        $container = $this->getConfigurationPool()->getContainer();
-
-        if ($container->get('security.token_storage')->getToken()) {
-            $authorizationChecker = $container->get('security.authorization_checker');
-
-            if (!$authorizationChecker->isGranted('ROLE_VALUATION_ADMIN')) {
-                $collection->remove('delete')->remove('export');
-            }
-        }
+        $collection->remove('create')
+            ->remove('delete')
+            ->remove('edit')
+            ->add('generateAppointment', $this->getRouterIdParameter().'/generateAppointment');
     }
 }
