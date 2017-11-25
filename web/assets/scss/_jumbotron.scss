@@ -44,9 +44,3 @@
     margin-top: 60px;
   }
 }
-
-.jumbotron {
-  @media (min-width: $screen-md-min) {
-    padding: (122 - $line-height-computed) 115px 0 115px;
-  }
-}

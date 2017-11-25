@@ -1,59 +1,195 @@
 /**
- * Created by majid on 5/11/17.
+ * Created by majid on 5/9/17.
  */
+
 angular
     .module('webuycarsApp')
-    .controller('ValuationStepFourController', ['$scope', '$filter', '$document', 'NgMap',
-        function ($scope, $filter, $document, NgMap) {
+    .controller('ValuationStepFourController', [
+        '$scope',
+        '$filter',
+        '$document',
+        '$window',
+        '$location',
+        '$anchorScroll',
+        'NgMap',
+        'BranchTiming',
+        'Appointment',
+        function ($scope, $filter, $document, $window, $location, $anchorScroll, NgMap, BranchTiming, Appointment) {
+            var vm = this;
             var defaultLat = 25.206497;
             var defaultLng = 55.268743;
             var defaultZoom = 10;
+            var selectedBranchZoom = 18;
+            var maxDate = new Date();
+            maxDate.setDate(maxDate.getDate() + 30);
 
-            var vm = this;
-            vm.latitude = null;
-            vm.longitude = null;
-            vm.branchName = null;
+            console.log('ValuationStepFourController');
 
-            NgMap.getMap().then(function (map) {
-                if(vm.latitude && vm.longitude){
-                    map.setZoom(defaultZoom);
-                    map.setCenter({lat: vm.latitude, lng: vm.longitude});
+            vm.mapHeight = '400px';
 
-                    var marker = new google.maps.Marker({
-                        position: {lat: vm.latitude, lng: vm.longitude},
-                        title: vm.branchName
-                    });
+            vm.branches = [];
+            vm.selectedBranch = null;
+            vm.appointmentDate = null;
+            vm.branchTimings = [];
+            vm.selectedBranchTiming = null;
+            vm.emailAddress = null;
+            vm.markers = [];
+            vm.selectedBranchObject = {};
+            vm.selectedPosition = {};
+            vm.isTimingSlotsAvailable = true;
 
-                    marker.setMap(map);
+            vm.valuationId = null;
 
-                }else{
-                    map.setZoom(defaultZoom);
-                    map.setCenter({lat: defaultLat, lng: defaultLng});
-                }
+            //Datepicker options
+            vm.options = {
+                minDate: new Date(),
+                maxDate: maxDate,
+                showWeeks: false,
+                startingDay: 6,
+                maxMode: 'day'
+            };
+
+            $scope.$watch('ctrl.branches', function(){
+                vm.branchesChanged();
             });
 
-            this.printAppointment = function(){
-                //    var content = document.getElementById().innerHTML;
-                //    var popupWinindow = window.open('', '_blank', 'width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
-                //    popupWinindow.document.open();
-                //    popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()">' + innerContents + '</html>');
-                //    popupWinindow.document.close();
-                //
-                //
-                //$.fn.print = function () {
-                //    var content = $(this).html();
-                //    var w = window.open('about:blank', '', 'width=800,height=600,top=100,left=100');
-                //    w.document.write(content);
-                //    w.print();
-                //    w.close();
-                //};
-                //
-                //$.fn.print2 = function () {
-                //    $('*').not(this).addClass('hidden-for-print').hide();
-                //    $(this).children().removeClass('hidden-for-print').show();
-                //    $(this).parents().removeClass('hidden-for-print').show();
-                //    window.print();
-                //    $('.hidden-for-print').show();
-                //};
-            }
+            $scope.$watch('ctrl.selectedBranch', function(){
+                console.log('Branch changed');
+                vm.isTimingSlotsAvailable = true;
+                vm.selectedBranchChanged();
+                vm.fetchBranchTimings();
+            });
+
+            $scope.$watch('ctrl.appointmentDate', function(){
+                vm.isTimingSlotsAvailable = true;
+                vm.fetchBranchTimings();
+            });
+
+            //Google Maps center changed event listener
+            NgMap.getMap().then(function (map) {
+                var bookingAppointFormPadding = 94;
+                vm.mapHeight = angular.element($document[0].getElementById('book-appointment-form')).height() + bookingAppointFormPadding * 2 + 'px';
+
+                map.addListener('center_changed', function () {
+                    // 3 seconds after the center of the map has changed, pan back to the
+                    // marker.
+                    window.setTimeout(function () {
+                        map.panTo(map.getCenter());
+                    }, 3000);
+                });
+
+                window.setTimeout(function () {
+                    var center = map.getCenter();
+                    google.maps.event.trigger(map, "resize");
+                    map.setCenter(center);
+                }, 500);
+            });
+
+            vm.addMarker = function (branch) {
+                NgMap.getMap().then(function (map) {
+                    var latLng = new google.maps.LatLng(branch['latitude'], branch['longitude']);
+                    var marker = new google.maps.Marker({
+                        position: latLng,
+                        title: branch['title']
+                    });
+                    marker.setMap(map);
+
+                    branch.marker = marker;
+                    vm.markers.push(marker);
+                });
+
+            };
+
+            vm.fetchBranchTimings = function(){
+                if(vm.selectedBranch && vm.appointmentDate){
+                    var appointmentDay = vm.appointmentDate.getDay();
+                    if(appointmentDay === 0){
+                        appointmentDay = 7;
+                    }
+
+                    var loader = angular.element($document[0].getElementById('loading-container'));
+                    loader.show();
+
+                    vm.branchTimings = BranchTiming.query({branchSlug: vm.selectedBranch, appointmentDay: appointmentDay}, function(response){
+                        loader.hide();
+                        vm.isTimingSlotsAvailable = Boolean(response.length);
+                    });
+                }
+            };
+
+            vm.branchesChanged = function(){
+                for (var i in vm.branches) {
+                    var branch = vm.branches[i];
+
+                    if (branch.hasOwnProperty('latitude') && branch['latitude'] && branch.hasOwnProperty('longitude') && branch['longitude']) {
+                        vm.addMarker(branch);
+                    }
+                }
+
+                NgMap.getMap().then(function (map) {
+                    var bounds = new google.maps.LatLngBounds();
+                    for (var i = 0; i < vm.markers.length; i++) {
+                        bounds.extend(vm.markers[i].getPosition());
+                    }
+
+                    map.fitBounds(bounds);
+                });
+            };
+
+            vm.selectedBranchChanged = function(){
+                vm.selectedBranchObject = $filter('filter')(vm.branches, {slug: vm.selectedBranch})[0];
+
+                NgMap.getMap().then(function (map) {
+                    if (vm.selectedBranchObject && vm.selectedBranchObject.marker) {
+                        map.setZoom(selectedBranchZoom);
+                        map.setCenter(vm.selectedBranchObject.marker.getPosition());
+                        vm.selectedPosition = vm.selectedBranchObject.marker.getPosition();
+                    } else {
+                        vm.selectedPosition = {lat: defaultLat, lng: defaultLng};
+                        map.setZoom(defaultZoom);
+                        map.setCenter(vm.selectedPosition);
+                    }
+                });
+            };
+
+            vm.triggerFormSubmit = function(){
+                $scope.valuationStepFourForm.$setSubmitted();
+
+                if($scope.valuationStepFourForm.$valid && Object.prototype.toString.call(vm.appointmentDate) === '[object Date]'){
+
+                    var appointmentObject = new Appointment;
+
+                    appointmentObject.dateBooked = {};
+                    appointmentObject.dateBooked.day = vm.appointmentDate.getDate();
+                    appointmentObject.dateBooked.month = vm.appointmentDate.getMonth() + 1;
+                    appointmentObject.dateBooked.year = vm.appointmentDate.getFullYear();
+
+                    appointmentObject.branchTiming = vm.selectedBranchTiming;
+                    appointmentObject.branch = vm.selectedBranch;
+
+                    appointmentObject.emailAddress = vm.emailAddress;
+
+                    var loader = angular.element($document[0].getElementById('loading-container'));
+                    loader.show();
+
+                    appointmentObject.$save(null, function(resource, headers){
+                        loader.hide();
+
+                        window.setTimeout(function () {
+                            $window.location.href = headers('Location');
+                        }, 100);
+                    }, function(error){
+                        loader.hide();
+
+                        alert('Error: Unable to create an Appointment');
+                    });
+                }else{
+                    vm.scrollTo('pick-a-branch');
+                }
+            };
+
+            vm.scrollTo = function(hash){
+                $location.hash(hash);
+                $anchorScroll();
+            };
         }]);

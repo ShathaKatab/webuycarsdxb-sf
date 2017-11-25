@@ -103,9 +103,7 @@ class Valuation
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100)
-     *
-     * @Assert\NotBlank()
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
      *
      * @Serializer\Expose()
      */
@@ -123,9 +121,7 @@ class Valuation
     /**
      * @var string
      *
-     * @ORM\Column(name="mobile_number", type="string", length=15)
-     *
-     * @Assert\NotBlank()
+     * @ORM\Column(name="mobile_number", type="string", length=15, nullable=true)
      */
     protected $mobileNumber;
 

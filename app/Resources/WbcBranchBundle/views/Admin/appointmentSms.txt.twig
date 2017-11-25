@@ -4,4 +4,5 @@ Make: {{ appointment.vehicleModel.make.name }}
 Model: {{ appointment.vehicleModel.name }}
 Year: {{ appointment.vehicleYear }}
 Timing: {{ appointment.smsTimingString }}
+Created by: {{ appointment.createdBy|default('Customer') }}
 {{ app.request.getSchemeAndHttpHost() ~ path('admin_wbc_branch_appointment_list') }}

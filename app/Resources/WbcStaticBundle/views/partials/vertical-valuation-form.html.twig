@@ -1,7 +1,20 @@
+{% set _valuation = valuation() %}
 <valuation-step-one class="ng-cloak"
-                    form-action-url="'{{ path('wbc_valuation_index')}}'"
+                    form-action-url="'{{ path('wbc_appointment_step_1')}}'"
                     vehicle-makes="{{ getMakes()|serialize }}"
                     vehicle-years="{{ getModelYears()|serialize }}"
                     form-button-text="Get FREE Online Valuation"
+                    form-class="appointment-funnel {% if _valuation is not null %}hidden{% endif %}"
                     form-group-submit-class="submit">
 </valuation-step-one>
+
+{% if _valuation is not null %}
+    <div id="selectedValuation" class="text-center appointment-funnel">
+        <h3 class="text-uppercase">Book A Free Appointment Now!</h3>
+        <h1>{{ _valuation.vehicleModel.make.name }} {{ _valuation.vehicleModel.name }} Owner!</h1>
+        <h4>Last time we checked your car was worth</h4>
+        <h1>AED {{ _valuation.priceOnline|number_format }}</h1>
+        <a href="{{ path('wbc_appointment_step_4') }}" class="btn btn-primary btn-lg">Book Appointment</a>
+        <a id="selectedValuationNew" href="javascript:void(0)">Not your car? Click to make a new valuation</a>
+    </div>
+{% endif %}

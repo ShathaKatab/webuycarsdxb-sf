@@ -5,7 +5,6 @@ craue_config_settings:
 
 wbc_vehicle:
     resource: "@WbcValuationBundle/Resources/config/routing.yml"
-    prefix:   /car-valuation
     schemes: [https]
 
 wbc_valuation:

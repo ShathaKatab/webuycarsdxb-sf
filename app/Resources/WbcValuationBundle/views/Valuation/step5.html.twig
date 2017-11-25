@@ -18,7 +18,7 @@
 {% block body %}
 
     {{ parent() }}
-    <span ng-controller="ValuationStepFourController as ctrl" ng-init="ctrl.branchName = '{{ appointment.branch.name }}'; ctrl.latitude = {{ appointment.branch.latitude}}; ctrl.longitude = {{ appointment.branch.longitude }}; ctrl.sitePhone = '{{ site_phone }}'">
+    <span ng-controller="ValuationStepFiveController as ctrl" ng-init="ctrl.branchName = '{{ appointment.branch.name }}'; ctrl.latitude = {{ appointment.branch.latitude}}; ctrl.longitude = {{ appointment.branch.longitude }}; ctrl.sitePhone = '{{ site_phone }}'">
     <section>
         <div class="container">
             <div class="row">

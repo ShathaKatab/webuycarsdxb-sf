@@ -9,12 +9,10 @@ angular
         $scope.vehicleMileage = null;
         $scope.vehicleColor = null;
         $scope.vehicleBodyCondition = null;
-        $scope.name = null;
-        $scope.mobileNumber = null;
 
         this.submitForm = function (isValid) {
             if (isValid) {
-                valuationDetailsForm.submit();
+                valuationStepTwoForm.submit();
             }
         }
     }]);

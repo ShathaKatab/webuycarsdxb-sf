@@ -67,7 +67,7 @@ textarea{
 
 #contact-us-branches-container{
   padding-top: 37px;
-  padding-bottom: 98px;
+  padding-bottom: 48px;
 }
 
 .inline-valuation-container {
@@ -91,5 +91,13 @@ textarea{
 
   .inline-valuation-container {
     min-height: 280px;
+  }
+}
+
+#header-form {
+  padding: 25px 0 0 0;
+  @media (max-width: $screen-sm-max) {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }

@@ -13,4 +13,9 @@ $(document).ready(function(){
             $(".navbar-toggle:visible").click();
         }
     });
+
+    $('#selectedValuationNew').click(function(){
+        $('#selectedValuation').hide();
+        $('.appointment-funnel').removeClass('hidden');
+    });
 });

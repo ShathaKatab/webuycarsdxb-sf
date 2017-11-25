@@ -16,7 +16,7 @@ use Wbc\VehicleBundle\Form\ModelYearType;
 use Wbc\UtilityBundle\Form\MobileNumberType;
 
 /**
- * Class ValuationType.
+ * Class ValuationStepTwoType.
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
  */
@@ -43,9 +43,6 @@ class ValuationStepTwoType extends ValuationStepOneType
             ->add('vehicleMileage', MileageType::class, ['label' => 'Vehicle Mileage'])
             ->add('vehicleBodyCondition', ConditionType::class, ['label' => 'Vehicle Body Condition'])
             ->add('vehicleColor', ColorType::class, ['label' => 'Vehicle Color'])
-            ->add('name', TextType::class, ['label' => 'Name'])
-            ->add('emailAddress', EmailType::class, ['label' => 'Email Address'])
-            ->add('mobileNumber', MobileNumberType::class, ['label' => 'Mobile Number'])
         ;
     }
 

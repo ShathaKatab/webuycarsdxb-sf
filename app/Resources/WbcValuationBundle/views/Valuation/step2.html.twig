@@ -27,21 +27,21 @@
     {{ parent() }}
     <section>
         <div id="valuation-container" class="container text-center" ng-controller="ValuationStepTwoController as ctrl">
-            <form name="valuationDetailsForm" ng-submit="ctrl.submitForm(valuationDetailsForm.$valid)" method="post" class="form" novalidate>
+            <form name="valuationStepTwoForm" ng-submit="ctrl.submitForm(valuationStepTwoForm.$valid)" method="post" class="form appointment-funnel" novalidate>
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
                         <div class="form-group">
-                            <select ng-model="ctrl.vehicleModelType" ng-class="{'form-control-invalid': valuationDetailsForm.$submitted && valuationDetailsForm.vehicleModelType.$invalid }" name="vehicleModelType" class="form-control">
+                            <select ng-model="ctrl.vehicleModelType" ng-class="{'form-control-invalid': valuationStepTwoForm.$submitted && valuationStepTwoForm.vehicleModelType.$invalid }" name="vehicleModelType" class="form-control">
                                 <option value="">Vehicle Trim</option>
                                 {% for modelType in vehicleModelTypes %}
                                     <option value="{{ modelType.id }}">{{ modelType.name }}</option>
                                 {% endfor %}
                             </select>
                             <p class="text-error hidden"
-                               ng-class="{'hidden': !valuationDetailsForm.$submitted || valuationDetailsForm.vehicleModelType.$valid }">Select a Vehicle Trim</p>
+                               ng-class="{'hidden': !valuationStepTwoForm.$submitted || valuationStepTwoForm.vehicleModelType.$valid }">Select a Vehicle Trim</p>
                         </div>
                         <div class="form-group">
-                            <select ng-model="ctrl.vehicleMileage" ng-class="{'form-control-invalid': valuationDetailsForm.$submitted && valuationDetailsForm.vehicleMileage.$invalid }"
+                            <select ng-model="ctrl.vehicleMileage" ng-class="{'form-control-invalid': valuationStepTwoForm.$submitted && valuationStepTwoForm.vehicleMileage.$invalid }"
                                     required name="vehicleMileage" class="form-control">
                                 <option value="">Vehicle Mileage</option>
                                 {% for key, mileage in getMileages() %}
@@ -49,10 +49,10 @@
                                 {% endfor %}
                             </select>
                             <p class="text-error hidden"
-                               ng-class="{'hidden': !valuationDetailsForm.$submitted || valuationDetailsForm.vehicleMileage.$valid }">Select a Vehicle Mileage</p>
+                               ng-class="{'hidden': !valuationStepTwoForm.$submitted || valuationStepTwoForm.vehicleMileage.$valid }">Select a Vehicle Mileage</p>
                         </div>
                         <div class="form-group">
-                            <select ng-model="ctrl.vehicleColor" ng-class="{'form-control-invalid': valuationDetailsForm.$submitted && valuationDetailsForm.vehicleColor.$invalid }"
+                            <select ng-model="ctrl.vehicleColor" ng-class="{'form-control-invalid': valuationStepTwoForm.$submitted && valuationStepTwoForm.vehicleColor.$invalid }"
                                     required name="vehicleColor" class="form-control">
                                 <option value="">Vehicle Color</option>
                                 {% for key, color in getColors() %}
@@ -60,10 +60,10 @@
                                 {% endfor %}
                             </select>
                             <p class="text-error hidden"
-                               ng-class="{'hidden': !valuationDetailsForm.$submitted || valuationDetailsForm.vehicleColor.$valid }">Select a Vehicle Color</p>
+                               ng-class="{'hidden': !valuationStepTwoForm.$submitted || valuationStepTwoForm.vehicleColor.$valid }">Select a Vehicle Color</p>
                         </div>
                         <div class="form-group">
-                            <select ng-model="ctrl.vehicleBodyCondition" ng-class="{'form-control-invalid': valuationDetailsForm.$submitted && valuationDetailsForm.vehicleBodyCondition.$invalid }"
+                            <select ng-model="ctrl.vehicleBodyCondition" ng-class="{'form-control-invalid': valuationStepTwoForm.$submitted && valuationStepTwoForm.vehicleBodyCondition.$invalid }"
                                     required name="vehicleBodyCondition" class="form-control">
                                 <option value="">Vehicle Body Condition</option>
                                 {% for key, condition in getBodyConditions() %}
@@ -71,29 +71,12 @@
                                 {% endfor %}
                             </select>
                             <p class="text-error hidden"
-                               ng-class="{'hidden': !valuationDetailsForm.$submitted || valuationDetailsForm.vehicleBodyCondition.$valid }">Select a Vehicle Body Condition</p>
+                               ng-class="{'hidden': !valuationStepTwoForm.$submitted || valuationStepTwoForm.vehicleBodyCondition.$valid }">Select a Vehicle Body Condition</p>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>And finally&hellip;</h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
-                        <div class="form-group">
-                            <input ng-model="ctrl.name" ng-class="{'form-control-invalid': valuationDetailsForm.$submitted && valuationDetailsForm.name.$invalid }"
-                                   required name="name" type="text" class="form-control" placeholder="Type your name">
-                            <p class="text-error hidden"
-                               ng-class="{'hidden': !valuationDetailsForm.$submitted || valuationDetailsForm.name.$valid }">Type your name</p>
-                        </div>
-                        <div class="form-group">
-                            <input data-type="telephone" ng-model="ctrl.mobileNumber" ng-pattern="/^(0|((\+|00)?971))(50|51|52|53|54|55|56|57|58|59)\d{7}$/" ng-class="{'form-control-invalid': valuationDetailsForm.$submitted && valuationDetailsForm.mobileNumber.$invalid }"
-                                   required name="mobileNumber" type="text" class="form-control" placeholder="Type your mobile phone number">
-                            <p class="text-error hidden"
-                               ng-class="{'hidden': !valuationDetailsForm.$submitted || valuationDetailsForm.mobileNumber.$valid }">Type a valid UAE mobile phone number</p>
-                        </div>
                         <div class="form-group submit">
                             <button type="submit" class="btn btn-primary btn-lg">See your Vehicle Value</button>
                         </div>

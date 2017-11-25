@@ -15,11 +15,11 @@
 }
 
 .btn-primary {
-  background-color: #FFCD00;
+  background-color: $sunflower-yellow-color;
 
   &:hover, &:focus, &:active {
     color: inherit;
-    background-color: #fbdb57;
+    background-color: $sunflower-yellow-color;
     border-color: transparent;
     outline: 0;
   }
@@ -27,24 +27,29 @@
   &:active{
     &:focus{
       color: inherit;
-      background-color: #fbdb57;
+      background-color: $sunflower-yellow-color;
       border-color: transparent;
       outline: 0;
     }
   }
 }
 
-.btn-lg, .btn-lg, .btn-group-lg > .btn {
-  padding: 14px 16px;
-}
+.appointment-funnel{
+  .btn-primary {
+    background-color: $apple-green-color;
 
-#sell-any-car-you-have {
-  button {
-    margin-top: -5px;
-  }
-  @media (max-width: $screen-sm-max) {
-    button{
-      margin-top: 0;
+    &:hover, &:focus, &:active {
+      background-color: $apple-green-color;
+    }
+
+    &:active {
+      &:focus {
+        background-color: $apple-green-color;
+      }
     }
   }
+}
+
+.btn-lg, .btn-lg, .btn-group-lg > .btn {
+  padding: 14px 16px;
 }
