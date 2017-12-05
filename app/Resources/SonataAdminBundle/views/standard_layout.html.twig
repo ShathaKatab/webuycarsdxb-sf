@@ -387,7 +387,21 @@ file that was distributed with this source code.
 <script>
     $(document).ready(function () {
         $('.convert-to-inspection').on('click', function (e) {
+            if(!$(this).data('branch-id') && !$(this).data('branch-timing')){
+                alert('You must set a Branch and Timing for this Appointment before attempting this action!');
+                e.preventDefault();
+                return;
+            }
+
             if (!window.confirm('Are you sure? This will generate an Inspection.')) {
+                e.preventDefault();
+                return;
+            }
+        });
+
+        $('.show-inspection').on('click', function(e){
+            if (!$(this).data('branch-id') && !$(this).data('branch-timing')) {
+                alert('You must set a Branch and Timing for this Appointment before attempting this action!');
                 e.preventDefault();
                 return;
             }

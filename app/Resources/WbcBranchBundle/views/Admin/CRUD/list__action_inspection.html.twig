@@ -1,13 +1,18 @@
 {% if object.status == 'checked-in' or object.status == 'inspected' %}
     {% if object.inspection is not null and object.inspection != false %}
         <a href="{{ path('admin_wbc_branch_inspection_show', {id: object.inspection.id}) }}"
-           class="btn btn-sm btn-info view_link"
+           data-branch-id="{{ object.branch|default(null) }}"
+           data-branch-timing="{{ object.branchTiming|default(null) }}"
+           class="btn btn-sm btn-info view_link show-inspection"
            title="Show Inspection">
             Show Inspection
         </a>
     {% elseif is_granted('ROLE_ADMIN_BRANCH_INSPECTION_CREATE') %}
         <a href="{{ path('admin_wbc_branch_appointment_generateInspection', {id: object.id}) }}"
            class="btn btn-sm btn-danger view_link convert-to-inspection"
+           data-branch-id="{{ object.branch|default(null) }}"
+           data-branch-timing="{{ object.branchTiming|default(null) }}"
+           data-majid="majid"
            title="Convert to Inspection">
             Convert to Inspection
         </a>
