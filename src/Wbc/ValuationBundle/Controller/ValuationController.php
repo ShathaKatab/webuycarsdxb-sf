@@ -90,7 +90,8 @@ class ValuationController extends Controller
             $data['vehicleYear'] = $modelYear;
 
             $valuation = new Valuation();
-            $valuation->setStatus(Valuation::SOURCE_WEBSITE);
+            $valuation->setStatus(Valuation::STATUS_NEW);
+            $valuation->setSource(Valuation::SOURCE_WEBSITE);
 
             $form = $this->createForm(new ValuationStepTwoType(), $valuation);
 
