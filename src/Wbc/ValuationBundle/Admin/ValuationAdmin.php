@@ -143,8 +143,8 @@ class ValuationAdmin extends AbstractAdmin
             ->add('vehicleMileage', null, ['label' => 'Mileage (Kms)'])
             ->add('priceOnline', 'currency', ['currency' => 'AED'])
             ->add('hasAppointment', 'boolean')
-            ->add('status', 'choice', ['choices' => Valuation::getStatuses()])
-            ->add('source', 'choice', ['choices' => Valuation::getSources()])
+            ->add('status', 'choice', ['choices' => Valuation::getStatuses(), 'editable' => true])
+            ->add('source', 'choice', ['choices' => Valuation::getSources(), 'editable' => true])
             ->add('createdAt', null, ['label' => 'Created'])
             ->add('_action', 'actions', ['actions' => [
                 'show' => [],
