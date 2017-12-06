@@ -171,7 +171,7 @@ class ValuationAdmin extends AbstractAdmin
             ->add('vehicleMileage', null, ['label' => 'Mileage (Kms)', 'disabled' => true, 'required' => false])
             ->add('vehicleBodyCondition', 'choice', ['choices' => ConditionType::getConditions(), 'disabled' => true, 'required' => false])
             ->add('vehicleColor', 'choice', ['choices' => ColorType::getColors(), 'disabled' => true, 'required' => false])
-            ->add('priceOnline', CurrencyType::class, ['label' => 'Price Online (AED)', 'disabled' => true, 'required' => false]);
+            ->add('priceOnline', 'money', ['currency' => 'AED', 'label' => 'Price Online', 'disabled' => true, 'required' => false]);
     }
 
     /**
