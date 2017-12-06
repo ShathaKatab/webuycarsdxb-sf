@@ -2,8 +2,8 @@
 
 namespace Wbc\BranchBundle\Repository;
 
-use Wbc\BranchBundle\Entity\Branch;
 use Doctrine\ORM\EntityRepository;
+use Wbc\BranchBundle\Entity\Branch;
 use Wbc\BranchBundle\Entity\Timing;
 
 /**
@@ -16,11 +16,12 @@ class TimingRepository extends EntityRepository
     /**
      * @param Branch $branch
      * @param int    $dayBooked
+     * @param bool   $admin
      * @param bool   $timeConstrained
      *
      * @return array
      */
-    public function findAllByBranchAndDay(Branch $branch, $dayBooked, $timeConstrained = true)
+    public function findAllByBranchAndDay(Branch $branch, $dayBooked, $admin = false, $timeConstrained = true)
     {
         $now = new \DateTime();
 
@@ -33,9 +34,13 @@ class TimingRepository extends EntityRepository
             ->orderBy('t.dayBooked', 'ASC')
             ->addOrderBy('t.from', 'ASC');
 
-        if ($timeConstrained && intval($dayBooked) == $now->format('N')) {
+        if ($timeConstrained && (int) $dayBooked === $now->format('N')) {
             $queryBuilder->andWhere('t.from >= :fromTime')
                 ->setParameter(':fromTime', Timing::formatDateTimeToInteger($now));
+        }
+
+        if (false === $admin) {
+            $queryBuilder->andWhere('t.adminOnly = :falsy')->setParameter(':falsy', false, \PDO::PARAM_BOOL);
         }
 
         return $queryBuilder->getQuery()->getResult();

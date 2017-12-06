@@ -40,6 +40,14 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
+    public function getExportFormats()
+    {
+        return ['xls'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getTemplate($name)
     {
         switch ($name) {
@@ -55,7 +63,7 @@ class AppointmentAdmin extends AbstractAdmin
 
     public function getExportFields()
     {
-        return ['name', 'mobileNumber', 'vehicleMake', 'vehicleModel', 'vehicleYear', 'valuation.priceOnline', 'dateBooked', 'branchTiming', 'status', 'createdAt', 'createdBy'];
+        return ['name', 'mobileNumber', 'emailAddress',  'vehicleMake', 'vehicleModel', 'vehicleYear', 'valuation.priceOnline', 'dateBooked', 'branchTiming', 'status', 'createdAt', 'createdBy'];
     }
 
     /**

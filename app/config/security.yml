@@ -81,6 +81,7 @@ security:
         ROLE_CALL_CENTER:
             - ROLE_ADMIN
             - ROLE_VALUATION_READER
+            - ROLE_VALUATION_EDITOR
             - ROLE_APPOINTMENT_READER
             - ROLE_APPOINTMENT_EDITOR
         ROLE_SUPER_ADMIN:

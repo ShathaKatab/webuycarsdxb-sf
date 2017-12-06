@@ -122,6 +122,13 @@ class Timing
     protected $updatedAt;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="admin_only", type="boolean", nullable=true, options={"default": false})
+     */
+    protected $adminOnly;
+
+    /**
      * Timing Constructor.
      *
      * @param Branch $branch
@@ -133,6 +140,7 @@ class Timing
         $this->branch = $branch;
         $this->dayBooked = $dayBooked;
         $this->from = $from;
+        $this->adminOnly = false;
     }
 
     public function __toString()
@@ -317,6 +325,10 @@ class Timing
     public function getName()
     {
         if ($this->branch && null !== $this->dayBooked && null !== $this->from && null !== $this->to) {
+            if ($this->adminOnly) {
+                return sprintf('%s - %s (Walk-In)', $this->branch->getName(), DayType::getDays()[$this->dayBooked]);
+            }
+
             return sprintf('%s - %s (%s - %s)', $this->branch->getName(), DayType::getDays()[$this->dayBooked], $this->from, $this->to);
         }
     }
@@ -352,6 +364,10 @@ class Timing
     public function getTimingString()
     {
         if (null !== $this->from && null !== $this->to) {
+            if ($this->adminOnly) {
+                return 'Walk-In';
+            }
+
             return sprintf('%s - %s', self::formatIntegerToTimeString($this->from), self::formatIntegerToTimeString($this->to));
         }
     }
@@ -400,5 +416,39 @@ class Timing
     public function hasTimeSurpassed()
     {
         return $this->formatDateTimeToInteger(new \DateTime()) > $this->formatDateTimeToInteger(new \DateTime($this->from));
+    }
+
+    /**
+     * Set adminOnly.
+     *
+     * @param bool $adminOnly
+     *
+     * @return Timing
+     */
+    public function setAdminOnly($adminOnly)
+    {
+        $this->adminOnly = $adminOnly;
+
+        return $this;
+    }
+
+    /**
+     * Get adminOnly.
+     *
+     * @return bool
+     */
+    public function getAdminOnly()
+    {
+        return $this->adminOnly;
+    }
+
+    /**
+     * Is adminOnly.
+     *
+     * @return bool
+     */
+    public function isAdminOnly()
+    {
+        return $this->adminOnly;
     }
 }

@@ -159,6 +159,12 @@ class AppointmentListener
         }
 
         if ($object->getBranch() && $object->getSmsTimingString() && $object->getName()) {
+            $branchTiming = $object->getBranchTiming();
+
+            if ($branchTiming && $branchTiming->isAdminOnly()) {
+                return;
+            }
+
             $this->smsManager->sendSms($object->getMobileNumber(),
                 $this->templating->render('WbcBranchBundle::appointmentSms.txt.twig', [
                     'appointment' => $object,

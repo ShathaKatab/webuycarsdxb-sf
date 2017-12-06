@@ -90,6 +90,7 @@ class ValuationController extends Controller
             $data['vehicleYear'] = $modelYear;
 
             $valuation = new Valuation();
+            $valuation->setStatus(Valuation::SOURCE_WEBSITE);
 
             $form = $this->createForm(new ValuationStepTwoType(), $valuation);
 
@@ -168,8 +169,6 @@ class ValuationController extends Controller
 
                 return $this->redirectToRoute('wbc_appointment_step_4');
             }
-            var_dump($form->getErrors());
-            exit;
         }
 
         return ['valuation' => $valuation];

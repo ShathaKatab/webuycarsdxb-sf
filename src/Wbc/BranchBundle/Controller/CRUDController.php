@@ -67,7 +67,7 @@ class CRUDController extends Controller
         return new Response($this->get('serializer')->serialize(
             $this->get('doctrine.orm.default_entity_manager')
                 ->getRepository('WbcBranchBundle:Timing')
-                ->findAllByBranchAndDay($branch, $request->get('day')), 'json'));
+                ->findAllByBranchAndDay($branch, $request->get('day')), 'json'), true);
     }
 
     /**

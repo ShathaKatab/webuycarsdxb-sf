@@ -5,9 +5,16 @@ namespace Wbc\ValuationBundle\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Wbc\BranchBundle\Entity\Appointment;
+use Wbc\ValuationBundle\Entity\Valuation;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Form\ColorType;
 use Wbc\VehicleBundle\Form\ConditionType;
@@ -32,6 +39,14 @@ class ValuationAdmin extends AbstractAdmin
     public function getExportFields()
     {
         return ['name', 'mobileNumber', 'emailAddress', 'vehicleMake', 'vehicleModel', 'vehicleMileage', 'priceOnline', 'hasAppointment', 'createdAt'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExportFormats()
+    {
+        return ['xls'];
     }
 
     /**
@@ -104,6 +119,14 @@ class ValuationAdmin extends AbstractAdmin
                     'dp_max_date' => (new \DateTime('+1 month'))->format('d/M/Y'),
                     'dp_default_date' => $now->format('m/d/Y'),
                 ],
+            ])
+            ->add('status', 'doctrine_orm_choice', [
+                'field_options' => ['choices' => Valuation::getStatuses()],
+                'field_type' => 'choice',
+            ])
+            ->add('source', 'doctrine_orm_choice', [
+                'field_options' => ['choices' => Valuation::getSources()],
+                'field_type' => 'choice',
             ]);
     }
 
@@ -120,6 +143,8 @@ class ValuationAdmin extends AbstractAdmin
             ->add('vehicleMileage', null, ['label' => 'Mileage (Kms)'])
             ->add('priceOnline', 'currency', ['currency' => 'AED'])
             ->add('hasAppointment', 'boolean')
+            ->add('status', 'choice', ['choices' => Valuation::getStatuses()])
+            ->add('source', 'choice', ['choices' => Valuation::getSources()])
             ->add('createdAt', null, ['label' => 'Created'])
             ->add('_action', 'actions', ['actions' => [
                 'show' => [],
@@ -130,12 +155,35 @@ class ValuationAdmin extends AbstractAdmin
             ]]);
     }
 
+    protected function configureFormFields(FormMapper $form)
+    {
+        $form->add('notes')
+            ->add('reasonCancellation', TextareaType::class, ['label' => 'Reason for Cancellation', 'required' => false])
+            ->add('status', ChoiceType::class, ['choices' => Valuation::getStatuses(), 'required' => false])
+            ->add('source', ChoiceType::class, ['choices' => Valuation::getSources(), 'required' => false])
+            ->add('name', null, ['disabled' => true, 'required' => false])
+            ->add('mobileNumber', null, ['label' => 'Mobile', 'disabled' => true, 'required' => false])
+            ->add('emailAddress', EmailType::class, ['disabled' => true, 'required' => false])
+            ->add('vehicleModel.make', null, ['disabled' => true, 'required' => false])
+            ->add('vehicleModel.name', null, ['disabled' => true, 'required' => false])
+            ->add('modelTypeName', TextType::class, ['disabled' => true, 'required' => false, 'label' => 'Vehicle Model Type'])
+            ->add('vehicleYear', null, ['disabled' => true, 'required' => false])
+            ->add('vehicleMileage', null, ['label' => 'Mileage (Kms)', 'disabled' => true, 'required' => false])
+            ->add('vehicleBodyCondition', 'choice', ['choices' => ConditionType::getConditions(), 'disabled' => true, 'required' => false])
+            ->add('vehicleColor', 'choice', ['choices' => ColorType::getColors(), 'disabled' => true, 'required' => false])
+            ->add('priceOnline', CurrencyType::class, ['label' => 'Price Online (AED)', 'disabled' => true, 'required' => false]);
+    }
+
     /**
      * {@inheritdoc}
      */
     protected function configureShowFields(ShowMapper $show)
     {
         $show->add('id')
+            ->add('notes')
+            ->add('reasonCancellation', TextareaType::class, ['label' => 'Reason for Cancellation', 'required' => false])
+            ->add('status', 'choice', ['choices' => Valuation::getStatuses()])
+            ->add('source', 'choice', ['choices' => Valuation::getSources()])
             ->add('name')
             ->add('mobileNumber', null, ['label' => 'Mobile'])
             ->add('emailAddress')
@@ -157,7 +205,6 @@ class ValuationAdmin extends AbstractAdmin
     {
         $collection->remove('create')
             ->remove('delete')
-            ->remove('edit')
             ->add('generateAppointment', $this->getRouterIdParameter().'/generateAppointment');
     }
 }

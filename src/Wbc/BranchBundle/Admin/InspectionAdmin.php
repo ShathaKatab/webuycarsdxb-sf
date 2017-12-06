@@ -47,9 +47,20 @@ class InspectionAdmin extends AbstractAdmin
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getExportFormats()
+    {
+        return ['xls'];
+    }
+
+    /**
+     * @return array
+     */
     public function getExportFields()
     {
-        return ['id', 'appointment.name', 'appointment.mobileNumber', 'vehicleMake', 'vehicleModel', 'vehicleYear', 'priceOnline', 'appointment.dateBooked', 'appointment.branchTiming', 'createdAt', 'createdBy'];
+        return ['id', 'appointment.name', 'appointment.emailAddress', 'appointment.mobileNumber', 'vehicleMake', 'vehicleModel', 'vehicleYear', 'priceOnline', 'appointment.dateBooked', 'appointment.branchTiming', 'createdAt', 'createdBy'];
     }
 
     /**

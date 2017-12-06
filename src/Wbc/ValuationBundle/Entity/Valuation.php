@@ -22,6 +22,18 @@ use Wbc\VehicleBundle\Entity\ModelType;
  */
 class Valuation
 {
+    const STATUS_NEW = 'new';
+    const STATUS_CALLBACK = 'callback';
+    const STATUS_INVALID_CONTACT = 'invalid_contact';
+    const STATUS_DUPLICATE = 'duplicate';
+    const STATUS_RESEARCH = 'research';
+    const STATUS_CANCELLED = 'cancelled';
+
+    const SOURCE_WEBSITE = 'website';
+    const SOURCE_CALL = 'call';
+    const SOURCE_WALK_IN = 'walk_in';
+    const SOURCE_OTHERS = 'others';
+
     /**
      * @var string
      *
@@ -156,6 +168,34 @@ class Valuation
     protected $updatedAt;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=20, nullable=true)
+     */
+    protected $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="notes", type="text", nullable=true)
+     */
+    protected $notes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="reason_cancellation", type="text", nullable=true)
+     */
+    protected $reasonCancellation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="source", type="string", length=20, nullable=true)
+     */
+    protected $source;
+
+    /**
      * @var Make
      */
     protected $vehicleMake;
@@ -172,6 +212,7 @@ class Valuation
         }
 
         $this->setAppointment($appointment);
+        $this->source = self::SOURCE_OTHERS;
     }
 
     public function __toString()
@@ -551,5 +592,145 @@ class Valuation
         }
 
         return false;
+    }
+
+    /**
+     * Set status.
+     *
+     * @param string $status
+     *
+     * @return Valuation
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status.
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set notes.
+     *
+     * @param string $notes
+     *
+     * @return Valuation
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Get notes.
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Set reasonCancellation.
+     *
+     * @param string $reasonCancellation
+     *
+     * @return Valuation
+     */
+    public function setReasonCancellation($reasonCancellation)
+    {
+        $this->reasonCancellation = $reasonCancellation;
+
+        return $this;
+    }
+
+    /**
+     * Get reasonCancellation.
+     *
+     * @return string
+     */
+    public function getReasonCancellation()
+    {
+        return $this->reasonCancellation;
+    }
+
+    /**
+     * Set source.
+     *
+     * @param string $source
+     *
+     * @return Valuation
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * Get source.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
+
+    /**
+     * Gets statuses.
+     *
+     * @return array
+     */
+    public static function getStatuses()
+    {
+        return [
+            self::STATUS_NEW => 'New',
+            self::STATUS_CALLBACK => 'Call Back',
+            self::STATUS_INVALID_CONTACT => 'Invalid Contact',
+            self::STATUS_DUPLICATE => 'Duplicate',
+            self::STATUS_RESEARCH => 'Research',
+            self::STATUS_CANCELLED => 'Cancelled',
+        ];
+    }
+
+    /**
+     * Gets Sources.
+     *
+     * @return array
+     */
+    public static function getSources()
+    {
+        return [
+            self::SOURCE_WEBSITE => 'Website',
+            self::SOURCE_CALL => 'Call',
+            self::SOURCE_WALK_IN => 'Walk-In',
+            self::SOURCE_OTHERS => 'Others',
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getModelTypeName()
+    {
+        if ($this->vehicleModelType) {
+            return $this->vehicleModelType->getName();
+        }
+
+        return '';
     }
 }

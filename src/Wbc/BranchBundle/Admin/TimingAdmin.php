@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Wbc\BranchBundle\Entity\Branch;
@@ -46,7 +47,9 @@ class TimingAdmin extends AbstractAdmin
             ->add('to', TextType::class, [
                 'help' => 'e.g. 13:00',
             ])
-            ->add('numberOfSlots', IntegerType::class);
+            ->add('numberOfSlots', IntegerType::class)
+            ->add('adminOnly', CheckboxType::class, ['required' => false])
+        ;
     }
 
     /**
@@ -73,6 +76,7 @@ class TimingAdmin extends AbstractAdmin
             ->add('from')
             ->add('to')
             ->add('numberOfSlots', 'integer', ['editable' => true])
+            ->add('adminOnly', 'boolean', ['editable' => true])
         ;
     }
 
@@ -87,6 +91,7 @@ class TimingAdmin extends AbstractAdmin
             ->add('dayBooked')
             ->add('from')
             ->add('to')
-            ->add('numberOfSlots');
+            ->add('numberOfSlots')
+            ->add('adminOnly');
     }
 }

@@ -48,9 +48,17 @@ class DealAdmin extends AbstractAdmin
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getExportFormats()
+    {
+        return ['xls'];
+    }
+
     public function getExportFields()
     {
-        return ['id', 'name', 'mobileNumber', 'inspection.vehicleMake', 'inspection.vehicleModel', 'inspection.vehicleYear', 'inspection.priceOnline', 'inspection.priceOffered', 'inspection.priceExpected', 'createdAt', 'createdBy'];
+        return ['id', 'name', 'emailAddress', 'mobileNumber', 'inspection.vehicleMake', 'inspection.vehicleModel', 'inspection.vehicleYear', 'inspection.priceOnline', 'inspection.priceOffered', 'inspection.priceExpected', 'createdAt', 'createdBy'];
     }
 
     /**
