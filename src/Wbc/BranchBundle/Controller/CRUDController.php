@@ -64,10 +64,10 @@ class CRUDController extends Controller
      */
     public function listBranchTimingsAction(Branch $branch, Request $request)
     {
-        return new Response($this->get('serializer')->serialize(
-            $this->get('doctrine.orm.default_entity_manager')
-                ->getRepository('WbcBranchBundle:Timing')
-                ->findAllByBranchAndDay($branch, $request->get('day')), 'json'), true);
+        $timings = $this->get('doctrine.orm.default_entity_manager')->getRepository('WbcBranchBundle:Timing')
+            ->findAllByBranchAndDay($branch, $request->get('day'), true);
+
+        return new Response($this->get('serializer')->serialize($timings, 'json'));
     }
 
     /**
