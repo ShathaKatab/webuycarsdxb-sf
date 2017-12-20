@@ -34,7 +34,7 @@ class Deal
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100)
+     * @ORM\Column(name="name", type="string", length=100, nullable=true)
      *
      * @Assert\NotBlank()
      *
@@ -45,7 +45,7 @@ class Deal
     /**
      * @var string
      *
-     * @ORM\Column(name="mobile_number", type="string", length=15)
+     * @ORM\Column(name="mobile_number", type="string", length=15, nullable=true)
      *
      * @Assert\NotBlank()
      */
@@ -54,7 +54,7 @@ class Deal
     /**
      * @var string
      *
-     * @ORM\Column(name="email_address", type="string", length=100)
+     * @ORM\Column(name="email_address", type="string", length=100, nullable=true)
      *
      * @Assert\NotBlank()
      * @Assert\Email()
