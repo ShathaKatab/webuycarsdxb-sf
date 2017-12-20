@@ -338,7 +338,11 @@ class Deal
         $appointment = $this->getAppointment();
 
         if ($appointment) {
-            return $appointment->getBranchTiming()->getTimingString();
+            $branchTiming = $appointment->getBranchTiming();
+
+            if ($branchTiming) {
+                return $branchTiming->getTimingString();
+            }
         }
     }
 
@@ -352,7 +356,11 @@ class Deal
         $appointment = $this->getAppointment();
 
         if ($appointment) {
-            return $appointment->getDateBooked()->format('M d, Y');
+            $dateBooked = $appointment->getDateBooked();
+
+            if ($dateBooked) {
+                return $dateBooked->format('M d, Y');
+            }
         }
     }
 
@@ -368,6 +376,7 @@ class Deal
     public function getAppointmentMobileNumber()
     {
         $appointment = $this->getAppointment();
+
         if ($appointment) {
             return $appointment->getMobileNumber();
         }
@@ -376,6 +385,7 @@ class Deal
     public function getAppointmentEmailAddress()
     {
         $appointment = $this->getAppointment();
+
         if ($appointment) {
             return $appointment->getEmailAddress();
         }
@@ -384,6 +394,7 @@ class Deal
     public function getAppointmentBranch()
     {
         $appointment = $this->getAppointment();
+
         if ($appointment) {
             return $appointment->getBranch();
         }
@@ -392,6 +403,7 @@ class Deal
     public function getAppointmentDayBooked()
     {
         $appointment = $this->getAppointment();
+
         if ($appointment) {
             return $appointment->getDayBooked();
         }
@@ -400,6 +412,7 @@ class Deal
     public function getAppointmentDateBooked()
     {
         $appointment = $this->getAppointment();
+
         if ($appointment) {
             return $appointment->getDateBooked();
         }
@@ -408,6 +421,7 @@ class Deal
     public function getAppointmentBranchTiming()
     {
         $appointment = $this->getAppointment();
+
         if ($appointment) {
             return $appointment->getBranchTiming();
         }
@@ -416,6 +430,7 @@ class Deal
     public function getAppointmentNotes()
     {
         $appointment = $this->getAppointment();
+
         if ($appointment) {
             return $appointment->getNotes();
         }
