@@ -205,6 +205,11 @@ class Valuation
     protected $vehicleMake;
 
     /**
+     * @var string
+     */
+    protected $priceImageEncoded;
+
+    /**
      * Valuation Constructor.
      *
      * @param Appointment $appointment
@@ -736,5 +741,25 @@ class Valuation
         }
 
         return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getPriceImageEncoded()
+    {
+        return $this->priceImageEncoded;
+    }
+
+    /**
+     * @param string $priceImageEncoded
+     *
+     * @return Valuation
+     */
+    public function setPriceImageEncoded($priceImageEncoded)
+    {
+        $this->priceImageEncoded = $priceImageEncoded;
+
+        return $this;
     }
 }

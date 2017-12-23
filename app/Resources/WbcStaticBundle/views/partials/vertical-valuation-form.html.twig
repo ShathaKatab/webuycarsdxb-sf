@@ -14,7 +14,10 @@
         <h1>{{ _valuation.vehicleModel.make.name }} {{ _valuation.vehicleModel.name }} Owner!</h1>
         {% if _valuation.priceOnline %}
             <h4>Last time we checked your car was worth</h4>
-            <h1>AED {{ _valuation.priceOnline|number_format }}</h1>
+            <div class="col-md-8 col-md-offset-2">
+            <img src="{{ _valuation.priceImageEncoded }}"
+                 class="inherit-margin-top img-responsive center-block valuation-price">
+            </div>
         {% endif %}
         <a href="{{ path('wbc_appointment_step_4') }}" class="btn btn-primary btn-lg">Book Appointment</a>
         <a id="selectedValuationNew" href="javascript:void(0)">Not your car? Click to make a new valuation</a>

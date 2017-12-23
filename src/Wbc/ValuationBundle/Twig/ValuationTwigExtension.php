@@ -4,8 +4,11 @@ namespace Wbc\ValuationBundle\Twig;
 
 use Doctrine\ORM\EntityManager;
 use JMS\DiExtraBundle\Annotation as DI;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Wbc\ValuationBundle\Entity\Valuation;
+use Wbc\ValuationBundle\ValuationEvent;
+use Wbc\ValuationBundle\ValuationEvents;
 use Wbc\VehicleBundle\Entity\Model;
 
 /**
@@ -18,6 +21,11 @@ use Wbc\VehicleBundle\Entity\Model;
  */
 class ValuationTwigExtension extends \Twig_Extension
 {
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
+
     /**
      * @var Session
      */
@@ -32,15 +40,18 @@ class ValuationTwigExtension extends \Twig_Extension
      * ValuationTwigExtension constructor.
      *
      * @DI\InjectParams({
+     *     "dispatcher" = @DI\Inject("event_dispatcher"),
      *     "session" = @DI\Inject("session"),
      *     "entityManager" = @DI\Inject("doctrine.orm.default_entity_manager")
      * })
      *
-     * @param Session       $session
-     * @param EntityManager $entityManager
+     * @param EventDispatcherInterface $dispatcher
+     * @param Session                  $session
+     * @param EntityManager            $entityManager
      */
-    public function __construct(Session $session, EntityManager $entityManager)
+    public function __construct(EventDispatcherInterface $dispatcher, Session $session, EntityManager $entityManager)
     {
+        $this->dispatcher = $dispatcher;
         $this->session = $session;
         $this->entityManager = $entityManager;
     }
@@ -60,6 +71,8 @@ class ValuationTwigExtension extends \Twig_Extension
     {
         if ($this->session->has('valuationId')) {
             $valuation = $this->entityManager->getRepository(Valuation::class)->find($this->session->get('valuationId'));
+
+            $this->dispatcher->dispatch(ValuationEvents::VALUATION_REQUESTED_FRONT_END, new ValuationEvent($valuation));
 
             return $valuation;
         }

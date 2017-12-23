@@ -17,7 +17,8 @@ use Wbc\ValuationBundle\Form\AppointmentType;
 use Wbc\ValuationBundle\Form\ValuationStepOneType;
 use Wbc\ValuationBundle\Form\ValuationStepThreeType;
 use Wbc\ValuationBundle\Form\ValuationStepTwoType;
-use Wbc\VehicleBundle\Entity\Model;
+use Wbc\ValuationBundle\ValuationEvent;
+use Wbc\ValuationBundle\ValuationEvents;
 
 /**
  * Class ValuationController.
@@ -197,6 +198,8 @@ class ValuationController extends Controller
         if (!$valuation) {
             throw new NotFoundHttpException('Valuation is not found!');
         }
+
+        $this->get('event_dispatcher')->dispatch(ValuationEvents::VALUATION_REQUESTED_FRONT_END, new ValuationEvent($valuation));
 
         if ($request->getMethod() === Request::METHOD_POST) {
             $data = json_decode($request->getContent(), true);
