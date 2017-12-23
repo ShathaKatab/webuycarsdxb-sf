@@ -153,6 +153,11 @@ class ValuationController extends Controller
         $this->checkValuationInSession();
 
         $valuationId = $session->get('valuationId');
+
+        if (!$valuationId) {
+            return $this->redirectToRoute('wbc_appointment_step_1');
+        }
+
         $valuation = $entityManager->getRepository('WbcValuationBundle:Valuation')->find($valuationId);
 
         if (!$valuation) {
@@ -193,6 +198,11 @@ class ValuationController extends Controller
         $session = $this->get('session');
         $valuationId = $session->get('valuationId');
         $entityManager = $this->get('doctrine.orm.default_entity_manager');
+
+        if (!$valuationId) {
+            return $this->redirectToRoute('wbc_appointment_step_1');
+        }
+
         $valuation = $entityManager->getRepository(Valuation::class)->find($valuationId);
 
         if (!$valuation) {
