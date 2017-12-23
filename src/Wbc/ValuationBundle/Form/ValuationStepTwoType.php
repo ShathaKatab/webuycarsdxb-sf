@@ -2,18 +2,15 @@
 
 namespace Wbc\ValuationBundle\Form;
 
-use Wbc\ValuationBundle\Entity\Valuation;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Wbc\ValuationBundle\Entity\Valuation;
 use Wbc\VehicleBundle\Form\ColorType;
 use Wbc\VehicleBundle\Form\ConditionType;
 use Wbc\VehicleBundle\Form\MileageType;
 use Wbc\VehicleBundle\Form\ModelSelectorType;
 use Wbc\VehicleBundle\Form\ModelTypeSelectorType;
 use Wbc\VehicleBundle\Form\ModelYearType;
-use Wbc\UtilityBundle\Form\MobileNumberType;
 
 /**
  * Class ValuationStepTwoType.

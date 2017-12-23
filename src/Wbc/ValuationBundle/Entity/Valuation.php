@@ -117,6 +117,8 @@ class Valuation
      *
      * @ORM\Column(name="name", type="string", length=100, nullable=true)
      *
+     * @Assert\NotBlank(groups={"valuation"})
+     *
      * @Serializer\Expose()
      */
     protected $name;
@@ -134,6 +136,8 @@ class Valuation
      * @var string
      *
      * @ORM\Column(name="mobile_number", type="string", length=15, nullable=true)
+     *
+     * @Assert\NotBlank(groups={"valuation"})
      */
     protected $mobileNumber;
 

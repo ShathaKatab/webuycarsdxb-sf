@@ -23,8 +23,6 @@ angular
             var maxDate = new Date();
             maxDate.setDate(maxDate.getDate() + 30);
 
-            console.log('ValuationStepFourController');
-
             vm.mapHeight = '400px';
 
             vm.branches = [];
@@ -54,7 +52,6 @@ angular
             });
 
             $scope.$watch('ctrl.selectedBranch', function(){
-                console.log('Branch changed');
                 vm.isTimingSlotsAvailable = true;
                 vm.selectedBranchChanged();
                 vm.fetchBranchTimings();

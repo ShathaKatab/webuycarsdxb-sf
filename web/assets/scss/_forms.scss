@@ -14,90 +14,99 @@ textarea{
   resize: vertical;
 }
 
-.form-control {
-  font-family: $font-family-base;
-  box-shadow: none;
-  color: $lightish-grey-color;
-  font-size: 12px;
-  font-weight: $font-weight;
-  line-height: 22px;
-  &:focus {
-    box-shadow: none;
-    border-color: inherit;
-  }
-
-  &.form-control-invalid{
-    border-color: $invalid-color;
+.g-recaptcha {
+  &.form-control-invalid {
+    >div{
+    border: 1px solid $invalid-color;
     color: $invalid-color;
   }
 }
 
-.form-group.submit {
-  margin-top: $form-group-margin-bottom + 8;
-}
-
-#book-appointment-form{
-  form{
-    border-top: 1px solid $grey-light-color;
-    border-bottom: 1px solid $grey-light-color;
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
-
-  .p-italic{
-    padding-top: 30px;
-    &.p{
-      padding-top: 0;
-    }
-  }
-}
-
-#contact-us-form-container{
-  border-bottom: 1px solid $grey-light-color;
-  padding-bottom: 64px;
-
-  textarea{
-    height: $input-height-small * 4 + $form-group-margin-bottom * 5;
-  }
-
-  button{
-    margin-top: $form-group-margin-bottom + 9;
-  }
-}
-
-#contact-us-branches-container{
-  padding-top: 37px;
-  padding-bottom: 48px;
-}
-
-.inline-valuation-container {
-  min-height: 80px;
-  padding-top: 20px;
-  padding-bottom: 15px;
-  background-color: #e9e9e9;
-}
-
-.form-inline {
   .form-control {
-    width: 100%;
-  }
-}
-@media (max-width: $screen-sm-max) {
-  .form-inline {
-    .form-group {
-      margin-bottom: $form-group-margin-bottom;
+    font-family: $font-family-base;
+    box-shadow: none;
+    color: $lightish-grey-color;
+    font-size: 12px;
+    font-weight: $font-weight;
+    line-height: 22px;
+    &:focus {
+      box-shadow: none;
+      border-color: inherit;
     }
+
+    &.form-control-invalid{
+      border-color: $invalid-color;
+      color: $invalid-color;
+    }
+  }
+
+  .form-group.submit {
+    margin-top: $form-group-margin-bottom + 8;
+  }
+
+  #book-appointment-form{
+    form{
+      border-top: 1px solid $grey-light-color;
+      border-bottom: 1px solid $grey-light-color;
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    .p-italic{
+      padding-top: 30px;
+      &.p{
+        padding-top: 0;
+      }
+    }
+  }
+
+  #contact-us-form-container{
+    border-bottom: 1px solid $grey-light-color;
+    padding-bottom: 64px;
+
+    textarea{
+      height: $input-height-small * 4 + $form-group-margin-bottom * 5;
+    }
+
+    button{
+      margin-top: $form-group-margin-bottom + 9;
+    }
+  }
+
+  #contact-us-branches-container{
+    padding-top: 37px;
+    padding-bottom: 48px;
   }
 
   .inline-valuation-container {
-    min-height: 280px;
+    min-height: 80px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color: #e9e9e9;
   }
-}
 
-#header-form {
-  padding: 25px 0 0 0;
+  .form-inline {
+    .form-control {
+      width: 100%;
+    }
+  }
   @media (max-width: $screen-sm-max) {
-    padding-top: 0;
-    padding-bottom: 0;
+    .form-inline {
+      .form-group {
+        margin-bottom: $form-group-margin-bottom;
+      }
+    }
+
+    .inline-valuation-container {
+      min-height: 280px;
+    }
+  }
+
+  #header-form {
+    padding: 25px 0 0 0;
+    @media (max-width: $screen-sm-max) {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 }
