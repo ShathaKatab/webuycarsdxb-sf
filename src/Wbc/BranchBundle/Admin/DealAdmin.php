@@ -381,7 +381,7 @@ class DealAdmin extends AbstractAdmin
      */
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('create')->remove('delete')
+        $collection->remove('create')
             ->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}');
