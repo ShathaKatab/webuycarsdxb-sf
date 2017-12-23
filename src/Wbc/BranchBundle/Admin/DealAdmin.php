@@ -271,33 +271,24 @@ class DealAdmin extends AbstractAdmin
             ])
             ->add('inspection.vehicleModel')
             ->add('inspection.vehicleYear')
-            ->add('appointment.dateRange', 'doctrine_orm_callback', [
-                'label' => 'Booked Today/Tomorrow',
-                'callback' => function ($queryBuilder, $alias, $field, $value) use ($now) {
-                    $dateBooked = null;
-                    if (!$value['value']) {
-                        return;
-                    }
-                    if ($value['value'] === 'today') {
-                        $dateBooked = (new \DateTime())->format('Y-m-d');
-                    } elseif ($value['value'] === 'tomorrow') {
-                        $dateBooked = (new \DateTime('+1 day'))->format('Y-m-d');
-                    }
-                    if ($dateBooked) {
-                        $queryBuilder->andWhere($alias.'.dateBooked = :dateBooked')
-                            ->setParameter(':dateBooked', $dateBooked);
-                    }
-
-                    return true;
-                },
-                'field_type' => 'choice',
-                'field_options' => [
-                    'choices' => [
-                        'today' => 'Today',
-                        'tomorrow' => 'Tomorrow',
-                    ], ], ])
+            ->add('createdAt', 'doctrine_orm_date_range', [
+                'label' => 'Deal Created Date Range',
+                'field_type' => 'sonata_type_date_range_picker',
+                'start_options' => [
+                    'years' => range($now->format('Y'), (int) ($now->format('Y')) + 1),
+                    'dp_min_date' => (new \DateTime('-1 month'))->format('d/M/Y'),
+                    'dp_max_date' => (new \DateTime('+1 month'))->format('d/M/Y'),
+                    'dp_default_date' => $now->format('m/d/Y'),
+                ],
+                'end_options' => [
+                    'years' => range($now->format('Y'), (int) ($now->format('Y')) + 1),
+                    'dp_min_date' => (new \DateTime('-1 month'))->format('d/M/Y'),
+                    'dp_max_date' => (new \DateTime('+1 month'))->format('d/M/Y'),
+                    'dp_default_date' => $now->format('m/d/Y'),
+                ],
+            ])
             ->add('appointment.dateBooked', 'doctrine_orm_date_range', [
-                'label' => 'Date Range',
+                'label' => 'Appointment Booked Date Range',
                 'field_type' => 'sonata_type_date_range_picker',
                 'start_options' => [
                     'years' => range($now->format('Y'), (int) ($now->format('Y')) + 1),
