@@ -29,7 +29,7 @@ class BranchController extends Controller
     public function getTimings(Branch $branch, $dayBooked)
     {
         $branchTimings = $this->get('doctrine.orm.default_entity_manager')
-            ->getRepository('WbcBranchBundle:Timing')->findAllByBranchAndDay($branch, $dayBooked);
+            ->getRepository('WbcBranchBundle:Timing')->findAllByBranchAndDay($branch, (int) $dayBooked);
 
         return new Response($this->get('serializer')->serialize($branchTimings, 'json'), Response::HTTP_OK, ['content-type' => 'application/json']);
     }
