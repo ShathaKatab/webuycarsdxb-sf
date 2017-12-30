@@ -32,8 +32,8 @@ parameters:
         "x-algolia-api-key": "NzViZDhiMjdlYWU5OGVjOWRkYzQ5ZTE1NjNmZjFiMzgxZWY2NjZkZGFlMzFiYWU5NWM0NzcyNTMxNTU4M2Y4NXVzZXJUb2tlbj1jYWN1eG1naHNvd2d1dzJvMW4yNHhqeG5jZmhsMXVxeiZ2YWxpZFVudGlsPTE0OTM0MTY4MDA="
     crawler_user_agent: "Mozilla/5.0 (Windows NT 5.2; RW; rv:7.0a1) Gecko/20091211 SeaMonkey/9.23a1pre"
     site_domain: webuycarsdxb.com
-    site_title: "WeBuyCars"
-    company_name: "Smart Wheels Auctions Organization LLC."
+    site_title: "WeBuyCarsDXB.com"
+    company_name: "Smart Wheels Auctions Organization LLC"
     company_office_number: "Office #4711"
     company_office_building: "ASPIN TOWER"
     company_office_street: 'SHK. ZAYED RD.'
@@ -45,9 +45,6 @@ parameters:
         -
             slug: about-us
             title: 'About Us'
-        -
-            slug: how-to-sell-my-car-in-dubai
-            title: 'Sell Any Car To Us'
         -
             slug: how-we-operate
             title: 'How We Operate'

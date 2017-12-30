@@ -1,9 +1,11 @@
 {% extends '@WbcStatic/Default/base.html.twig' %}
-{% block title %}<title>Get Your Free online Car Valuation | {{ site_title }}</title>{% endblock %}
+{% block title %}<title>Start Car Valuation Process For Your Car</title>{% endblock %}
 {% block meta %}
-    <meta name="description" content="Free car valuation on WeBuyCarsDxb.com. Know your used car value in few seconds and book your appointment now. Purchase guaranteed.">
+    <meta name="description" content="Enter your car details to get your car valuation in less than 3 seconds">
 {% endblock %}
-
+{% block links %}
+    <link rel="canonical" href="{{ url('wbc_static_default_article', {'slug': 'car-valuation-dubai'}) }}">
+{% endblock %}
 {% block header %}
     <header>
         <div class="container text-center">

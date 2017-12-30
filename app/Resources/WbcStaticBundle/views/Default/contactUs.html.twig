@@ -1,5 +1,10 @@
 {% extends '@WbcStatic/Default/base.html.twig' %}
 
+{% block title %}<title>Want To Get in Touch With {{ site_title }}?</title>{% endblock %}
+{% block meta %}
+    <meta name="description" content="We would love to hear from you. Please feel free to contact us here. Looking forward to be in touch.">
+{% endblock %}
+
 {% block body %}
     {{ parent() }}
     <article>
@@ -60,7 +65,7 @@
                                                   class="form-control"
                                                   placeholder="Message"
                                                   ng-minlength="20"
-                                                ></textarea>
+                                        ></textarea>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg">Contact Us</button>

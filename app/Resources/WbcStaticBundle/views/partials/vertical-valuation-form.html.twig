@@ -11,7 +11,7 @@
 {% if _valuation is not null %}
     <div id="selectedValuation" class="text-center appointment-funnel">
         <h3 class="text-uppercase">Book A Free Appointment Now!</h3>
-        <h1>{{ _valuation.vehicleModel.make.name }} {{ _valuation.vehicleModel.name }} Owner!</h1>
+        <div class="h1">{{ _valuation.vehicleModel.make.name }} {{ _valuation.vehicleModel.name }} Owner!</div>
         {% if _valuation.priceOnline %}
             <h4>Last time we checked your car was worth</h4>
             <div class="col-md-8 col-md-offset-2">

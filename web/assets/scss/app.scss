@@ -60,7 +60,7 @@
 }
 
 #mobile-friendly{
-  padding: 252px floor(($grid-gutter-width / 2)) 252px ceil(($grid-gutter-width / 2)) ;
+  padding: 190px floor(($grid-gutter-width / 2)) 190px ceil(($grid-gutter-width / 2)) ;
   @media (max-width: $screen-sm-max) {
     padding-top: 0;
     padding-bottom: 0;

@@ -1,0 +1,39 @@
+<div>
+    {% set _fullRate = rate|round(0, 'floor') %}
+    {% set _hasHalfRate = false %}
+    {% set _totalRatings = 5 %}
+    {% set _ratingsCounter = 0 %}
+    {% set _showSchema = showSchema|default(true) %}
+    {% if rate - _fullRate == 0.5 %}
+        {% set _hasHalfRate = true %}
+    {% endif %}
+    {% for j in 1.._fullRate %}
+        <i class="fa fa-star" aria-hidden="true"></i>
+        {% set _ratingsCounter = _ratingsCounter+1 %}
+    {% endfor %}
+
+    {% if _ratingsCounter < _totalRatings and _hasHalfRate == true %}
+        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+        {% set _ratingsCounter = _ratingsCounter+1 %}
+    {% endif %}
+
+    {% if _ratingsCounter < _totalRatings %}
+        {% for i in _ratingsCounter+1.._totalRatings %}
+            <i class="fa fa-star-o" aria-hidden="true"></i>
+        {% endfor %}
+    {% endif %}
+    {% if _showSchema == true %}
+        <script type="application/ld+json">
+        {
+          "@context": "http://schema.org",
+          "@type": "Product",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "{{ rate }}"
+          },
+          "description": "{{ description }}",
+          "name": "{{ title }}"
+        }
+  </script>
+    {% endif %}
+</div>

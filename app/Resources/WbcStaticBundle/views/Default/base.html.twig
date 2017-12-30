@@ -26,10 +26,13 @@
     <link rel="manifest" href="{{ asset('images/favicon.ico/manifest.json') }}">
 
     {% block seoHead %}
-        {% block title %}<title>Sell Any Car For Cash | Free Car Valuation | {{ site_title }}</title>{% endblock %}
+        {% block title %}<title>Want to Sell a Car in Dubai? Sell Any Car To Us Instantly - No Fees</title>{% endblock %}
         {% block meta %}
-            <meta name="description" content="Sell your car at the highest price in less than 30 minutes with our convenient
-    and safe process at WeBuyCarsDxb.com. Book your appointment and visit us today.">
+            <meta name="description"
+                  content="Want to sell your car in Dubai? We are happy to help you sell your car at no extra fees.
+            Sell your car for instant cash. Sell Any Car to us now.">
+            <meta name="keywords"
+                  content="Sell Your Car Online, Buy and Sell Cars in Dubai, Sell Your Car UAE, Sell Used Car, Sell My Car, Sell Car Dubai, Sell Your Car Dubai, Sell My Car Dubai, Sell Any Car Dubai, Sell Used Car Dubai, Sell My Car UAE">
         {% endblock %}
     {% endblock %}
     <base href="{{ path('wbc_static_default_index') }}">
@@ -41,6 +44,8 @@
         {% endstylesheets %}
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    {% block links %}
+    {% endblock %}
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
@@ -76,7 +81,7 @@
                         </div>
                     </div>
                     <div id="navbar-steps-container" class="col-md-6 col-xs-12">
-                        <h2>We buy any car in 30 min!</h2>
+                        <div class="h2">We buy any car in 30 min!</div>
                     </div>
                     <div id="navbar-phone-container" class="col-md-2 col-md-pull-0 col-xs-pull-9 text-right">
                         <a href="tel: {{ site_phone }}">

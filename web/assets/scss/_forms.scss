@@ -16,9 +16,10 @@ textarea{
 
 .g-recaptcha {
   &.form-control-invalid {
-    >div{
-    border: 1px solid $invalid-color;
-    color: $invalid-color;
+    > div {
+      border: 1px solid $invalid-color;
+      color: $invalid-color;
+    }
   }
 }
 
@@ -109,4 +110,3 @@ textarea{
       padding-bottom: 0;
     }
   }
-}

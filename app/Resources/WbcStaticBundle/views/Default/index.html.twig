@@ -5,38 +5,10 @@
         <div class="jumbotron container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="text-center">Selling your car has never been easier!</h1>
+                    <h1 class="text-center">The Easiest Way to Sell a Car in Dubai</h1>
                 </div>
             </div>
-            <div id="header-form">
-                <div class="row">
-                    <div class="col-md-5 col-md-offset-1">
-                        {% include 'WbcStaticBundle:partials:vertical-valuation-form.html.twig' %}
-                    </div>
-                    <div id="jumbotron-steps-container" class="col-md-4 col-md-offset-1">
-                        <div class="steps one">
-                            <h2 class="number pull-left">1</h2>
-
-                            <div class="description">Free Online Valuation</div>
-                        </div>
-                        <div class="steps two">
-                            <h2 class="number pull-left">2</h2>
-
-                            <div class="description">Book Appointment</div>
-                        </div>
-                        <div class="steps three">
-                            <h2 class="number pull-left">3</h2>
-
-                            <div class="description">Free car Inspection</div>
-                        </div>
-                        <div class="steps four">
-                            <h2 class="number pull-left">4</h2>
-
-                            <div class="description">Get cash for your car</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% include '@WbcStatic/partials/header-form.html.twig' %}
         </div>
     </header>
 {% endblock %}
@@ -89,23 +61,39 @@
             </div>
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center">
-                    <h2>Sell Your Car With Us In Less Than 30 Minutes</h2>
-
-                    <p>At <a href="/">Webuycarsdxb.com</a> we offer the most convenient and best way
-                        for you to <a href="/how-to-sell-my-car-in-dubai">sell any car</a> in UAE in less than 30
-                        minutes at a fair price. We will inspect the car professionally at our branch and will handle
-                        all the paperwork and transfer process of your car, it couldn't be easier!</p>
-
-                    <p>The condition of your car does not matter to us. We buy cars for their fair and
-                        competitive market value and upon completion of the deal you get to walk away with Cash in
-                        hand.</p>
-
-                    <p>With our simple selling process, you don't have to go through any hassles of
-                        selling your car. Our fast and reliable service gives you an opportunity to easily sell any car
-                        with us quickly.</p>
-
-                    <p>So if you have a car to sell, then book an appointment and head over to our
-                        branch for your Free car inspection and today.</p>
+                    <h2>Sell Car in Dubai at the Price That’s Right</h2>
+                    <p>When it comes to selling your car in Dubai, you will be under a lot of pressure. A great number
+                        of websites now allow you to sell your car online. However, it does not mean you can pick any of
+                        them and start the selling process blindly. There could be hundreds of companies that buy and
+                        sell cars in Dubai, but the biggest challenge for you is going to sell it at the right price. On
+                        most occasions, they price your car so low that you prefer keeping it forever overselling it.
+                        Here are some of the issues you will face when you want to sell your car in UAE.</p>
+                    <h2>Common Issues When You Want to Sell Any Car in Dubai</h2>
+                    <h3>They Aren’t Buying Your Particular Car</h3>
+                    <p>When people sell a used car in Dubai, the biggest challenge is to find someone who buys the
+                        particular brand of the car. Toyota, Honda, Hyundai, etc. are the most popular brands, but what
+                        if your car does not belong to any of these makes? At We Buy Cars DXB we welcome you to come to
+                        one of our branches no matter which car you have.</p>
+                    <h3>They Don’t Price It Right</h3>
+                    <p>You are going to face this issue more often than not. They talk at length about how they will
+                        make it easy for you to sell car in Dubai but the disappointment is real when they price it. You
+                        will not face such a scenario when you work with We Buy Cars DXB. In fact, one of the reasons
+                        our customers keep returning to us is how fairly we price their cars.</p>
+                    <h3>They Make Selling a Difficult Process</h3>
+                    <p>So, many dealerships don’t even have their websites. If you go to them without an appointment,
+                        they might not assist you at all. If you call them before you visit them, their professionals
+                        might be busy doing other things and take time to serve you. With We Buy Cars DXB we have a
+                        no-hassle online valuation process. Fill in the basic information about your car and yourself,
+                        and receive a text on your phone about the appointment. In fact, we even call you at the
+                        appointment day to confirm your meeting with us.</p>
+                    <h3>They Don’t Buy Cars with Loans on Them</h3>
+                    <p>One of the easiest ways for many car dealerships to refuse doing business with you is to tell you
+                        that there are pending payments on your car and that they don’t buy cars until they have been
+                        paid in full. That’s where We Buy Cars DXB goes the extra mile in customer experience. If you
+                        still need to make some payments on your car, just come to our brand and say “I want to sell my
+                        car” and we will be more than happy to serve you.</p>
+                    <p>Start your car valuation process on our website today or give us a call at <a href="tel:{{ site_phone }}">{{ site_phone }}</a> to ask any
+                        questions that you might have.</p>
                 </div>
             </div>
             <div class="row">
@@ -141,6 +129,14 @@
                                                         </p>
 
                                                         <h3 class="text-center color-white">Malcolm Dunne</h3>
+                                                        <div class="text-center color-white">
+                                                            {% include '@WbcStatic/partials/rating.html.twig' with {'rate': randomRating(), 'description': 'I sold my car here and it was a quick and
+                                                            tension free process. I did not have to go to RTA. The
+                                                            process was transparent. They looked after transferring the
+                                                            car out of my name and paid me in Cash.',
+                                                            'title': 'Malcolm Dunne',
+                                                            'showSchema': 0} %}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -157,6 +153,17 @@
                                                         </p>
 
                                                         <h3 class="text-center color-white">Lisa Padurska</h3>
+
+                                                        <div class="text-center color-white">
+                                                            {% include '@WbcStatic/partials/rating.html.twig' with {
+                                                            'rate': randomRating(),
+                                                            'description': 'WeBuyCarsDxb.com gave me a good price for
+                                                            my car, which helped me cover my loan. The deal was done in
+                                                            30 minutes and their representative came with me to the bank
+                                                            to pay off my loan.',
+                                                            'title': 'Lisa Padurska',
+                                                            'showSchema': 0} %}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -173,6 +180,17 @@
                                                         </p>
 
                                                         <h3 class="text-center color-white">Atul Gupta</h3>
+
+                                                        <div class="text-center color-white">
+                                                            {% include '@WbcStatic/partials/rating.html.twig' with {
+                                                            'rate': randomRating(),
+                                                            'description': 'Minimal paperwork. Quick process and good
+                                                            customer service. Best part is I didnt need to go to RTA and
+                                                            waste my time. They handled everything and paid me cash on
+                                                            the spot.',
+                                                            'title': 'Atul Gupta',
+                                                            'showSchema': 0} %}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -189,8 +207,19 @@
                                                             classifieds this was a breath of fresh air. I would
                                                             definitely recommend them to anyone 100%
                                                         </p>
-
                                                         <h3 class="text-center color-white">Elham Fakhoury</h3>
+
+                                                        <div class="text-center color-white">
+                                                            {% include '@WbcStatic/partials/rating.html.twig' with {
+                                                            'rate': randomRating(),
+                                                            'description': 'My colleague recommended this place to me
+                                                            and they lived up to my expectations. The whole process was
+                                                            fast and easy. After dealing with the nightmare of
+                                                            classifieds this was a breath of fresh air. I would
+                                                            definitely recommend them to anyone 100%',
+                                                            'title': 'Elham Fakhoury',
+                                                            'showSchema': 0} %}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -256,7 +285,7 @@
     <p>So come be a part of over <span class="text-bold">5000 happy faces</span> and sell your car to us hassle-free today.</p>
     ',
     'buttonText': 'JOIN THEM'} %}
-
     {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
+    {% include 'WbcStaticBundle:partials:our-services.html.twig' %}
 
 {% endblock %}
