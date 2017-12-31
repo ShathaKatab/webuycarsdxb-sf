@@ -1,33 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
-        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-    <url>
-        <loc>https://webuycarsdxb.com/</loc>
-    </url>
-    <url>
-        <loc>https://webuycarsdxb.com/about-us</loc>
-    </url>
-    <url>
-        <loc>https://webuycarsdxb.com/how-to-sell-my-car-in-dubai</loc>
-    </url>
-    <url>
-        <loc>https://webuycarsdxb.com/how-we-operate</loc>
-    </url>
-    <url>
-        <loc>https://webuycarsdxb.com/contact-us</loc>
-    </url>
-    <url>
-        <loc>https://webuycarsdxb.com/terms-and-conditions</loc>
-    </url>
-    <url>
-        <loc>https://webuycarsdxb.com/privacy-policy</loc>
-    </url>
-    <url>
-        <loc>https://webuycarsdxb.com/car-valuation/</loc>
-    </url>
+<url>
+  <loc>https://webuycarsdxb.com/</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/about-us</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/how-we-operate</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/contact-us</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/terms-and-conditions</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/privacy-policy</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/frequently-asked-questions</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/car-valuation-1</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/selling-car-dubai</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/car-valuation-dubai</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/cash-your-car-uae</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/car-buyers-dubai</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/car-buying-dubai</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/car-trade-dubai</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://webuycarsdxb.com/how-to-sell-my-car-in-dubai</loc>
+  <lastmod>2017-12-31T07:18:54+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
 </urlset>
