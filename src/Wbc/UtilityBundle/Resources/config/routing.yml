@@ -1,0 +1,3 @@
+wbc_utility:
+    type: annotation
+    resource: "@WbcUtilityBundle/Controller/RedirectController.php"
