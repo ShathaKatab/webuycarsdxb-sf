@@ -185,7 +185,7 @@
 {% block footer %}
     <footer>
         <div class="container-fluid">
-            <div class="row">
+            <div id="footer-menu-container" class="row">
                 <div id="footer-menu" class="col-md-6">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
@@ -212,6 +212,15 @@
                                         PO Box: {{ company_po_box }} Dubai<br>
                                         Tel: {{ company_office_phone }}
                                     </p>
+
+                                    <h2 class="text-left">Inspection Branch</h2>
+                                    {% for branch in getBranches() %}
+                                        <p class="text-left">
+                                            {{ branch.name }}<br>
+                                            {{ branch.address }}<br>
+                                            Tel: {{ branch.phoneNumber }}
+                                        </p>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>

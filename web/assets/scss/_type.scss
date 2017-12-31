@@ -193,8 +193,12 @@ section.section-text {
 }
 
 // == Footer
-#footer-menu {
+#footer-menu-container{
   background-color: $aqua-marine-color;
+}
+
+#footer-menu {
+  background-color: transparent;
   padding: 224px floor(($grid-gutter-width / 2)) 255px ceil(($grid-gutter-width / 2));
 
   a {
