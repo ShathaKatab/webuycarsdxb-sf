@@ -217,7 +217,7 @@
                                     {% for branch in getBranches() %}
                                         <p class="text-left">
                                             {{ branch.name }}<br>
-                                            {{ branch.address }}<br>
+                                            {{ branch.address|nl2br }}<br>
                                             Tel: {{ branch.phoneNumber }}
                                         </p>
                                     {% endfor %}

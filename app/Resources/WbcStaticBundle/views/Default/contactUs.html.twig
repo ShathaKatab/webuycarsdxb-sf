@@ -88,7 +88,7 @@
                                     <h4 class="text-left"><a href="tel: {{ branch.phoneNumber }}"><i class="fa fa-phone"
                                                                                                      aria-hidden="true"></i>&nbsp;{{ branch.phoneNumber }}
                                         </a></h4>
-                                    <h4 class="text-left"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{ branch.address }}
+                                    <h4 class="text-left"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{ branch.address|nl2br }}
                                     </h4>
                                     <h4 class="text-left"><i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;{{ branch.citySlug | citySlug }}
                                     </h4>
