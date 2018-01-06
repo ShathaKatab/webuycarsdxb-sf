@@ -104,6 +104,14 @@ ul, ol{
       padding-top: 0;
       padding-bottom: 0;
     }
+    a {
+      color: $aqua-marine-color;
+      font-weight: $font-weight;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
