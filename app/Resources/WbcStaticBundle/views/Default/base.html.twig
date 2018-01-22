@@ -45,7 +45,9 @@
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     {% block links %}
-        {% if app.request.get('_route') == 'wbc_static_default_index'
+        {% if app.request.pathInfo == '/how-to-sell-my-car-in-dubai' %}
+        <link rel="canonical" href="{{ path('wbc_static_default_index') }}">
+        {% elseif app.request.get('_route') == 'wbc_static_default_index'
         or app.request.get('_route') == 'wbc_static_default_contact_us'
         or app.request.get('_route') == 'wbc_static_default_article' %}
             <link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}">
