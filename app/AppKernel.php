@@ -1,13 +1,13 @@
 <?php
 
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles = [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
@@ -36,9 +36,9 @@ class AppKernel extends Kernel
             new Wbc\CrawlerBundle\WbcCrawlerBundle(),
             new Wbc\StaticBundle\WbcStaticBundle(),
             new Wbc\ValuationBundle\WbcValuationBundle(),
-        );
+        ];
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
+        if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
@@ -51,5 +51,26 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+    }
+}
+
+//APC Polyfills for PHP7
+if (!function_exists('apc_fetch')) {
+    function apc_fetch($key, &$success = null)
+    {
+        return apcu_fetch($key, $success);
+    }
+}
+
+if (!function_exists('apc_exists')) {
+    function apc_exists($keys)
+    {
+        return apcu_exists($keys);
+    }
+}
+if (!function_exists('apc_store')) {
+    function apc_store($keys)
+    {
+        return apcu_store($keys);
     }
 }

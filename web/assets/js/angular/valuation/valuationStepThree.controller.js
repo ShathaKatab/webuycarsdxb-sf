@@ -9,19 +9,8 @@ angular
         $scope.mobileNumber = null;
 
         this.submitForm = function (isValid) {
-            if (isValid && gRecaptchaSubmitted) {
+            if (isValid) {
                 valuationStepThreeForm.submit();
-            }
-
-            if (!gRecaptchaSubmitted) {
-                angular.element($document[0]).find('.g-recaptcha').addClass('form-control-invalid');
             }
         }
     }]);
-
-var gRecaptchaSubmitted = false;
-
-function gRecaptchaCallback() {
-    gRecaptchaSubmitted = true;
-    $('.g-recaptcha').removeClass('form-control-invalid');
-}

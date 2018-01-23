@@ -68,6 +68,7 @@
     },
     "sort-packages": true
   },
+  "minimum-stability": "stable",
   "extra": {
     "symfony-app-dir": "app",
     "symfony-web-dir": "web",
