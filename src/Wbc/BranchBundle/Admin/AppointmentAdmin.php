@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -54,6 +55,8 @@ class AppointmentAdmin extends AbstractAdmin
             case 'create':
             case 'edit':
                 return 'WbcBranchBundle:Admin:edit.html.twig';
+            case 'show':
+                return 'Admin/show.html.twig';
             case 'base_list_field':
                 return 'WbcBranchBundle:Admin:base_list_field.html.twig';
             default:
@@ -195,11 +198,12 @@ class AppointmentAdmin extends AbstractAdmin
                     'empty_data' => Appointment::STATUS_NEW,
                 ])
                 ->add('notes', TextareaType::class, ['required' => false])
-                ->add('createdBy', null, ['read_only' => true, 'disabled' => true, 'required' => false])
-                ->end();
+                ->add('createdBy', null, ['read_only' => true, 'disabled' => true, 'required' => false]);
         }
 
-        $formMapper->end();
+        $formMapper->add('smsSent', CheckboxType::class, ['required' => false, 'disabled' => true])
+            ->end()
+            ->end();
     }
 
     /**
@@ -306,6 +310,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'editable' => true])
             ->add('valuation.priceOnline', 'currency', ['currency' => 'AED', 'label' => 'Online Valuation'])
             ->add('dateBooked')
+            ->add('branch')
         ;
 
         if (isset($filterParams['dateRange']['value']) && $filterParams['dateRange']['value'] === 'today') {
@@ -323,15 +328,17 @@ class AppointmentAdmin extends AbstractAdmin
             ]);
         }
 
+
         $listMapper->add('createdAt', null, ['label' => 'Created'])
             ->add('createdBy')
+            ->add('smsSent')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
                     'inspection' => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_inspection.html.twig'],
-                ], ]);
+                    'sms' => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_sms.html.twig'], ], ]);
     }
 
     /**
@@ -370,6 +377,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'empty_data' => Appointment::STATUS_NEW])
             ->add('notes')
             ->add('createdBy')
+            ->add('smsSent')
             ->end()
             ->end();
     }
@@ -382,6 +390,7 @@ class AppointmentAdmin extends AbstractAdmin
         $collection->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
-            ->add('generateInspection', $this->getRouterIdParameter().'/generateInspection');
+            ->add('generateInspection', $this->getRouterIdParameter().'/generateInspection')
+            ->add('sendSms', $this->getRouterIdParameter().'/sendSms');
     }
 }

@@ -1,0 +1,13 @@
+{% extends 'SonataAdminBundle:CRUD:show.html.twig' %}
+
+{% block navbar_title %}
+    {{ parent() }}
+    <a style="margin-top: 11px;" href="javascript:void(0)"
+       class="btn btn-sm btn-danger view_link send-appointment-sms"
+       title="Send SMS"
+       data-appointment-id="{{ object.id }}"
+       data-branch-id="{{ object.branch|default(null) }}"
+       data-branch-timing="{{ object.branchTiming|default(null) }}">
+        Send SMS
+    </a>
+{% endblock %}

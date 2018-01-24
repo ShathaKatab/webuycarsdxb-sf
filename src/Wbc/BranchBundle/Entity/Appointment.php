@@ -255,6 +255,13 @@ class Appointment
     protected $inspections;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="sms_sent", type="boolean", nullable=true, options={"default": false})
+     */
+    protected $smsSent;
+
+    /**
      * @var Branch
      */
     protected $branch;
@@ -987,5 +994,29 @@ class Appointment
     public function getInspection()
     {
         return $this->inspections->first();
+    }
+
+    /**
+     * Set smsSent.
+     *
+     * @param bool $smsSent
+     *
+     * @return Appointment
+     */
+    public function setSmsSent($smsSent)
+    {
+        $this->smsSent = $smsSent;
+
+        return $this;
+    }
+
+    /**
+     * Get smsSent.
+     *
+     * @return bool
+     */
+    public function isSmsSent()
+    {
+        return $this->smsSent;
     }
 }

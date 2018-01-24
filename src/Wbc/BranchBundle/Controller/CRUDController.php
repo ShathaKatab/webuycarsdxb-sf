@@ -112,4 +112,26 @@ class CRUDController extends Controller
 
         return new RedirectResponse($this->generateUrl('admin_wbc_branch_deal_show', ['id' => $deal->getId()]));
     }
+
+    /**
+     * Sends an Appointment SMS to customer.
+     *
+     * @CF\ParamConverter("appointment", class="WbcBranchBundle:Appointment")
+     *
+     * @param Appointment $appointment
+     *
+     * @return Response
+     */
+    public function sendSmsAction(Appointment $appointment)
+    {
+        $response = $this->get('wbc.utility.twilio_manager')
+            ->sendSms($appointment->getMobileNumber(), $this->get('templating')->render('WbcBranchBundle::appointmentSms.txt.twig', ['appointment' => $appointment]));
+
+        if ($response instanceof \Twilio\Rest\Api\V2010\Account\MessageInstance) {
+            $appointment->setSmsSent(true);
+            $this->get('doctrine.orm.default_entity_manager')->flush($appointment);
+        }
+
+        return new Response('');
+    }
 }
