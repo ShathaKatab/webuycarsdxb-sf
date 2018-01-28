@@ -1,0 +1,4 @@
+services:
+#    wbc_blog.example:
+#        class: Wbc\BlogBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

@@ -267,6 +267,7 @@ class User extends BaseUser
     {
         return [
             'ROLE_APPOINTMENT_SMS',
+            'ROLE_BLOG_EDITOR',
             'ROLE_ACCOUNTANT',
             'ROLE_PURCHASING',
             'ROLE_CALL_CENTER',

@@ -48,6 +48,11 @@ sonata_admin:
                 roles: [ROLE_SUPER_ADMIN]
                 on_top: true
                 icon:   '<i class="fa fa-user-circle-o"></i>'
+            Blog:
+                label: Blog
+                items: [admin.blog.post, admin.blog.category]
+                roles: [ROLE_BLOG_EDITOR]
+                icon:   '<i class="fa fa-file-text"></i>'
             Vehicles:
                 label: Vehicles
                 items: [admin.vehicle.make, admin.vehicle.model, admin.vehicle.model_type]
@@ -102,6 +107,12 @@ sonata_admin:
                 settings:
                     groups: ["Vehicles"]
                 roles: [ROLE_SUPER_ADMIN]
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: ["Blog"]
+                roles: [ROLE_BLOG_EDITOR]
 
     title: "WeBuyCars Admin"
     title_logo: /images/admin-logo.png
@@ -123,7 +134,21 @@ sonata_admin:
         # permission related to the objects
         object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
 
+    assets:
+        extra_javascripts:
+            # ...
+            - bundles/ivoryckeditor/ckeditor.js
+            - bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js
+            - bundles/sonataformatter/markitup/sets/markdown/set.js
+            - bundles/sonataformatter/markitup/sets/html/set.js
+            - bundles/sonataformatter/markitup/sets/textile/set.js
 
+        extra_stylesheets:
+            # ...
+            - bundles/sonataformatter/markitup/skins/sonata/style.css
+            - bundles/sonataformatter/markitup/sets/markdown/style.css
+            - bundles/sonataformatter/markitup/sets/html/style.css
+            - bundles/sonataformatter/markitup/sets/textile/style.css
 services:
     admin.branch.appointment:
         class: Wbc\BranchBundle\Admin\AppointmentAdmin
@@ -188,3 +213,13 @@ services:
         arguments: [~, Wbc\VehicleBundle\Entity\ModelType, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Trims, group: "Vehicles" }
+    admin.blog.post:
+        class: Wbc\BlogBundle\Admin\PostAdmin
+        arguments: [~, Wbc\BlogBundle\Entity\Post, WbcBlogBundle:PostAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: Post }
+    admin.blog.category:
+        class: Wbc\BlogBundle\Admin\CategoryAdmin
+        arguments: [~, Wbc\BlogBundle\Entity\Category, WbcBlogBundle:CategoryAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Blog, label: Category }

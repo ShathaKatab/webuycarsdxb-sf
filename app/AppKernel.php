@@ -29,6 +29,12 @@ class AppKernel extends Kernel
             new Lexik\Bundle\MaintenanceBundle\LexikMaintenanceBundle(),
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new Craue\ConfigBundle\CraueConfigBundle(),
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Sonata\FormatterBundle\SonataFormatterBundle(),
+            new Sonata\MediaBundle\SonataMediaBundle(),
+            new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new Wbc\UserBundle\WbcUserBundle(),
             new Wbc\UtilityBundle\WbcUtilityBundle(),
             new Wbc\BranchBundle\WbcBranchBundle(),
@@ -36,6 +42,7 @@ class AppKernel extends Kernel
             new Wbc\CrawlerBundle\WbcCrawlerBundle(),
             new Wbc\StaticBundle\WbcStaticBundle(),
             new Wbc\ValuationBundle\WbcValuationBundle(),
+            new Wbc\BlogBundle\WbcBlogBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

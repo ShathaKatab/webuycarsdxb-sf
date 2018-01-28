@@ -57,6 +57,16 @@ _sonata_admin:
     prefix: /admin
     schemes: [https]
 
+gallery:
+    resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
+    prefix: /media/gallery
+    schemes: [https]
+
+media:
+    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+    prefix: /media
+    schemes: [https]
+
 wbc_utility:
     resource: "@WbcUtilityBundle/Resources/config/routing.yml"
     prefix:   /
@@ -66,3 +76,7 @@ wbc_static:
     resource: "@WbcStaticBundle/Resources/config/routing.yml"
     prefix:   /
     schemes: [https]
+
+wbc_blog:
+    resource: "@WbcBlogBundle/Resources/config/routing.yml"
+    prefix:   /
