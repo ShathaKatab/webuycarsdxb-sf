@@ -3,6 +3,8 @@ imports:
     - { resource: sonata.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: sonata/sonata_formatter.yml }
+    - { resource: ivory/ivory_ckeditor.yml }
 
 parameters:
     locale: en
@@ -164,45 +166,6 @@ doctrine_cache:
       namespace: craue_config
       aliases:
         - craue_config_cache_provider
-
-sonata_formatter:
-    default_formatter: text
-    formatters:
-        markdown:
-            service: sonata.formatter.text.markdown
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig #keep this commented unless you are using media bundle.
-
-
-        text:
-            service: sonata.formatter.text.text
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig
-
-
-        rawhtml:
-            service: sonata.formatter.text.raw
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig
-
-
-        richhtml:
-            service: sonata.formatter.text.raw
-            extensions:
-                - sonata.formatter.twig.control_flow
-                - sonata.formatter.twig.gist
-        #        - sonata.media.formatter.twig
-
-
-        twig:
-            service: sonata.formatter.text.twigengine
-            extensions: [] # Twig formatter cannot have extensions
 
 sonata_media:
     # if you don't use default namespace configuration

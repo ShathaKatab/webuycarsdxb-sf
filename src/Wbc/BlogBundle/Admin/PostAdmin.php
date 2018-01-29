@@ -57,7 +57,10 @@ class PostAdmin extends AbstractAdmin
         $formMapper->with('Blog', ['class' => 'col-md-9'])
             ->add('title')
             ->add('slug')
-            ->add('content', SimpleFormatterType::class, ['format' => 'richhtml'])
+            ->add('content', SimpleFormatterType::class, [
+                'format' => 'richhtml',
+                'ckeditor_context' => 'default',
+            ])
             ->add('metaTitle')
             ->add('metaDescription')
             ->end()

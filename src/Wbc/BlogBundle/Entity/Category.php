@@ -44,7 +44,7 @@ class Category
     /**
      * @var ArrayCollection
      *
-     * @ORM\ManyToMany(targetEntity="Wbc\BlogBundle\Entity\Post", mappedBy="tag")
+     * @ORM\ManyToMany(targetEntity="Wbc\BlogBundle\Entity\Post", mappedBy="categories")
      */
     private $posts;
 
