@@ -215,11 +215,11 @@ services:
             - { name: sonata.admin, manager_type: orm, label: Trims, group: "Vehicles" }
     admin.blog.post:
         class: Wbc\BlogBundle\Admin\PostAdmin
-        arguments: [~, Wbc\BlogBundle\Entity\Post, WbcBlogBundle:PostAdmin]
+        arguments: [~, Wbc\BlogBundle\Entity\Post, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: Post }
     admin.blog.category:
         class: Wbc\BlogBundle\Admin\CategoryAdmin
-        arguments: [~, Wbc\BlogBundle\Entity\Category, WbcBlogBundle:CategoryAdmin]
+        arguments: [~, Wbc\BlogBundle\Entity\Category, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: Category }

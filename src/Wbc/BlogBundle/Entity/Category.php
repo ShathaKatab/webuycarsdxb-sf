@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * Class Category.
  *
  * @ORM\Table(name="blog_category")
- * @ORM\Entity(repositoryClass="Wbc\BlogBundle\Repository\CategoryRepository")
+ * @ORM\Entity()
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
  */

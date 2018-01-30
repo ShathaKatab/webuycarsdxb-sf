@@ -1,0 +1,3 @@
+wbc_blog:
+    type: annotation
+    resource: "@WbcBlogBundle/Controller/BlogController.php"

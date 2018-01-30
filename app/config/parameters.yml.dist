@@ -60,6 +60,9 @@ parameters:
         -
             slug: frequently-asked-questions
             title: 'Frequently Asked Questions'
+        -
+            slug: blog
+            title: 'Blog'
     site_facebook: "https://www.facebook.com/"
     site_twitter: "https://twitter.com/"
     site_instagram: "https://www.instagram.com/"

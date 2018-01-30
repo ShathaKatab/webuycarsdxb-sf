@@ -53,6 +53,7 @@
             <link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}">
         {% endif %}
     {% endblock %}
+    {% block extraJs %}{% endblock %}
 </head>
 <body>
 {% include 'WbcStaticBundle:partials:google-tag-manager-body.html.twig' %}

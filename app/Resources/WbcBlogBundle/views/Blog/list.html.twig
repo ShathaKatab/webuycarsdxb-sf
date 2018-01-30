@@ -1,0 +1,31 @@
+{% extends '@WbcStatic/Default/base.html.twig' %}
+
+{% block seoHead %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <div class="container" id="blog">
+        <h1 class="text-center">Blog</h1>
+        <div id="blog-list" class="col-md-7 col-md-offset-1">
+            {% for article in pagination %}
+                <h2 class="text-left ellipsis"><a href="{{ path("wbc_blog_get", {"slug": article.slug}) }}">{{ article.title }}</a></h2>
+                {% include 'WbcBlogBundle:Blog/partials:article.html.twig' with {'article': article, "preview": true} %}
+            {% endfor %}
+            {# display navigation #}
+            <div class="navigation text-center">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+        <div id="list-categories" class="col-md-3 col-md-offset-1">
+            <h3>Categories</h3>
+            {% include '@WbcBlog/Blog/partials/categories.html.twig' %}
+        </div>
+    </div>
+
+    {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
+    {% include '@WbcStatic/partials/our-services.html.twig' %}
+
+{% endblock %}

@@ -26,6 +26,7 @@
     "jms/i18n-routing-bundle": "~1.1@stable",
     "jms/job-queue-bundle": "~1.1@stable",
     "jms/serializer-bundle": "^1.1",
+    "knplabs/knp-paginator-bundle": "^2.7",
     "leafo/scssphp": "^0.6.7",
     "lexik/maintenance-bundle": "^2.1",
     "patchwork/jsqueeze": "^2.0",

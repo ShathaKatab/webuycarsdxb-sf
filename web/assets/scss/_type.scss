@@ -5,7 +5,6 @@ h1, h2, h3, h4, h5, h6 {
 h1, header .jumbotron h1, .h1 {
   font-size: 40px;
   line-height: 50px;
-  margin-top: inherit;
 }
 
 .h1{
@@ -80,6 +79,10 @@ p, .p {
     &:hover{
       text-decoration: underline;
     }
+  }
+
+  &.small{
+    margin-bottom: 0;
   }
 }
 
@@ -301,4 +304,65 @@ section.section-text {
     margin-bottom: 25px;
   }
 
+}
+
+#blog{
+  h1, .h1 {
+    margin-top: 50px;
+  }
+
+  article{
+    padding-bottom: 41px;
+    margin-bottom: 41px;
+    h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p.small{
+      text-align: left;
+      margin-bottom: 0;
+      a {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+    p{
+      text-align: left;
+      a {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      &.breadcrumb{
+        background-color: transparent;
+      }
+    }
+    img{
+      margin-top: 15px;
+      margin-bottom: 25px;
+    }
+  }
+}
+
+#blog-list{
+  article{
+    border-bottom: 1px solid $grey-light-color;
+  }
+  .pagination{
+    font-size: 18px;
+    .current{
+      color: $pinkish-grey-color;
+      cursor: not-allowed;
+    }
+  }
+}
+
+#list-categories{
+  h2, .h2, h3, .h3{
+    padding-bottom: 15px;
+    border-bottom: 1px solid $grey-light-color;
+    margin-bottom: 15px;
+  }
+  a{
+    color: $lightish-grey-color;
+    font-size:16px;
+    text-decoration: underline;
+  }
 }

@@ -9,9 +9,24 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Form\Type\DateTimePickerType;
 use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PostAdmin extends AbstractAdmin
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getTemplate($name)
+    {
+        switch ($name) {
+            case 'create':
+            case 'edit':
+                return 'WbcBlogBundle:Admin:edit.html.twig';
+            default:
+                return parent::getTemplate($name);
+        }
+    }
+
     /**
      * @param DatagridMapper $datagridMapper
      */
@@ -41,6 +56,7 @@ class PostAdmin extends AbstractAdmin
             ->add('updatedAt')
             ->add('_action', null, [
                 'actions' => [
+                    'preview' => ['template' => 'WbcBlogBundle:Admin/CRUD:list__action_preview.html.twig'],
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
@@ -54,15 +70,27 @@ class PostAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
+        /** @var \Wbc\BlogBundle\Entity\Post $subject */
+        $subject = $this->getSubject();
+
         $formMapper->with('Blog', ['class' => 'col-md-9'])
-            ->add('title')
-            ->add('slug')
+            ->add('title', TextType::class, [
+                'attr' => [
+                    'ng-model' => 'ctrl.title',
+                    'ng-blur' => 'ctrl.titleChanged()',
+                    'ng-init' => sprintf('ctrl.title = "%s"; ctrl.slug = "%s"; ctrl.metaDescription = "%s";', $subject->getTitle(), $subject->getSlug(), $subject->getMetaDescription()),
+                ],
+            ])
+            ->add('slug', TextType::class, ['attr' => ['ng-model' => 'ctrl.slug']])
             ->add('content', SimpleFormatterType::class, [
                 'format' => 'richhtml',
                 'ckeditor_context' => 'default',
             ])
             ->add('metaTitle')
-            ->add('metaDescription')
+            ->add('metaDescription', TextType::class, [
+                'help' => '{{ ctrl.metaDescription.length || 0 }} characters',
+                'attr' => ['ng-model' => 'ctrl.metaDescription'],
+            ])
             ->end()
             ->with('Extras', ['class' => 'col-md-3'])
             ->add('author')

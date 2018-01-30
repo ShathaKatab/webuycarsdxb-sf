@@ -1,0 +1,30 @@
+{% extends 'SonataAdminBundle:CRUD:edit.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/vendor/angular/angular.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/angular-slugify/angular-slugify.js') }}"></script>
+    <script src="{{ asset('assets/js/angular/admin/app.js') }}"></script>
+    <script src="{{ asset('assets/js/angular/admin/blog/blogAdmin.controller.js') }}"></script>
+    {% javascripts %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+{% block navbar_title %}
+    {{ parent() }}
+    {% if object.slug %}
+        <a style="margin-top: 10px;" href="{{ path('wbc_blog_preview', {slug: object.slug}) }}"
+           target="_blank"
+           class="btn btn-sm btn-info view_link"
+           title="Show Preview">
+            <i class="fa fa-eye"></i> Show Preview
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block form %}
+    <div ng-app="webuycarsAdminApp" ng-controller="BlogAdminController as ctrl">
+        {{ parent() }}
+    </div>
+{% endblock %}

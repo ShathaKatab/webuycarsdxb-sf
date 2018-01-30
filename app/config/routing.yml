@@ -72,11 +72,12 @@ wbc_utility:
     prefix:   /
     schemes: [https]
 
+wbc_blog:
+    resource: "@WbcBlogBundle/Resources/config/routing.yml"
+    prefix:   /
+    schemes: [https]
+
 wbc_static:
     resource: "@WbcStaticBundle/Resources/config/routing.yml"
     prefix:   /
     schemes: [https]
-
-wbc_blog:
-    resource: "@WbcBlogBundle/Resources/config/routing.yml"
-    prefix:   /

@@ -43,3 +43,21 @@ $form-group-margin-bottom: 12px;
 
 $screen-sm-max-padding-top: 30px;
 $screen-sm-max-padding-bottom: 30px;
+
+//== Pagination
+
+$pagination-color: $aqua-marine-color;
+$pagination-bg: #fff !default;
+$pagination-border: #ddd !default;
+
+$pagination-hover-color: darken($aqua-marine-color, 15%);
+$pagination-hover-bg: $gray-lighter !default;
+$pagination-hover-border: #ddd !default;
+
+$pagination-active-color: #fff !default;
+$pagination-active-bg: $pinkish-grey-color;
+$pagination-active-border: $pinkish-grey-color;
+
+$pagination-disabled-color: $gray-light !default;
+$pagination-disabled-bg: #fff !default;
+$pagination-disabled-border: #ddd !default;

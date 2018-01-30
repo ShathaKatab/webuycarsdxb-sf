@@ -1,0 +1,25 @@
+<article>
+    <p class="small">Author: {{ article.author }}</p>
+    <p class="small p-italic">{{ article.publicationDateStart | date('F jS Y') }}</p>
+    {% if preview == true %}
+        <a href="{{ path("wbc_blog_get", {"slug": article.slug}) }}">
+            {% media article.image, 'small' with {'class': 'img-responsive'} %}
+        </a>
+        {{ article.content|truncate(270)|raw }}
+        <br>
+        {% for category in article.categories %}
+            <a href="{{ path("wbc_blog_category_list", {'category': category.slug}) }}"><span class="label label-default">{{ category.name }}</span></a>
+        {% endfor %}
+
+        <div class="row">
+            <div class="col-md-5">
+                <a href="{{ path("wbc_blog_get", {"slug": article.slug}) }}" class="btn btn-primary btn-lg">Read more</a>
+            </div>
+        </div>
+    {% else %}
+        <p class="small breadcrumb ellipsis"><a href="{{ path("wbc_blog_list") }}">Blog</a> > {{ article.title }}</p>
+        {% media article.image, 'small' with {'class': 'img-responsive'} %}
+        {{ article.content|raw }}
+        <div class="sharethis-inline-share-buttons"></div>
+    {% endif %}
+</article>

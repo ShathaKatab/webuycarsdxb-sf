@@ -1,0 +1,31 @@
+{% extends '@WbcStatic/Default/base.html.twig' %}
+{% block seoHead %}
+    {% block title %}<title>{{ article.metaTitle|default(article.title) }}</title>{% endblock %}
+    {% block meta %}
+        <meta name="description"
+              content="{{ article.metaDescription|default(article.content|truncate(250)) }}">
+    {% endblock %}
+{% endblock %}
+
+{% block extraJs %}
+    <script type="text/javascript"
+            src="//platform-api.sharethis.com/js/sharethis.js#property=5a6faade344b890012fe79cf&product=inline-share-buttons"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="container" id="blog">
+        <div class="col-md-10 col-md-offset-1">
+            <h1 class="text-left ellipsis">{{ article.title }}</h1>
+        </div>
+        <div class="col-md-7 col-md-offset-1">
+            {% include 'WbcBlogBundle:Blog/partials:article.html.twig' with {'article': article, "preview": false} %}
+        </div>
+        <div class="col-md-3" id="list-categories">
+            <h2 class="text-left">Categories</h2>
+            {% include '@WbcBlog/Blog/partials/categories.html.twig' %}
+        </div>
+    </div>
+
+    {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
+    {% include '@WbcStatic/partials/our-services.html.twig' %}
+{% endblock %}

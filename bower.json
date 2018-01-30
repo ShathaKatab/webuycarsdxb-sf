@@ -29,6 +29,7 @@
     "angular-google-maps": "^2.4.1",
     "underscore": "^1.8.3",
     "ngmap": "^1.18.4",
-    "angular-bootstrap": "^2.5.0"
+    "angular-bootstrap": "^2.5.0",
+    "angular-slugify": "^1.0.1"
   }
 }

@@ -92,9 +92,9 @@ class Post
     private $imageAlt;
 
     /**
-     * @var string
+     * @var Media
      *
-     * @ORM\OneToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
     private $image;
 

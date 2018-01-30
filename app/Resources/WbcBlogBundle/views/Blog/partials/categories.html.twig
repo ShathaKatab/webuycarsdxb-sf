@@ -1,0 +1,13 @@
+<div class="">
+    <ul class="list-unstyled">
+        {% for category in getCategories() %}
+            {% set _totalPosts = category.posts.count() %}
+            {% if _totalPosts > 0 %}
+                <li>
+                    <a href="{{ path('wbc_blog_category_list', {'category': category.slug}) }}">{{ category.name }}
+                        ({{ _totalPosts }})</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
