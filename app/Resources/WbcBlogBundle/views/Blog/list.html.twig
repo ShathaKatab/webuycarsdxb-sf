@@ -19,10 +19,13 @@
                 {{ knp_pagination_render(pagination) }}
             </div>
         </div>
-        <div id="list-categories" class="col-md-3 col-md-offset-1">
-            <h3>Categories</h3>
-            {% include '@WbcBlog/Blog/partials/categories.html.twig' %}
-        </div>
+        {% set _categories = getCategories() %}
+        {% if _categories|length %}
+            <div id="list-categories" class="col-md-3 col-md-offset-1">
+                <h3>Categories</h3>
+                {% include '@WbcBlog/Blog/partials/categories.html.twig' with {categories: _categories} %}
+            </div>
+        {% endif %}
     </div>
 
     {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}

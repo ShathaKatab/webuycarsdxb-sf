@@ -48,7 +48,15 @@ class CategoryTwigExtension extends \Twig_Extension
      */
     public function getCategories()
     {
-        return $this->entityManager->getRepository(Category::class)->findBy([], ['name' => 'ASC']);
+        $queryBuilder = $this->entityManager->createQueryBuilder()
+            ->select('c')
+            ->from(Category::class, 'c')
+            ->innerJoin('c.posts', 'p', 'WITH', 'p.enabled = :enabled')
+            ->orderBy('c.name', 'ASC')
+            ->setParameter(':enabled', true, \PDO::PARAM_BOOL)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**

@@ -20,10 +20,13 @@
         <div class="col-md-7 col-md-offset-1">
             {% include 'WbcBlogBundle:Blog/partials:article.html.twig' with {'article': article, "preview": false} %}
         </div>
-        <div class="col-md-3" id="list-categories">
-            <h2 class="text-left">Categories</h2>
-            {% include '@WbcBlog/Blog/partials/categories.html.twig' %}
-        </div>
+        {% set _categories = getCategories() %}
+        {% if _categories|length %}
+            <div class="col-md-3" id="list-categories">
+                <h2 class="text-left">Categories</h2>
+                {% include '@WbcBlog/Blog/partials/categories.html.twig' with {categories: _categories} %}
+            </div>
+        {% endif %}
     </div>
 
     {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}

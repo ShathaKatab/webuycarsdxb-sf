@@ -4,6 +4,7 @@ namespace Wbc\BlogBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as CF;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Wbc\BlogBundle\Entity\Post;
 
 /**
@@ -14,8 +15,8 @@ use Wbc\BlogBundle\Entity\Post;
 class BlogController extends Controller
 {
     /**
-     * @CF\Route("/blog/{page}", name="wbc_blog_list", defaults={"page"=1}, requirements={"page"="\d+"})
-     * @CF\Route("/blog/category/{category}/{page}", name="wbc_blog_category_list", defaults={"page"=1}, requirements={"page"="\d+", "category"="[a-z0-9A-Z_\-]+"})
+     * @CF\Route("/{page}", name="wbc_blog_list", defaults={"page"=1}, requirements={"page"="\d+"})
+     * @CF\Route("/category/{category}/{page}", name="wbc_blog_category_list", defaults={"page"=1}, requirements={"page"="\d+", "category"="[a-z0-9A-Z_\-]+"})
      * @CF\Method("GET")
      *
      * @param int    $page
@@ -39,9 +40,14 @@ class BlogController extends Controller
             $queryBuilder->innerJoin('p.categories', 'c', 'WITH', 'c.slug = :categorySlug')
                 ->setParameter(':categorySlug', $category, \PDO::PARAM_STR);
         }
+        $pagination = $this->get('knp_paginator')->paginate($queryBuilder->getQuery(), $page);
+
+        if ($category && !count($pagination)) {
+            throw new NotFoundHttpException('Category not found!');
+        }
 
         return $this->render('WbcBlogBundle:Blog:list.html.twig', [
-            'pagination' => $this->get('knp_paginator')->paginate($queryBuilder->getQuery(), $page),
+            'pagination' => $pagination,
         ]);
     }
 
@@ -60,7 +66,7 @@ class BlogController extends Controller
     }
 
     /**
-     * @CF\Route("/blog/preview/{slug}", name="wbc_blog_preview", requirements={"slug"="[a-z0-9A-Z_\-]+"})
+     * @CF\Route("/preview/{slug}", name="wbc_blog_preview", requirements={"slug"="[a-z0-9A-Z_\-]+"})
      * @CF\ParamConverter("post", class="WbcBlogBundle:Post", options={"repository_method" = "findOneBySlug", "mapping": {"slug"="slug"}})
      * @CF\Template("WbcBlogBundle:Blog:get.html.twig")
      * @CF\Security("has_role('ROLE_BLOG_EDITOR')")

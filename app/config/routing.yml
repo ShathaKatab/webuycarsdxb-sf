@@ -74,7 +74,7 @@ wbc_utility:
 
 wbc_blog:
     resource: "@WbcBlogBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /blog
     schemes: [https]
 
 wbc_static:

@@ -3,6 +3,7 @@
 namespace Wbc\BlogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -217,5 +218,16 @@ class Category
     public function getPosts()
     {
         return $this->posts;
+    }
+
+    public function getEnabledPosts()
+    {
+        $collection = new ArrayCollection();
+
+        foreach ($this->posts as $post) {
+            $collection->add($post);
+        }
+
+        return $collection->matching(Criteria::create()->where(Criteria::expr()->eq('enabled', true)));
     }
 }
