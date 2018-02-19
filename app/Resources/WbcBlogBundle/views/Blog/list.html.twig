@@ -11,7 +11,7 @@
         <h1 class="text-center">Blog</h1>
         <div id="blog-list" class="col-md-7 col-md-offset-1">
             {% for article in pagination %}
-                <h2 class="text-left ellipsis"><a href="{{ path("wbc_blog_get", {"slug": article.slug}) }}">{{ article.title }}</a></h2>
+                <h2 class="text-left"><a href="{{ path("wbc_blog_get", {"slug": article.slug}) }}">{{ article.title }}</a></h2>
                 {% include 'WbcBlogBundle:Blog/partials:article.html.twig' with {'article': article, "preview": true} %}
             {% endfor %}
             {# display navigation #}
