@@ -1,7 +1,11 @@
 {% extends '@WbcStatic/Default/base.html.twig' %}
 
 {% block seoHead %}
-    {{ parent() }}
+    {% block title %}<title>Check Our Automotive Blog Articles – The Best in Dubai</title>{% endblock %}
+    {% block meta %}
+        <meta name="description"
+              content="{{ site_title }} team is pleased to share with you the latest tips and exciting content about the automotive industry. Happy reading.">
+    {% endblock %}
 {% endblock %}
 
 {% block body %}
