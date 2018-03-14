@@ -156,7 +156,7 @@ class Appointment
      * @ORM\Column(name="vehicle_color", type="string", length=30, nullable=true)
      *
      * @Assert\NotBlank()
-     * @Assert\Choice(choices={"white", "silver", "black", "grey", "blue", "red", "brown", "green"})
+     * @Assert\Choice(choices={"white", "silver", "black", "grey", "blue", "red", "brown", "green", "other"})
      *
      * @Serializer\Expose()
      */
