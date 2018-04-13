@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\BranchBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as CF;
@@ -124,12 +126,27 @@ class CRUDController extends Controller
      */
     public function sendSmsAction(Appointment $appointment)
     {
-        $response = $this->get('wbc.utility.twilio_manager')
+        $smsManager = $this->get('wbc.utility.twilio_manager');
+
+        $response = $smsManager
             ->sendSms($appointment->getMobileNumber(), $this->get('templating')->render('WbcBranchBundle::appointmentSms.txt.twig', ['appointment' => $appointment]));
 
         if ($response instanceof \Twilio\Rest\Api\V2010\Account\MessageInstance) {
             $appointment->setSmsSent(true);
             $this->get('doctrine.orm.default_entity_manager')->flush($appointment);
+        }
+
+        $queryBuilder = $this->get('doctrine.orm.default_entity_manager')->createQueryBuilder();
+        $queryBuilder->select('u')->from('WbcUserBundle:User', 'u')
+            ->where($queryBuilder->expr()->like('u.roles', $queryBuilder->expr()->literal('%ROLE_APPOINTMENT_SMS%')));
+
+        $roleAppointmentSmsUsers = $queryBuilder->getQuery()->getResult();
+
+        foreach ($roleAppointmentSmsUsers as $user) {
+            $profile = $user->getProfile();
+            if ($profile) {
+                $smsManager->sendSms($profile->getMobileNumber(), $this->get('templating')->render('WbcBranchBundle:Admin:appointmentSms.txt.twig', ['appointment' => $appointment]));
+            }
         }
 
         return new Response('');
