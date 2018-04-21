@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Wbc\BranchBundle\Twig;
+namespace Wbc\CareersBundle\Twig;
 
 use JMS\DiExtraBundle\Annotation as DI;
 use Wbc\CareersBundle\Entity\Role;
