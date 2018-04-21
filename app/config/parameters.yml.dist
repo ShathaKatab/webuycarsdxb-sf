@@ -52,6 +52,9 @@ parameters:
             slug: contact-us
             title: 'Contact Us'
         -
+            slug: careers
+            title: 'Careers'
+        -
             slug: terms-and-conditions
             title: 'Terms & Conditions'
         -

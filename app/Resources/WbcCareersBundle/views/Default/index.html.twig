@@ -1,0 +1,26 @@
+{% extends '@WbcStatic/Default/base.html.twig' %}
+{% block header %}
+    <h1 class="text-center">Careers</h1>
+{% endblock %}
+    {% block body %}
+        {{ parent() }}
+        <article id="careers-list" class="text-center">
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2" style="padding-bottom: 25px;">
+                            {% if roles|length %}
+                                {% include '@WbcCareers/partials/role-list.html.twig' with {roles: roles} %}
+                            {% else %}
+                                {% include '@WbcCareers/partials/no-role-list.html.twig' %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
+        {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
+        {% include '@WbcStatic/partials/our-services.html.twig' %}
+
+    {% endblock %}

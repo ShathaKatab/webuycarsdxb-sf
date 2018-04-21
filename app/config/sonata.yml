@@ -58,6 +58,11 @@ sonata_admin:
                 items: [admin.vehicle.make, admin.vehicle.model, admin.vehicle.model_type]
                 roles: [ROLE_SUPER_ADMIN]
                 icon:   '<i class="fa fa-car"></i>'
+            Careers:
+                label: Careers
+                items: [admin.careers.role]
+                roles: [ROLE_CAREERS_EDITOR]
+                icon:   '<i class="fa fa-briefcase"></i>'
         blocks:
             -
                 position: left
@@ -113,6 +118,12 @@ sonata_admin:
                 settings:
                     groups: ["Blog"]
                 roles: [ROLE_BLOG_EDITOR]
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: ["Careers"]
+                roles: [ROLE_CAREERS_EDITOR]
 
     title: "WeBuyCars Admin"
     title_logo: /images/admin-logo.png
@@ -223,3 +234,15 @@ services:
         arguments: [~, Wbc\BlogBundle\Entity\Category, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: Category }
+
+    admin.careers.role:
+        class: Wbc\CareersBundle\Admin\RoleAdmin
+        arguments: [~, Wbc\CareersBundle\Entity\Role, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Careers, label: Roles }
+
+#    admin.careers.candidate:
+#        class: Wbc\CareersBundle\Admin\CandidateAdmin
+#        arguments: [~, Wbc\CareersBundle\Entity\Candidate, ~]
+#        tags:
+#            - { name: sonata.admin, manager_type: orm }

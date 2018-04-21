@@ -1,0 +1,3 @@
+wbc_careers_homepage:
+    type: annotation
+    resource: "@WbcCareersBundle/Controller/DefaultController.php"

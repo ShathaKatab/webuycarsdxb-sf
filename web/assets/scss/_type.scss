@@ -370,3 +370,23 @@ section.section-text {
     text-decoration: underline;
   }
 }
+
+#careers-list{
+  .h2, .h3{
+    text-align: left;
+  }
+
+  @media (min-width: $screen-md-min) {
+    .btn-career-view {
+      margin-top: 40px;
+    }
+  }
+}
+
+#careers-detail {
+  @media (min-width: $screen-md-min) {
+    .btn-career-view-top{
+      margin-top: 40px;
+    }
+  }
+}

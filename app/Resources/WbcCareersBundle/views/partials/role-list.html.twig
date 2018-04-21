@@ -1,0 +1,17 @@
+<h2>Open Positions</h2>
+{% for role in roles %}
+    <div class="col-md-8">
+    <a href="{{ url('wbc_careers_role_get', {'slug': role.slug}) }}" class="h2 text-left ellipsis">
+        {{ role.title }}<br>
+        <small>
+            Department: {{ role.department|departmentSlug }}<br>
+            Location: {{ role.location|citySlug }}, United Arab Emirates
+        </small>
+    </a>
+    </div>
+    <div class="col-md-4">
+        <a href="{{ url('wbc_careers_role_get', {'slug': role.slug}) }}" class="btn btn-primary ellipsis btn-career-view">View</a>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+{% endfor %}

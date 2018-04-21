@@ -1,0 +1,35 @@
+{% extends '@WbcStatic/Default/base.html.twig' %}
+{% block header %}
+    <h1 class="text-center">Careers</h1>
+{% endblock %}
+{% block body %}
+    <article id="careers-detail" class="text-center">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2" style="padding-bottom: 25px;">
+                        <div class="col-md-8">
+                            <h2 class="text-left">
+                                {{ role.title }}
+                                <br>
+                                <small>
+                                    Department: {{ role.department|departmentSlug }}<br>
+                                    Location: {{ role.location|citySlug }}, United Arab Emirates
+                                </small>
+                            </h2>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="#"
+                               class="btn btn-primary ellipsis btn-career-apply-top">Apply</a>
+                        </div>
+                        <div class="col-md-12">
+                        <h5 class="text-left">Description</h5>
+                        <h5 class="text-left">Role Title - {{ role.title }}</h5>
+                            <p class="text-left">{{ role.description|raw }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+{% endblock %}
