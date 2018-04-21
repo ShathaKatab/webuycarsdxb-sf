@@ -413,7 +413,7 @@ class Role
      *
      * @param \Wbc\CareersBundle\Entity\Candidate $candidates
      */
-    public function removeCandidate(\Wbc\CareersBundle\Entity\Candidate $candidates): void
+    public function removeCandidate(\Wbc\CareersBundle\Entity\Candidate $candidates)
     {
         $this->candidates->removeElement($candidates);
     }

@@ -15,7 +15,7 @@ class Version20180421111529 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function up(Schema $schema): void
+    public function up(Schema $schema)
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
@@ -32,7 +32,7 @@ class Version20180421111529 extends AbstractMigration
     /**
      * @param Schema $schema
      */
-    public function down(Schema $schema): void
+    public function down(Schema $schema)
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');

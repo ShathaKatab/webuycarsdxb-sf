@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class RoleRepository extends EntityRepository
 {
-    public function findActiveRoles(): array
+    public function findActiveRoles()
     {
         $now = new \DateTime();
 
