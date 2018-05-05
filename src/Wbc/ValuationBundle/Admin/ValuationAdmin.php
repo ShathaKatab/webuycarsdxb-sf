@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Wbc\BranchBundle\Entity\Appointment;
+use Wbc\UtilityBundle\AdminDateRange;
 use Wbc\ValuationBundle\Entity\Valuation;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Form\ColorType;
@@ -105,21 +106,7 @@ class ValuationAdmin extends AbstractAdmin
                     ],
                 ],
             ])
-            ->add('createdAt', 'doctrine_orm_date_range', [
-                'label' => 'Date Created At',
-                'field_type' => 'sonata_type_date_range_picker',
-                'start_options' => [
-                    'years' => range($now->format('Y'), (int) ($now->format('Y')) + 1),
-                    'dp_min_date' => (new \DateTime('-1 month'))->format('d/M/Y'),
-                    'dp_max_date' => (new \DateTime('+1 month'))->format('d/M/Y'),
-                    'dp_default_date' => $now->format('m/d/Y'), ],
-                'end_options' => [
-                    'years' => range($now->format('Y'), (int) ($now->format('Y')) + 1),
-                    'dp_min_date' => (new \DateTime('-1 month'))->format('d/M/Y'),
-                    'dp_max_date' => (new \DateTime('+1 month'))->format('d/M/Y'),
-                    'dp_default_date' => $now->format('m/d/Y'),
-                ],
-            ])
+            ->add('createdAt', 'doctrine_orm_date_range', AdminDateRange::getDoctrineOrmDateRange('Date Created At'))
             ->add('status', 'doctrine_orm_choice', [
                 'field_options' => ['choices' => Valuation::getStatuses()],
                 'field_type' => 'choice',

@@ -19,6 +19,7 @@ use Wbc\BranchBundle\Entity\Inspection;
 use Wbc\BranchBundle\Entity\Timing;
 use Wbc\BranchBundle\Form\BranchType;
 use Wbc\BranchBundle\Form\DayType;
+use Wbc\UtilityBundle\AdminDateRange;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
 use Wbc\VehicleBundle\Entity\ModelType;
@@ -277,20 +278,7 @@ class InspectionAdmin extends AbstractAdmin
                     ],
                 ],
             ])
-            ->add('appointment.dateBooked', 'doctrine_orm_date_range', [
-                'label' => 'Date Range',
-                'field_type' => 'sonata_type_date_range_picker',
-                'start_options' => [
-                    'years' => range($now->format('Y'), (int) ($now->format('Y')) + 1),
-                    'dp_min_date' => (new \DateTime('-1 month'))->format('d/M/Y'),
-                    'dp_max_date' => (new \DateTime('+1 month'))->format('d/M/Y'),
-                    'dp_default_date' => $now->format('m/d/Y'), ],
-                'end_options' => [
-                    'years' => range($now->format('Y'), (int) ($now->format('Y')) + 1),
-                    'dp_min_date' => (new \DateTime('-1 month'))->format('d/M/Y'),
-                    'dp_max_date' => (new \DateTime('+1 month'))->format('d/M/Y'),
-                    'dp_default_date' => $now->format('m/d/Y'), ],
-            ])
+            ->add('appointment.dateBooked', 'doctrine_orm_date_range', AdminDateRange::getDoctrineOrmDateRange('Date Range'))
         ;
     }
 

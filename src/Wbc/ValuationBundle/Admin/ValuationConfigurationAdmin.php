@@ -72,8 +72,8 @@ class ValuationConfigurationAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list->add('vehicleYear')
-            ->add('vehicleMake')
-            ->add('vehicleModel')
+            ->add('vehicleMake', null, array('sortable' => true, 'sort_field_mapping' => array('fieldName' => 'name'), 'sort_parent_association_mappings' => array(array('fieldName' => 'vehicleMake'))))
+            ->add('vehicleModel', null, array('sortable' => true, 'sort_field_mapping' => array('fieldName' => 'name'), 'sort_parent_association_mappings' => array(array('fieldName' => 'vehicleModel'))))
             ->add('vehicleColor')
             ->add('vehicleBodyCondition')
             ->add('discount', NumberType::class, ['label' => 'Discount (%)'])
