@@ -52,7 +52,7 @@ class CandidateListener
         $this->entityManager = $entityManager;
     }
 
-    public function postPersist(LifecycleEventArgs $args): void
+    public function postPersist(LifecycleEventArgs $args)
     {
         $object = $args->getObject();
 
