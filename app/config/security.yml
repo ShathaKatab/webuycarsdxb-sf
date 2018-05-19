@@ -126,7 +126,6 @@ security:
             - ROLE_ADMIN_BLOG_POST_DELETE
             - ROLE_ADMIN_BLOG_CATEGORY_EXPORT
             - ROLE_ADMIN_BLOG_CATEGORY_DELETE
-            - ROLE_CAREERS_EDITOR
 
     providers:
         fos_userbundle:

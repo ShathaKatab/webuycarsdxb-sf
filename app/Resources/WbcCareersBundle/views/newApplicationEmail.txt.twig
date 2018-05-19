@@ -1,0 +1,16 @@
+Hello,
+
+A new applicant has applied for the role: {{ candidate.role.title }}.
+
+Candidate details are below:
+
+Name: {{ candidate.firstName ~ " " ~ candidate.lastName }}
+Email Address: {{ candidate.emailAddress }}
+Mobile Number: {{ candidate.mobileNumber }}
+Current Role: {{ candidate.currentRole }}
+
+See more details here: {{ url('admin_wbc_careers_candidate_show', {'id': candidate.id}) }}
+
+Regards.
+
+webuycarsdxb.com

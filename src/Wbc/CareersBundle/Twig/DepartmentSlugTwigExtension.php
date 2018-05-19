@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Wbc\CareersBundle\Twig;
 
 use JMS\DiExtraBundle\Annotation as DI;

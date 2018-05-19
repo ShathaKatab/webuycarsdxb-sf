@@ -18,4 +18,11 @@ $(document).ready(function(){
         $('#selectedValuation').hide();
         $('.appointment-funnel').removeClass('hidden');
     });
+
+    $('.btn-career-apply').on('click', function (e){
+        $("#careers-apply").slideDown();
+        $('html, body').animate({
+            scrollTop: $("#careers-apply").offset().top
+        }, 2000);
+    });
 });

@@ -60,7 +60,7 @@ sonata_admin:
                 icon:   '<i class="fa fa-car"></i>'
             Careers:
                 label: Careers
-                items: [admin.careers.role]
+                items: [admin.careers.role, admin.careers.candidate]
                 roles: [ROLE_CAREERS_EDITOR]
                 icon:   '<i class="fa fa-briefcase"></i>'
         blocks:
@@ -241,8 +241,8 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: Careers, label: Roles }
 
-#    admin.careers.candidate:
-#        class: Wbc\CareersBundle\Admin\CandidateAdmin
-#        arguments: [~, Wbc\CareersBundle\Entity\Candidate, ~]
-#        tags:
-#            - { name: sonata.admin, manager_type: orm }
+    admin.careers.candidate:
+        class: Wbc\CareersBundle\Admin\CandidateAdmin
+        arguments: [~, Wbc\CareersBundle\Entity\Candidate, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Careers, label: Candidates }

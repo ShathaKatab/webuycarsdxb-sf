@@ -144,6 +144,11 @@ class Role
         $this->isActive = true;
     }
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     /**
      * Get id.
      *
@@ -413,7 +418,7 @@ class Role
      *
      * @param \Wbc\CareersBundle\Entity\Candidate $candidates
      */
-    public function removeCandidate(\Wbc\CareersBundle\Entity\Candidate $candidates)
+    public function removeCandidate(\Wbc\CareersBundle\Entity\Candidate $candidates): void
     {
         $this->candidates->removeElement($candidates);
     }

@@ -30,4 +30,17 @@ class RoleRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     *
+     * @return array
+     */
+    public function findByEntityForAdminFilters()
+    {
+        $statement = $this->_em->getConnection()->prepare('SELECT id, title FROM careers_role');
+        $statement->execute();
+
+        return $statement->fetchAll(\PDO::FETCH_KEY_PAIR);
+    }
 }

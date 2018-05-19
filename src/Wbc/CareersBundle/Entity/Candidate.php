@@ -7,6 +7,7 @@ namespace Wbc\CareersBundle\Entity;
 use Application\Sonata\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -77,6 +78,9 @@ class Candidate
      * @var string
      *
      * @ORM\Column(name="cover_letter", type="text", nullable=true)
+     *
+     * @Assert\Type("string")
+     * @Assert\Length(max=255)
      */
     protected $coverLetter;
 
@@ -91,6 +95,9 @@ class Candidate
      * @var string
      *
      * @ORM\Column(name="current_role", type="string", length=100, nullable=true)
+     *
+     * @Assert\Type("string")
+     * @Assert\Length(max=100)
      */
     protected $currentRole;
 
@@ -133,6 +140,27 @@ class Candidate
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
+
+    /**
+     * @var File
+     *
+     * @Assert\File(
+     *     maxSize = "5m",
+     *     mimeTypes = {"application/pdf", "application/x-pdf", "application/msword"},
+     * )
+     */
+    protected $uploadedFile;
+
+    /**
+     * Candidate constructor.
+     *
+     * @param Role $role
+     */
+    public function __construct(Role $role = null)
+    {
+        $this->role = $role;
+        $this->status = self::STATUS_NEW;
+    }
 
     /**
      * @return array
@@ -404,11 +432,11 @@ class Candidate
     /**
      * Set uploadedCv.
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $uploadedCv
+     * @param Media $uploadedCv
      *
      * @return Candidate
      */
-    public function setUploadedCv(\Application\Sonata\MediaBundle\Entity\Media $uploadedCv = null)
+    public function setUploadedCv(Media $uploadedCv = null)
     {
         $this->uploadedCv = $uploadedCv;
 
@@ -418,7 +446,7 @@ class Candidate
     /**
      * Get uploadedCv.
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
+     * @return Media
      */
     public function getUploadedCv()
     {
@@ -428,11 +456,11 @@ class Candidate
     /**
      * Set role.
      *
-     * @param \Wbc\CareersBundle\Entity\Role $role
+     * @param Role $role
      *
      * @return Candidate
      */
-    public function setRole(\Wbc\CareersBundle\Entity\Role $role = null)
+    public function setRole(Role $role = null)
     {
         $this->role = $role;
 
@@ -447,5 +475,25 @@ class Candidate
     public function getRole()
     {
         return $this->role;
+    }
+
+    /**
+     * @return File
+     */
+    public function getUploadedFile()
+    {
+        return $this->uploadedFile;
+    }
+
+    /**
+     * @param File $uploadedFile
+     *
+     * @return Candidate
+     */
+    public function setUploadedFile(File $uploadedFile)
+    {
+        $this->uploadedFile = $uploadedFile;
+
+        return $this;
     }
 }

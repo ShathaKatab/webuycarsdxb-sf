@@ -19,13 +19,99 @@
                             </h2>
                         </div>
                         <div class="col-md-4">
-                            <a href="#"
-                               class="btn btn-primary ellipsis btn-career-apply-top">Apply</a>
+                            <a id="btn-career-apply-top" class="btn btn-primary ellipsis btn-career-apply">Apply</a>
                         </div>
-                        <div class="col-md-12">
-                        <h5 class="text-left">Description</h5>
-                        <h5 class="text-left">Role Title - {{ role.title }}</h5>
-                            <p class="text-left">{{ role.description|raw }}</p>
+                        <div class="col-md-12 text-left">
+                            <h5>Description</h5>
+                            <h5>Role Title - {{ role.title }}</h5>
+                            {{ role.description|raw }}
+                            <h5>Responsibilities</h5>
+                            {{ role.responsibilities|raw }}
+                            <h5>Skills & Experience</h5>
+                            {{ role.skillsAndExperience|raw }}
+                            <a class="btn btn-lg btn-primary ellipsis btn-career-apply">Apply</a>
+                        </div>
+                        <div class="col-md-12 text-left" style="padding-top: 30px;">
+                            <a href="{{ url('wbc_careers_default_index') }}" class="ellipsis"><i
+                                        class="fa fa-chevron-circle-left"></i> Back to Careers</a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div id="careers-apply" style="display: none;" class="col-md-12" ng-controller="DetailsController as ctrl">
+                            <h3>Submit application for the role {{ role.title }}</h3>
+                            <form name="candidateForm" ng-submit="ctrl.submitForm(candidateForm.$valid)" method="post"
+                                  enctype="multipart/form-data"
+                                  novalidate>
+                                <div class="col-md-6 col-md-offset-3">
+                                    <div class="form-group">
+                                        <input ng-model="ctrl.firstName"
+                                               ng-class="{'form-control-invalid': candidateForm.$submitted && candidateForm.firstName.$invalid }"
+                                               name="firstName"
+                                               required
+                                               class="form-control"
+                                               type="text"
+                                               placeholder="First Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input ng-model="ctrl.lastName"
+                                               ng-class="{'form-control-invalid': candidateForm.$submitted && candidateForm.lastName.$invalid }"
+                                               name="lastName"
+                                               required
+                                               class="form-control"
+                                               type="text"
+                                               placeholder="Last Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input ng-model="ctrl.emailAddress"
+                                               ng-class="{'form-control-invalid': candidateForm.$submitted && candidateForm.emailAddress.$invalid }"
+                                               name="emailAddress"
+                                               required
+                                               class="form-control"
+                                               type="email"
+                                               placeholder="Email Address">
+                                    </div>
+                                    <div class="form-group">
+                                        <input ng-model="ctrl.mobileNumber"
+                                               ng-class="{'form-control-invalid': candidateForm.$submitted && candidateForm.mobileNumber.$invalid }"
+                                               name="mobileNumber"
+                                               ng-pattern="/^(0|((\+|00)?971))(2|3|4|6|7|9|50|52|54|55|56|57|58|59)\d{7}$/"
+                                               required
+                                               class="form-control"
+                                               type="text"
+                                               placeholder="Mobile number">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input ng-model="ctrl.currentRole"
+                                               ng-class="{'form-control-invalid': candidateForm.$submitted && candidateForm.currentRole.$invalid }"
+                                               name="currentRole"
+                                               maxlength="30"
+                                               class="form-control"
+                                               type="text"
+                                               placeholder="Current Role">
+                                    </div>
+                                    <div class="form-group">
+                                    <textarea ng-model="ctrl.coverLetter"
+                                              ng-class="{'form-control-invalid': candidateForm.$submitted && candidateForm.coverLetter.$invalid }"
+                                              name="coverLetter" class="form-control"
+                                              maxlength="255"
+                                              placeholder="Cover Letter">
+                                    </textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Upload your CV (.pdf or .doc or .docx), 5MB or less</label>
+                                        <input ng-model="ctrl.uploadedFile"
+                                               ng-class="{'form-control-invalid': candidateForm.$submitted && candidateForm.uploadedFile.$invalid }"
+                                               name="uploadedFile"
+                                               class="form-control"
+                                               type="file"
+                                               placeholder="Upload CV">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-lg">Submit Application</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

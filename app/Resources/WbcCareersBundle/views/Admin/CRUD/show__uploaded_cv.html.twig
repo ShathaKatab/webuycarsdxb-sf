@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_show_field.html.twig' %}
+
+{% block field %}
+    {% if object.uploadedCv %}
+        <a href="{{ url('sonata_media_download', {'id': object.uploadedCv.id}) }}">{{ object.uploadedCv.name }}</a>
+    {% else %}
+        No CV
+    {% endif %}
+{% endblock %}

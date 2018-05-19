@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * @ORM\Table(name="fos_user", uniqueConstraints={@ORM\UniqueConstraint(name="wbc_user_unique_idx", columns={"username",
  * "username_canonical", "email", "email_canonical"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Wbc\UserBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
@@ -272,6 +272,7 @@ class User extends BaseUser
             'ROLE_PURCHASING',
             'ROLE_CALL_CENTER',
             'ROLE_SUPER_ADMIN',
+            'ROLE_CAREERS_EDITOR'
         ];
     }
 }

@@ -180,6 +180,7 @@ sonata_media:
         default:  # the default context is mandatory
             providers:
                 - sonata.media.provider.image
+                - sonata.media.provider.file
 
             formats:
                 small: { width: 555, quality: 95}
