@@ -28,7 +28,7 @@ class CandidateAdmin extends AbstractAdmin
 {
     private $roles;
 
-    protected function configureFormFields(FormMapper $form): void
+    protected function configureFormFields(FormMapper $form)
     {
         $form->add('firstName')
             ->add('lastName')
@@ -43,7 +43,7 @@ class CandidateAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureListFields(ListMapper $list): void
+    protected function configureListFields(ListMapper $list)
     {
         $list->addIdentifier('id')
             ->add('firstName')
@@ -57,7 +57,7 @@ class CandidateAdmin extends AbstractAdmin
             ->add('_action', null, ['actions' => ['show' => [], 'edit' => [], 'delete' => []]]);
     }
 
-    protected function configureDatagridFilters(DatagridMapper $filter): void
+    protected function configureDatagridFilters(DatagridMapper $filter)
     {
         $roles = $this->getRoles();
 
@@ -80,7 +80,7 @@ class CandidateAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureShowFields(ShowMapper $show): void
+    protected function configureShowFields(ShowMapper $show)
     {
         $show->add('firstName')
             ->add('lastName')
@@ -94,7 +94,7 @@ class CandidateAdmin extends AbstractAdmin
             ->add('role');
     }
 
-    protected function configureRoutes(RouteCollection $collection): void
+    protected function configureRoutes(RouteCollection $collection)
     {
         parent::configureRoutes($collection);
     }
