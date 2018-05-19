@@ -146,7 +146,12 @@ class Role
 
     public function __toString()
     {
-        return $this->title;
+        if($this->title){
+            return $this->title;
+        }
+
+        return '';
+
     }
 
     /**

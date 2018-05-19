@@ -162,6 +162,15 @@ class Candidate
         $this->status = self::STATUS_NEW;
     }
 
+    public function __toString()
+    {
+        if ($this->id) {
+            return (string) $this->id;
+        }
+
+        return '';
+    }
+
     /**
      * @return array
      */
