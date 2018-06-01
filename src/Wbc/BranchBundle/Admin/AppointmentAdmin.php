@@ -86,7 +86,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper): void
+    protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var $subject \Wbc\BranchBundle\Entity\Appointment */
         $subject = $this->getSubject();
@@ -213,7 +213,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $now = new \DateTime();
 
@@ -286,7 +286,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper): void
+    protected function configureListFields(ListMapper $listMapper)
     {
         $filterParams = $this->getFilterParameters();
 
@@ -333,7 +333,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper): void
+    protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper->tab('Vehicle Information')
             ->with('')
@@ -376,7 +376,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureRoutes(RouteCollection $collection): void
+    protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
