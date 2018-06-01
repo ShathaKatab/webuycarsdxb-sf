@@ -140,25 +140,25 @@ class ValuationManager
 
         switch ($option) {
             case 'mid':
-                $optionPercentage = (float) ($this->container->get('craue_config')->get('optionMid'));
+                $optionPercentage = (float) ($this->container->get('craue_config')->get('optionMidPercentage'));
                 break;
             case 'full':
-                $optionPercentage = (float) ($this->container->get('craue_config')->get('optionFull'));
+                $optionPercentage = (float) ($this->container->get('craue_config')->get('optionFullPercentage'));
                 break;
             case 'basic':
-                $optionPercentage = (float) ($this->container->get('craue_config')->get('optionBasic'));
+                $optionPercentage = (float) ($this->container->get('craue_config')->get('optionBasicPercentage'));
                 break;
         }
 
         switch ($bodyCondition) {
             case 'good':
-                $bodyConditionPercentage = (float) ($this->container->get('craue_config')->get('bodyConditionGood'));
+                $bodyConditionPercentage = (float) ($this->container->get('craue_config')->get('bodyConditionGoodPercentage'));
                 break;
             case 'fair':
-                $bodyConditionPercentage = (float) ($this->container->get('craue_config')->get('bodyConditionFair'));
+                $bodyConditionPercentage = (float) ($this->container->get('craue_config')->get('bodyConditionFairPercentage'));
                 break;
             case 'excellent':
-                $bodyConditionPercentage = (float) ($this->container->get('craue_config')->get('bodyConditionExcellent'));
+                $bodyConditionPercentage = (float) ($this->container->get('craue_config')->get('bodyConditionExcellentPercentage'));
                 break;
         }
 
