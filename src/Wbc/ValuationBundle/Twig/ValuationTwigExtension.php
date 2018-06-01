@@ -72,7 +72,9 @@ class ValuationTwigExtension extends \Twig_Extension
         if ($this->session->has('valuationId')) {
             $valuation = $this->entityManager->getRepository(Valuation::class)->find($this->session->get('valuationId'));
 
-            $this->dispatcher->dispatch(ValuationEvents::VALUATION_REQUESTED_FRONT_END, new ValuationEvent($valuation));
+            if($valuation){
+                $this->dispatcher->dispatch(ValuationEvents::VALUATION_REQUESTED_FRONT_END, new ValuationEvent($valuation));
+            }
 
             return $valuation;
         }

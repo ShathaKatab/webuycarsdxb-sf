@@ -43,13 +43,6 @@
   &.left, &.right{
     background: none;
   }
-
-  //  &.left{
-  //    left: -5%;
-  //  }
-  //  &.right{
-  //    right: -5%;
-  //  }
 }
 
 #appointments-stats{
@@ -109,3 +102,66 @@ img{
     margin-bottom: 15px;
   }
 }
+
+#carousel-used-cars{
+  height: 300px;
+
+  img{
+    max-height: 250px;
+  }
+
+  .carousel-inner{
+    padding-bottom: 75px;
+    .carousel-indicators{
+      bottom: 0;
+    }
+  }
+  .carousel-control {
+    top: -35%;
+    &.left {
+      left: -10%;
+    }
+    &.right {
+      right: -10%;
+    }
+    @media (max-width: $screen-sm-max) {
+      &.left {
+        left: 15%;
+      }
+      &.right {
+        right: 15%;
+      }
+    }
+    @media (max-width: $screen-xs-max) {
+      &.left {
+        left: -4%;
+      }
+      &.right {
+        right: -4%;
+      }
+    }
+  }
+}
+
+#carousel-used-cars-detail{
+  .carousel-control {
+    top: 0;
+  }
+
+  .carousel-indicators{
+    bottom: 10px;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    margin-bottom: 30px;
+  }
+}
+
+#used-cars{
+  @media (max-width: $screen-sm-max) {
+    .bg-dark-color{
+      padding-bottom: 125px;
+    }
+  }
+}
+

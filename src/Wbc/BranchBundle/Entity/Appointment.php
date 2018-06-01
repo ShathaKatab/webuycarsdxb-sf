@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\BranchBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -155,12 +157,23 @@ class Appointment
      *
      * @ORM\Column(name="vehicle_color", type="string", length=30, nullable=true)
      *
-     * @Assert\NotBlank()
      * @Assert\Choice(choices={"white", "silver", "black", "grey", "blue", "red", "brown", "green", "other"})
      *
      * @Serializer\Expose()
      */
     protected $vehicleColor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vehicle_option", type="string", length=30, nullable=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Choice(choices={"base", "mid", "full"})
+     *
+     * @Serializer\Expose()
+     */
+    protected $vehicleOption;
 
     /**
      * @var \DateTime
@@ -818,6 +831,7 @@ class Appointment
             $this->vehicleMileage = $valuation->getVehicleMileage();
             $this->vehicleColor = $valuation->getVehicleColor();
             $this->vehicleBodyCondition = $valuation->getVehicleBodyCondition();
+            $this->vehicleOption = $valuation->getVehicleOption();
             $this->name = $valuation->getName();
             $this->emailAddress = $valuation->getEmailAddress();
             $this->mobileNumber = $valuation->getMobileNumber();
@@ -961,7 +975,7 @@ class Appointment
      *
      * @param Inspection $inspection
      */
-    public function removeInspection(Inspection $inspection)
+    public function removeInspection(Inspection $inspection): void
     {
         $this->inspections->removeElement($inspection);
     }
@@ -1016,6 +1030,40 @@ class Appointment
      * @return bool
      */
     public function isSmsSent()
+    {
+        return $this->smsSent;
+    }
+
+    /**
+     * Set vehicleOption.
+     *
+     * @param string $vehicleOption
+     *
+     * @return Appointment
+     */
+    public function setVehicleOption($vehicleOption)
+    {
+        $this->vehicleOption = $vehicleOption;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicleOption.
+     *
+     * @return string
+     */
+    public function getVehicleOption()
+    {
+        return $this->vehicleOption;
+    }
+
+    /**
+     * Get smsSent.
+     *
+     * @return bool
+     */
+    public function getSmsSent()
     {
         return $this->smsSent;
     }

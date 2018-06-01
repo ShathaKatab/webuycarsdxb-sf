@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\ValuationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -93,7 +95,6 @@ class Valuation
      *
      * @ORM\Column(name="vehicle_color", type="string", length=30, nullable=true)
      *
-     * @Assert\NotBlank()
      * @Assert\Choice(choices={"white", "silver", "black", "grey", "blue", "red", "brown", "green", "other"})
      *
      * @Serializer\Expose()
@@ -111,6 +112,18 @@ class Valuation
      * @Serializer\Expose()
      */
     protected $vehicleBodyCondition;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vehicle_option", type="string", length=30, nullable=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Choice(choices={"base", "mid", "full"})
+     *
+     * @Serializer\Expose()
+     */
+    protected $vehicleOption;
 
     /**
      * @var string
@@ -596,7 +609,7 @@ class Valuation
      */
     public function hasAppointment()
     {
-        if ($this->appointment !== null) {
+        if (null !== $this->appointment) {
             return true;
         }
 
@@ -761,5 +774,29 @@ class Valuation
         $this->priceImageEncoded = $priceImageEncoded;
 
         return $this;
+    }
+
+    /**
+     * Set vehicleOption.
+     *
+     * @param string $vehicleOption
+     *
+     * @return Valuation
+     */
+    public function setVehicleOption($vehicleOption)
+    {
+        $this->vehicleOption = $vehicleOption;
+
+        return $this;
+    }
+
+    /**
+     * Get vehicleOption.
+     *
+     * @return string
+     */
+    public function getVehicleOption()
+    {
+        return $this->vehicleOption;
     }
 }

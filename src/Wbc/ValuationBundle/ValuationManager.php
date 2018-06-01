@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\ValuationBundle;
 
 use Doctrine\ORM\EntityManager;
@@ -75,8 +77,8 @@ class ValuationManager
         $this->valuationCommand = $valuationCommand;
         $this->logger = $logger;
         $this->container = $container;
-        $this->valuationDiscountPercentage = floatval($this->container->get('craue_config')->get('valuationDiscountPercentage'));
-        $this->usdExchangeRate = floatval($this->container->get('craue_config')->get('usdExchangeRate'));
+        $this->valuationDiscountPercentage = (float) ($this->container->get('craue_config')->get('valuationDiscountPercentage'));
+        $this->usdExchangeRate = (float) ($this->container->get('craue_config')->get('usdExchangeRate'));
     }
 
     public function setPrice(Valuation $valuation)
@@ -88,8 +90,8 @@ class ValuationManager
 
     protected function getPriceFromAverages(Valuation $valuation)
     {
-        $modelId = intval($valuation->getVehicleModel()->getId());
-        $year = intval($valuation->getVehicleYear());
+        $modelId = (int) ($valuation->getVehicleModel()->getId());
+        $year = (int) ($valuation->getVehicleYear());
 
         $averages = ['price' => 0, 'mileage' => 0];
 
@@ -109,16 +111,20 @@ class ValuationManager
             }
         }
 
+        $option = $valuation->getVehicleOption();
+        $bodyCondition = $valuation->getVehicleBodyCondition();
         $mileage = $valuation->getVehicleMileage();
         $averagePrice = $averages['price'];
         $averageMileage = $averages['mileage'];
         $price = $averagePrice;
         $mileagePercentage = 0;
+        $optionPercentage = 0;
+        $bodyConditionPercentage = 0;
 
-        $downMileageInterval = floatval($this->container->get('craue_config')->get('downMileageInterval'));
-        $downMileagePercentage = floatval($this->container->get('craue_config')->get('downMileagePercentage'));
-        $upMileageInterval = floatval($this->container->get('craue_config')->get('upMileageInterval'));
-        $upMileagePercentage = floatval($this->container->get('craue_config')->get('upMileagePercentage'));
+        $downMileageInterval = (float) ($this->container->get('craue_config')->get('downMileageInterval'));
+        $downMileagePercentage = (float) ($this->container->get('craue_config')->get('downMileagePercentage'));
+        $upMileageInterval = (float) ($this->container->get('craue_config')->get('upMileageInterval'));
+        $upMileagePercentage = (float) ($this->container->get('craue_config')->get('upMileagePercentage'));
 
         if ($mileage < $averageMileage) {
             $avgCoefficient = floor($averageMileage / $downMileageInterval);
@@ -132,7 +138,31 @@ class ValuationManager
             $mileagePercentage = $coefficient * $upMileagePercentage;
         }
 
-        return $price + $price * $mileagePercentage / 100;
+        switch ($option) {
+            case 'mid':
+                $optionPercentage = (float) ($this->container->get('craue_config')->get('optionMid'));
+                break;
+            case 'full':
+                $optionPercentage = (float) ($this->container->get('craue_config')->get('optionFull'));
+                break;
+            case 'basic':
+                $optionPercentage = (float) ($this->container->get('craue_config')->get('optionBasic'));
+                break;
+        }
+
+        switch ($bodyCondition) {
+            case 'good':
+                $bodyConditionPercentage = (float) ($this->container->get('craue_config')->get('bodyConditionGood'));
+                break;
+            case 'fair':
+                $bodyConditionPercentage = (float) ($this->container->get('craue_config')->get('bodyConditionFair'));
+                break;
+            case 'excellent':
+                $bodyConditionPercentage = (float) ($this->container->get('craue_config')->get('bodyConditionExcellent'));
+                break;
+        }
+
+        return $price + ($price * $mileagePercentage + $price * $optionPercentage + $price * $bodyConditionPercentage) / 100;
     }
 
     protected function getAverages($modelId, $year, $source, $exchangeRate = 1)
@@ -181,20 +211,18 @@ class ValuationManager
 
         if ($output) {
             $output = json_decode($output, true);
-            if (json_last_error() === JSON_ERROR_NONE && isset($output['price'])) {
-                return floatval($output['price']);
+            if (JSON_ERROR_NONE === json_last_error() && isset($output['price'])) {
+                return (float) ($output['price']);
             }
         }
-
-        return;
     }
 
     protected function generateTrainingDataFile(Valuation $valuation)
     {
-        $modelId = intval($valuation->getVehicleModel()->getId());
-        $makeId = intval($valuation->getVehicleMake()->getId());
-        $year = intval($valuation->getVehicleYear());
-        $mileage = intval($valuation->getVehicleMileage());
+        $modelId = (int) ($valuation->getVehicleModel()->getId());
+        $makeId = (int) ($valuation->getVehicleMake()->getId());
+        $year = (int) ($valuation->getVehicleYear());
+        $mileage = (int) ($valuation->getVehicleMileage());
 
         $color = strtolower($valuation->getVehicleColor());
 
@@ -217,8 +245,8 @@ class ValuationManager
             'b_model' => $modelId,
             'c_year' => $year,
             'd_mileage' => $mileage,
-            'f_color' => intval($color),
-            'g_body_condition' => intval($bodyCondition),
+            'f_color' => (int) $color,
+            'g_body_condition' => (int) $bodyCondition,
             'z_price' => 0,
         ];
 
@@ -233,7 +261,7 @@ class ValuationManager
 
         array_walk($trainingData, function (&$item) {
             foreach ($item as $key => $_item) {
-                $item[$key] = intval($_item);
+                $item[$key] = (int) $_item;
             }
         });
 
@@ -261,9 +289,9 @@ class ValuationManager
      * @param int    $exchangeRate
      * @param int    $limit
      *
-     * @return array
-     *
      * @throws \Doctrine\DBAL\DBALException
+     *
+     * @return array
      */
     private function getValuationData($source, $year, $mileage, $modelId, $exchangeRate = 1, $limit = 100)
     {
@@ -302,17 +330,17 @@ class ValuationManager
     /**
      * @param Valuation $valuation
      *
-     * @return float
-     *
      * @throws \Doctrine\DBAL\DBALException
+     *
+     * @return float
      */
     private function getValuationConfigurationDiscount(Valuation $valuation)
     {
         $makeId = $valuation->getVehicleMake()->getId();
         $year = $valuation->getVehicleYear();
         $modelId = $valuation->getVehicleModel()->getId();
-        $color = strtolower($valuation->getVehicleColor());
-        $bodyCondition = strtolower($valuation->getVehicleBodyCondition());
+        $color = strtolower($valuation->getVehicleColor() ?: '');
+        $bodyCondition = strtolower($valuation->getVehicleBodyCondition() ?: '');
         $discount = 0.0;
 
         $connection = $this->entityManager->getConnection();
@@ -325,43 +353,43 @@ class ValuationManager
         $configs = $statement->fetchAll();
 
         foreach ($configs as $config) {
-            if ($config['vehicle_make_id'] === null
-                && $config['vehicle_model_id'] === null
-                && $config['vehicle_year'] === null
-                && $config['vehicle_color'] === null
-                && $config['vehicle_body_condition'] === null) {
+            if (null === $config['vehicle_make_id']
+                && null === $config['vehicle_model_id']
+                && null === $config['vehicle_year']
+                && null === $config['vehicle_color']
+                && null === $config['vehicle_body_condition']) {
                 continue;
             }
 
-            if ($config['vehicle_make_id'] !== null && intval($config['vehicle_make_id']) !== $makeId) {
+            if (null !== $config['vehicle_make_id'] && (int) ($config['vehicle_make_id']) !== $makeId) {
                 continue;
             }
 
-            if ($config['vehicle_model_id'] !== null && intval($config['vehicle_model_id']) !== $modelId) {
+            if (null !== $config['vehicle_model_id'] && (int) ($config['vehicle_model_id']) !== $modelId) {
                 continue;
             }
 
-            if ($config['vehicle_year'] !== null && intval($config['vehicle_year']) !== $year) {
+            if (null !== $config['vehicle_year'] && (int) ($config['vehicle_year']) !== $year) {
                 continue;
             }
 
-            if ($config['vehicle_color'] !== null && $config['vehicle_color'] !== $color) {
+            if (null !== $config['vehicle_color'] && $config['vehicle_color'] !== $color) {
                 continue;
             }
 
-            if ($config['vehicle_body_condition'] !== null && $config['vehicle_body_condition'] !== $bodyCondition) {
+            if (null !== $config['vehicle_body_condition'] && $config['vehicle_body_condition'] !== $bodyCondition) {
                 continue;
             }
 
-            $discount += floatval($config['discount']);
+            $discount += (float) ($config['discount']);
         }
 
-        return floatval($discount);
+        return (float) $discount;
     }
 
     private function roundUpToAny($n, $x = 5)
     {
-        return (ceil($n) % $x === 0) ? ceil($n) : round(($n + $x / 2) / $x) * $x;
+        return (0 === ceil($n) % $x) ? ceil($n) : round(($n + $x / 2) / $x) * $x;
     }
 
     private function setValuationPrice(Valuation $valuation, $price = null)

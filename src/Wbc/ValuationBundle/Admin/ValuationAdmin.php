@@ -19,6 +19,7 @@ use Wbc\ValuationBundle\Entity\Valuation;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Form\ColorType;
 use Wbc\VehicleBundle\Form\ConditionType;
+use Wbc\VehicleBundle\Form\OptionType;
 
 /**
  * Class ValuationAdmin.
@@ -128,6 +129,7 @@ class ValuationAdmin extends AbstractAdmin
             ->add('vehicleModel.name')
             ->add('vehicleYear')
             ->add('vehicleMileage', null, ['label' => 'Mileage (Kms)'])
+            ->add('vehicleOption', 'choice', ['choices' => OptionType::getOptions()])
             ->add('priceOnline', 'currency', ['currency' => 'AED'])
             ->add('hasAppointment', 'boolean')
             ->add('status', 'choice', ['choices' => Valuation::getStatuses(), 'editable' => true])
@@ -158,6 +160,7 @@ class ValuationAdmin extends AbstractAdmin
             ->add('vehicleMileage', null, ['label' => 'Mileage (Kms)', 'disabled' => true, 'required' => false])
             ->add('vehicleBodyCondition', 'choice', ['choices' => ConditionType::getConditions(), 'disabled' => true, 'required' => false])
             ->add('vehicleColor', 'choice', ['choices' => ColorType::getColors(), 'disabled' => true, 'required' => false])
+            ->add('vehicleOption', 'choice', ['choices' => OptionType::getOptions(), 'disabled' => true, 'required' => false])
             ->add('priceOnline', 'money', ['currency' => 'AED', 'label' => 'Price Online', 'disabled' => true, 'required' => false]);
     }
 
@@ -181,6 +184,7 @@ class ValuationAdmin extends AbstractAdmin
             ->add('vehicleMileage', null, ['label' => 'Mileage (Kms)'])
             ->add('vehicleBodyCondition', 'choice', ['choices' => ConditionType::getConditions()])
             ->add('vehicleColor', 'choice', ['choices' => ColorType::getColors()])
+            ->add('vehicleOption', 'choice', ['choices' => OptionType::getOptions()])
             ->add('priceOnline', 'currency', ['currency' => 'AED'])
             ->add('createdAt', null, ['label' => 'Created']);
     }

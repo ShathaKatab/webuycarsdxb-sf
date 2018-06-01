@@ -1,0 +1,4 @@
+services:
+#    wbc_used_cars.example:
+#        class: Wbc\UsedCarsBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

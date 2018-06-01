@@ -2,10 +2,31 @@
  * Created by majid on 4/14/17.
  */
 $(document).ready(function () {
+    var makeSelect = $("select[name$='vehicleMake]']");
+    if (!makeSelect.length){
+        makeSelect = $("select[name$='make]']");
+    }
+
     var modelSelect = $("select[name$='vehicleModel]']");
+    if (!modelSelect.length){
+        modelSelect = $("select[name$='model]']");
+    }
+
     var modelTypeSelect = $("select[name$='vehicleModelType]']");
+    if (!modelTypeSelect.length){
+        modelTypeSelect = $("select[name$='modelType]']");
+    }
+
     var transmissionSelect = $("select[name$='vehicleTransmission]']");
+    if (!transmissionSelect.length){
+        transmissionSelect = $("select[name$='transmission]']");
+    }
+
     var specificationsSelect = $("select[name$='vehicleSpecifications]']");
+    if (!specificationsSelect.length){
+        specificationsSelect = $("select[name$='specifications]']");
+    }
+
     var transmissionSelector2 = transmissionSelect.prev($('.select2-container')).find($('span.select2-chosen'));
     var specificationSelector2 = specificationsSelect.prev($('.select2-container')).find($('span.select2-chosen'));
     var modelTypeSelector2 = modelTypeSelect.prev($('.select2-container')).find($('span.select2-chosen')).text('');
@@ -26,7 +47,7 @@ $(document).ready(function () {
         modelSelect.hide();
     }
 
-    $("select[name$='vehicleMake]']").on('change', function () {
+    makeSelect.on('change', function () {
         clearTransmissionAndSpecifications();
         var makeIdValue = this.value;
         modelSelect.find('option').remove();

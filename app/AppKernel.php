@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new SunCat\MobileDetectBundle\MobileDetectBundle(),
             new Wbc\UserBundle\WbcUserBundle(),
             new Wbc\UtilityBundle\WbcUtilityBundle(),
             new Wbc\BranchBundle\WbcBranchBundle(),
@@ -45,6 +46,7 @@ class AppKernel extends Kernel
             new Wbc\ValuationBundle\WbcValuationBundle(),
             new Wbc\BlogBundle\WbcBlogBundle(),
             new Wbc\CareersBundle\WbcCareersBundle(),
+            new Wbc\UsedCarsBundle\WbcUsedCarsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

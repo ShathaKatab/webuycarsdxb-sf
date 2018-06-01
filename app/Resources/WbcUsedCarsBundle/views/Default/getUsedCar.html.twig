@@ -1,0 +1,176 @@
+{% extends '@WbcStatic/Default/base.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {% set _totalIndicators = usedCar.images|length %}
+    <article class="text-center">
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1" style="padding-bottom: 25px;">
+                        <h1>{{ usedCar.title }}<br><small>AED {{ usedCar.price|number_format }}</small></h1>
+                        <div class="row padding--top4x">
+                            <div class="col-md-7">
+                                {% if usedCar.hasImages() %}
+                                    <div id="carousel-used-cars-detail" class="carousel slide" data-ride="carousel"
+                                         data-interval="false" data-wrap="false">
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            {% for i in 1.._totalIndicators %}
+                                                <li data-target="carousel-used-cars-detail" data-slide-to="{{ i }}"
+                                                    class="{% if i == 1 %}active{% endif %}"></li>
+                                            {% endfor %}
+                                        </ol>
+
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner" role="listbox">
+                                            {% for image in usedCar.images %}
+                                                <div class="item {% if loop.index == 1  %}active{% endif %}">
+                                                    {% media image, 'big' with {'class': 'img-responsive img-thumbnail', 'alt': usedCar.title, 'title': usedCar.title} %}
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <!-- Controls -->
+                                        <a class="left carousel-control" href="#carousel-used-cars-detail" role="button"
+                                           data-slide="prev">
+                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="right carousel-control" href="#carousel-used-cars-detail" role="button"
+                                           data-slide="next">
+                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                {% else %}
+                                    <p class="text-center">No images</p>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-5 text-left">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-xs-6 text-bold">Make:</div>
+                                            <div class="col-xs-6 ellipsis">{{ usedCar.make.name }}</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-xs-6 text-bold">Model:</div>
+                                            <div class="col-xs-6 ellipsis">{{ usedCar.model.name }}</div>
+                                        </div>
+                                    </li>
+                                    {% if usedCar.modelType %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-bold">Trim:</div>
+                                                <div class="col-xs-6 ellipsis">{{ usedCar.modelType.trim }}</div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-xs-6 text-bold">Year:</div>
+                                            <div class="col-xs-6 ellipsis">{{ usedCar.year }}</div>
+                                        </div>
+                                    </li>
+                                    {% if usedCar.mileage %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-bold">Mileage:</div>
+                                                <div class="col-xs-6 ellipsis">{{ usedCar.mileage|number_format }} kms
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                    {% if usedCar.doors %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-bold">Doors:</div>
+                                                <div class="col-xs-6 ellipsis">{{ usedCar.doors }}</div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                    {% if usedCar.color %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-bold">Color:</div>
+                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.color }}</div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if usedCar.bodyType %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-bold">Body Type:</div>
+                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.bodyType }}</div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if usedCar.cylinders %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-bold">Cylinders:</div>
+                                                <div class="col-xs-6 ellipsis">{{ usedCar.cylinders }}</div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if usedCar.transmission %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-bold">Transmission:</div>
+                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.transmission }}</div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if usedCar.specifications %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-bold">Specs:</div>
+                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.specifications }}</div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if usedCar.horsepower %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-bold">Horsepower:</div>
+                                                <div class="col-xs-6 ellipsis">{{ usedCar.horsepower }} HP</div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if usedCar.options %}
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-bold">Options:</div>
+                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.options }}</div>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                {% if usedCar.description %}
+                                    <h2>Description</h2>
+                                    <p>{{ usedCar.description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+
+    {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
+    {% include '@WbcStatic/partials/our-services.html.twig' %}
+
+{% endblock %}

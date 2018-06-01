@@ -272,7 +272,8 @@ class User extends BaseUser
             'ROLE_PURCHASING',
             'ROLE_CALL_CENTER',
             'ROLE_SUPER_ADMIN',
-            'ROLE_CAREERS_EDITOR'
+            'ROLE_CAREERS_EDITOR',
+            'ROLE_USED_CARS_EDITOR'
         ];
     }
 }

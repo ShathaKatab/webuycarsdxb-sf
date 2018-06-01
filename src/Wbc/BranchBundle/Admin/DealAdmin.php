@@ -300,6 +300,7 @@ class DealAdmin extends AbstractAdmin
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
+                    'generateUsedCarFromDeal' => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_generate_used_car.html.twig'],
                 ],
             ]);
     }
@@ -356,6 +357,8 @@ class DealAdmin extends AbstractAdmin
         $collection->remove('create')
             ->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
-            ->add('listBranchTimings', 'branchTimings/{branchId}/{day}');
+            ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
+            ->add('generateUsedCarFromDeal', $this->getRouterIdParameter() . '/generateUsedCarFromDeal');
+
     }
 }

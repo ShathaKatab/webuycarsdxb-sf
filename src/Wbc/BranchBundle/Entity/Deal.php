@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\BranchBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Wbc\UsedCarsBundle\Entity\UsedCars;
 use Wbc\UserBundle\Entity\User;
 
 /**
@@ -119,6 +122,13 @@ class Deal
     protected $updatedAt;
 
     /**
+     * @var UsedCars
+     *
+     * @ORM\OneToOne(targetEntity="Wbc\UsedCarsBundle\Entity\UsedCars", mappedBy="deal")
+     */
+    protected $usedCar;
+
+    /**
      * Deal Constructor.
      *
      * @param Inspection $inspection
@@ -126,6 +136,15 @@ class Deal
     public function __construct(Inspection $inspection = null)
     {
         $this->setInspection($inspection);
+    }
+
+    public function __toString()
+    {
+        if ($this->id) {
+            return (string) $this->id;
+        }
+
+        return '';
     }
 
     /**
@@ -458,5 +477,29 @@ class Deal
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set usedCar.
+     *
+     * @param UsedCars $usedCar
+     *
+     * @return Deal
+     */
+    public function setUsedCar(UsedCars $usedCar = null)
+    {
+        $this->usedCar = $usedCar;
+
+        return $this;
+    }
+
+    /**
+     * Get usedCar.
+     *
+     * @return UsedCars
+     */
+    public function getUsedCar()
+    {
+        return $this->usedCar;
     }
 }

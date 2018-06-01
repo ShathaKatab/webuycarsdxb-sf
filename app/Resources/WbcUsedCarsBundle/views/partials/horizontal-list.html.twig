@@ -1,0 +1,76 @@
+{% set _usedCars = getUsedCars() %}
+{% set _i = 1 %}
+{% set _totalUsedCars = _usedCars|length %}
+{% set _isMobileOrTablet = is_mobile() or is_tablet() or is_mobile_view() or is_tablet_view() %}
+{% set _totalIndicators = _isMobileOrTablet ? _totalUsedCars : (_totalUsedCars / 3)|round(0, "ceil") %}
+{% if _usedCars|length %}
+    <section id="used-cars">
+        <div class="container-fluid bg-dark-color">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="h1">Trading-in your vehicle is easy</div>
+                    <p>Below are some of the vehicles available for trade-in</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="carousel-used-cars" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="row">
+                                    <div class="carousel-inner" role="listbox">
+                                        {% for usedCar in _usedCars %}
+                                            {% if _isMobileOrTablet or _i == 1 or (_i - 1) % 3 == 0 %}
+                                                <div class="item {% if _i == 1 %}active{% endif %}">
+                                            {% endif %}
+                                            <div class="{% if _isMobileOrTablet %}col-md-12{% else %}col-md-4{% endif %}">
+                                                <div class="thumbnail">
+                                                    {% media usedCar.firstImage, 'small' with {'width': '', 'height': '', 'class': 'img-thumbnail', 'alt': usedCar.title, 'title': usedCar.title} %}
+                                                    <div class="caption">
+                                                        <h3 class="text-center color-white">{{ usedCar.title }}</h3>
+                                                        <div class="text-center">
+                                                            <div class="col-md-12 col-md-offset-0 col-xs-6 col-xs-offset-3">
+                                                                <a href="{{ url('wbc_used_cars_get', {'guid': usedCar.guid}) }}" class="btn btn-default">See More</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% if _isMobileOrTablet or _i % 3 == 0 or _i == _totalUsedCars %}
+                                                </div>
+                                            {% endif %}
+                                            {% set _i = _i + 1 %}
+                                        {% endfor %}
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            {% for i in 1.._totalIndicators %}
+                                                <li data-target="carousel-used-cars" data-slide-to="{{ _i - 1 }}"
+                                                    class="{% if i == 1 %}active{% endif %}"></li>
+                                            {% endfor %}
+                                        </ol>
+                                    </div>
+                                    <!-- Controls -->
+                                    <a class="left carousel-control" href="#carousel-used-cars" role="button"
+                                       data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-used-cars" role="button"
+                                       data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                    <!-- Wrapper for slides -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+
+{% endif %}

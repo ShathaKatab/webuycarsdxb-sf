@@ -1,13 +1,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3"
-             style="padding:10px; border: 1px solid #d8d8d8; margin-top: 100px; border-radius: 10px;">
+             style="padding:10px; border: 1px solid #d8d8d8; margin-top: 100px; margin-bottom: 50px; border-radius: 10px;">
             <h1 class="text-center">
                 Parameters<br>
-            <small><a href="{{ path('sonata_admin_dashboard') }}"> <- Back to Admin</a></small>
+                <small><a href="{{ path('sonata_admin_dashboard') }}"> <- Back to Admin</a></small>
             </h1>
             <div class="row">
-                {{ form_start(form, {'attr': {'class': 'craue_config_settings_modify form'}}) }}
+                <div class="col-md-10 col-md-offset-1">
+                {{ form_start(form, {'attr': {'class': 'craue_config_settings_modify form form-horizontal'}}) }}
                 {{ form_errors(form) }}
 
                 {% for section in sections | craue_sortSections %}
@@ -18,13 +19,15 @@
 
                     {% for setting in form.settings if setting.vars.value.section == section %}
                         <div class="form-group">
-                            <div class="col-md-12">
-                                {{ form_row(setting.value) }}
-
+                            <div class="col-md-7 text-bold">
+                                {{ form_label(setting.value) }}:
+                            </div>
+                            <div class="col-md-3">
+                                {{ form_widget(setting.value, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(setting.value) }}
                             </div>
                         </div>
                     {% endfor %}
-
                     {% if section is not empty %}
                         </fieldset>
                     {% endif %}
@@ -38,6 +41,7 @@
                     </div>
                 </div>
                 {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>

@@ -52,15 +52,15 @@
                                ng-class="{'hidden': !valuationStepTwoForm.$submitted || valuationStepTwoForm.vehicleMileage.$valid }">Select a Vehicle Mileage</p>
                         </div>
                         <div class="form-group">
-                            <select ng-model="ctrl.vehicleColor" ng-class="{'form-control-invalid': valuationStepTwoForm.$submitted && valuationStepTwoForm.vehicleColor.$invalid }"
-                                    required name="vehicleColor" class="form-control">
-                                <option value="">Vehicle Color</option>
-                                {% for key, color in getColors() %}
-                                    <option value="{{ key }}">{{ color }}</option>
+                            <select ng-model="ctrl.vehicleOption" ng-class="{'form-control-invalid': valuationStepTwoForm.$submitted && valuationStepTwoForm.vehicleOption.$invalid }"
+                                    required name="vehicleOption" class="form-control">
+                                <option value="">Vehicle Options</option>
+                                {% for key, option in getOptions() %}
+                                    <option value="{{ key }}">{{ option }}</option>
                                 {% endfor %}
                             </select>
                             <p class="text-error hidden"
-                               ng-class="{'hidden': !valuationStepTwoForm.$submitted || valuationStepTwoForm.vehicleColor.$valid }">Select a Vehicle Color</p>
+                               ng-class="{'hidden': !valuationStepTwoForm.$submitted || valuationStepTwoForm.vehicleOption.$valid }">Select a Vehicle Option</p>
                         </div>
                         <div class="form-group">
                             <select ng-model="ctrl.vehicleBodyCondition" ng-class="{'form-control-invalid': valuationStepTwoForm.$submitted && valuationStepTwoForm.vehicleBodyCondition.$invalid }"

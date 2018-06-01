@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\BranchBundle\Admin;
 
 use Doctrine\ORM\EntityRepository;
@@ -84,7 +86,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $formMapper): void
     {
         /** @var $subject \Wbc\BranchBundle\Entity\Appointment */
         $subject = $this->getSubject();
@@ -149,7 +151,8 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('vehicleMileage', WbcVehicleType\MileageType::class)
             ->add('vehicleSpecifications', WbcVehicleType\SpecificationType::class, ['required' => false])
             ->add('vehicleBodyCondition', WbcVehicleType\ConditionType::class)
-            ->add('vehicleColor', WbcVehicleType\ColorType::class)
+            ->add('vehicleColor', WbcVehicleType\ColorType::class, ['required' => false])
+            ->add('vehicleOption', WbcVehicleType\OptionType::class, ['required' => false])
             ->end()
             ->end();
 
@@ -210,7 +213,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $now = new \DateTime();
 
@@ -244,9 +247,9 @@ class AppointmentAdmin extends AbstractAdmin
                         return;
                     }
 
-                    if ($value['value'] === 'today') {
+                    if ('today' === $value['value']) {
                         $dateBooked = (new \DateTime())->format('Y-m-d');
-                    } elseif ($value['value'] === 'tomorrow') {
+                    } elseif ('tomorrow' === $value['value']) {
                         $dateBooked = (new \DateTime('+1 day'))->format('Y-m-d');
                     }
 
@@ -283,7 +286,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $listMapper): void
     {
         $filterParams = $this->getFilterParameters();
 
@@ -294,6 +297,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('details.vehicleModelName', null, ['label' => 'Model'])
             ->add('vehicleYear', null, ['label' => 'Year'])
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'editable' => true])
+            ->add('vehicleOption', 'choice', ['choices' => WbcVehicleType\OptionType::getOptions()])
             ->add('valuation.priceOnline', 'currency', ['currency' => 'AED', 'label' => 'Online Valuation'])
             ->add('dateBooked')
             ->add('branch')
@@ -314,7 +318,6 @@ class AppointmentAdmin extends AbstractAdmin
             ]);
         }
 
-
         $listMapper->add('createdAt', null, ['label' => 'Created'])
             ->add('createdBy')
             ->add('smsSent')
@@ -330,7 +333,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper->tab('Vehicle Information')
             ->with('')
@@ -342,6 +345,8 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('vehicleMileage', 'choice', ['choices' => WbcVehicleType\MileageType::getMileages()])
             ->add('vehicleSpecifications', 'choice', ['choices' => WbcVehicleType\SpecificationType::getSpecifications()])
             ->add('vehicleBodyCondition', 'choice', ['choices' => WbcVehicleType\ConditionType::getConditions()])
+            ->add('vehicleColor', 'choice', ['choices' => WbcVehicleType\ColorType::getColors()])
+            ->add('vehicleOption', 'choice', ['choices' => WbcVehicleType\OptionType::getOptions()])
             ->end()
             ->end();
 
@@ -371,7 +376,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollection $collection): void
     {
         $collection->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))

@@ -38,6 +38,7 @@
     "sonata-project/doctrine-orm-admin-bundle": "^3.1",
     "sonata-project/formatter-bundle": "^3.4",
     "sonata-project/media-bundle": "^3.10",
+    "suncat/mobile-detect-bundle": "^1.1",
     "swiftmailer/swiftmailer": "^5.4",
     "symfony/assetic-bundle": "^2.8",
     "symfony/intl": "^3.3",

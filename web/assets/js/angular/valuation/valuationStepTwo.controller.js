@@ -7,7 +7,7 @@ angular
     .controller('ValuationStepTwoController', ['$scope', function ($scope) {
         $scope.vehicleModelType = null;
         $scope.vehicleMileage = null;
-        $scope.vehicleColor = null;
+        $scope.vehicleOption = null;
         $scope.vehicleBodyCondition = null;
 
         this.submitForm = function (isValid) {

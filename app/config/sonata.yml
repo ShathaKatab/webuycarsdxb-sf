@@ -63,6 +63,12 @@ sonata_admin:
                 items: [admin.careers.role, admin.careers.candidate]
                 roles: [ROLE_CAREERS_EDITOR]
                 icon:   '<i class="fa fa-briefcase"></i>'
+            Used Cars:
+                label: Used Cars
+                items: [admin.used_cars]
+                roles: [ROLE_USED_CARS_EDITOR]
+                icon:   '<i class="fa fa-car"></i>'
+                on_top: true
         blocks:
             -
                 position: left
@@ -124,6 +130,12 @@ sonata_admin:
                 settings:
                     groups: ["Careers"]
                 roles: [ROLE_CAREERS_EDITOR]
+            -
+                position: right
+                type: sonata.admin.block.admin_list
+                settings:
+                    groups: ["Used Cars"]
+                roles: [ROLE_USED_CARS_EDITOR]
 
     title: "WeBuyCars Admin"
     title_logo: /images/admin-logo.png
@@ -205,7 +217,7 @@ services:
 
     admin.branch.deal:
         class: Wbc\BranchBundle\Admin\DealAdmin
-        arguments: [~, Wbc\BranchBundle\Entity\Deal, ~]
+        arguments: [~, Wbc\BranchBundle\Entity\Deal, WbcBranchBundle:CRUD]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Deal, group: "Deals" }
 
@@ -246,3 +258,9 @@ services:
         arguments: [~, Wbc\CareersBundle\Entity\Candidate, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Careers, label: Candidates }
+
+    admin.used_cars:
+        class: Wbc\UsedCarsBundle\Admin\UsedCarsAdmin
+        arguments: [~, Wbc\UsedCarsBundle\Entity\UsedCars, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Used Cars", label: "Used Cars" }

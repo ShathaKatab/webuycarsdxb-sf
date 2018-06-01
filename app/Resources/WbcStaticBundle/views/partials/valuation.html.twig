@@ -9,7 +9,7 @@
                     <img src="{{ valuation.priceImageEncoded }}" class="inherit-margin-top img-responsive center-block valuation-price">
                 </div>
                 <div class="col-md-12">
-                    <p>{{ valuation.vehicleYear  }} - {{ valuation.vehicleMake.name }} {{ valuation.vehicleModel.name }} {% if valuation.vehicleModelType is not null %}{{ '- ' ~ valuation.vehicleModelType.trim }}{% endif %} - {{ valuation.vehicleMileage|number_format ~ ' kms'}} - {{ valuation.vehicleColor|capitalize ~ ' Color' }} -  {{ valuation.vehicleBodyCondition|capitalize ~ ' Condition' }}</p>
+                    <p>{{ valuation.vehicleYear  }} - {{ valuation.vehicleMake.name }} {{ valuation.vehicleModel.name }} {% if valuation.vehicleModelType is not null %}{{ '- ' ~ valuation.vehicleModelType.trim }}{% endif %} - {{ valuation.vehicleMileage|number_format ~ ' kms'}} - {{ valuation.vehicleOption|capitalize ~ ' Option' }} -  {{ valuation.vehicleBodyCondition|capitalize ~ ' Condition' }}</p>
                 </div>
             </div>
         </div>

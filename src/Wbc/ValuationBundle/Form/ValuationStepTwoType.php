@@ -11,6 +11,7 @@ use Wbc\VehicleBundle\Form\MileageType;
 use Wbc\VehicleBundle\Form\ModelSelectorType;
 use Wbc\VehicleBundle\Form\ModelTypeSelectorType;
 use Wbc\VehicleBundle\Form\ModelYearType;
+use Wbc\VehicleBundle\Form\OptionType;
 
 /**
  * Class ValuationStepTwoType.
@@ -39,7 +40,7 @@ class ValuationStepTwoType extends ValuationStepOneType
             ])
             ->add('vehicleMileage', MileageType::class, ['label' => 'Vehicle Mileage'])
             ->add('vehicleBodyCondition', ConditionType::class, ['label' => 'Vehicle Body Condition'])
-            ->add('vehicleColor', ColorType::class, ['label' => 'Vehicle Color'])
+            ->add('vehicleOption', OptionType::class, ['label' => 'Vehicle Options'])
         ;
     }
 

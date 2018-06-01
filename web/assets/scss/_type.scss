@@ -126,7 +126,11 @@ ul, ol{
   margin-bottom: 30px;
 }
 .text-bold{
-  font-weight: bold;
+  font-weight: bold !important;
+
+  label{
+    font-weight: bold !important;
+  }
 }
 
 .color-dark {
