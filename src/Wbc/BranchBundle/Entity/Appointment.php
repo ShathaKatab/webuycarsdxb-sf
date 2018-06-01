@@ -975,7 +975,7 @@ class Appointment
      *
      * @param Inspection $inspection
      */
-    public function removeInspection(Inspection $inspection): void
+    public function removeInspection(Inspection $inspection)
     {
         $this->inspections->removeElement($inspection);
     }
