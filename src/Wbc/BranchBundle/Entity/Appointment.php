@@ -168,7 +168,7 @@ class Appointment
      *
      * @ORM\Column(name="vehicle_option", type="string", length=30, nullable=true)
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"frontend"})
      * @Assert\Choice(choices={"base", "mid", "full"})
      *
      * @Serializer\Expose()

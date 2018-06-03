@@ -8,9 +8,9 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Wbc\BranchBundle\Form\BranchSelectorType;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\Timing;
+use Wbc\BranchBundle\Form\BranchSelectorType;
 use Wbc\ValuationBundle\Entity\Valuation;
 
 /**
@@ -41,6 +41,7 @@ class AppointmentType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Appointment::class,
             'csrf_protection' => false,
+            'validation_groups' => ['Default', 'frontend'],
         ]);
     }
 

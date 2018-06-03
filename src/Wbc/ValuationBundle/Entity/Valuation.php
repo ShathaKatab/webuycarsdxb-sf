@@ -51,7 +51,7 @@ class Valuation
      * @ORM\ManyToOne(targetEntity="\Wbc\VehicleBundle\Entity\Model")
      * @ORM\JoinColumn(name="vehicle_model_id", referencedColumnName="id")
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"valuation-step-2"})
      *
      * @Serializer\Expose()
      */
@@ -62,7 +62,7 @@ class Valuation
      *
      * @ORM\Column(name="vehicle_year", type="smallint")
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"valuation-step-2"})
      * @Assert\Range(min=1928)
      *
      * @Serializer\Expose()
@@ -84,7 +84,7 @@ class Valuation
      *
      * @ORM\Column(name="vehicle_mileage", type="bigint")
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"valuation-step-2"})
      *
      * @Serializer\Expose()
      */
@@ -106,7 +106,7 @@ class Valuation
      *
      * @ORM\Column(name="vehicle_body_condition", type="string", length=30, nullable=true)
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"valuation-step-2"})
      * @Assert\Choice(choices={"good", "fair", "excellent"})
      *
      * @Serializer\Expose()
@@ -118,7 +118,7 @@ class Valuation
      *
      * @ORM\Column(name="vehicle_option", type="string", length=30, nullable=true)
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"valuation-step-2"})
      * @Assert\Choice(choices={"base", "mid", "full"})
      *
      * @Serializer\Expose()
@@ -130,7 +130,7 @@ class Valuation
      *
      * @ORM\Column(name="name", type="string", length=100, nullable=true)
      *
-     * @Assert\NotBlank(groups={"valuation"})
+     * @Assert\NotBlank(groups={"valuation-step-3"})
      *
      * @Serializer\Expose()
      */
@@ -150,7 +150,7 @@ class Valuation
      *
      * @ORM\Column(name="mobile_number", type="string", length=15, nullable=true)
      *
-     * @Assert\NotBlank(groups={"valuation"})
+     * @Assert\NotBlank(groups={"valuation-step-3"})
      */
     protected $mobileNumber;
 

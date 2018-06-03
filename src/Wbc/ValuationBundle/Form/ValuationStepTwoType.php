@@ -5,7 +5,6 @@ namespace Wbc\ValuationBundle\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Wbc\ValuationBundle\Entity\Valuation;
-use Wbc\VehicleBundle\Form\ColorType;
 use Wbc\VehicleBundle\Form\ConditionType;
 use Wbc\VehicleBundle\Form\MileageType;
 use Wbc\VehicleBundle\Form\ModelSelectorType;
@@ -51,6 +50,9 @@ class ValuationStepTwoType extends ValuationStepOneType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefault('data_class', Valuation::class);
+        $resolver->setDefaults([
+            'data_class' => Valuation::class,
+            'validation_groups' => ['valuation-step-2'],
+        ]);
     }
 }

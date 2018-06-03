@@ -43,7 +43,7 @@ class ValuationController extends Controller
     {
         $form = null;
 
-        if ($request->getMethod() === Request::METHOD_POST) {
+        if (Request::METHOD_POST === $request->getMethod()) {
             $data = $request->request->all();
             $form = $this->createForm(new ValuationStepOneType());
 
@@ -85,7 +85,7 @@ class ValuationController extends Controller
         $modelYear = $session->get('modelYear');
         $entityManager = $this->get('doctrine.orm.default_entity_manager');
 
-        if ($request->getMethod() === Request::METHOD_POST) {
+        if (Request::METHOD_POST === $request->getMethod()) {
             $data = $request->request->all();
             $data['vehicleModel'] = $modelId;
             $data['vehicleYear'] = $modelYear;
@@ -164,7 +164,7 @@ class ValuationController extends Controller
             throw new NotFoundHttpException('Valuation is not found!');
         }
 
-        if ($request->getMethod() === Request::METHOD_POST) {
+        if (Request::METHOD_POST === $request->getMethod()) {
             $data = $request->request->all();
 
             $form = $this->createForm(new ValuationStepThreeType(), $valuation);
@@ -211,10 +211,10 @@ class ValuationController extends Controller
 
         $this->get('event_dispatcher')->dispatch(ValuationEvents::VALUATION_REQUESTED_FRONT_END, new ValuationEvent($valuation));
 
-        if ($request->getMethod() === Request::METHOD_POST) {
+        if (Request::METHOD_POST === $request->getMethod()) {
             $data = json_decode($request->getContent(), true);
 
-            if (json_last_error() !== JSON_ERROR_NONE) {
+            if (JSON_ERROR_NONE !== json_last_error()) {
                 throw new InvalidArgumentException('Form is not valid JSON content!');
             }
 

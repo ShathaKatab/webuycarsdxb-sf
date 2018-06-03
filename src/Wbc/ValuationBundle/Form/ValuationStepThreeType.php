@@ -34,7 +34,7 @@ class ValuationStepThreeType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Valuation::class,
             'csrf_protection' => false,
-            'validation_groups' => ['valuation'],
+            'validation_groups' => ['valuation-step-3'],
         ]);
     }
 }
