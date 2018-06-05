@@ -259,8 +259,6 @@ class UsedCars
      * @ORM\ManyToOne(targetEntity="\Wbc\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id", nullable=false)
      *
-     * @Assert\NotBlank()
-     *
      * @Serializer\Expose()
      */
     protected $createdBy;
