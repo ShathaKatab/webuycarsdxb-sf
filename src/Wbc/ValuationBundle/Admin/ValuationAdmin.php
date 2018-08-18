@@ -40,7 +40,7 @@ class ValuationAdmin extends AbstractAdmin
      */
     public function getExportFields()
     {
-        return ['name', 'mobileNumber', 'emailAddress', 'vehicleMake', 'vehicleModel', 'vehicleMileage', 'priceOnline', 'hasAppointment', 'createdAt'];
+        return ['name', 'mobileNumber', 'emailAddress', 'vehicleYear', 'vehicleMake', 'vehicleModel', 'vehicleMileage', 'priceOnline', 'hasAppointment', 'createdAt'];
     }
 
     /**
