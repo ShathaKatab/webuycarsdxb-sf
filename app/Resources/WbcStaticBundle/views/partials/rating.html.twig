@@ -2,6 +2,7 @@
     {% set _fullRate = rate|round(0, 'floor') %}
     {% set _hasHalfRate = false %}
     {% set _totalRatings = 5 %}
+    {% set _totalRaters = randomRaters(75, 95) %}
     {% set _ratingsCounter = 0 %}
     {% set _showSchema = showSchema|default(true) %}
     {% if rate - _fullRate == 0.5 %}
@@ -30,7 +31,7 @@
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "{{ rate }}",
-            "ratingCount": "{{ _totalRatings }}"
+            "ratingCount": "{{ _totalRaters }}"
           },
           "description": "{{ description }}",
           "name": "{{ title }}"

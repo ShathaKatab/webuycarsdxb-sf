@@ -19,7 +19,11 @@ class RandomRatingTwigExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return [new \Twig_SimpleFunction('randomRating', [$this, 'getRating'])];
+        return
+            [
+                new \Twig_SimpleFunction('randomRating', [$this, 'getRating']),
+                new \Twig_SimpleFunction('randomRaters', [$this, 'getRaters']),
+            ];
     }
 
     /**
@@ -34,6 +38,17 @@ class RandomRatingTwigExtension extends \Twig_Extension
         $ratings = range($min, $max, $stepper);
 
         return $ratings[array_rand($ratings)];
+    }
+
+    /**
+     * @param int $min
+     * @param int $max
+     *
+     * @return int
+     */
+    public function getRaters($min = 75, $max = 95)
+    {
+        return random_int($min, $max);
     }
 
     /**
