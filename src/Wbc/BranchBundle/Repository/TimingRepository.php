@@ -42,7 +42,7 @@ class TimingRepository extends EntityRepository
         if (false === $admin) {
             $queryBuilder->andWhere('t.adminOnly = :falsy')->setParameter(':falsy', false, \PDO::PARAM_BOOL);
 
-            if ($dayBooked === 6 && $now->format('Y-m-d') < '2018-06-17') {
+            if (in_array($dayBooked, [2, 3, 4, 5]) && $now->format('Y-m-d') < '2018-08-25') {
                 return [];
             }
         }
