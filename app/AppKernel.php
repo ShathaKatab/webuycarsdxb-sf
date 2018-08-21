@@ -46,7 +46,7 @@ class AppKernel extends Kernel
             new Wbc\ValuationBundle\WbcValuationBundle(),
             new Wbc\BlogBundle\WbcBlogBundle(),
             new Wbc\CareersBundle\WbcCareersBundle(),
-            new Wbc\UsedCarsBundle\WbcUsedCarsBundle(),
+            new Wbc\InventoryBundle\WbcInventoryBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

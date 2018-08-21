@@ -15,7 +15,7 @@ use Wbc\BranchBundle\Entity\Branch;
 use Wbc\BranchBundle\Entity\Deal;
 use Wbc\BranchBundle\Entity\Inspection;
 use Wbc\BranchBundle\Events\AppointmentEvent;
-use Wbc\UsedCarsBundle\Entity\UsedCars;
+use Wbc\InventoryBundle\Entity\Inventory;
 
 /**
  * Class CRUDController.
@@ -117,7 +117,7 @@ class CRUDController extends Controller
     }
 
     /**
-     * Generates a Used Car from a Deal.
+     * Generates an Inventory from a Deal.
      *
      * @CF\ParamConverter("deal", class="WbcBranchBundle:Deal")
      *
@@ -125,16 +125,16 @@ class CRUDController extends Controller
      *
      * @return Response
      */
-    public function generateUsedCarFromDealAction(Deal $deal)
+    public function generateInventoryFromDealAction(Deal $deal)
     {
         $entityManager = $this->get('doctrine.orm.default_entity_manager');
-        $usedCar = new UsedCars($deal);
-        $usedCar->setCreatedBy($this->getUser());
+        $inventory = new Inventory($deal);
+        $inventory->setCreatedBy($this->getUser());
 
-        $entityManager->persist($usedCar);
+        $entityManager->persist($inventory);
         $entityManager->flush();
 
-        return new RedirectResponse($this->generateUrl('admin_wbc_usedcars_usedcars_edit', ['id' => $usedCar->getId()]));
+        return new RedirectResponse($this->generateUrl('admin_wbc_inventory_inventory_edit', ['id' => $inventory->getId()]));
     }
 
     /**

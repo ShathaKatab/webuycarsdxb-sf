@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Wbc\UsedCarsBundle\Twig;
+namespace Wbc\InventoryBundle\Twig;
 
 use Doctrine\ORM\EntityManagerInterface;
 use JMS\DiExtraBundle\Annotation as DI;
-use Wbc\UsedCarsBundle\Entity\UsedCars;
+use Wbc\InventoryBundle\Entity\UsedCar;
 
 /**
- * Class UsedCarsTwigExtension.
+ * Class UsedCarTwigExtension.
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
  *
  * @DI\Service("wbc.used_cars.twig.used_cars_extension", public=false)
  * @DI\Tag(name="twig.extension")
  */
-class UsedCarsTwigExtension extends \Twig_Extension
+class UsedCarTwigExtension extends \Twig_Extension
 {
     /**
      * @var EntityManagerInterface
@@ -24,7 +24,7 @@ class UsedCarsTwigExtension extends \Twig_Extension
     private $entityManager;
 
     /**
-     * UsedCarsTwigExtension Constructor.
+     * UsedCarTwigExtension Constructor.
      *
      * @DI\InjectParams({
      *  "entityManager" = @DI\Inject("doctrine.orm.entity_manager")
@@ -48,11 +48,11 @@ class UsedCarsTwigExtension extends \Twig_Extension
     /**
      * @param int $limit
      *
-     * @return array|UsedCars[]
+     * @return array|UsedCar[]
      */
     public function getUsedCars($limit = 15)
     {
-        return $this->entityManager->getRepository(UsedCars::class)->findBy(['active' => true], ['createdAt' => 'DESC'], $limit);
+        return $this->entityManager->getRepository(UsedCar::class)->findBy(['active' => true], ['createdAt' => 'DESC'], $limit);
     }
 
     /**

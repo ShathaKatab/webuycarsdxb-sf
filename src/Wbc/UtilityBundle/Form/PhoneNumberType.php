@@ -25,8 +25,7 @@ class PhoneNumberType extends AbstractType
     {
         $resolver->setDefaults([
             'constraints' => [
-                new NotBlank(['message' => 'fos_user.mobileNumber.blank']),
-                new PhoneNumber(['message' => 'fos_user.phoneNumber.match']),
+                new PhoneNumber(['message' => 'Invalid phone number']),
             ],
         ]);
     }

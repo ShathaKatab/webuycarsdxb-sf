@@ -51,34 +51,34 @@
                                     <li class="list-group-item">
                                         <div class="row">
                                             <div class="col-xs-6 text-bold">Make:</div>
-                                            <div class="col-xs-6 ellipsis">{{ usedCar.make.name }}</div>
+                                            <div class="col-xs-6 ellipsis">{{ usedCar.inventory.make.name }}</div>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
                                             <div class="col-xs-6 text-bold">Model:</div>
-                                            <div class="col-xs-6 ellipsis">{{ usedCar.model.name }}</div>
+                                            <div class="col-xs-6 ellipsis">{{ usedCar.inventory.model.name }}</div>
                                         </div>
                                     </li>
-                                    {% if usedCar.modelType %}
+                                    {% if usedCar.inventory.modelType %}
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-xs-6 text-bold">Trim:</div>
-                                                <div class="col-xs-6 ellipsis">{{ usedCar.modelType.trim }}</div>
+                                                <div class="col-xs-6 ellipsis">{{ usedCar.inventory.modelType.trim }}</div>
                                             </div>
                                         </li>
                                     {% endif %}
                                     <li class="list-group-item">
                                         <div class="row">
                                             <div class="col-xs-6 text-bold">Year:</div>
-                                            <div class="col-xs-6 ellipsis">{{ usedCar.year }}</div>
+                                            <div class="col-xs-6 ellipsis">{{ usedCar.inventory.year }}</div>
                                         </div>
                                     </li>
-                                    {% if usedCar.mileage %}
+                                    {% if usedCar.inventory.mileage %}
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-xs-6 text-bold">Mileage:</div>
-                                                <div class="col-xs-6 ellipsis">{{ usedCar.mileage|number_format }} kms
+                                                <div class="col-xs-6 ellipsis">{{ usedCar.inventory.mileage|number_format }} kms
                                                 </div>
                                             </div>
                                         </li>
@@ -91,11 +91,11 @@
                                             </div>
                                         </li>
                                     {% endif %}
-                                    {% if usedCar.color %}
+                                    {% if usedCar.inventory.color %}
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-xs-6 text-bold">Color:</div>
-                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.color }}</div>
+                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.inventory.color }}</div>
                                             </div>
                                         </li>
                                     {% endif %}
@@ -118,20 +118,20 @@
                                         </li>
                                     {% endif %}
 
-                                    {% if usedCar.transmission %}
+                                    {% if usedCar.inventory.transmission %}
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-xs-6 text-bold">Transmission:</div>
-                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.transmission }}</div>
+                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.inventory.transmission }}</div>
                                             </div>
                                         </li>
                                     {% endif %}
 
-                                    {% if usedCar.specifications %}
+                                    {% if usedCar.inventory.specifications %}
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-xs-6 text-bold">Specs:</div>
-                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.specifications }}</div>
+                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.inventory.specifications }}</div>
                                             </div>
                                         </li>
                                     {% endif %}
@@ -145,11 +145,11 @@
                                         </li>
                                     {% endif %}
 
-                                    {% if usedCar.options %}
+                                    {% if usedCar.inventory.options %}
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-xs-6 text-bold">Options:</div>
-                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.options }}</div>
+                                                <div class="col-xs-6 text-capitalize ellipsis">{{ usedCar.inventory.options }}</div>
                                             </div>
                                         </li>
                                     {% endif %}

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
-use Wbc\UsedCarsBundle\Entity\UsedCars;
+use Wbc\InventoryBundle\Entity\Inventory;
 use Wbc\UserBundle\Entity\User;
 
 /**
@@ -122,11 +122,11 @@ class Deal
     protected $updatedAt;
 
     /**
-     * @var UsedCars
+     * @var Inventory
      *
-     * @ORM\OneToOne(targetEntity="Wbc\UsedCarsBundle\Entity\UsedCars", mappedBy="deal")
+     * @ORM\OneToOne(targetEntity="Wbc\InventoryBundle\Entity\Inventory", mappedBy="deal")
      */
-    protected $usedCar;
+    protected $inventory;
 
     /**
      * Deal Constructor.
@@ -217,6 +217,7 @@ class Deal
         $this->inspection = $inspection;
 
         if ($inspection) {
+            $this->pricePurchased = $inspection->getPriceOffered();
             $appointment = $inspection->getAppointment();
 
             if ($appointment) {
@@ -480,26 +481,26 @@ class Deal
     }
 
     /**
-     * Set usedCar.
+     * Set inventory.
      *
-     * @param UsedCars $usedCar
+     * @param Inventory $inventory
      *
      * @return Deal
      */
-    public function setUsedCar(UsedCars $usedCar = null)
+    public function setInventory(Inventory $inventory = null)
     {
-        $this->usedCar = $usedCar;
+        $this->inventory = $inventory;
 
         return $this;
     }
 
     /**
-     * Get usedCar.
+     * Get inventory.
      *
-     * @return UsedCars
+     * @return Inventory
      */
-    public function getUsedCar()
+    public function getInventory()
     {
-        return $this->usedCar;
+        return $this->inventory;
     }
 }

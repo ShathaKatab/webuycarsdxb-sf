@@ -59,7 +59,7 @@ class DealAdmin extends AbstractAdmin
 
     public function getExportFields()
     {
-        return ['id', 'name', 'emailAddress', 'mobileNumber', 'inspection.vehicleMake', 'inspection.vehicleModel', 'inspection.vehicleYear', 'inspection.priceOnline', 'inspection.priceOffered', 'inspection.priceExpected', 'createdAt', 'createdBy'];
+        return ['id', 'name', 'emailAddress', 'mobileNumber', 'inspection.vehicleMake', 'inspection.vehicleModel', 'inspection.vehicleYear', 'inspection.priceOnline', 'inspection.pricePurchased', 'inspection.priceExpected', 'createdAt', 'createdBy'];
     }
 
     /**
@@ -97,13 +97,6 @@ class DealAdmin extends AbstractAdmin
                 'read_only' => true,
                 'disabled' => true,
                 'required' => false,
-            ])
-            ->add('inspection.priceOffered', MoneyType::class, [
-                'label' => 'Offered Price',
-                'currency' => 'AED',
-                'required' => false,
-                'disabled' => true,
-                'read_only' => true,
             ])
             ->add('inspection.priceExpected', MoneyType::class, [
                 'label' => 'Expected Price',
@@ -288,7 +281,6 @@ class DealAdmin extends AbstractAdmin
             ->add('inspection.vehicleModel', null, ['label' => 'Model'])
             ->add('inspection.vehicleYear', null, ['label' => 'Year'])
             ->add('inspection.priceOnline', 'currency', ['currency' => 'AED', 'label' => 'Online Valuation'])
-            ->add('inspection.priceOffered', 'currency', ['currency' => 'AED', 'label' => 'Offered Price'])
             ->add('inspection.priceExpected', 'currency', ['currency' => 'AED', 'label' => 'Expected Price'])
             ->add('pricePurchased', 'currency', ['currency' => 'AED', 'label' => 'Purchased Price'])
             ->add('dateBookedString', null, ['label' => 'Date Booked'])
@@ -300,7 +292,7 @@ class DealAdmin extends AbstractAdmin
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
-                    'generateUsedCarFromDeal' => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_generate_used_car.html.twig'],
+                    'generateInventoryFromDeal' => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_generate_inventory.html.twig'],
                 ],
             ]);
     }
@@ -318,7 +310,6 @@ class DealAdmin extends AbstractAdmin
             ->end()
             ->with('Inspection Details')
             ->add('inspection.priceOnline', null, ['label' => 'Online Price (AED)'])
-            ->add('inspection.priceOffered', null, ['label' => 'Offered Price (AED)'])
             ->add('inspection.priceExpected', null, ['label' => 'Expected Price (AED)'])
             ->add('inspection.status', ChoiceType::class, ['choices' => Inspection::getStatuses()])
             ->end()
@@ -358,7 +349,7 @@ class DealAdmin extends AbstractAdmin
             ->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
-            ->add('generateUsedCarFromDeal', $this->getRouterIdParameter() . '/generateUsedCarFromDeal');
+            ->add('generateInventoryFromDeal', $this->getRouterIdParameter() . '/generateInventoryFromDeal');
 
     }
 }

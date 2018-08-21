@@ -1,6 +1,6 @@
 <?php
 
-namespace Wbc\UsedCarsBundle\DependencyInjection;
+namespace Wbc\InventoryBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('wbc_used_cars');
+        $rootNode = $treeBuilder->root('wbc_inventory');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

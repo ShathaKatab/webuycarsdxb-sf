@@ -48,27 +48,26 @@ sonata_admin:
                 roles: [ROLE_SUPER_ADMIN]
                 on_top: true
                 icon:   '<i class="fa fa-user-circle-o"></i>'
+            Inventory:
+                label: Inventory
+                items: [admin.inventory, admin.inventory.dealers, admin.inventory.used_cars]
+                roles: [ROLE_INVENTORY_EDITOR]
+                icon:   '<i class="fa fa-car"></i>'
             Blog:
                 label: Blog
                 items: [admin.blog.post, admin.blog.category]
                 roles: [ROLE_BLOG_EDITOR]
                 icon:   '<i class="fa fa-file-text"></i>'
-            Vehicles:
-                label: Vehicles
-                items: [admin.vehicle.make, admin.vehicle.model, admin.vehicle.model_type]
-                roles: [ROLE_SUPER_ADMIN]
-                icon:   '<i class="fa fa-car"></i>'
             Careers:
                 label: Careers
                 items: [admin.careers.role, admin.careers.candidate]
                 roles: [ROLE_CAREERS_EDITOR]
                 icon:   '<i class="fa fa-briefcase"></i>'
-            Used Cars:
-                label: Used Cars
-                items: [admin.used_cars]
-                roles: [ROLE_USED_CARS_EDITOR]
+            Vehicles:
+                label: Vehicles
+                items: [admin.vehicle.make, admin.vehicle.model, admin.vehicle.model_type]
+                roles: [ROLE_SUPER_ADMIN]
                 icon:   '<i class="fa fa-car"></i>'
-                on_top: true
         blocks:
             -
                 position: left
@@ -134,8 +133,8 @@ sonata_admin:
                 position: right
                 type: sonata.admin.block.admin_list
                 settings:
-                    groups: ["Used Cars"]
-                roles: [ROLE_USED_CARS_EDITOR]
+                    groups: ["Inventory"]
+                roles: [ROLE_INVENTORY_EDITOR]
 
     title: "WeBuyCars Admin"
     title_logo: /images/admin-logo.png
@@ -259,8 +258,20 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: Careers, label: Candidates }
 
-    admin.used_cars:
-        class: Wbc\UsedCarsBundle\Admin\UsedCarsAdmin
-        arguments: [~, Wbc\UsedCarsBundle\Entity\UsedCars, ~]
+    admin.inventory:
+        class: Wbc\InventoryBundle\Admin\InventoryAdmin
+        arguments: [~, Wbc\InventoryBundle\Entity\Inventory, WbcInventoryBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Used Cars", label: "Used Cars" }
+            - { name: sonata.admin, manager_type: orm, group: "Inventory", label: "Inventory" }
+
+    admin.inventory.used_cars:
+        class: Wbc\InventoryBundle\Admin\UsedCarAdmin
+        arguments: [~, Wbc\InventoryBundle\Entity\UsedCar, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Inventory", label: "Used Cars" }
+
+    admin.inventory.dealers:
+        class: Wbc\InventoryBundle\Admin\DealerAdmin
+        arguments: [~, Wbc\InventoryBundle\Entity\Dealer, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Inventory", label: "Dealers" }

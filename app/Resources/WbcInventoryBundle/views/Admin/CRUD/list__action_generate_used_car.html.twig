@@ -1,0 +1,13 @@
+{% if object.usedCar is null or object.soldAt is null %}
+    <a href="{{ path('admin_wbc_inventory_inventory_generateUsedCarFromInventory', {id: object.id}) }}"
+       class="btn btn-sm btn-info view_link"
+       title="Generate a Used Car">
+        Generate a Used Car
+    </a>
+{% elseif object.usedCar is not null %}
+    <a href="{{ path('admin_wbc_inventory_usedcar_show', {id: object.usedCar.id}) }}"
+       class="btn btn-sm btn-success view_link"
+       title="Show Used Car">
+        Show Used Car
+    </a>
+{% endif %}

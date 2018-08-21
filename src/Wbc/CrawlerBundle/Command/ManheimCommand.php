@@ -100,7 +100,7 @@ class ManheimCommand extends ClassifiedsCommand
                         $classifiedAd->setMileageSuffix(ClassifiedsAd::MILEAGE_MILES);
                         $classifiedAd->setBodyCondition($bodyCondition);
                         $classifiedAd->setSourceCreatedAt(new \DateTime(trim($ad['purchaseDate'])));
-                        $classifiedAd->setPrice(trim($ad['purchasePrice']));
+                        $classifiedAd->setPrice(trim($ad['pricePurchased']));
                         $classifiedAd->setCurrency(ClassifiedsAd::CURRENCY_USD);
                         $classifiedAd->setMake($make->getName());
                         $classifiedAd->setModel($model->getName());

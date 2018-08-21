@@ -1,5 +1,5 @@
-wbc_used_cars:
-    resource: "@WbcUsedCarsBundle/Resources/config/routing.yml"
+wbc_inventory:
+    resource: "@WbcInventoryBundle/Resources/config/routing.yml"
     prefix:   /used-cars
 
 wbc_careers:

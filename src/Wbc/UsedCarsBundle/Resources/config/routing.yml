@@ -1,3 +1,0 @@
-wbc_used_cars_homepage:
-    type: annotation
-    resource: "@WbcUsedCarsBundle/Controller/DefaultController.php"
