@@ -51,7 +51,7 @@ class UsedCarAdmin extends AbstractAdmin
         }
     }
 
-    public function prePersist($object): void
+    public function prePersist($object)
     {
         $tokenStorage = $this->getConfigurationPool()->getContainer()->get('security.token_storage');
 
@@ -60,7 +60,7 @@ class UsedCarAdmin extends AbstractAdmin
         }
     }
 
-    protected function configureFormFields(FormMapper $form): void
+    protected function configureFormFields(FormMapper $form)
     {
         /** @var $subject \Wbc\InventoryBundle\Entity\UsedCar */
         $subject = $this->getSubject();
@@ -158,7 +158,7 @@ class UsedCarAdmin extends AbstractAdmin
         $form->end();
     }
 
-    protected function configureListFields(ListMapper $list): void
+    protected function configureListFields(ListMapper $list)
     {
         $list->addIdentifier('id')
             ->add('inventory.make')
@@ -178,7 +178,7 @@ class UsedCarAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureShowFields(ShowMapper $show): void
+    protected function configureShowFields(ShowMapper $show)
     {
         $show->tab('Vehicle Information')
             ->with('Vehicle Details')
@@ -232,7 +232,7 @@ class UsedCarAdmin extends AbstractAdmin
         $show->end();
     }
 
-    protected function configureRoutes(RouteCollection $collection): void
+    protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('create');
     }

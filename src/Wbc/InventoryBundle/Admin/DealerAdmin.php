@@ -25,7 +25,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  */
 class DealerAdmin extends AbstractAdmin
 {
-    protected function configureFormFields(FormMapper $form): void
+    protected function configureFormFields(FormMapper $form)
     {
         $form->tab('Dealer')
             ->with('')
@@ -49,7 +49,7 @@ class DealerAdmin extends AbstractAdmin
         ;
     }
 
-    protected function configureListFields(ListMapper $list): void
+    protected function configureListFields(ListMapper $list)
     {
         $list->addIdentifier('id')
             ->add('name', TextType::class, ['required' => false, 'label' => 'Dealer Name'])
@@ -62,7 +62,7 @@ class DealerAdmin extends AbstractAdmin
             ->add('_action', 'actions', ['actions' => ['show' => [], 'edit' => []]]);
     }
 
-    protected function configureShowFields(ShowMapper $show): void
+    protected function configureShowFields(ShowMapper $show)
     {
         $show->tab('Dealer')
             ->with('')
@@ -86,7 +86,7 @@ class DealerAdmin extends AbstractAdmin
             ->end();
     }
 
-    protected function configureRoutes(RouteCollection $collection): void
+    protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('delete');
     }
