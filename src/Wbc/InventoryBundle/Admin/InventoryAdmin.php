@@ -59,7 +59,7 @@ class InventoryAdmin extends AbstractAdmin
         }
     }
 
-    public function prePersist($object): void
+    public function prePersist($object)
     {
         $tokenStorage = $this->getConfigurationPool()->getContainer()->get('security.token_storage');
         if ($tokenStorage->getToken()) {
@@ -67,7 +67,7 @@ class InventoryAdmin extends AbstractAdmin
         }
     }
 
-    protected function configureFormFields(FormMapper $form): void
+    protected function configureFormFields(FormMapper $form)
     {
         /** @var $subject \Wbc\InventoryBundle\Entity\Inventory */
         $subject = $this->getSubject();
@@ -164,7 +164,7 @@ class InventoryAdmin extends AbstractAdmin
             ->end();
     }
 
-    protected function configureListFields(ListMapper $list): void
+    protected function configureListFields(ListMapper $list)
     {
         $list->addIdentifier('id')
             ->add('make')
@@ -186,7 +186,7 @@ class InventoryAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureShowFields(ShowMapper $show): void
+    protected function configureShowFields(ShowMapper $show)
     {
         $show->tab('Vehicle Information')
             ->with('Vehicle Details')
@@ -227,7 +227,7 @@ class InventoryAdmin extends AbstractAdmin
             ->end();
     }
 
-    protected function configureRoutes(RouteCollection $collection): void
+    protected function configureRoutes(RouteCollection $collection)
     {
         $collection->remove('delete')
             ->add('generateUsedCarFromInventory', $this->getRouterIdParameter() . '/generateUsedCarFromInventory');
