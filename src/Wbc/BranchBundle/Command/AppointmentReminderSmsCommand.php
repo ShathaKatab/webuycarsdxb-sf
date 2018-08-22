@@ -32,7 +32,7 @@ class AppointmentReminderSmsCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure(): void
+    protected function configure()
     {
         $this->setName('branch:appointment:reminder-sms')
             ->addOption('age', null, InputOption::VALUE_REQUIRED, 'Missed Appointment age in days, default 30 days', 30)
@@ -44,7 +44,7 @@ class AppointmentReminderSmsCommand extends ContainerAwareCommand
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $batchSize = (int) $input->getOption('batch-size');
         $age = (int) $input->getOption('age');
