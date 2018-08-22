@@ -1,0 +1,7 @@
+{% if object.appointment is not null %}
+    <a href="{{ path('admin_wbc_branch_appointment_edit', {id: object.appointment.id}) }}"
+       class="btn btn-sm btn-info view_link go-to-appointment"
+       title="Go to Appointment">
+        Go to Appointment
+    </a>
+{% endif %}

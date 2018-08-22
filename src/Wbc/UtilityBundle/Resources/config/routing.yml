@@ -1,3 +1,8 @@
-wbc_utility:
+wbc_utility_redirect:
     type: annotation
     resource: "@WbcUtilityBundle/Controller/RedirectController.php"
+
+wbc_utility_twilio_receive_sms:
+    type: annotation
+    resource: "@WbcUtilityBundle/Controller/TwilioReceiveSmsController.php"
+    prefix: twilio

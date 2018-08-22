@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\BranchBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as CF;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Wbc\BranchBundle\Entity\Branch;
 
@@ -17,14 +19,13 @@ class BranchController extends Controller
     /**
      * Gets Branch Timings by Branch and Date.
      *
-     * @CF\Route("/{branchSlug}/timings/{dayBooked}", name="wbc_branch_timing")
-     * @CF\Method({"GET", "POST"})
+     * @CF\Route("/{branchSlug}/timings/{dayBooked}", name="wbc_branch_timing", methods={"GET"})
      * @CF\ParamConverter("branch", class="WbcBranchBundle:Branch", options={"mapping": {"branchSlug"="slug"}})
      *
      * @param Branch $branch
      * @param string $dayBooked
      *
-     * @return array
+     * @return Response
      */
     public function getTimings(Branch $branch, $dayBooked)
     {

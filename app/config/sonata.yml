@@ -13,6 +13,12 @@ sonata_admin:
                 roles: [ROLE_APPOINTMENT_READER, ROLE_APPOINTMENT_EDITOR, ROLE_APPOINTMENT_ADMIN]
                 on_top: true
                 icon:   '<i class="fa fa-calendar-check-o"></i>'
+            Appointment Reminders:
+                label: Appointment Reminders
+                items: [admin.branch.appointment_reminder]
+                roles: [ROLE_APPOINTMENT_READER, ROLE_APPOINTMENT_EDITOR, ROLE_APPOINTMENT_ADMIN]
+                on_top: true
+                icon:   '<i class="fa fa-calendar-check-o"></i> <span id="totalRequestCallback" style="margin-bottom: 4px; display:none;" class="badge label-danger"></span>'
             Inspections:
                 label: Inspections
                 items: [admin.branch.inspection]
@@ -275,3 +281,9 @@ services:
         arguments: [~, Wbc\InventoryBundle\Entity\Dealer, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Inventory", label: "Dealers" }
+
+    admin.branch.appointment_reminder:
+        class: Wbc\BranchBundle\Admin\AppointmentReminderAdmin
+        arguments: [~, Wbc\BranchBundle\Entity\AppointmentReminder, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Appointment Reminders", label: "Appointment Reminders" }

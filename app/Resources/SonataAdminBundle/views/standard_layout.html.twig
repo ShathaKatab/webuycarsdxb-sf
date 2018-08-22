@@ -69,9 +69,9 @@ file that was distributed with this source code.
         {# localize moment #}
         {% if locale[:2] != 'en' %}
         <script src="{{ asset(
-        'bundles/sonatacore/vendor/moment/locale/' ~
-        locale|lower|replace({'_':'-'}) ~
-        '.js'
+            'bundles/sonatacore/vendor/moment/locale/' ~
+            locale|lower|replace({'_':'-'}) ~
+            '.js'
         ) }}"></script>
         {% endif %}
 
@@ -242,7 +242,7 @@ file that was distributed with this source code.
                             <form action="{{ path('sonata_admin_search') }}" method="GET" class="sidebar-form" role="search">
                                 <div class="input-group custom-search-form">
                                     <input type="text" name="q" value="{{ app.request.get('q') }}" class="form-control" placeholder="{{ 'search_placeholder'|trans({}, 'SonataAdminBundle') }}">
-                                        <span class="input-group-btn">
+                                    <span class="input-group-btn">
                                             <button class="btn btn-flat" type="submit">
                                                 <i class="fa fa-search" aria-hidden="true"></i>
                                             </button>
@@ -452,5 +452,15 @@ file that was distributed with this source code.
     })
 </script>
 <script src="{{ asset('assets/vendor/blockUI/jquery.blockUI.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        var totalCallbacks = {{ totalRequestedCallback() }};
+
+        if(totalCallbacks){
+            $('#totalRequestCallback').text(totalCallbacks);
+            $('#totalRequestCallback').show();
+        }
+    });
+</script>
 </body>
 </html>

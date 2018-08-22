@@ -275,6 +275,15 @@ class Appointment
     protected $smsSent;
 
     /**
+     * @var AppointmentReminder
+     *
+     * @ORM\OneToOne(targetEntity="\Wbc\BranchBundle\Entity\AppointmentReminder", mappedBy="appointment", cascade={"remove"})
+     *
+     * @Serializer\Expose()
+     */
+    protected $appointmentReminder;
+
+    /**
      * @var Branch
      */
     protected $branch;
@@ -975,7 +984,7 @@ class Appointment
      *
      * @param Inspection $inspection
      */
-    public function removeInspection(Inspection $inspection)
+    public function removeInspection(Inspection $inspection): void
     {
         $this->inspections->removeElement($inspection);
     }
@@ -1066,5 +1075,29 @@ class Appointment
     public function getSmsSent()
     {
         return $this->smsSent;
+    }
+
+    /**
+     * Set appointmentReminder.
+     *
+     * @param AppointmentReminder $appointmentReminder
+     *
+     * @return Appointment
+     */
+    public function setAppointmentReminder(AppointmentReminder $appointmentReminder = null)
+    {
+        $this->appointmentReminder = $appointmentReminder;
+
+        return $this;
+    }
+
+    /**
+     * Get appointmentReminder.
+     *
+     * @return AppointmentReminder
+     */
+    public function getAppointmentReminder()
+    {
+        return $this->appointmentReminder;
     }
 }
