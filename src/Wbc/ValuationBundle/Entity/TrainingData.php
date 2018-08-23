@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\ValuationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Wbc\BranchBundle\Entity\Deal;
 use Wbc\CrawlerBundle\Entity\ClassifiedsAd;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class TrainingData.
@@ -18,6 +21,30 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class TrainingData
 {
+    /**
+     * @var array
+     */
+    public static $colors = [
+        'other' => 0,
+        'white' => 1,
+        'silver' => 2,
+        'black' => 3,
+        'grey' => 4,
+        'blue' => 5,
+        'red' => 6,
+        'brown' => 7,
+        'green' => 8,
+    ];
+
+    /**
+     * @var array
+     */
+    public static $bodyConditions = [
+        'other' => 0,
+        'fair' => 1,
+        'good' => 2,
+        'excellent' => 3,
+    ];
     /**
      * @var int
      *
@@ -44,10 +71,10 @@ class TrainingData
     protected $model;
 
     /**
-     * @var Model
+     * @var ClassifiedsAd
      *
      * @ORM\ManyToOne(targetEntity="\Wbc\CrawlerBundle\Entity\ClassifiedsAd")
-     * @ORM\JoinColumn(name="crawler_classifieds_ad_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="crawler_classifieds_ad_id", referencedColumnName="id", nullable=true)
      */
     protected $crawlerClassifiedsAd;
 
@@ -117,19 +144,12 @@ class TrainingData
     protected $updatedAt;
 
     /**
-     * @var array
+     * @var Deal
+     *
+     * @ORM\ManyToOne(targetEntity="Wbc\BranchBundle\Entity\Deal")
+     * @ORM\JoinColumn(name="deal_id", referencedColumnName="id", nullable=true)
      */
-    public static $colors = [
-        'other' => 0,
-        'white' => 1,
-        'silver' => 2,
-        'black' => 3,
-        'grey' => 4,
-        'blue' => 5,
-        'red' => 6,
-        'brown' => 7,
-        'green' => 8,
-    ];
+    protected $deal;
 
     /**
      * @var array
@@ -144,16 +164,6 @@ class TrainingData
         'purple' => 'other',
         'teal' => 'blue',
         'other color' => 'other',
-    ];
-
-    /**
-     * @var array
-     */
-    public static $bodyConditions = [
-        'other' => 0,
-        'fair' => 1,
-        'good' => 2,
-        'excellent' => 3,
     ];
 
     /**
@@ -178,7 +188,6 @@ class TrainingData
      *
      * @param Make          $make
      * @param Model         $model
-     * @param ClassifiedsAd $crawlerClassifiedsAd
      * @param int           $year
      * @param int           $mileage
      * @param string        $color
@@ -186,16 +195,15 @@ class TrainingData
      * @param mixed         $price
      * @param string        $source
      */
-    public function __construct(Make $make, Model $model, ClassifiedsAd $crawlerClassifiedsAd, $year, $mileage, $color, $bodyCondition, $price, $source)
+    public function __construct(Make $make, Model $model, $year, $mileage, $color, $bodyCondition, $price, $source)
     {
         $color = strtolower($color);
         $bodyCondition = strtolower($bodyCondition);
 
         $this->make = $make;
         $this->model = $model;
-        $this->crawlerClassifiedsAd = $crawlerClassifiedsAd;
-        $this->year = intval($year);
-        $this->mileage = intval($mileage);
+        $this->year = (int) $year;
+        $this->mileage = (int) $mileage;
         $this->price = round($price);
         $this->source = $source;
 
@@ -487,7 +495,7 @@ class TrainingData
      *
      * @return TrainingData
      */
-    public function setCrawlerClassifiedsAd(ClassifiedsAd $crawlerClassifiedsAd)
+    public function setCrawlerClassifiedsAd(ClassifiedsAd $crawlerClassifiedsAd = null)
     {
         $this->crawlerClassifiedsAd = $crawlerClassifiedsAd;
 
@@ -526,5 +534,29 @@ class TrainingData
     public function getCurrency()
     {
         return $this->currency;
+    }
+
+    /**
+     * Set deal.
+     *
+     * @param Deal $deal
+     *
+     * @return TrainingData
+     */
+    public function setDeal(Deal $deal = null)
+    {
+        $this->deal = $deal;
+
+        return $this;
+    }
+
+    /**
+     * Get deal.
+     *
+     * @return Deal
+     */
+    public function getDeal()
+    {
+        return $this->deal;
     }
 }

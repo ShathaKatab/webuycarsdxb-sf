@@ -97,6 +97,7 @@ class ValuationManager
 
         $averagesDubizzle = $this->getAverages($modelId, $year, ClassifiedsAd::SOURCE_DUBIZZLE);
         $averagesManheim = $this->getAverages($modelId, $year, ClassifiedsAd::SOURCE_MANHEIM, $this->usdExchangeRate);
+        $averagesDeals = $this->getAverages($modelId, $year, ClassifiedsAd::SOURCE_DEALS);
 
         if ($averagesDubizzle) {
             $averages = ['price' => $averagesDubizzle['avg_price'], 'mileage' => $averagesDubizzle['avg_mileage']];
@@ -108,6 +109,18 @@ class ValuationManager
                 $averages['mileage'] = ($averages['mileage'] + $averagesManheim['avg_mileage']) / 2;
             } else {
                 $averages = ['price' => $averagesManheim['avg_price'], 'mileage' => $averagesManheim['avg_mileage']];
+            }
+        }
+
+        if ($averagesDeals) {
+            //Hassan wants to add 20% to the price from Deals
+            $averagesDeals['avg_price'] = $averagesDeals['avg_price'] + $averagesDeals['avg_price'] * 0.2;
+
+            if ($averages['price'] && $averages['mileage']) {
+                $averages['price'] = ($averages['price'] + $averagesDeals['avg_price']) / 2;
+                $averages['mileage'] = ($averages['mileage'] + $averagesDeals['avg_mileage']) / 2;
+            } else {
+                $averages = ['price' => $averagesDeals['avg_price'], 'mileage' => $averagesDeals['avg_mileage']];
             }
         }
 

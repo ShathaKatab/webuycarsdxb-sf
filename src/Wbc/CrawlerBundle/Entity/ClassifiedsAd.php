@@ -19,6 +19,7 @@ class ClassifiedsAd
     const SOURCE_DUBIZZLE = 'dubizzle.com';
     const SOURCE_GETTHAT = 'getthat.com';
     const SOURCE_MANHEIM = 'manheim.com';
+    const SOURCE_DEALS = 'deals';
     const MILEAGE_KM = 'km';
     const MILEAGE_MILES = 'miles';
     const CURRENCY_AED = 'AED';

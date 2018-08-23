@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\ValuationBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -34,9 +36,9 @@ class TrainingDataCommand extends ContainerAwareCommand
     {
         $this
             ->setName('valuation:generate:training-data')
-            ->addArgument('source', InputArgument::REQUIRED, 'Source of the Classifieds Ad; manheim, dubizzle')
+            ->addArgument('source', InputArgument::REQUIRED, 'Source of the Classifieds Ad; manheim, dubizzle, deals')
             ->addOption('overwrite', null, InputOption::VALUE_OPTIONAL, 'Either true or false; if false existing rows will be ignored')
-            ->setDescription('Generates machine learning test data from Classifieds Ads.');
+            ->setDescription('Generates machine learning test data from Classifieds Ads or Deals.');
     }
 
     /**
@@ -51,16 +53,20 @@ class TrainingDataCommand extends ContainerAwareCommand
         $this->output = $output;
         $source = $input->getArgument('source');
 
-        if (!in_array($source, ['manheim.com', 'dubizzle.com'])) {
-            throw new \RuntimeException(sprintf('Source: %s is invalid! Valid sources are; manheim.com, dubizzle.com', $source));
+        if (!in_array($source, ['manheim.com', 'dubizzle.com', 'deals'], true)) {
+            throw new \RuntimeException(sprintf('Source: %s is invalid! Valid sources are; manheim.com, dubizzle.com, deals', $source));
         }
 
-        if ($source == 'dubizzle.com') {
+        if ('dubizzle.com' === $source) {
             $this->dubizzleTrainingData();
         }
 
-        if ($source == 'manheim.com') {
+        if ('manheim.com' === $source) {
             $this->manheimTrainingData();
+        }
+
+        if ('deals' === $source) {
+            $this->dealsTrainingData();
         }
 
         $output->writeln('<info>Done Generating Training Data for Machine Learning.</info>');
@@ -100,14 +106,15 @@ class TrainingDataCommand extends ContainerAwareCommand
             foreach ($ads as $ad) {
                 $make = $this->entityManager->getReference('WbcVehicleBundle:Make', $mappingMakeModel['makeId']);
                 $model = $this->entityManager->getReference('WbcVehicleBundle:Model', $mappingMakeModel['modelId']);
-                $mileage = round(intval($ad['mileage']) * 1.60934);
+                $mileage = round((int) ($ad['mileage']) * 1.60934);
                 $classifiedsAd = $this->entityManager->getReference('WbcCrawlerBundle:ClassifiedsAd', $ad['id']);
-                $trainingData = new TrainingData($make, $model, $classifiedsAd, $ad['year'], $mileage, $ad['color'], $ad['body_condition'], $ad['price'], $ad['source']);
+                $trainingData = new TrainingData($make, $model, $ad['year'], $mileage, $ad['color'], $ad['body_condition'], $ad['price'], $ad['source']);
+                $trainingData->setCrawlerClassifiedsAd($classifiedsAd);
                 $trainingData->setCurrency($ad['currency']);
                 $this->entityManager->persist($trainingData);
                 ++$row;
 
-                if ($row % 200 === 0) {
+                if (0 === $row % 200) {
                     $this->entityManager->flush();
                     $this->entityManager->clear();
                     gc_collect_cycles();
@@ -151,7 +158,8 @@ class TrainingDataCommand extends ContainerAwareCommand
                 $make = $this->entityManager->getReference('WbcVehicleBundle:Make', $mappingMakeModel['makeId']);
                 $model = $this->entityManager->getReference('WbcVehicleBundle:Model', $mappingMakeModel['modelId']);
                 $classifiedsAd = $this->entityManager->getReference('WbcCrawlerBundle:ClassifiedsAd', $ad['id']);
-                $trainingData = new TrainingData($make, $model, $classifiedsAd, $ad['year'], $ad['mileage'], $ad['color'], $ad['body_condition'], $ad['price'], $ad['source']);
+                $trainingData = new TrainingData($make, $model, $ad['year'], $ad['mileage'], $ad['color'], $ad['body_condition'], $ad['price'], $ad['source']);
+                $trainingData->setCrawlerClassifiedsAd($classifiedsAd);
                 $trainingData->setCurrency($ad['currency']);
                 $this->entityManager->persist($trainingData);
             }
@@ -159,5 +167,43 @@ class TrainingDataCommand extends ContainerAwareCommand
 
         $this->entityManager->flush();
         $this->output->writeln('<comment>Done with Training Data for Dubizzle.com</comment>');
+    }
+
+    private function dealsTrainingData()
+    {
+        $this->output->writeln('<comment>Working on Training Data from webuycarsdxb.com Deals</comment>');
+        //Deals
+        $connection = $this->entityManager->getConnection();
+        $statement = $connection->prepare('SELECT make.name AS makeName, model.name AS modelName, make.id AS makeId, model.id AS modelId
+                                              FROM vehicle_model AS model
+                                              INNER JOIN vehicle_make AS make ON model.make_id = make.id');
+        $statement->execute();
+        $makesModels = $statement->fetchAll();
+
+        foreach ($makesModels as $makeModel) {
+            $this->output->writeln(sprintf('<fg=magenta>Setting Data for: Make => %s, Model => %s</>', $makeModel['makeName'], $makeModel['modelName']));
+
+            $statement = $connection->prepare('SELECT d.id, i.vehicle_year, i.vehicle_mileage, i.vehicle_color, i.vehicle_body_condition, d.price_purchased
+                                                FROM deal d
+                                                INNER JOIN inspection i ON i.id = d.inspection_id
+                                                WHERE i.vehicle_model_id = :modelId');
+
+            $statement->bindValue(':modelId', $makeModel['modelId']);
+            $statement->execute();
+            $deals = $statement->fetchAll();
+
+            foreach ($deals as $deal) {
+                $make = $this->entityManager->getReference('WbcVehicleBundle:Make', $makeModel['makeId']);
+                $model = $this->entityManager->getReference('WbcVehicleBundle:Model', $makeModel['modelId']);
+
+                $trainingData = new TrainingData($make, $model, $deal['vehicle_year'], $deal['vehicle_mileage'], $deal['vehicle_color'], $deal['vehicle_body_condition'], $deal['price_purchased'], ClassifiedsAd::SOURCE_DEALS);
+                $trainingData->setDeal($this->entityManager->getReference('WbcBranchBundle:Deal', $deal['id']));
+                $trainingData->setCurrency(ClassifiedsAd::CURRENCY_AED);
+                $this->entityManager->persist($trainingData);
+            }
+        }
+
+        $this->entityManager->flush();
+        $this->output->writeln('<comment>Done with Training Data from webuycarsdxb.com Deals</comment>');
     }
 }
