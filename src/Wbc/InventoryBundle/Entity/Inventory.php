@@ -566,6 +566,7 @@ class Inventory
 
         if ($deal) {
             $this->pricePurchased = $deal->getPricePurchased();
+            $appointment = $deal->getAppointment();
             $inspection = $deal->getInspection();
 
             if ($inspection) {
@@ -576,7 +577,7 @@ class Inventory
                 $this->mileage = $inspection->getVehicleMileage();
                 $this->specifications = $inspection->getVehicleSpecifications();
                 $this->bodyCondition = $inspection->getVehicleBodyCondition();
-                $this->options = $inspection->getVehicleOption();
+                $this->options = $appointment->getVehicleOption();
                 $this->color = $inspection->getVehicleColor();
             }
         }
