@@ -213,6 +213,20 @@ class Valuation
     protected $source;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="actual_price", type="decimal", precision=11, scale=2, nullable=true)
+     */
+    protected $actualPrice;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="discount_percentage", type="decimal", precision=11, scale=2, nullable=true)
+     */
+    protected $discountPercentage;
+
+    /**
      * @var Make
      */
     protected $vehicleMake;
@@ -783,5 +797,53 @@ class Valuation
     public function getVehicleOption()
     {
         return $this->vehicleOption;
+    }
+
+    /**
+     * Set actualPrice.
+     *
+     * @param string $actualPrice
+     *
+     * @return Valuation
+     */
+    public function setActualPrice($actualPrice)
+    {
+        $this->actualPrice = $actualPrice;
+
+        return $this;
+    }
+
+    /**
+     * Get actualPrice.
+     *
+     * @return string
+     */
+    public function getActualPrice()
+    {
+        return $this->actualPrice;
+    }
+
+    /**
+     * Set discountPercentage.
+     *
+     * @param string $discountPercentage
+     *
+     * @return Valuation
+     */
+    public function setDiscountPercentage($discountPercentage)
+    {
+        $this->discountPercentage = $discountPercentage;
+
+        return $this;
+    }
+
+    /**
+     * Get discountPercentage.
+     *
+     * @return string
+     */
+    public function getDiscountPercentage()
+    {
+        return $this->discountPercentage;
     }
 }

@@ -162,7 +162,9 @@ class ValuationAdmin extends AbstractAdmin
             ->add('vehicleBodyCondition', 'choice', ['choices' => ConditionType::getConditions(), 'disabled' => true, 'required' => false])
             ->add('vehicleColor', 'choice', ['choices' => ColorType::getColors(), 'disabled' => true, 'required' => false])
             ->add('vehicleOption', 'choice', ['choices' => OptionType::getOptions(), 'disabled' => true, 'required' => false])
-            ->add('priceOnline', 'money', ['currency' => 'AED', 'label' => 'Price Online', 'disabled' => true, 'required' => false]);
+            ->add('priceOnline', 'money', ['currency' => 'AED', 'label' => 'Price Online', 'disabled' => true, 'required' => false])
+            ->add('actualPrice', 'money', ['currency' => 'AED', 'label' => 'Price Online', 'disabled' => true, 'required' => false])
+            ->add('discountPercentage', null, ['disabled' => true, 'required' => false]);
     }
 
     /**
@@ -187,6 +189,8 @@ class ValuationAdmin extends AbstractAdmin
             ->add('vehicleColor', 'choice', ['choices' => ColorType::getColors()])
             ->add('vehicleOption', 'choice', ['choices' => OptionType::getOptions()])
             ->add('priceOnline', 'currency', ['currency' => 'AED'])
+            ->add('actualPrice', 'currency', ['currency' => 'AED'])
+            ->add('discountPercentage')
             ->add('createdAt', null, ['label' => 'Created']);
     }
 

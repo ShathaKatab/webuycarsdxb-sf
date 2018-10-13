@@ -407,6 +407,8 @@ class ValuationManager
 
     private function setValuationPrice(Valuation $valuation, $price = null)
     {
+        $valuation->setActualPrice($price);
+
         if ($price && $price > self::MIN_ALLOWABLE_PRICE) {
             $discount = $this->getValuationConfigurationDiscount($valuation);
 
@@ -418,9 +420,10 @@ class ValuationManager
                 $price = 0.0;
             }
 
+            $valuation->setDiscountPercentage($discount);
             $valuation->setPriceOnline($price);
-
-            $this->entityManager->flush();
         }
+
+        $this->entityManager->flush();
     }
 }
