@@ -19,3 +19,12 @@ services:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
             - [ setAnnotationReader, [ '@annotation_reader' ] ]
+
+    memcached:
+        class: Memcached
+        calls:
+            - [ addServer, ['127.0.0.1', 11211] ]
+    memcached_cache:
+        class: Doctrine\Common\Cache\MemcachedCache
+        calls:
+            - [ setMemcached, [@memcached] ]

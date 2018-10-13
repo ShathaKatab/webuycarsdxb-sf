@@ -92,7 +92,7 @@ class ValuationController extends Controller
 
             $valuation = new Valuation();
             $valuation->setStatus(Valuation::STATUS_NEW);
-            $valuation->setSource(Valuation::SOURCE_WEBSITE);
+            $valuation->setSource(Valuation::SOURCE_WEBSITE_ORGANIC);
 
             $form = $this->createForm(new ValuationStepTwoType(), $valuation);
 

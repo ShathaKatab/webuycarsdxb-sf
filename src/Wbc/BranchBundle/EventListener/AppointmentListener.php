@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\BranchBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -7,11 +9,13 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use JMS\DiExtraBundle\Annotation as DI;
 use Symfony\Bundle\TwigBundle\TwigEngine;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Wbc\BranchBundle\BranchEvents;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\AppointmentDetails;
 use Wbc\BranchBundle\Events\AppointmentEvent;
+use Wbc\StaticBundle\EventListener\StaticListener;
 use Wbc\UserBundle\Entity\User;
 use Wbc\UtilityBundle\TwilioManager;
 use Wbc\ValuationBundle\Entity\Valuation;
@@ -51,26 +55,38 @@ class AppointmentListener
     private $tokenStorage;
 
     /**
+     * @var Session
+     */
+    private $session;
+
+    /**
      * AppointmentListener Constructor.
      *
      * @DI\InjectParams({
      *  "entityManager" = @DI\Inject("doctrine.orm.default_entity_manager"),
      *  "twilioManager" = @DI\Inject("wbc.utility.twilio_manager"),
      *  "templating" = @DI\Inject("templating"),
-     *  "tokenStorage" = @DI\Inject("security.token_storage")
+     *  "tokenStorage" = @DI\Inject("security.token_storage"),
+     *  "session" = @DI\Inject("session")
      * })
      *
      * @param EntityManager         $entityManager
      * @param TwilioManager         $twilioManager
      * @param TwigEngine            $templating
      * @param TokenStorageInterface $tokenStorage
+     * @param Session               $session
      */
-    public function __construct(EntityManager $entityManager, TwilioManager $twilioManager, TwigEngine $templating, TokenStorageInterface $tokenStorage)
+    public function __construct(EntityManager $entityManager,
+                                TwilioManager $twilioManager,
+                                TwigEngine $templating,
+                                TokenStorageInterface $tokenStorage,
+                                Session $session)
     {
         $this->entityManager = $entityManager;
         $this->smsManager = $twilioManager;
         $this->templating = $templating;
         $this->tokenStorage = $tokenStorage;
+        $this->session = $session;
     }
 
     /**
@@ -78,7 +94,7 @@ class AppointmentListener
      *
      * @param AppointmentEvent $event
      */
-    public function onBeforeCreate(AppointmentEvent $event)
+    public function onBeforeCreate(AppointmentEvent $event): void
     {
         $appointment = $event->getAppointment();
 
@@ -99,7 +115,7 @@ class AppointmentListener
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postLoad(LifecycleEventArgs $args)
+    public function postLoad(LifecycleEventArgs $args): void
     {
         $object = $args->getObject();
 
@@ -123,7 +139,7 @@ class AppointmentListener
     /**
      * @param LifecycleEventArgs $args
      */
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args): void
     {
         $object = $args->getObject();
 
@@ -141,7 +157,7 @@ class AppointmentListener
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postPersist(LifecycleEventArgs $args)
+    public function postPersist(LifecycleEventArgs $args): void
     {
         $object = $args->getObject();
         $objectManager = $args->getObjectManager();
@@ -185,12 +201,18 @@ class AppointmentListener
                 }
             }
         }
+
+        //The user has created an Appointment
+        //Remove the utm_source from the session
+        if ($this->session->has(StaticListener::UTM_SOURCE)) {
+            $this->session->remove(StaticListener::UTM_SOURCE);
+        }
     }
 
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postUpdate(LifecycleEventArgs $args)
+    public function postUpdate(LifecycleEventArgs $args): void
     {
         $object = $args->getObject();
 
@@ -206,7 +228,7 @@ class AppointmentListener
      *
      * @param AppointmentEvent $event
      */
-    public function onAppointmentGenerateInspection(AppointmentEvent $event)
+    public function onAppointmentGenerateInspection(AppointmentEvent $event): void
     {
         $appointment = $event->getAppointment();
         $appointment->setStatus(Appointment::STATUS_INSPECTED);
@@ -217,7 +239,7 @@ class AppointmentListener
      * @param Appointment   $appointment
      * @param ObjectManager $objectManager
      */
-    private function updateAppointmentDetails(Appointment $appointment, ObjectManager $objectManager)
+    private function updateAppointmentDetails(Appointment $appointment, ObjectManager $objectManager): void
     {
         $details = $appointment->getDetails();
 

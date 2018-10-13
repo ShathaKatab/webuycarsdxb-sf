@@ -31,9 +31,9 @@ class Valuation
     const STATUS_RESEARCH = 'research';
     const STATUS_CANCELLED = 'cancelled';
 
-    const SOURCE_WEBSITE = 'website';
+    const SOURCE_WEBSITE_ORGANIC = 'website-organic';
     const SOURCE_CALL = 'call';
-    const SOURCE_WALK_IN = 'walk_in';
+    const SOURCE_WALK_IN = 'walk-in';
     const SOURCE_OTHERS = 'others';
 
     /**
@@ -726,21 +726,6 @@ class Valuation
             self::STATUS_DUPLICATE => 'Duplicate',
             self::STATUS_RESEARCH => 'Research',
             self::STATUS_CANCELLED => 'Cancelled',
-        ];
-    }
-
-    /**
-     * Gets Sources.
-     *
-     * @return array
-     */
-    public static function getSources()
-    {
-        return [
-            self::SOURCE_WEBSITE => 'Website',
-            self::SOURCE_CALL => 'Call',
-            self::SOURCE_WALK_IN => 'Walk-In',
-            self::SOURCE_OTHERS => 'Others',
         ];
     }
 

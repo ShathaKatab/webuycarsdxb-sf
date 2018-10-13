@@ -213,7 +213,7 @@ class Inventory
     /**
      * @var Deal
      *
-     * @ORM\OneToOne(targetEntity="Wbc\BranchBundle\Entity\Deal")
+     * @ORM\OneToOne(targetEntity="Wbc\BranchBundle\Entity\Deal", inversedBy="inventory")
      * @ORM\JoinColumn(name="deal_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $deal;

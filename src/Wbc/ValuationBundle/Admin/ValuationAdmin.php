@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\ValuationBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -9,7 +11,6 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -65,7 +66,7 @@ class ValuationAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $now = new \DateTime();
         $datagridMapper->add('name')
@@ -83,16 +84,16 @@ class ValuationAdmin extends AbstractAdmin
             ->add('hasAppointment', 'doctrine_orm_callback', [
                 'label' => 'Has Appointment',
                 'callback' => function ($queryBuilder, $alias, $field, $value) use ($now) {
-                    if ($value['value'] === null) {
+                    if (null === $value['value']) {
                         return;
                     }
 
                     $theValue = (bool) ($value['value']);
 
-                    if ($theValue === true) {
+                    if (true === $theValue) {
                         $queryBuilder->innerJoin($alias.'.appointment', 'appointment')
                             ->andWhere('appointment IS NOT NULL');
-                    } elseif ($theValue === false) {
+                    } elseif (false === $theValue) {
                         $queryBuilder->leftJoin($alias.'.appointment', 'appointment')
                             ->andWhere('appointment IS NULL');
                     }
@@ -113,7 +114,7 @@ class ValuationAdmin extends AbstractAdmin
                 'field_type' => 'choice',
             ])
             ->add('source', 'doctrine_orm_choice', [
-                'field_options' => ['choices' => Valuation::getSources()],
+                'field_options' => ['choices' => $this->getValuationSources()],
                 'field_type' => 'choice',
             ]);
     }
@@ -121,7 +122,7 @@ class ValuationAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper->addIdentifier('name')
             ->add('mobileNumber', null, ['label' => 'Mobile'])
@@ -133,7 +134,7 @@ class ValuationAdmin extends AbstractAdmin
             ->add('priceOnline', 'currency', ['currency' => 'AED'])
             ->add('hasAppointment', 'boolean')
             ->add('status', 'choice', ['choices' => Valuation::getStatuses(), 'editable' => true])
-            ->add('source', 'choice', ['choices' => Valuation::getSources(), 'editable' => true])
+            ->add('source', 'choice', ['choices' => $this->getValuationSources(), 'editable' => true])
             ->add('createdAt', null, ['label' => 'Created'])
             ->add('_action', 'actions', ['actions' => [
                 'show' => [],
@@ -144,12 +145,12 @@ class ValuationAdmin extends AbstractAdmin
             ]]);
     }
 
-    protected function configureFormFields(FormMapper $form)
+    protected function configureFormFields(FormMapper $form): void
     {
         $form->add('notes')
             ->add('reasonCancellation', TextareaType::class, ['label' => 'Reason for Cancellation', 'required' => false])
             ->add('status', ChoiceType::class, ['choices' => Valuation::getStatuses(), 'required' => false])
-            ->add('source', ChoiceType::class, ['choices' => Valuation::getSources(), 'required' => false])
+            ->add('source', ChoiceType::class, ['choices' => $this->getValuationSources(), 'required' => false])
             ->add('name', null, ['disabled' => true, 'required' => false])
             ->add('mobileNumber', null, ['label' => 'Mobile', 'disabled' => true, 'required' => false])
             ->add('emailAddress', EmailType::class, ['disabled' => true, 'required' => false])
@@ -167,13 +168,13 @@ class ValuationAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $show)
+    protected function configureShowFields(ShowMapper $show): void
     {
         $show->add('id')
             ->add('notes')
             ->add('reasonCancellation', TextareaType::class, ['label' => 'Reason for Cancellation', 'required' => false])
             ->add('status', 'choice', ['choices' => Valuation::getStatuses()])
-            ->add('source', 'choice', ['choices' => Valuation::getSources()])
+            ->add('source', 'choice', ['choices' => $this->getValuationSources()])
             ->add('name')
             ->add('mobileNumber', null, ['label' => 'Mobile'])
             ->add('emailAddress')
@@ -192,10 +193,18 @@ class ValuationAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollection $collection): void
     {
         $collection->remove('create')
             ->remove('delete')
             ->add('generateAppointment', $this->getRouterIdParameter().'/generateAppointment');
+    }
+
+    private function getValuationSources()
+    {
+        return $this->getConfigurationPool()
+            ->getContainer()
+            ->get('wbc.static.parameter_manager')
+            ->getValuationSources();
     }
 }

@@ -1,4 +1,7 @@
 services:
-#    wbc_static.example:
-#        class: Wbc\StaticBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    static.parameter.repository:
+        class: Wbc\StaticBundle\Repository\ParameterRepository
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        arguments: ['Wbc\StaticBundle\Entity\Parameter']
+        calls:
+            - [ setCacheManager, [@memcached] ]
