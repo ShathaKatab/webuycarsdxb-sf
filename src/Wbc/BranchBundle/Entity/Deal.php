@@ -122,6 +122,13 @@ class Deal
     protected $updatedAt;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="source", type="string", length=20, nullable=true)
+     */
+    protected $source;
+
+    /**
      * @var Inventory
      *
      * @ORM\OneToOne(targetEntity="Wbc\InventoryBundle\Entity\Inventory", mappedBy="deal")
@@ -218,6 +225,7 @@ class Deal
 
         if ($inspection) {
             $this->pricePurchased = $inspection->getPriceOffered();
+            $this->source = $inspection->getSource();
             $appointment = $inspection->getAppointment();
 
             if ($appointment) {
@@ -502,5 +510,29 @@ class Deal
     public function getInventory()
     {
         return $this->inventory;
+    }
+
+    /**
+     * Set source.
+     *
+     * @param string $source
+     *
+     * @return Deal
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * Get source.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 }

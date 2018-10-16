@@ -284,6 +284,13 @@ class Appointment
     protected $appointmentReminder;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="source", type="string", length=20, nullable=true)
+     */
+    protected $source;
+
+    /**
      * @var Branch
      */
     protected $branch;
@@ -844,6 +851,7 @@ class Appointment
             $this->name = $valuation->getName();
             $this->emailAddress = $valuation->getEmailAddress();
             $this->mobileNumber = $valuation->getMobileNumber();
+            $this->source = $valuation->getSource();
         }
 
         return $this;
@@ -1099,5 +1107,28 @@ class Appointment
     public function getAppointmentReminder()
     {
         return $this->appointmentReminder;
+    }
+
+    /**
+     * Set source
+     *
+     * @param string $source
+     * @return Appointment
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * Get source
+     *
+     * @return string 
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 }

@@ -111,6 +111,7 @@ class InspectionAdmin extends AbstractAdmin
                 'label' => 'Inspection Notes',
                 'required' => false,
             ])
+            ->add('source', ChoiceType::class, ['choices' => $this->getValuationSources(), 'required' => false])
             ->end()
             ->with('Vehicle Details')
             ->add('vehicleYear', WbcVehicleType\ModelYearType::class)
@@ -165,7 +166,7 @@ class InspectionAdmin extends AbstractAdmin
             ->add('vehicleMileage', WbcVehicleType\MileageType::class)
             ->add('vehicleSpecifications', WbcVehicleType\SpecificationType::class, ['required' => false])
             ->add('vehicleBodyCondition', WbcVehicleType\ConditionType::class)
-            ->add('vehicleColor', WbcVehicleType\ColorType::class)
+            ->add('vehicleColor', WbcVehicleType\ColorType::class, ['required' => false])
             ->end()
             ->end();
 
@@ -294,6 +295,7 @@ class InspectionAdmin extends AbstractAdmin
             ->add('vehicleModel', null, ['label' => 'Model'])
             ->add('vehicleYear', null, ['label' => 'Year'])
             ->add('status', 'choice', ['choices' => Inspection::getStatuses(), 'editable' => true])
+            ->add('source', 'choice', ['choices' => $this->getValuationSources(), 'editable' => true])
             ->add('priceOnline', 'currency', [
                 'currency' => 'AED',
                 'label' => 'Online Valuation',
@@ -331,6 +333,7 @@ class InspectionAdmin extends AbstractAdmin
             ->add('priceOffered', null, ['label' => 'Offered Price (AED)'])
             ->add('priceExpected', null, ['label' => 'Expected Price (AED)'])
             ->add('status', 'choice', ['choices' => Inspection::getStatuses()])
+            ->add('source', 'choice', ['choices' => $this->getValuationSources()])
             ->add('notes', 'textarea')
             ->end()
             ->with('Vehicle Details')
@@ -374,5 +377,10 @@ class InspectionAdmin extends AbstractAdmin
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
             ->add('generateDeal', $this->getRouterIdParameter().'/generateDeal')
         ;
+    }
+
+    private function getValuationSources()
+    {
+        return $this->getConfigurationPool()->getContainer()->get('wbc.static.parameter_manager')->getValuationSources();
     }
 }

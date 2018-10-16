@@ -89,6 +89,7 @@ class DealAdmin extends AbstractAdmin
             ->add('mobileNumber')
             ->add('emailAddress')
             ->add('pricePurchased', MoneyType::class, ['label' => 'Purchased Price', 'currency' => 'AED'])
+            ->add('source', ChoiceType::class, ['choices' => $this->getValuationSources(), 'required' => false])
             ->end()
             ->with('Inspection Details')
             ->add('inspection.priceOnline', MoneyType::class, [
@@ -285,6 +286,7 @@ class DealAdmin extends AbstractAdmin
             ->add('pricePurchased', 'currency', ['currency' => 'AED', 'label' => 'Purchased Price'])
             ->add('dateBookedString', null, ['label' => 'Date Booked'])
             ->add('timingString', null, ['label' => 'Timing'])
+            ->add('source', 'choice', ['choices' => $this->getValuationSources(), 'editable' => true])
             ->add('createdAt', null, ['label' => 'Created'])
             ->add('createdBy', null, ['placeholder' => 'User'])
             ->add('_action', 'actions', [
@@ -307,6 +309,7 @@ class DealAdmin extends AbstractAdmin
             ->add('name')
             ->add('mobileNumber')
             ->add('emailAddress')
+            ->add('source', 'choice', ['choices' => $this->getValuationSources()])
             ->end()
             ->with('Inspection Details')
             ->add('inspection.priceOnline', null, ['label' => 'Online Price (AED)'])
@@ -350,6 +353,10 @@ class DealAdmin extends AbstractAdmin
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
             ->add('generateInventoryFromDeal', $this->getRouterIdParameter() . '/generateInventoryFromDeal');
+    }
 
+    private function getValuationSources()
+    {
+        return $this->getConfigurationPool()->getContainer()->get('wbc.static.parameter_manager')->getValuationSources();
     }
 }

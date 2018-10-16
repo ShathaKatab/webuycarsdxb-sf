@@ -202,7 +202,8 @@ class AppointmentAdmin extends AbstractAdmin
                     'empty_data' => Appointment::STATUS_NEW,
                 ])
                 ->add('notes', TextareaType::class, ['required' => false])
-                ->add('createdBy', null, ['read_only' => true, 'disabled' => true, 'required' => false]);
+                ->add('createdBy', null, ['read_only' => true, 'disabled' => true, 'required' => false])
+                ->add('source', ChoiceType::class, ['choices' => $this->getValuationSources(), 'required' => false]);
         }
 
         $formMapper->add('smsSent', CheckboxType::class, ['required' => false, 'disabled' => true])
@@ -297,6 +298,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('details.vehicleModelName', null, ['label' => 'Model'])
             ->add('vehicleYear', null, ['label' => 'Year'])
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'editable' => true])
+            ->add('source', 'choice', ['choices' => $this->getValuationSources(), 'editable' => true])
             ->add('vehicleOption', 'choice', ['choices' => WbcVehicleType\OptionType::getOptions()])
             ->add('valuation.priceOnline', 'currency', ['currency' => 'AED', 'label' => 'Online Valuation'])
             ->add('dateBooked')
@@ -367,6 +369,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('valuation.priceOnline', 'currency', ['currency' => 'AED'])
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'empty_data' => Appointment::STATUS_NEW])
             ->add('notes')
+            ->add('source', 'choice', ['choices' => $this->getValuationSources()])
             ->add('createdBy')
             ->add('smsSent')
             ->end()
@@ -383,5 +386,10 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
             ->add('generateInspection', $this->getRouterIdParameter().'/generateInspection')
             ->add('sendSms', $this->getRouterIdParameter().'/sendSms');
+    }
+
+    private function getValuationSources()
+    {
+        return $this->getConfigurationPool()->getContainer()->get('wbc.static.parameter_manager')->getValuationSources();
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\BranchBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -122,9 +124,6 @@ class Inspection
      *
      * @ORM\Column(name="vehicle_color", type="string", length=30, nullable=true)
      *
-     * @Assert\NotBlank()
-     * @Assert\Choice(choices={"white", "silver", "black", "grey", "blue", "red", "brown", "green", "other"})
-     *
      * @Serializer\Expose()
      */
     protected $vehicleColor;
@@ -207,6 +206,13 @@ class Inspection
      * @Serializer\Expose()
      */
     protected $notes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="source", type="string", length=20, nullable=true)
+     */
+    protected $source;
 
     /**
      * Inspection Constructor.
@@ -549,6 +555,7 @@ class Inspection
             $this->vehicleYear = $appointment->getVehicleYear();
             $this->vehicleTransmission = $appointment->getVehicleTransmission();
             $this->vehicleSpecifications = $appointment->getVehicleSpecifications();
+            $this->source = $appointment->getSource();
         }
 
         return $this;
@@ -705,5 +712,29 @@ class Inspection
     public function getNotes()
     {
         return $this->notes;
+    }
+
+    /**
+     * Set source.
+     *
+     * @param string $source
+     *
+     * @return Inspection
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * Get source.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 }
