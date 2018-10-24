@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Wbc\BranchBundle\BranchEvents;
 use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\Branch;
-use Wbc\BranchBundle\Entity\Deal;
 use Wbc\BranchBundle\Entity\Inspection;
 use Wbc\BranchBundle\Events\AppointmentEvent;
 use Wbc\InventoryBundle\Entity\Inventory;
@@ -94,47 +93,6 @@ class CRUDController extends Controller
             ->dispatch(BranchEvents::ON_APPOINTMENT_GENERATE_INSPECTION, new AppointmentEvent($appointment));
 
         return new RedirectResponse($this->generateUrl('admin_wbc_branch_inspection_show', ['id' => $inspection->getId()]));
-    }
-
-    /**
-     * Generates a Deal from an Inspection.
-     *
-     * @CF\ParamConverter("inspection", class="WbcBranchBundle:Inspection")
-     *
-     * @param Inspection $inspection
-     *
-     * @return Response
-     */
-    public function generateDealAction(Inspection $inspection)
-    {
-        $entityManager = $this->get('doctrine.orm.default_entity_manager');
-        $deal = new Deal($inspection);
-        $deal->setCreatedBy($this->getUser());
-        $entityManager->persist($deal);
-        $entityManager->flush();
-
-        return new RedirectResponse($this->generateUrl('admin_wbc_branch_deal_show', ['id' => $deal->getId()]));
-    }
-
-    /**
-     * Generates an Inventory from a Deal.
-     *
-     * @CF\ParamConverter("deal", class="WbcBranchBundle:Deal")
-     *
-     * @param Deal $deal
-     *
-     * @return Response
-     */
-    public function generateInventoryFromDealAction(Deal $deal)
-    {
-        $entityManager = $this->get('doctrine.orm.default_entity_manager');
-        $inventory = new Inventory($deal);
-        $inventory->setCreatedBy($this->getUser());
-
-        $entityManager->persist($inventory);
-        $entityManager->flush();
-
-        return new RedirectResponse($this->generateUrl('admin_wbc_inventory_inventory_edit', ['id' => $inventory->getId()]));
     }
 
     /**

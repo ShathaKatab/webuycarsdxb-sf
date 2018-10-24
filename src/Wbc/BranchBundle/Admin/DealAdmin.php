@@ -294,7 +294,6 @@ class DealAdmin extends AbstractAdmin
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
-                    'generateInventoryFromDeal' => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_generate_inventory.html.twig'],
                 ],
             ]);
     }
@@ -351,8 +350,7 @@ class DealAdmin extends AbstractAdmin
         $collection->remove('create')
             ->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
-            ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
-            ->add('generateInventoryFromDeal', $this->getRouterIdParameter() . '/generateInventoryFromDeal');
+            ->add('listBranchTimings', 'branchTimings/{branchId}/{day}');
     }
 
     private function getValuationSources()

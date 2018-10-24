@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Wbc\InventoryBundle\Entity\Inventory;
 use Wbc\UserBundle\Entity\User;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
@@ -29,6 +30,7 @@ class Inspection
     const STATUS_INVALID = 'invalid';
     const STATUS_OFFER_ACCEPTED = 'offer_accepted';
     const STATUS_OFFER_REJECTED = 'offer_rejected';
+    const STATUS_PENDING = 'pending';
 
     /**
      * @var int
@@ -155,7 +157,7 @@ class Inspection
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="\Wbc\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="\Wbc\UserBundle\Entity\User", fetch="EAGER")
      * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id", nullable=false)
      */
     protected $createdBy;
@@ -197,6 +199,13 @@ class Inspection
      * @ORM\OneToOne(targetEntity="Wbc\BranchBundle\Entity\Deal", mappedBy="inspection")
      */
     protected $deal;
+
+    /**
+     * @var Inventory
+     *
+     * @ORM\OneToOne(targetEntity="Wbc\InventoryBundle\Entity\Inventory", mappedBy="inspection", fetch="EAGER")
+     */
+    protected $inventory;
 
     /**
      * @var string
@@ -686,6 +695,7 @@ class Inspection
             self::STATUS_NEW => 'New',
             self::STATUS_OFFER_ACCEPTED => 'Offer Accepted',
             self::STATUS_OFFER_REJECTED => 'Offer Rejected',
+            self::STATUS_PENDING => 'Pending',
             self::STATUS_INVALID => 'Invalid',
         ];
     }
@@ -736,5 +746,29 @@ class Inspection
     public function getSource()
     {
         return $this->source;
+    }
+
+    /**
+     * Set inventory.
+     *
+     * @param Inventory $inventory
+     *
+     * @return Inspection
+     */
+    public function setInventory(Inventory $inventory = null)
+    {
+        $this->inventory = $inventory;
+
+        return $this;
+    }
+
+    /**
+     * Get inventory.
+     *
+     * @return Inventory
+     */
+    public function getInventory()
+    {
+        return $this->inventory;
     }
 }

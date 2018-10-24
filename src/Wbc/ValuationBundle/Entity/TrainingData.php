@@ -6,8 +6,8 @@ namespace Wbc\ValuationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Wbc\BranchBundle\Entity\Deal;
 use Wbc\CrawlerBundle\Entity\ClassifiedsAd;
+use Wbc\InventoryBundle\Entity\Inventory;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
 
@@ -144,12 +144,12 @@ class TrainingData
     protected $updatedAt;
 
     /**
-     * @var Deal
+     * @var Inventory
      *
-     * @ORM\ManyToOne(targetEntity="Wbc\BranchBundle\Entity\Deal")
-     * @ORM\JoinColumn(name="deal_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Wbc\InventoryBundle\Entity\Inventory")
+     * @ORM\JoinColumn(name="inventory_id", referencedColumnName="id", nullable=true)
      */
-    protected $deal;
+    protected $inventory;
 
     /**
      * @var array
@@ -186,14 +186,14 @@ class TrainingData
     /**
      * TrainingData Constructor.
      *
-     * @param Make          $make
-     * @param Model         $model
-     * @param int           $year
-     * @param int           $mileage
-     * @param string        $color
-     * @param string        $bodyCondition
-     * @param mixed         $price
-     * @param string        $source
+     * @param Make   $make
+     * @param Model  $model
+     * @param int    $year
+     * @param int    $mileage
+     * @param string $color
+     * @param string $bodyCondition
+     * @param mixed  $price
+     * @param string $source
      */
     public function __construct(Make $make, Model $model, $year, $mileage, $color, $bodyCondition, $price, $source)
     {
@@ -537,26 +537,26 @@ class TrainingData
     }
 
     /**
-     * Set deal.
+     * Set inventory.
      *
-     * @param Deal $deal
+     * @param Inventory $inventory
      *
      * @return TrainingData
      */
-    public function setDeal(Deal $deal = null)
+    public function setInventory(Inventory $inventory = null)
     {
-        $this->deal = $deal;
+        $this->inventory = $inventory;
 
         return $this;
     }
 
     /**
-     * Get deal.
+     * Get inventory.
      *
-     * @return Deal
+     * @return Inventory
      */
-    public function getDeal()
+    public function getInventory()
     {
-        return $this->deal;
+        return $this->inventory;
     }
 }

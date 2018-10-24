@@ -1,0 +1,9 @@
+{% if object.status == 'offer_accepted' %}
+    {% if object.inventory is not null %}
+        <a href="{{ path('admin_wbc_inventory_inventory_show', {id: object.inventory.id}) }}"
+           class="btn btn-sm btn-info view_link"
+           title="Show Inventory">
+            Show Inventory
+        </a>
+    {% endif %}
+{% endif %}

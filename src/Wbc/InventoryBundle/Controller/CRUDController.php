@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration as CF;
 use Sonata\AdminBundle\Controller\CRUDController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Wbc\BranchBundle\Entity\Deal;
 use Wbc\InventoryBundle\Entity\Inventory;
 use Wbc\InventoryBundle\Entity\UsedCar;
 

@@ -25,12 +25,11 @@ sonata_admin:
                 roles: [ROLE_INSPECTION_READER, ROLE_INSPECTION_EDITOR, ROLE_INSPECTION_ADMIN]
                 on_top: true
                 icon:   '<i class="fa fa-check-circle-o"></i>'
-            Deals:
-                label: Deals
-                items: [admin.branch.deal]
-                roles: [ROLE_DEAL_READER, ROLE_DEAL_EDITOR, ROLE_DEAL_ADMIN]
-                on_top: true
-                icon:   '<i class="fa fa-list-ul"></i>'
+            Inventory:
+                label: Inventory
+                items: [admin.inventory, admin.inventory.dealers, admin.inventory.used_cars]
+                roles: [ROLE_INVENTORY_EDITOR]
+                icon:   '<i class="fa fa-car"></i>'
             Valuations:
                 label: Valuations
                 items: [admin.valuation]
@@ -54,11 +53,6 @@ sonata_admin:
                 roles: [ROLE_SUPER_ADMIN]
                 on_top: true
                 icon:   '<i class="fa fa-user-circle-o"></i>'
-            Inventory:
-                label: Inventory
-                items: [admin.inventory, admin.inventory.dealers, admin.inventory.used_cars]
-                roles: [ROLE_INVENTORY_EDITOR]
-                icon:   '<i class="fa fa-car"></i>'
             Blog:
                 label: Blog
                 items: [admin.blog.post, admin.blog.category]
@@ -219,12 +213,6 @@ services:
         arguments: [~, Wbc\BranchBundle\Entity\Inspection, WbcBranchBundle:CRUD]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Inspection, group: "Inspections" }
-
-    admin.branch.deal:
-        class: Wbc\BranchBundle\Admin\DealAdmin
-        arguments: [~, Wbc\BranchBundle\Entity\Deal, WbcBranchBundle:CRUD]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: Deal, group: "Deals" }
 
     admin.vehicle.make:
         class: Wbc\VehicleBundle\Admin\MakeAdmin

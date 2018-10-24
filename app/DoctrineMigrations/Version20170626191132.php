@@ -6,7 +6,6 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\Deal;
 use Wbc\BranchBundle\Entity\Inspection;
 

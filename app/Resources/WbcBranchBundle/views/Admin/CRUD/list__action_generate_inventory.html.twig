@@ -1,7 +1,0 @@
-{% if object.inventory is null %}
-    <a href="{{ path('admin_wbc_branch_deal_generateInventoryFromDeal', {id: object.id}) }}"
-       class="btn btn-sm btn-info view_link"
-       title="Push to Inventory">
-        Push to Inventory
-    </a>
-{% endif %}

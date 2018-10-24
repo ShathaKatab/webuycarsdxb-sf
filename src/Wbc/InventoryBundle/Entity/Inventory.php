@@ -9,6 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Wbc\BranchBundle\Entity\Deal;
+use Wbc\BranchBundle\Entity\Inspection;
 use Wbc\UserBundle\Entity\User;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
@@ -26,9 +27,9 @@ use Wbc\VehicleBundle\Entity\ModelType;
  */
 class Inventory
 {
-    const STATUS_NEW = 'new';
-    const STATUS_SOLD = 'sold';
     const STATUS_IN_STOCK = 'in-stock';
+    const STATUS_SOLD = 'sold';
+    const STATUS_IN_GARAGE = 'in-garage';
 
     /**
      * @var int
@@ -219,6 +220,14 @@ class Inventory
     protected $deal;
 
     /**
+     * @var Inspection
+     *
+     * @ORM\OneToOne(targetEntity="Wbc\BranchBundle\Entity\Inspection", inversedBy="inventory")
+     * @ORM\JoinColumn(name="inspection_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    protected $inspection;
+
+    /**
      * @var UsedCar
      *
      * @ORM\OneToOne(targetEntity="Wbc\InventoryBundle\Entity\UsedCar", mappedBy="inventory")
@@ -245,13 +254,18 @@ class Inventory
     protected $status;
 
     /**
+     * @var string
+     */
+    protected $transitionName;
+
+    /**
      * Inventory constructor.
      *
      * @param Deal $deal
      */
     public function __construct(Deal $deal = null)
     {
-        $this->status = self::STATUS_NEW;
+        $this->status = self::STATUS_IN_STOCK;
         $this->setDeal($deal);
     }
 
@@ -565,21 +579,7 @@ class Inventory
         $this->deal = $deal;
 
         if ($deal) {
-            $this->pricePurchased = $deal->getPricePurchased();
-            $appointment = $deal->getAppointment();
-            $inspection = $deal->getInspection();
-
-            if ($inspection) {
-                $this->model = $inspection->getVehicleModel();
-                $this->modelType = $inspection->getVehicleModelType();
-                $this->year = $inspection->getVehicleYear();
-                $this->transmission = $inspection->getVehicleTransmission();
-                $this->mileage = $inspection->getVehicleMileage();
-                $this->specifications = $inspection->getVehicleSpecifications();
-                $this->bodyCondition = $inspection->getVehicleBodyCondition();
-                $this->options = $appointment->getVehicleOption();
-                $this->color = $inspection->getVehicleColor();
-            }
+            $this->setPricePurchased($deal->getPricePurchased());
         }
 
         return $this;
@@ -628,7 +628,11 @@ class Inventory
      */
     public function setPricePurchased($pricePurchased)
     {
-        $this->pricePurchased = $pricePurchased;
+        if (!$this->pricePurchased && $pricePurchased) {
+            $this->pricePurchased = $pricePurchased;
+        } else {
+            $this->pricePurchased = 0; //hack for cannot be null error
+        }
 
         return $this;
     }
@@ -859,9 +863,68 @@ class Inventory
     public static function getStatuses()
     {
         return [
-            self::STATUS_NEW => 'New',
             self::STATUS_IN_STOCK => 'In Stock',
+            self::STATUS_IN_GARAGE => 'In Garage',
             self::STATUS_SOLD => 'Sold',
         ];
+    }
+
+    /**
+     * Set inspection.
+     *
+     * @param Inspection $inspection
+     *
+     * @return Inventory
+     */
+    public function setInspection(Inspection $inspection = null)
+    {
+        $this->inspection = $inspection;
+
+        if ($inspection) {
+            $appointment = $inspection->getAppointment();
+
+            $this->setPricePurchased($inspection->getPriceOffered());
+            $this->model = $inspection->getVehicleModel();
+            $this->modelType = $inspection->getVehicleModelType();
+            $this->year = $inspection->getVehicleYear();
+            $this->transmission = $inspection->getVehicleTransmission();
+            $this->mileage = $inspection->getVehicleMileage();
+            $this->specifications = $inspection->getVehicleSpecifications();
+            $this->bodyCondition = $inspection->getVehicleBodyCondition();
+            $this->options = $appointment ? $appointment->getVehicleOption() : null;
+            $this->color = $inspection->getVehicleColor();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get inspection.
+     *
+     * @return \Wbc\BranchBundle\Entity\Inspection
+     */
+    public function getInspection()
+    {
+        return $this->inspection;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTransitionName(): ?string
+    {
+        return $this->transitionName;
+    }
+
+    /**
+     * @param string $transitionName
+     *
+     * @return self
+     */
+    public function setTransitionName(string $transitionName): self
+    {
+        $this->transitionName = $transitionName;
+
+        return $this;
     }
 }

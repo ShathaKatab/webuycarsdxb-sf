@@ -19,7 +19,7 @@ class ClassifiedsAd
     const SOURCE_DUBIZZLE = 'dubizzle.com';
     const SOURCE_GETTHAT = 'getthat.com';
     const SOURCE_MANHEIM = 'manheim.com';
-    const SOURCE_DEALS = 'deals';
+    const SOURCE_INVENTORY = 'inventory';
     const MILEAGE_KM = 'km';
     const MILEAGE_MILES = 'miles';
     const CURRENCY_AED = 'AED';
@@ -65,7 +65,7 @@ class ClassifiedsAd
     /**
      * @var ClassifiedsModel
      *
-     * @ORM\ManyToOne(targetEntity="\Wbc\CrawlerBundle\Entity\ClassifiedsModel", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="\Wbc\CrawlerBundle\Entity\ClassifiedsModel", fetch="EAGER", inversedBy="classifiedAds")
      * @ORM\JoinColumn(name="classifieds_model_id", referencedColumnName="id", nullable=true)
      */
     protected $classifiedsModel;
