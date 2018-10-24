@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Wbc\BranchBundle\EventSubscriber;
+namespace Wbc\BranchBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
