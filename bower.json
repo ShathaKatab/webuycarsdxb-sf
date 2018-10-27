@@ -24,12 +24,15 @@
     "font-awesome": "^4.7.0",
     "bootstrap-sass": "^3.3.7",
     "angular-resource": "^1.6.4",
+    "angular-cookies": "^1.6.4",
     "angular-toArrayFilter": "^1.0.1",
     "angular-block-ui": "^0.2.2",
     "angular-google-maps": "^2.4.1",
     "underscore": "^1.8.3",
     "ngmap": "^1.18.4",
     "angular-bootstrap": "^2.5.0",
-    "angular-slugify": "^1.0.1"
+    "angular-slugify": "^1.0.1",
+    "angular-daterangepicker": "^0.2.2",
+    "angular-chart.js": "^1.1.1"
   }
 }

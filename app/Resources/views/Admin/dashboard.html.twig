@@ -1,0 +1,107 @@
+{% extends 'SonataAdminBundle:Core:dashboard.html.twig' %}
+
+{% block title %}{{ 'title_dashboard'|trans({}, 'SonataAdminBundle') }}{% endblock %}
+{% block breadcrumb %}{% endblock %}
+{% block content %}
+    <div ng-app="webuycarsAdminApp" ng-cloak ng-controller="StatsController as ctrl">
+        <div class="row">
+            <div class="col-md-3 pull-left">
+                <form name="chartUnitForm">
+                    <select ng-change="ctrl.chartUnitChanged()" name="chartUnit" ng-model="ctrl.chartUnitSelected"
+                            ng-options="unit.name for unit in ctrl.chartUnits track by unit.id">
+                    </select>
+                </form>
+            </div>
+            <div class="col-md-6 pull-right" style="margin-bottom: 20px">
+                <div id="daterange" class="selectbox pull-right date-picker"
+                     date-range-picker
+                     ng-model="ctrl.datePicker.date"
+                     options="ctrl.datePickerOptions">
+                    <i class="fa fa-calendar"></i>
+                    <span ng-bind="ctrl.datePicker.label"></span> <b class="caret"></b>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-4 col-md-offset-4">
+                <hr>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <stat-item ng-show="ctrl.showCharts"
+                           chart-options="ctrl.chartOptions"
+                           the-stat-item="ctrl.valuations"
+                           title="Valuations"
+                           no-data-text="No Valuations Data"></stat-item>
+            </div>
+            <div class="col-md-6">
+                <stat-item ng-show="ctrl.showCharts"
+                           chart-options="ctrl.chartOptions"
+                           the-stat-item="ctrl.valuationsWithoutPrice"
+                           title="Valuations without Price"
+                           no-data-text="No Valuations without Price Data"></stat-item>
+            </div>
+            <div class="col-md-6">
+                <stat-item ng-show="ctrl.showCharts"
+                           chart-options="ctrl.chartOptions"
+                           the-stat-item="ctrl.appointments"
+                           title="Appointments"
+                           no-data-text="No Appointments Data"></stat-item>
+            </div>
+
+            <div class="col-md-6">
+                <stat-item ng-show="ctrl.showCharts"
+                           chart-options="ctrl.chartOptions"
+                           the-stat-item="ctrl.appointmentsNoShow"
+                           title="Appointments No Show"
+                           no-data-text="No Appointments No Show Data"></stat-item>
+            </div>
+
+            <div class="col-md-6">
+                <stat-item ng-show="ctrl.showCharts"
+                           chart-options="ctrl.chartOptions"
+                           the-stat-item="ctrl.inspections"
+                           title="Inspections"
+                           no-data-text="No Inspections Data"></stat-item>
+            </div>
+
+            <div class="col-md-6">
+                <stat-item ng-show="ctrl.showCharts"
+                           chart-options="ctrl.chartOptions"
+                           the-stat-item="ctrl.deals"
+                           title="Deals"
+                           no-data-text="No Deals Data"></stat-item>
+            </div>
+        </div>
+    </div>
+    <div id='loading-container' style="display: none">
+        <div class='loading-content'>
+            <div class='loading-image'></div>
+            <p class='loading-message color-white'>Loading&hellip;</p>
+        </div>
+    </div>
+{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-daterangepicker/daterangepicker.css') }}"/>
+            {{ parent() }}
+        {% endblock %}
+   {% block javascripts %}
+       {{ parent() }}
+       {% javascripts filter='?jsqueeze' output='admin/js/app.js'
+           'assets/vendor/moment/min/moment-with-locales.min.js'
+           'assets/vendor/angular/angular.js'
+           'assets/vendor/angular-resource/angular-resource.min.js'
+           'assets/vendor/angular-cookies/angular-cookies.min.js'
+           'assets/vendor/angular-toArrayFilter/toArrayFilter.js'
+           'assets/vendor/chart.js/dist/Chart.min.js'
+           'assets/vendor/angular-chart.js/dist/angular-chart.min.js'
+           'assets/vendor/bootstrap-daterangepicker/daterangepicker.js'
+           'assets/vendor/angular-daterangepicker/js/angular-daterangepicker.min.js'
+           'assets/admin/js/angular/app.js'
+           'assets/admin/js/angular/dashboard/stats.controller.js'
+           'assets/admin/js/angular/dashboard/stat-item.component.js'
+       %}
+           <script src="{{ asset_url }}"></script>
+       {% endjavascripts %}
+   {% endblock %}

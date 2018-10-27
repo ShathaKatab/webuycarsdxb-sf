@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -202,7 +204,7 @@ class User extends BaseUser
      *
      * @param mixed $serialized
      */
-    public function unserialize($serialized)
+    public function unserialize($serialized): void
     {
         $data = unserialize($serialized);
         $data = array_merge($data, array_fill(0, 2, null));
@@ -233,7 +235,7 @@ class User extends BaseUser
         return $fullName;
     }
 
-    public function setFullName($fullName)
+    public function setFullName($fullName): void
     {
         $this->fullName = $fullName;
     }
@@ -249,11 +251,11 @@ class User extends BaseUser
     /**
      * @param bool $isAdmin
      */
-    public function setAdmin($isAdmin)
+    public function setAdmin($isAdmin): void
     {
         $this->admin = $isAdmin;
 
-        if ((bool) $isAdmin === true) {
+        if (true === (bool) $isAdmin) {
             $this->addRole('ROLE_SUPER_ADMIN');
         } else {
             $this->removeRole('ROLE_SUPER_ADMIN');
@@ -273,7 +275,8 @@ class User extends BaseUser
             'ROLE_CALL_CENTER',
             'ROLE_SUPER_ADMIN',
             'ROLE_CAREERS_EDITOR',
-            'ROLE_USED_CARS_EDITOR'
+            'ROLE_USED_CARS_EDITOR',
+            'ROLE_MARKETING',
         ];
     }
 }

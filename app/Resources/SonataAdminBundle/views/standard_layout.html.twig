@@ -35,6 +35,10 @@ file that was distributed with this source code.
         {% for stylesheet in sonata_admin.adminPool.getOption('stylesheets', []) %}
             <link rel="stylesheet" href="{{ asset(stylesheet) }}">
         {% endfor %}
+        {% stylesheets filter='scssphp' output='admin/css/app.css'
+            'assets/admin/scss/app.scss' %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
     {% endblock %}
 
     {% block javascripts %}
@@ -253,6 +257,13 @@ file that was distributed with this source code.
 
                         {% block side_bar_before_nav %} {% endblock %}
                         {% block side_bar_nav %}
+                            <ul class="sidebar-menu">
+                                <li class="{% if (app.request.pathinfo == path('sonata_admin_dashboard')) %} active {% endif %}">
+                                    <a href="{{ path('sonata_admin_dashboard') }}">
+                                        <i class="fa fa-dashboard"></i>Dashboard
+                                    </a>
+                                </li>
+                            </ul>
                             {{ knp_menu_render('sonata_admin_sidebar', {template: sonata_admin.adminPool.getTemplate('knp_menu_template')}) }}
 
                             {% if is_granted('ROLE_SUPER_ADMIN') %}

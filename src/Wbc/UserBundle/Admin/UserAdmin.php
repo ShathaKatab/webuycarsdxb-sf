@@ -69,7 +69,7 @@ class UserAdmin extends AbstractAdmin
             ->add('email', EmailType::class, ['label' => 'Email Address'])
             ->add('profile.firstName', TextType::class, ['label' => 'First Name'])
             ->add('profile.lastName', null, ['label' => 'Last Name'])
-            ->add('profile.mobileNumber', MobileNumberType::class, [
+            ->add('profile.mobileNumber', null, [
                 'help' => 'e.g. 0551234567',
                 'label' => 'Mobile',
                 'attr' => ['autocomplete' => 'off'],

@@ -5,6 +5,8 @@ sonata_block:
         sonata.admin.block.admin_list:
             contexts:   [admin]
 sonata_admin:
+    templates:
+        dashboard: ::Admin/dashboard.html.twig
     dashboard:
         groups:
             Appointments:

@@ -21,10 +21,6 @@ header h1, header .h1, article h1, article .h1{
   background-color: $aqua-marine-color;
 }
 
-.bg-grey {
-  background-color: $grey-color;
-}
-
 .bg-dark-color {
   background-color: $dark-color;
 }
@@ -47,32 +43,29 @@ header h1, header .h1, article h1, article .h1{
   overflow: hidden;
   position: fixed;
   outline: 0;
-}
 
-#loading-container .loading-content {
-  height: 135px;
-  width: 150px;
-  margin: auto auto;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, .75);
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-}
+  .loading-content {
+    height: 135px;
+    width: 150px;
+    margin: auto auto;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .75);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
 
-#loading-container .loading-content .loading-image {
-  width: 64px;
-  height: 64px;
-  margin: 15% auto 15px auto;
-  background: url(../../images/loading.svg) no-repeat;
-}
-
-#loading-container .loading-content .loading-message {
-  text-transform: capitalize;
+    .loading-image {
+      width: 64px;
+      height: 64px;
+      margin: 15% auto 15px auto;
+      background: url(../../images/loading.svg) no-repeat;
+      text-transform: capitalize;
+    }
+  }
 }
 
 .ellipsis {
@@ -83,7 +76,6 @@ header h1, header .h1, article h1, article .h1{
   display: block;
   white-space: nowrap;
 }
-
 
 .text-left p{
   text-align: left;

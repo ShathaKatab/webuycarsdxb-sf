@@ -1,3 +1,8 @@
 wbc_static_homepage:
     type: annotation
     resource: "@WbcStaticBundle/Controller/DefaultController.php"
+
+wbc_static_admin_dashboard:
+    type: annotation
+    prefix: admin
+    resource: "@WbcStaticBundle/Controller/DashboardAdminController.php"
