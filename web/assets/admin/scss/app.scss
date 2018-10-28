@@ -66,5 +66,8 @@ hr {
 .canvas-container{
   &.box-body{
     min-height: 296px;
+    canvas{
+      max-height: 276px;
+    }
   }
 }

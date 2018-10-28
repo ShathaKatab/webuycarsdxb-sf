@@ -22,6 +22,26 @@ class StatItem
     /**
      * @var int
      */
+    public $week;
+
+    /**
+     * @var int
+     */
+    public $month;
+
+    /**
+     * @var int
+     */
+    public $quarter;
+
+    /**
+     * @var int
+     */
+    public $year;
+
+    /**
+     * @var int
+     */
     public $total;
 
     /**

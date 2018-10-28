@@ -45,18 +45,22 @@ class DashboardManager
         $this->connection->getConfiguration()->setResultCacheImpl($memcachedCache);
     }
 
-    public function getValuations(\DateTime $dateFrom, \DateTime $dateTo, $hasPrice = null): Stat
+    public function getValuations(\DateTime $dateFrom, \DateTime $dateTo, $grouping, $hasPrice = null): Stat
     {
         $stat = new Stat($dateFrom, $dateTo);
 
         $statItems = [];
 
-        $sql = 'SELECT created_at, YEAR(created_at) AS year, MONTH(created_at) AS month, DAY(created_at) AS day, COUNT(1) AS total
+        $sql = 'SELECT created_at, YEAR(created_at) AS year, 
+                        MONTH(created_at) AS month, 
+                        QUARTER(created_at) AS quarter, 
+                        WEEK(created_at) AS week, 
+                        DAY(created_at) AS day, 
+                        COUNT(1) AS total
                 FROM valuation
                 WHERE created_at >= ? 
                 AND created_at <= ?
                 %s
-                GROUP BY YEAR(created_at), MONTH(created_at), DAY(created_at)
                 ';
         if (false === $hasPrice) {
             $sql = sprintf($sql, ' AND price_online IS NULL ');
@@ -66,17 +70,19 @@ class DashboardManager
             $sql = sprintf($sql, '');
         }
 
+        $sql = $this->getGroupBy($sql, $grouping);
+
         $valuations = $this->performCachedQuery(
             $sql,
             [$dateFrom->format('Y-m-d H:i:s'), $dateTo->format('Y-m-d H:i:s')],
             [\PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_STR],
             $dateFrom,
             $dateTo,
-            'valuation_stats'
+            sprintf('valuation_stats_%s', $grouping)
         );
 
         foreach ($valuations as $valuation) {
-            $statItems[] = new StatItem(new \DateTime($valuation['created_at']), (int) $valuation['total']);
+            $statItems[] = $this->getStatItem($valuation);
         }
 
         $stat->items = $statItems;
@@ -84,7 +90,7 @@ class DashboardManager
         return $stat;
     }
 
-    public function getAppointments(\DateTime $dateFrom, \DateTime $dateTo, $showedUp = null): Stat
+    public function getAppointments(\DateTime $dateFrom, \DateTime $dateTo, $grouping, $showedUp = null): Stat
     {
         $parameters = [$dateFrom->format('Y-m-d H:i:s'), $dateTo->format('Y-m-d H:i:s')];
         $types = [\PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_STR];
@@ -92,13 +98,16 @@ class DashboardManager
         $stat = new Stat($dateFrom, $dateTo);
 
         $statItems = [];
-
-        $sql = 'SELECT created_at, YEAR(created_at) AS year, MONTH(created_at) AS month, DAY(created_at) AS day, COUNT(1) AS total
+        $sql = 'SELECT created_at, YEAR(created_at) AS year, 
+                        MONTH(created_at) AS month, 
+                        QUARTER(created_at) AS quarter, 
+                        WEEK(created_at) AS week, 
+                        DAY(created_at) AS day, 
+                        COUNT(1) AS total       
                 FROM appointment
                 WHERE created_at >= ? 
                 AND created_at <= ? 
                 %s
-                GROUP BY YEAR(created_at), MONTH(created_at), DAY(created_at)
                 ';
 
         if (false === $showedUp || true === $showedUp) {
@@ -114,17 +123,19 @@ class DashboardManager
             $types[] = \PDO::PARAM_STR;
         }
 
+        $sql = $this->getGroupBy($sql, $grouping);
+
         $appointments = $this->performCachedQuery(
             $sql,
             $parameters,
             $types,
             $dateFrom,
             $dateTo,
-            'appointment_stats'
+            sprintf('appointment_stats_%s', $grouping)
         );
 
         foreach ($appointments as $appointment) {
-            $statItems[] = new StatItem(new \DateTime($appointment['created_at']), (int) $appointment['total']);
+            $statItems[] = $this->getStatItem($appointment);
         }
 
         $stat->items = $statItems;
@@ -132,18 +143,23 @@ class DashboardManager
         return $stat;
     }
 
-    public function getInspections(\DateTime $dateFrom, \DateTime $dateTo): Stat
+    public function getInspections(\DateTime $dateFrom, \DateTime $dateTo, $grouping): Stat
     {
         $stat = new Stat($dateFrom, $dateTo);
 
         $statItems = [];
-
-        $sql = 'SELECT created_at, YEAR(created_at) AS year, MONTH(created_at) AS month, DAY(created_at) AS day, COUNT(1) AS total
+        $sql = 'SELECT created_at, YEAR(created_at) AS year, 
+                        MONTH(created_at) AS month, 
+                        QUARTER(created_at) AS quarter, 
+                        WEEK(created_at) AS week, 
+                        DAY(created_at) AS day, 
+                        COUNT(1) AS total                
                 FROM inspection
                 WHERE created_at >= ? 
                 AND created_at <= ? 
-                GROUP BY YEAR(created_at), MONTH(created_at), DAY(created_at)
                 ';
+
+        $sql = $this->getGroupBy($sql, $grouping);
 
         $inspections = $this->performCachedQuery(
             $sql,
@@ -151,11 +167,11 @@ class DashboardManager
             [\PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_STR],
             $dateFrom,
             $dateTo,
-            'inspection_stats'
+            sprintf('inspection_stats_%s', $grouping)
         );
 
         foreach ($inspections as $inspection) {
-            $statItems[] = new StatItem(new \DateTime($inspection['created_at']), (int) $inspection['total']);
+            $statItems[] = $this->getStatItem($inspection);
         }
 
         $stat->items = $statItems;
@@ -163,18 +179,23 @@ class DashboardManager
         return $stat;
     }
 
-    public function getDeals(\DateTime $dateFrom, \DateTime $dateTo): Stat
+    public function getDeals(\DateTime $dateFrom, \DateTime $dateTo, $grouping): Stat
     {
         $stat = new Stat($dateFrom, $dateTo);
 
         $statItems = [];
-
-        $sql = 'SELECT created_at, YEAR(created_at) AS year, MONTH(created_at) AS month, DAY(created_at) AS day, COUNT(1) AS total
+        $sql = 'SELECT created_at, YEAR(created_at) AS year, 
+                        MONTH(created_at) AS month, 
+                        QUARTER(created_at) AS quarter, 
+                        WEEK(created_at) AS week, 
+                        DAY(created_at) AS day, 
+                        COUNT(1) AS total
                 FROM deal
                 WHERE created_at >= ? 
                 AND created_at <= ? 
-                GROUP BY YEAR(created_at), MONTH(created_at), DAY(created_at)
                 ';
+
+        $sql = $this->getGroupBy($sql, $grouping);
 
         $deals = $this->performCachedQuery(
             $sql,
@@ -182,11 +203,11 @@ class DashboardManager
             [\PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_STR, \PDO::PARAM_STR],
             $dateFrom,
             $dateTo,
-            'deal_stats'
+            sprintf('deal_stats_%s', $grouping)
         );
 
         foreach ($deals as $deal) {
-            $statItems[] = new StatItem(new \DateTime($deal['created_at']), (int) $deal['total']);
+            $statItems[] = $this->getStatItem($deal);
         }
 
         $stat->items = $statItems;
@@ -216,5 +237,39 @@ class DashboardManager
         $statement->closeCursor();
 
         return $data;
+    }
+
+    private function getGroupBy($sql, $grouping): string
+    {
+        $group = 'GROUP BY YEAR(created_at), MONTH(created_at), DAY(created_at)';
+
+        switch ($grouping) {
+            case 'week':
+                $group = 'GROUP BY YEAR(created_at), MONTH(created_at), WEEK(created_at)';
+                break;
+            case 'month':
+                $group = 'GROUP BY YEAR(created_at), MONTH(created_at)';
+                break;
+            case 'quarter':
+                $group = 'GROUP BY YEAR(created_at), QUARTER(created_at)';
+                break;
+            case 'year':
+                $group = 'GROUP BY YEAR(created_at)';
+                break;
+        }
+
+        return sprintf('%s %s', $sql, $group);
+    }
+
+    private function getStatItem(array $result): StatItem
+    {
+        $statItem = new StatItem(new \DateTime($result['created_at']), (int)$result['total']);
+        $statItem->day = $result['day'];
+        $statItem->year = $result['year'];
+        $statItem->month = $result['month'];
+        $statItem->quarter = $result['quarter'];
+        $statItem->week = $result['week'];
+
+        return $statItem;
     }
 }

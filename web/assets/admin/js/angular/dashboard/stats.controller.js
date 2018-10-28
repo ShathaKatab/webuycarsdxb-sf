@@ -72,7 +72,9 @@ angular
                         type: 'time',
                         distribution: 'linear',
                         time: {
-                            unit: vm.chartUnitSelected ? vm.chartUnitSelected.id : 'day'
+                            unit: vm.chartUnitSelected ? vm.chartUnitSelected.id : 'day',
+                            min: moment(vm.datePicker.date.startDate),
+                            max: moment(vm.datePicker.date.endDate)
                         }
                     }]
                 }
@@ -85,7 +87,7 @@ angular
 
                     $http({
                         method: 'GET',
-                        url: '/admin/dashboard/stats/' + vm.datePicker.date.startDate.format('YYYY-MM-DD') + '/' + vm.datePicker.date.endDate.format('YYYY-MM-DD')
+                        url: '/admin/dashboard/stats/' + vm.datePicker.date.startDate.format('YYYY-MM-DD') + '/' + vm.datePicker.date.endDate.format('YYYY-MM-DD') + '/' + vm.chartUnitSelected.id
                     }).then(function successCallback(response) {
                         vm.valuations = JSON.parse(response.data.valuations);
                         vm.valuationsWithoutPrice = JSON.parse(response.data.valuationsWithoutPrice);
@@ -137,8 +139,8 @@ angular
 
             vm.chartUnitChanged = function () {
                 if (vm.chartUnitSelected){
-                    vm.chartOptions.scales.xAxes[0].time.unit = vm.chartUnitSelected.id;
                     $cookies.put('chartUnit', JSON.stringify(vm.chartUnitSelected));
+                    $window.location.reload();
                 }
             };
 

@@ -17,8 +17,27 @@ angular
 
                     if (angular.isArray(theStatItem.items)) {
                         theStatItem.items.forEach(function (element) {
-                            vm.chartLabels.push(element['created_at']);
-                            vm.chartData[0].push({t: moment(element['created_at']), y: element['total']});
+                            var xAxis = null;
+
+                            switch (vm.chartUnit.id){
+                                case 'year':
+                                    xAxis = moment(element['year'], 'YYYY').endOf('year');
+                                    break;
+                                case 'month':
+                                    xAxis = moment(element['year'] + '-' + element['month'], 'YYYY-M').endOf('month');
+                                    break;
+                                case 'quarter':
+                                    xAxis = moment(element['year'] + '-' + element['quarter'], 'YYYY-Q').endOf('quarter');
+                                    break;
+                                case 'week':
+                                    xAxis = moment(element['year'] + '-' + element['week'], 'YYYY-w').endOf('week');
+                                    break;
+                                default:
+                                    xAxis = moment(element['created_at'], 'YYYY-M-D');
+                            }
+
+                            vm.chartLabels.push(xAxis);
+                            vm.chartData[0].push({x: xAxis, y: element['total']});
                         });
                     }
                 }
@@ -29,6 +48,7 @@ angular
             title: '@',
             noDataText: '@',
             theStatItem: '<',
-            chartOptions: '='
+            chartOptions: '=',
+            chartUnit: '='
         }
     });
