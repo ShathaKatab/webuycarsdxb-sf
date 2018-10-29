@@ -359,8 +359,10 @@ class ValuationManager
         $connection = $this->entityManager->getConnection();
         $statement = $connection->prepare('
                 SELECT vehicle_make_id, vehicle_model_id, vehicle_year, vehicle_color, vehicle_body_condition, discount
-                FROM valuation_configuration
+                FROM valuation_configuration 
+                WHERE active = :isActive
                 ');
+        $statement->bindValue(':isActive', true, \PDO::PARAM_BOOL);
         $statement->execute();
 
         $configs = $statement->fetchAll();
