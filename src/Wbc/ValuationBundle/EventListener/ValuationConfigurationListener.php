@@ -16,7 +16,7 @@ use Wbc\ValuationBundle\Entity\ValuationConfiguration;
  * Class ValuationConfigurationListener.
  *
  * @DI\DoctrineListener(
- *     events = {"prePersist", "postPersist", "postUpdate"},
+ *     events = {"prePersist", "postPersist"},
  *     connection = "default",
  *     lazy = true,
  *     priority = 0,
