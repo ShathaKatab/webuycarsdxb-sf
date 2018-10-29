@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\ValuationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Wbc\UserBundle\Entity\User;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
 
@@ -71,6 +74,21 @@ class ValuationConfiguration
     protected $discount;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="active", type="boolean", options={"default": false})
+     */
+    protected $active;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="\Wbc\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id", nullable=true)
+     */
+    protected $createdBy;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -85,6 +103,14 @@ class ValuationConfiguration
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
+
+    /**
+     * ValuationConfiguration constructor.
+     */
+    public function __construct()
+    {
+        $this->active = false;
+    }
 
     /**
      * Get id.
@@ -286,5 +312,63 @@ class ValuationConfiguration
     public function getVehicleBodyCondition()
     {
         return $this->vehicleBodyCondition;
+    }
+
+    /**
+     * Set active.
+     *
+     * @param bool $active
+     *
+     * @return ValuationConfiguration
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active.
+     *
+     * @return bool
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * isActive.
+     *
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * Set createdBy.
+     *
+     * @param User $createdBy
+     *
+     * @return ValuationConfiguration
+     */
+    public function setCreatedBy(User $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy.
+     *
+     * @return User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 }

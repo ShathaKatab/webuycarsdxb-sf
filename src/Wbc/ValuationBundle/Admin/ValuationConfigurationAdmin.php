@@ -46,6 +46,7 @@ class ValuationConfigurationAdmin extends AbstractAdmin
         /** @var $subject \Wbc\BranchBundle\Entity\Appointment */
         $subject = $this->getSubject();
         $request = $this->getRequest();
+        $authorizationChecker = $this->getConfigurationPool()->getContainer()->get('security.authorization_checker');
 
         $form->add('vehicleYear', WbcVehicleType\ModelYearType::class, [
             'choice_label' => function ($value, $key, $index) {
@@ -67,16 +68,20 @@ class ValuationConfigurationAdmin extends AbstractAdmin
                 }]);
             }
         }
+        $form->add('active', null, ['disabled' => !$authorizationChecker->isGranted('ROLE_VALUATION_CONFIGURATION_ACTIVATOR')]);
     }
 
     protected function configureListFields(ListMapper $list)
     {
+        $authorizationChecker = $this->getConfigurationPool()->getContainer()->get('security.authorization_checker');
+
         $list->add('vehicleYear')
             ->add('vehicleMake', null, array('sortable' => true, 'sort_field_mapping' => array('fieldName' => 'name'), 'sort_parent_association_mappings' => array(array('fieldName' => 'vehicleMake'))))
             ->add('vehicleModel', null, array('sortable' => true, 'sort_field_mapping' => array('fieldName' => 'name'), 'sort_parent_association_mappings' => array(array('fieldName' => 'vehicleModel'))))
             ->add('vehicleColor')
             ->add('vehicleBodyCondition')
             ->add('discount', NumberType::class, ['label' => 'Discount (%)'])
+            ->add('active', 'boolean', ['editable' => $authorizationChecker->isGranted('ROLE_VALUATION_CONFIGURATION_ACTIVATOR')])
             ->add('_action', 'actions', ['actions' => ['show' => [], 'edit' => [], 'delete' => []]]);
     }
 
@@ -87,6 +92,7 @@ class ValuationConfigurationAdmin extends AbstractAdmin
             ->add('vehicleModel')
             ->add('vehicleColor')
             ->add('vehicleBodyCondition')
-            ->add('discount', NumberType::class, ['label' => 'Discount (%)']);
+            ->add('discount', NumberType::class, ['label' => 'Discount (%)'])
+            ->add('active', 'boolean');
     }
 }

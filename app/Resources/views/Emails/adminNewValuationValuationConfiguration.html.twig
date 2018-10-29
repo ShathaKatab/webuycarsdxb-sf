@@ -1,0 +1,9 @@
+<p>Hello Super Admins,</p>
+
+<p>A new Valuation Configuration has been created by: {{ valuationConfiguration.createdBy.profile.firstName ~ ' ' ~ valuationConfiguration.createdBy.profile.lastName }}</p>
+
+<p>To activate it, click the link below:</p>
+{{ app.request.getSchemeAndHttpHost() ~ path('admin_wbc_valuation_valuationconfiguration_edit', {id: valuationConfiguration.id}) }}
+<br>
+<p>Regards,</p>
+<h3>{{ site_title }}</h3>
