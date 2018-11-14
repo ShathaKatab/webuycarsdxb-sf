@@ -33,6 +33,7 @@ class CRUDController extends Controller
 
         $usedCar = new UsedCar($inventory);
         $usedCar->setCreatedBy($this->getUser());
+        $usedCar->setPrice(0);
 
         $entityManager->persist($usedCar);
         $entityManager->flush();

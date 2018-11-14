@@ -64,7 +64,7 @@ class InspectionAdmin extends AbstractAdmin
      */
     public function getExportFields()
     {
-        return ['id', 'appointment.name', 'appointment.emailAddress', 'appointment.mobileNumber', 'vehicleMake', 'vehicleModel', 'vehicleYear', 'priceOnline', 'appointment.dateBooked', 'appointment.branchTiming', 'createdAt', 'createdBy'];
+        return ['id', 'appointment.name', 'appointment.emailAddress', 'appointment.mobileNumber', 'vehicleMake', 'vehicleModel', 'vehicleYear', 'appointment.dateBooked', 'appointment.branchTiming', 'source', 'status', 'priceOnline', 'priceOffered', 'priceExpected', 'createdAt', 'createdBy'];
     }
 
     /**
