@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wbc\InventoryBundle\Entity\Inventory;
 use Wbc\InventoryBundle\Entity\UsedCar;
+use Application\Sonata\MediaBundle\Entity\Gallery;
 
 /**
  * Class CRUDController.
@@ -34,6 +35,12 @@ class CRUDController extends Controller
         $usedCar = new UsedCar($inventory);
         $usedCar->setCreatedBy($this->getUser());
         $usedCar->setPrice(0);
+        $usedCar->setActive(false);
+        $gallery = new Gallery();
+        $gallery->setName(sprintf('used-car-inventory-%d', $inventory->getId()));
+        $gallery->setEnabled(true);
+        $gallery->setContext('default');
+        $usedCar->setGallery($gallery);
 
         $entityManager->persist($usedCar);
         $entityManager->flush();

@@ -622,13 +622,13 @@ class Inventory
     /**
      * Set pricePurchased.
      *
-     * @param string $pricePurchased
+     * @param float $pricePurchased
      *
      * @return Inventory
      */
     public function setPricePurchased($pricePurchased)
     {
-        if (!$this->pricePurchased && $pricePurchased) {
+        if (!(int) $this->pricePurchased && $pricePurchased) {
             $this->pricePurchased = $pricePurchased;
         } else {
             $this->pricePurchased = 0; //hack for cannot be null error
@@ -640,11 +640,11 @@ class Inventory
     /**
      * Get pricePurchased.
      *
-     * @return string
+     * @return float
      */
     public function getPricePurchased()
     {
-        return $this->pricePurchased;
+        return (float) $this->pricePurchased;
     }
 
     /**

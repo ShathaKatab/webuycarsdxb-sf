@@ -168,12 +168,12 @@ class UsedCarAdmin extends AbstractAdmin
             ->add('price', null, ['label' => 'Price (AED)'])
             ->add('hasImages', 'boolean')
             ->add('active', 'boolean', ['editable' => true])
-            ->add('inventory.deal')
             ->add('_action', 'actions', [
                 'actions' => [
                     'show' => [],
                     'edit' => [],
                     'delete' => [],
+                    'showInventory' => ['template' => 'WbcInventoryBundle:Admin/CRUD:list__action_show_used_car_inventory.html.twig'],
                 ], ])
         ;
     }
