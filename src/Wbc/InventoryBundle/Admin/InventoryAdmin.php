@@ -207,6 +207,7 @@ class InventoryAdmin extends AbstractAdmin
             ->add('status', 'choice', ['choices' => Inventory::getStatuses()])
             ->add('pricePurchased', MoneyType::class, ['currency' => 'AED'])
             ->add('priceSold', MoneyType::class, ['currency' => 'AED'])
+            ->add('profit', MoneyType::class, ['currency'=> 'AED', 'label' => 'GP'])
             ->add('soldAt')
             ->add('soldToDealer', null, ['label' => 'Sold To'])
             ->add('_action', 'actions', [

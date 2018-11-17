@@ -927,4 +927,9 @@ class Inventory
 
         return $this;
     }
+
+    public function getProfit()
+    {
+        return $this->status === self::STATUS_SOLD ? (float) $this->priceSold - $this->pricePurchased : 0;
+    }
 }

@@ -434,7 +434,7 @@ class UsedCar
 
         $galleryHasMedias = $this->gallery->getGalleryHasMedias();
 
-        if (!$galleryHasMedias) {
+        if (!count($galleryHasMedias)) {
             return;
         }
 

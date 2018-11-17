@@ -19,8 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Dealer
 {
-    const TYPE_INDIVIDUAL = 'individual';
-    const TYPE_COMPANY = 'company';
+    const TYPE_RETAIL = 'retail';
+    const TYPE_DEALER = 'dealer';
 
     /**
      * @var int
@@ -113,7 +113,7 @@ class Dealer
      *
      * @ORM\Column(name="type", type="string", length=15, nullable=false)
      *
-     * @Assert\Choice(choices={"individual", "company"})
+     * @Assert\Choice(choices={"dealer", "retail"})
      */
     protected $type;
 
@@ -512,6 +512,6 @@ class Dealer
 
     public static function getTypes()
     {
-        return [self::TYPE_COMPANY => 'Company', self::TYPE_INDIVIDUAL => 'Individual'];
+        return [self::TYPE_DEALER => 'Dealer', self::TYPE_RETAIL => 'Retail'];
     }
 }
