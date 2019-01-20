@@ -41,6 +41,8 @@
 
 .idea/
 
+.php_cs.cache
+
 /web/assets/app.js
 /web/assets/css
 /web/assets/bundles

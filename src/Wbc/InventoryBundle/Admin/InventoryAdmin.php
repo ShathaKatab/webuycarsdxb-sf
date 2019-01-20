@@ -72,6 +72,10 @@ class InventoryAdmin extends AbstractAdmin
     {
         parent::validate($errorElement, $object);
 
+        if ($this->getConfigurationPool()->getContainer()->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
+            return;
+        }
+
         $em = $this->getModelManager()->getEntityManager($this->getClass());
         $originalObject = $em->getUnitOfWork()->getOriginalEntityData($object);
         $newStatus = $object->getStatus();
