@@ -16,15 +16,16 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/doctrine-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/doctrine-cache-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/doctrine-migrations-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/event-manager" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/inflector" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/migrations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/orm" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/persistence" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/reflection" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/egeloen/ckeditor-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/egeloen/json-builder" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/enqueue/amqp-lib" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/enqueue/amqp-tools" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/erusev/parsedown" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofsymfony/rest-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofsymfony/user-bundle" />
@@ -68,7 +69,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/ocramius/proxy-manager" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/patchwork/jsqueeze" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/php-amqplib/php-amqplib" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpcollection/phpcollection" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-common" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpdocumentor/reflection-docblock" />
@@ -84,8 +84,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/phpunit-mock-objects" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/http-message" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/psr/log" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/queue-interop/amqp-interop" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/queue-interop/queue-interop" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ralouphie/getallheaders" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/comparator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/diff" />
@@ -111,14 +110,13 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/exporter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/formatter-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/media-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/sonata-project/notification-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/suncat/mobile-detect-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/assetic-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/intl" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/monolog-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/phpunit-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-apcu" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-ctype" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-icu" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php54" />
@@ -137,7 +135,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/willdurand/negotiation" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-code" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-eventmanager" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zenddiagnostics" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

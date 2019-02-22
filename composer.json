@@ -21,6 +21,7 @@
     "friendsofsymfony/rest-bundle": "^2.3",
     "friendsofsymfony/user-bundle": "~2.0.1",
     "gedmo/doctrine-extensions": "~2.4@stable",
+    "giggsey/libphonenumber-for-php": "^8.10",
     "guzzlehttp/guzzle": "^6.0",
     "incenteev/composer-parameter-handler": "~2.0",
     "jms/di-extra-bundle": "^1.7",
@@ -30,6 +31,7 @@
     "knplabs/knp-paginator-bundle": "^2.7",
     "leafo/scssphp": "^0.6.7",
     "lexik/maintenance-bundle": "^2.1",
+    "nelmio/api-doc-bundle": "2.13.3",
     "patchwork/jsqueeze": "^2.0",
     "phpunit/phpunit": "^5.7",
     "sensio/distribution-bundle": "~4.0",
@@ -42,10 +44,10 @@
     "suncat/mobile-detect-bundle": "^1.1",
     "swiftmailer/swiftmailer": "^5.4",
     "symfony/assetic-bundle": "^2.8",
-    "symfony/intl": "^3.3",
     "symfony/monolog-bundle": "~2.4",
     "symfony/swiftmailer-bundle": "~2.3",
-    "symfony/symfony": "2.8.*"
+    "symfony/symfony": "2.8.*",
+    "twilio/sdk": "^5.28"
   },
   "require-dev": {
     "sensio/generator-bundle": "~3.0",
@@ -70,7 +72,7 @@
   "config": {
     "bin-dir": "bin",
     "platform": {
-      "php": "7.1"
+      "php": "7.2"
     },
     "sort-packages": true
   },

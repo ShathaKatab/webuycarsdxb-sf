@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list id="222fcae6-0857-40e8-adec-6a5556b8c5b7" name="ignored" comment="" />
-    <list default="true" id="f57a1388-7442-4895-b522-407d25b76919" name="Default" comment="- Fix 500 error">
+    <list default="true" id="f57a1388-7442-4895-b522-407d25b76919" name="Default" comment="Status at system">
       <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
@@ -10,8 +10,454 @@
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/webuycars.iml" afterPath="" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Wbc/BranchBundle/Admin/InspectionAdmin.php" afterPath="$PROJECT_DIR$/src/Wbc/BranchBundle/Admin/InspectionAdmin.php" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/SonataAdminBundle/views/standard_layout.html.twig" afterPath="$PROJECT_DIR$/app/Resources/SonataAdminBundle/views/standard_layout.html.twig" />
+      <change beforePath="$PROJECT_DIR$/app/SymfonyRequirements.php" afterPath="$PROJECT_DIR$/app/SymfonyRequirements.php" />
+      <change beforePath="$PROJECT_DIR$/bower.json" afterPath="$PROJECT_DIR$/bower.json" />
+      <change beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
       <change beforePath="$PROJECT_DIR$/src/Wbc/InventoryBundle/Admin/InventoryAdmin.php" afterPath="$PROJECT_DIR$/src/Wbc/InventoryBundle/Admin/InventoryAdmin.php" />
+      <change beforePath="$PROJECT_DIR$/src/Wbc/UserBundle/Entity/User.php" afterPath="$PROJECT_DIR$/src/Wbc/UserBundle/Entity/User.php" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular-bootstrap/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/angular-bootstrap/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular-resource/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/angular-resource/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular-resource/angular-resource.js" afterPath="$PROJECT_DIR$/web/assets/vendor/angular-resource/angular-resource.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular-resource/angular-resource.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/angular-resource/angular-resource.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular-resource/bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/angular-resource/bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular-resource/package.json" afterPath="$PROJECT_DIR$/web/assets/vendor/angular-resource/package.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular-toArrayFilter/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/angular-toArrayFilter/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular-toArrayFilter/CHANGELOG.md" afterPath="$PROJECT_DIR$/web/assets/vendor/angular-toArrayFilter/CHANGELOG.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular-toArrayFilter/package.json" afterPath="$PROJECT_DIR$/web/assets/vendor/angular-toArrayFilter/package.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/angular/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular/angular.js" afterPath="$PROJECT_DIR$/web/assets/vendor/angular/angular.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular/angular.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/angular/angular.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular/angular.min.js.map" afterPath="$PROJECT_DIR$/web/assets/vendor/angular/angular.min.js.map" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular/bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/angular/bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/angular/package.json" afterPath="$PROJECT_DIR$/web/assets/vendor/angular/package.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/blockUI/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/blockUI/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/blockUI/README.md" afterPath="$PROJECT_DIR$/web/assets/vendor/blockUI/README.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/blockUI/blockUI.jquery.json" afterPath="$PROJECT_DIR$/web/assets/vendor/blockUI/blockUI.jquery.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/blockUI/bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/blockUI/bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/blockUI/composer.json" afterPath="$PROJECT_DIR$/web/assets/vendor/blockUI/composer.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/blockUI/jquery.blockUI.js" afterPath="$PROJECT_DIR$/web/assets/vendor/blockUI/jquery.blockUI.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/CHANGELOG.md" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/CHANGELOG.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/CONTRIBUTING.md" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/CONTRIBUTING.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/LICENSE" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/LICENSE" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/README.md" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/README.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.eot" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.svg" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff2" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/fonts/bootstrap/glyphicons-halflings-regular.woff2" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap-sprockets.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap-sprockets.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/affix.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/affix.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/alert.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/alert.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/button.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/button.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/carousel.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/carousel.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/collapse.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/collapse.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/modal.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/modal.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/popover.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/tab.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/tab.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/transition.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/javascripts/bootstrap/transition.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/_bootstrap-compass.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/_bootstrap-compass.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/_bootstrap-mincer.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/_bootstrap-mincer.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/_bootstrap.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/_bootstrap.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_alerts.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_alerts.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_badges.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_badges.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_breadcrumbs.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_breadcrumbs.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_button-groups.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_button-groups.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_carousel.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_carousel.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_close.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_close.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_code.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_code.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_component-animations.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_component-animations.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_dropdowns.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_dropdowns.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_forms.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_forms.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_glyphicons.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_glyphicons.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_grid.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_grid.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_input-groups.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_input-groups.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_jumbotron.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_jumbotron.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_labels.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_labels.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_list-group.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_list-group.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_media.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_media.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_mixins.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_mixins.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_modals.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_modals.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_navbar.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_navbar.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_navs.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_navs.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_normalize.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_normalize.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_pager.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_pager.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_pagination.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_pagination.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_panels.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_panels.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_popovers.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_popovers.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_print.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_print.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_progress-bars.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_progress-bars.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_responsive-embed.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_responsive-embed.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_responsive-utilities.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_responsive-utilities.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_tables.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_tables.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_theme.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_theme.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_thumbnails.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_thumbnails.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_tooltip.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_tooltip.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_type.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_type.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_utilities.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_utilities.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_wells.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/_wells.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_alerts.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_alerts.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_background-variant.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_background-variant.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_border-radius.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_border-radius.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_center-block.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_center-block.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_clearfix.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_clearfix.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_forms.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_forms.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_gradients.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_gradients.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_grid-framework.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_grid-framework.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_grid.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_grid.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_hide-text.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_hide-text.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_image.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_image.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_labels.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_labels.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_list-group.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_list-group.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_nav-divider.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_nav-divider.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_nav-vertical-align.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_nav-vertical-align.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_opacity.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_opacity.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_pagination.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_pagination.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_panels.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_panels.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_progress-bar.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_progress-bar.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_reset-filter.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_reset-filter.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_reset-text.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_reset-text.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_resize.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_resize.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_responsive-visibility.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_responsive-visibility.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_size.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_size.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_tab-focus.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_tab-focus.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_table-row.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_table-row.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_text-overflow.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_text-overflow.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/composer.json" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/composer.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/eyeglass-exports.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/eyeglass-exports.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/package.json" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/package.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/sache.json" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap-sass/sache.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/CHANGELOG.md" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/CHANGELOG.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/Gemfile" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/Gemfile" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/Gemfile.lock" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/Gemfile.lock" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/Gruntfile.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/Gruntfile.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/ISSUE_TEMPLATE.md" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/ISSUE_TEMPLATE.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/LICENSE" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/LICENSE" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/README.md" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/README.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap-theme.css" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap-theme.css.map" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap-theme.min.css" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap-theme.min.css.map" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap-theme.min.css.map" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap.css" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap.css" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap.css.map" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap.min.css" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap.min.css.map" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/css/bootstrap.min.css.map" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/js/bootstrap.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/js/bootstrap.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/dist/js/bootstrap.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/bs-commonjs-generator.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/bs-commonjs-generator.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/bs-glyphicons-data-generator.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/bs-glyphicons-data-generator.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/bs-lessdoc-parser.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/bs-lessdoc-parser.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/bs-raw-files-generator.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/bs-raw-files-generator.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/change-version.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/change-version.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/configBridge.json" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/configBridge.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/npm-shrinkwrap.json" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/grunt/sauce_browsers.yml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/affix.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/affix.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/alert.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/alert.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/button.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/button.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/carousel.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/carousel.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/collapse.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/collapse.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/dropdown.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/dropdown.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/modal.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/modal.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/popover.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/popover.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/scrollspy.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/scrollspy.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/tab.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/tab.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/tooltip.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/tooltip.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/transition.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/js/transition.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/.csscomb.json" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/.csslintrc" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/alerts.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/alerts.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/badges.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/badges.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/bootstrap.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/bootstrap.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/breadcrumbs.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/breadcrumbs.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/button-groups.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/button-groups.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/buttons.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/buttons.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/carousel.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/carousel.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/close.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/close.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/code.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/code.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/component-animations.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/component-animations.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/dropdowns.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/dropdowns.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/forms.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/forms.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/glyphicons.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/glyphicons.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/grid.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/grid.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/input-groups.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/input-groups.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/jumbotron.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/jumbotron.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/labels.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/labels.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/list-group.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/list-group.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/media.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/media.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/alerts.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/alerts.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/border-radius.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/border-radius.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/buttons.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/buttons.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/center-block.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/center-block.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/clearfix.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/clearfix.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/forms.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/forms.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/gradients.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/gradients.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/grid-framework.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/grid-framework.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/grid.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/grid.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/hide-text.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/hide-text.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/image.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/image.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/opacity.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/opacity.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/reset-text.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/reset-text.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/resize.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/resize.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/responsive-visibility.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/responsive-visibility.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/vendor-prefixes.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/mixins/vendor-prefixes.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/modals.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/modals.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/navbar.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/navbar.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/navs.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/navs.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/normalize.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/normalize.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/pager.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/pager.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/pagination.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/pagination.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/panels.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/panels.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/popovers.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/popovers.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/print.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/print.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/progress-bars.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/progress-bars.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/responsive-embed.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/responsive-embed.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/responsive-utilities.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/responsive-utilities.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/scaffolding.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/scaffolding.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/tables.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/tables.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/theme.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/theme.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/thumbnails.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/thumbnails.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/tooltip.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/tooltip.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/type.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/type.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/utilities.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/utilities.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/variables.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/variables.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/wells.less" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/less/wells.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/nuget/bootstrap.less.nuspec" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/nuget/bootstrap.less.nuspec" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/nuget/bootstrap.nuspec" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/nuget/bootstrap.nuspec" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/package.js" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/package.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/bootstrap/package.json" afterPath="$PROJECT_DIR$/web/assets/vendor/bootstrap/package.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/.gitignore" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/.npmignore" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/.npmignore" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/HELP-US-OUT.txt" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/HELP-US-OUT.txt" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/css/font-awesome.css" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/css/font-awesome.css" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/css/font-awesome.css.map" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/css/font-awesome.css.map" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/css/font-awesome.min.css" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/css/font-awesome.min.css" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/FontAwesome.otf" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/FontAwesome.otf" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/fontawesome-webfont.eot" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/fontawesome-webfont.eot" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/fontawesome-webfont.svg" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/fontawesome-webfont.svg" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/fontawesome-webfont.ttf" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/fontawesome-webfont.ttf" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/fontawesome-webfont.woff" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/fontawesome-webfont.woff" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/fontawesome-webfont.woff2" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/fonts/fontawesome-webfont.woff2" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/animated.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/animated.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/bordered-pulled.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/bordered-pulled.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/core.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/core.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/fixed-width.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/fixed-width.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/font-awesome.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/font-awesome.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/icons.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/icons.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/larger.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/larger.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/list.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/list.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/mixins.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/mixins.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/path.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/path.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/rotated-flipped.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/rotated-flipped.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/screen-reader.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/screen-reader.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/stacked.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/stacked.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/variables.less" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/less/variables.less" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_animated.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_animated.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_bordered-pulled.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_bordered-pulled.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_core.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_core.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_fixed-width.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_fixed-width.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_icons.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_icons.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_larger.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_larger.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_list.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_list.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_mixins.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_mixins.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_path.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_path.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_rotated-flipped.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_rotated-flipped.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_screen-reader.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_screen-reader.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_stacked.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_stacked.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_variables.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/_variables.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/font-awesome.scss" afterPath="$PROJECT_DIR$/web/assets/vendor/font-awesome/scss/font-awesome.scss" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/html5shiv/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/html5shiv/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/html5shiv/Gruntfile.js" afterPath="$PROJECT_DIR$/web/assets/vendor/html5shiv/Gruntfile.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/html5shiv/MIT and GPL2 licenses.md" afterPath="$PROJECT_DIR$/web/assets/vendor/html5shiv/MIT and GPL2 licenses.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/html5shiv/bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/html5shiv/bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/html5shiv/dist/html5shiv-printshiv.js" afterPath="$PROJECT_DIR$/web/assets/vendor/html5shiv/dist/html5shiv-printshiv.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/html5shiv/dist/html5shiv-printshiv.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/html5shiv/dist/html5shiv-printshiv.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/html5shiv/dist/html5shiv.js" afterPath="$PROJECT_DIR$/web/assets/vendor/html5shiv/dist/html5shiv.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/html5shiv/dist/html5shiv.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/html5shiv/dist/html5shiv.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/html5shiv/package.json" afterPath="$PROJECT_DIR$/web/assets/vendor/html5shiv/package.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/html5shiv/readme.md" afterPath="$PROJECT_DIR$/web/assets/vendor/html5shiv/readme.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/AUTHORS.txt" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/AUTHORS.txt" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/LICENSE.txt" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/LICENSE.txt" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/README.md" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/README.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/core.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/core.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.min.map" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.min.map" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.slim.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.slim.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.slim.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.slim.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.slim.min.map" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/dist/jquery.slim.min.map" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/external/sizzle/LICENSE.txt" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/external/sizzle/LICENSE.txt" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/external/sizzle/dist/sizzle.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/external/sizzle/dist/sizzle.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/external/sizzle/dist/sizzle.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/external/sizzle/dist/sizzle.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/external/sizzle/dist/sizzle.min.map" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/external/sizzle/dist/sizzle.min.map" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/.eslintrc.json" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/.eslintrc.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/jsonp.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/jsonp.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/load.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/load.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/parseXML.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/parseXML.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/script.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/script.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/var/location.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/var/location.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/var/nonce.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/var/nonce.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/var/rquery.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/var/rquery.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/xhr.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/ajax/xhr.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes/attr.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes/attr.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes/classes.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes/classes.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes/prop.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes/prop.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes/support.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes/support.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes/val.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/attributes/val.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/callbacks.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/callbacks.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/DOMEval.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/DOMEval.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/access.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/access.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/init.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/init.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/nodeName.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/nodeName.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/parseHTML.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/parseHTML.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/ready-no-deferred.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/ready-no-deferred.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/ready.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/ready.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/readyException.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/readyException.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/stripAndCollapse.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/stripAndCollapse.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/support.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/support.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/var/rsingleTag.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/core/var/rsingleTag.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/addGetHookIf.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/addGetHookIf.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/adjustCSS.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/adjustCSS.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/curCSS.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/curCSS.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/hiddenVisibleSelectors.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/hiddenVisibleSelectors.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/showHide.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/showHide.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/support.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/support.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/var/cssExpand.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/var/cssExpand.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/var/getStyles.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/var/getStyles.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/var/isHiddenWithinTree.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/var/isHiddenWithinTree.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/var/rmargin.js" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/var/rnumnonpx.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/var/rnumnonpx.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/var/swap.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/css/var/swap.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/data.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/data.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/data/Data.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/data/Data.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/data/var/acceptData.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/data/var/acceptData.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/data/var/dataPriv.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/data/var/dataPriv.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/data/var/dataUser.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/data/var/dataUser.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/deferred.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/deferred.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/deferred/exceptionHook.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/deferred/exceptionHook.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/deprecated.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/deprecated.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/dimensions.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/dimensions.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/effects.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/effects.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/effects/Tween.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/effects/Tween.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/effects/animatedSelector.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/effects/animatedSelector.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event/ajax.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event/ajax.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event/alias.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event/alias.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event/focusin.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event/focusin.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event/support.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event/support.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event/trigger.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/event/trigger.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/exports/amd.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/exports/amd.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/exports/global.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/exports/global.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/jquery.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/jquery.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/_evalUrl.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/_evalUrl.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/buildFragment.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/buildFragment.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/getAll.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/getAll.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/setGlobalEval.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/setGlobalEval.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/support.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/support.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/var/rcheckableType.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/var/rcheckableType.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/var/rscriptType.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/var/rscriptType.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/var/rtagName.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/var/rtagName.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/wrapMap.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/manipulation/wrapMap.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/offset.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/offset.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/queue.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/queue.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/queue/delay.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/queue/delay.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/selector-native.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/selector-native.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/selector-sizzle.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/selector-sizzle.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/selector.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/selector.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/serialize.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/serialize.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/traversing.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/traversing.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/traversing/findFilter.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/traversing/findFilter.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/traversing/var/dir.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/traversing/var/dir.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/traversing/var/rneedsContext.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/traversing/var/rneedsContext.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/traversing/var/siblings.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/traversing/var/siblings.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/ObjectFunctionString.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/ObjectFunctionString.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/arr.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/arr.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/class2type.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/class2type.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/concat.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/concat.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/document.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/document.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/documentElement.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/documentElement.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/fnToString.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/fnToString.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/getProto.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/getProto.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/hasOwn.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/hasOwn.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/indexOf.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/indexOf.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/pnum.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/pnum.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/push.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/push.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/rcssNum.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/rcssNum.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/rnothtmlwhite.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/rnothtmlwhite.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/slice.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/slice.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/support.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/support.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/toString.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/var/toString.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/jquery/src/wrap.js" afterPath="$PROJECT_DIR$/web/assets/vendor/jquery/src/wrap.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/.travis.yml" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/.travis.yml" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/README.md" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/README.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.core.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.core.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.core.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.core.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.fp.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.fp.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.fp.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.fp.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/lodash.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/mapping.fp.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/dist/mapping.fp.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/doc/README.md" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/doc/README.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/fp/_baseConvert.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/fp/_baseConvert.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/fp/_mapping.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/fp/_mapping.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/lib/fp/template/modules/_util.jst" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/lib/fp/template/modules/_util.jst" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/lodash.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/lodash.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/package.json" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/package.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/test/test-fp.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/test/test-fp.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/lodash/test/test.js" afterPath="$PROJECT_DIR$/web/assets/vendor/lodash/test/test.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/ngmap/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/ngmap/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/Gruntfile.js" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/Gruntfile.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/LICENSE-MIT" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/LICENSE-MIT" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/README.md" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/README.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/cross-domain/example.html" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/cross-domain/example.html" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/cross-domain/respond-proxy.html" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/cross-domain/respond-proxy.html" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/cross-domain/respond.proxy.gif" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/cross-domain/respond.proxy.gif" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/cross-domain/respond.proxy.js" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/cross-domain/respond.proxy.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/dest/respond.matchmedia.addListener.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/dest/respond.matchmedia.addListener.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/dest/respond.matchmedia.addListener.src.js" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/dest/respond.matchmedia.addListener.src.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/dest/respond.min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/dest/respond.min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/dest/respond.src.js" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/dest/respond.src.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/package.json" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/package.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/src/matchmedia.addListener.js" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/src/matchmedia.addListener.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/src/matchmedia.polyfill.js" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/src/matchmedia.polyfill.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/respond/src/respond.js" afterPath="$PROJECT_DIR$/web/assets/vendor/respond/src/respond.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/underscore/.bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/underscore/.bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/underscore/LICENSE" afterPath="$PROJECT_DIR$/web/assets/vendor/underscore/LICENSE" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/underscore/README.md" afterPath="$PROJECT_DIR$/web/assets/vendor/underscore/README.md" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/underscore/bower.json" afterPath="$PROJECT_DIR$/web/assets/vendor/underscore/bower.json" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/underscore/underscore-min.js" afterPath="$PROJECT_DIR$/web/assets/vendor/underscore/underscore-min.js" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/underscore/underscore-min.map" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/web/assets/vendor/underscore/underscore.js" afterPath="$PROJECT_DIR$/web/assets/vendor/underscore/underscore.js" />
+      <change beforePath="$PROJECT_DIR$/web/config.php" afterPath="$PROJECT_DIR$/web/config.php" />
     </list>
     <ignored path="webuycars.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,42 +492,12 @@
     <favorites_list name="webuycars" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AppointmentAdmin.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Wbc/BranchBundle/Admin/AppointmentAdmin.php">
+    <leaf>
+      <file leaf-file-name="composer.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/composer.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2432">
-              <caret line="199" column="29" lean-forward="false" selection-start-line="199" selection-start-column="23" selection-end-line="199" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InspectionAdmin.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Wbc/BranchBundle/Admin/InspectionAdmin.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SecurityContext.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/SecurityContext.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="33" column="6" lean-forward="false" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AuthorizationChecker.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Authorization/AuthorizationChecker.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="53" column="47" lean-forward="false" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="47" />
+            <state relative-caret-position="90">
+              <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -90,8 +506,38 @@
       <file leaf-file-name="InventoryAdmin.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Wbc/InventoryBundle/Admin/InventoryAdmin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="76" column="7" lean-forward="true" selection-start-line="76" selection-start-column="7" selection-end-line="76" selection-end-column="7" />
+            <state relative-caret-position="333">
+              <caret line="168" column="19" lean-forward="true" selection-start-line="168" selection-start-column="19" selection-end-line="168" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="standard_layout.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Resources/SonataAdminBundle/views/standard_layout.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="136" column="37" lean-forward="false" selection-start-line="136" selection-start-column="37" selection-end-line="136" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MediaController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/sonata-project/media-bundle/src/Controller/Api/MediaController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -109,17 +555,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>source</find>
-      <find>exp</find>
-      <find>color</find>
-      <find>generateUse</find>
-      <find>deal</find>
-      <find>getAct</find>
-      <find>seo</find>
-      <find>site_domain</find>
-      <find>disabled</find>
-      <find>soldToDealer</find>
-      <find>pricePurchased</find>
       <find>pricePur</find>
       <find>gallery</find>
       <find>generateUs</find>
@@ -139,6 +574,17 @@
       <find>$form</find>
       <find>authorization_checker</find>
       <find>status</find>
+      <find>$color</find>
+      <find>cache:clear</find>
+      <find>clearCac</find>
+      <find>symfony-scripts</find>
+      <find>twilio</find>
+      <find>continue;</find>
+      <find>continue</find>
+      <find>$class-&gt;associationMappings</find>
+      <find>switch</find>
+      <find>jquer</find>
+      <find>body_attributes</find>
     </findStrings>
     <replaceStrings>
       <replace>candidateForm</replace>
@@ -176,6 +622,10 @@
       <dir>$PROJECT_DIR$/web/assets/scss</dir>
       <dir>$PROJECT_DIR$</dir>
       <dir>$PROJECT_DIR$/src/Wbc</dir>
+      <dir>$PROJECT_DIR$/vendor/sensio/distribution-bundle</dir>
+      <dir>$PROJECT_DIR$/vendor/sensio</dir>
+      <dir>$PROJECT_DIR$/vendor</dir>
+      <dir>$PROJECT_DIR$/vendor/symfony</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -184,19 +634,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Wbc/BranchBundle/EventListener/InspectionSubscriber.php" />
-        <option value="$PROJECT_DIR$/src/Wbc/BranchBundle/EventListener/InspectionListener.php" />
-        <option value="$PROJECT_DIR$/app/Resources/SonataAdminBundle/views/Core/dashboard.html.twig" />
         <option value="$PROJECT_DIR$/app/config/sonata.yml" />
         <option value="$PROJECT_DIR$/web/assets/scss/_utilities.scss" />
-        <option value="$PROJECT_DIR$/app/Resources/SonataAdminBundle/views/standard_layout.html.twig" />
-        <option value="$PROJECT_DIR$/bower.json" />
         <option value="$PROJECT_DIR$/src/Wbc/StaticBundle/Resources/config/routing.yml" />
         <option value="$PROJECT_DIR$/src/Wbc/StaticBundle/Model/Stat.php" />
         <option value="$PROJECT_DIR$/app/config/config.yml" />
         <option value="$PROJECT_DIR$/web/templates/admin/dashboard/stat-item.html" />
         <option value="$PROJECT_DIR$/web/admin/templates/admin/dashboard/stat-item.html" />
-        <option value="$PROJECT_DIR$/src/Wbc/UserBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Wbc/UtilityBundle/Validator/Constraints/MobileNumber.php" />
         <option value="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Validator/Constraints/RegexValidator.php" />
         <option value="$PROJECT_DIR$/src/Wbc/UserBundle/Admin/UserAdmin.php" />
@@ -232,9 +676,15 @@
         <option value="$PROJECT_DIR$/web/assets/scss/app.scss" />
         <option value="$PROJECT_DIR$/app/Resources/WbcInventoryBundle/views/partials/vertical-list.html.twig" />
         <option value="$PROJECT_DIR$/web/assets/scss/_carousel.scss" />
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/Wbc/InventoryBundle/Admin/InventoryAdmin.php" />
         <option value="$PROJECT_DIR$/src/Wbc/BranchBundle/Admin/InspectionAdmin.php" />
+        <option value="$PROJECT_DIR$/src/Wbc/UserBundle/Entity/User.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Debug/Exception/ContextErrorException.php" />
+        <option value="$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/UnitOfWork.php" />
+        <option value="$PROJECT_DIR$/bower.json" />
+        <option value="$PROJECT_DIR$/app/Resources/SonataAdminBundle/views/standard_layout.html.twig" />
+        <option value="$PROJECT_DIR$/src/Wbc/InventoryBundle/Admin/InventoryAdmin.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -254,7 +704,6 @@
       <path value="$PROJECT_DIR$/vendor/craue/config-bundle" />
       <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
       <path value="$PROJECT_DIR$/vendor/swiftmailer/swiftmailer" />
-      <path value="$PROJECT_DIR$/vendor/nelmio/api-doc-bundle" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/guzzle" />
       <path value="$PROJECT_DIR$/vendor/sonata-project/media-bundle" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/promises" />
@@ -266,14 +715,9 @@
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-components" />
       <path value="$PROJECT_DIR$/vendor/knplabs/gaufrette" />
       <path value="$PROJECT_DIR$/vendor/knplabs/knp-paginator-bundle" />
-      <path value="$PROJECT_DIR$/vendor/twilio/sdk" />
-      <path value="$PROJECT_DIR$/vendor/giggsey/locale" />
-      <path value="$PROJECT_DIR$/vendor/giggsey/libphonenumber-for-php" />
       <path value="$PROJECT_DIR$/vendor/patchwork/jsqueeze" />
       <path value="$PROJECT_DIR$/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/vendor/egeloen/ckeditor-bundle" />
-      <path value="$PROJECT_DIR$/vendor/queue-interop/queue-interop" />
-      <path value="$PROJECT_DIR$/vendor/queue-interop/amqp-interop" />
       <path value="$PROJECT_DIR$/vendor/sebastian/global-state" />
       <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
       <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
@@ -288,7 +732,6 @@
       <path value="$PROJECT_DIR$/vendor/sonata-project/block-bundle" />
       <path value="$PROJECT_DIR$/vendor/sonata-project/cache" />
       <path value="$PROJECT_DIR$/vendor/sonata-project/exporter" />
-      <path value="$PROJECT_DIR$/vendor/sonata-project/notification-bundle" />
       <path value="$PROJECT_DIR$/vendor/sonata-project/doctrine-orm-admin-bundle" />
       <path value="$PROJECT_DIR$/vendor/sonata-project/doctrine-extensions" />
       <path value="$PROJECT_DIR$/vendor/sonata-project/easy-extends-bundle" />
@@ -297,7 +740,6 @@
       <path value="$PROJECT_DIR$/vendor/jdorn/sql-formatter" />
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-eventmanager" />
       <path value="$PROJECT_DIR$/vendor/zendframework/zend-code" />
-      <path value="$PROJECT_DIR$/vendor/zendframework/zenddiagnostics" />
       <path value="$PROJECT_DIR$/vendor/phpcollection/phpcollection" />
       <path value="$PROJECT_DIR$/vendor/gedmo/doctrine-extensions" />
       <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
@@ -325,7 +767,6 @@
       <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php56" />
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-migrations-bundle" />
-      <path value="$PROJECT_DIR$/vendor/symfony/intl" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-util" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php70" />
@@ -358,7 +799,6 @@
       <path value="$PROJECT_DIR$/vendor/psr/http-message" />
       <path value="$PROJECT_DIR$/vendor/ocramius/proxy-manager" />
       <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/php-amqplib/php-amqplib" />
       <path value="$PROJECT_DIR$/vendor/sensio/generator-bundle" />
       <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
       <path value="$PROJECT_DIR$/vendor/jms/cg" />
@@ -368,12 +808,10 @@
       <path value="$PROJECT_DIR$/vendor/jms/job-queue-bundle" />
       <path value="$PROJECT_DIR$/vendor/jms/translation-bundle" />
       <path value="$PROJECT_DIR$/vendor/jms/i18n-routing-bundle" />
-      <path value="$PROJECT_DIR$/vendor/enqueue/amqp-lib" />
       <path value="$PROJECT_DIR$/vendor/jms/serializer" />
       <path value="$PROJECT_DIR$/vendor/jms/parser-lib" />
       <path value="$PROJECT_DIR$/vendor/sonata-project/formatter-bundle" />
       <path value="$PROJECT_DIR$/vendor/jms/di-extra-bundle" />
-      <path value="$PROJECT_DIR$/vendor/enqueue/amqp-tools" />
       <path value="$PROJECT_DIR$/vendor/egeloen/json-builder" />
       <path value="$PROJECT_DIR$/vendor/symfony/symfony" />
       <path value="$PROJECT_DIR$/vendor/twig/extensions" />
@@ -384,6 +822,15 @@
       <path value="$PROJECT_DIR$/vendor/friendsofsymfony/rest-bundle" />
       <path value="$PROJECT_DIR$/vendor/mobiledetect/mobiledetectlib" />
       <path value="$PROJECT_DIR$/vendor/suncat/mobile-detect-bundle" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/reflection" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/twilio/sdk" />
+      <path value="$PROJECT_DIR$/vendor/giggsey/locale" />
+      <path value="$PROJECT_DIR$/vendor/giggsey/libphonenumber-for-php" />
+      <path value="$PROJECT_DIR$/vendor/nelmio/api-doc-bundle" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
@@ -428,6 +875,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -438,28 +886,24 @@
             <path>
               <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
               <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="app" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
               <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Wbc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Application" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
               <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Wbc" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="BranchBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
-              <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Wbc" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="BranchBundle" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Admin" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
@@ -485,77 +929,101 @@
               <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
               <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sonata-project" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
               <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sonata-project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="media-bundle" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
               <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sonata-project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="media-bundle" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
               <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sonata-project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="media-bundle" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
               <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sonata-project" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="media-bundle" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Component" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Api" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
               <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Component" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Security" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
               <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Component" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Security" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="angular" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="angular" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
+              <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="web" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="angular" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="blog" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="bcb0276e:PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="bcb0276e:PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
+              <item name="PHP Runtime" type="20ee2d1f:SyntheticLibraryElementNode" />
+            </path>
+            <path>
+              <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="bcb0276e:PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
+              <item name="PHP Runtime" type="20ee2d1f:SyntheticLibraryElementNode" />
               <item name="Core" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="webuycars-sf" type="b2602c69:ProjectViewProjectNode" />
-              <item name="webuycars-sf" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="vendor" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Symfony" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Component" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Security" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Core" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Authorization" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -590,7 +1058,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -641,13 +1108,13 @@
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="PROJECT_INTERPRETER" value="false" />
       <option name="WORKING_DIRECTORY" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <module name="" />
       <envs />
-      <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
@@ -794,14 +1261,10 @@
       <workItem from="1545154698760" duration="28000" />
       <workItem from="1547476348662" duration="36000" />
       <workItem from="1547476419644" duration="3000" />
-      <workItem from="1547979428946" duration="942000" />
-    </task>
-    <task id="LOCAL-00135" summary="Backend for Careers page">
-      <created>1524319316214</created>
-      <option name="number" value="00135" />
-      <option name="presentableId" value="LOCAL-00135" />
-      <option name="project" value="LOCAL" />
-      <updated>1524319316215</updated>
+      <workItem from="1547979428946" duration="1489000" />
+      <workItem from="1548502474979" duration="15000" />
+      <workItem from="1550812395800" duration="3432000" />
+      <workItem from="1550819268813" duration="3742000" />
     </task>
     <task id="LOCAL-00136" summary="Remove return types">
       <created>1524319644244</created>
@@ -1139,11 +1602,18 @@
       <option name="project" value="LOCAL" />
       <updated>1542449705536</updated>
     </task>
-    <option name="localTasksCounter" value="184" />
+    <task id="LOCAL-00184" summary="Status at system">
+      <created>1547980638002</created>
+      <option name="number" value="00184" />
+      <option name="presentableId" value="LOCAL-00184" />
+      <option name="project" value="LOCAL" />
+      <updated>1547980638002</updated>
+    </task>
+    <option name="localTasksCounter" value="185" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="320346000" />
+    <option name="totallyTimeSpent" value="328082000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -1155,8 +1625,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="790" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="790" extended-state="6" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32838038" sideWeight="0.5822604" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32838038" sideWeight="0.41773963" order="9" side_tool="true" content_ui="tabs" />
@@ -1164,7 +1633,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3258595" sideWeight="0.79971385" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5156951" sideWeight="0.8948498" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26108727" sideWeight="0.4943182" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27181688" sideWeight="0.4943182" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297568" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37592867" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1224,7 +1693,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="Ayman: Could you please add more reviews to the website – keep it random between 75 to 95" />
     <MESSAGE value="Ayman: Could you please preserve the car valuation for as long as possible. I don’t want the valuation to expire any more.&#10;(increased cookie_lifetime to 365 days)" />
     <MESSAGE value="Awwad: Add vehicleYear in Valuation export" />
     <MESSAGE value="Hassan: Our office will be closed during attached dates for Aid holiday, pls stop appointments accordingly.&#10;August 20th 2018 - August 25th 2018" />
@@ -1249,7 +1717,8 @@
     <MESSAGE value="Remove Notificator class" />
     <MESSAGE value="- Create Used Car gallery by default&#10;- Disable a Used Car once an Inventory is sold&#10;- Bug fixes" />
     <MESSAGE value="- Fix 500 error" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Fix 500 error" />
+    <MESSAGE value="Status at system" />
+    <option name="LAST_COMMIT_MESSAGE" value="Status at system" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1265,123 +1734,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Wbc/InventoryBundle/Admin/UsedCarAdmin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="145" column="26" lean-forward="false" selection-start-line="145" selection-start-column="19" selection-end-line="145" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Application/Sonata/MediaBundle/Entity/Gallery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="41" lean-forward="false" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/sonata-project/media-bundle/src/Entity/BaseGallery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="19" column="37" lean-forward="false" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/sonata-project/media-bundle/src/Model/Gallery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-707">
-          <caret line="16" column="15" lean-forward="false" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Wbc/InventoryBundle/Controller/CRUDController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="38" column="33" lean-forward="true" selection-start-line="38" selection-start-column="33" selection-end-line="38" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Wbc/InventoryBundle/Entity/Dealer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="115" column="48" lean-forward="false" selection-start-line="115" selection-start-column="48" selection-end-line="115" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Wbc/InventoryBundle/Admin/DealerAdmin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="59" column="52" lean-forward="false" selection-start-line="59" selection-start-column="52" selection-end-line="59" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Wbc/InventoryBundle/Entity/Inventory.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="932" column="105" lean-forward="false" selection-start-line="932" selection-start-column="105" selection-end-line="932" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Wbc/InventoryBundle/Entity/UsedCar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="436" column="37" lean-forward="false" selection-start-line="436" selection-start-column="37" selection-end-line="436" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/WbcValuationBundle/views/Valuation/step5.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="68" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/WbcStaticBundle/views/Default/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4440">
-          <caret line="296" column="22" lean-forward="false" selection-start-line="296" selection-start-column="22" selection-end-line="296" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/WbcInventoryBundle/views/partials/vertical-list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="53" lean-forward="false" selection-start-line="45" selection-start-column="53" selection-end-line="45" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="43" column="13" lean-forward="true" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/assets/scss/_carousel.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Wbc/ValuationBundle/Entity/Valuation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="154" column="14" lean-forward="false" selection-start-line="154" selection-start-column="14" selection-end-line="154" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Wbc/ValuationBundle/EventListener/ValuationListener.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="149" column="0" lean-forward="false" selection-start-line="149" selection-start-column="0" selection-end-line="179" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/images/webuycarsdxb-logo.svg">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/WbcStaticBundle/views/Default/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
@@ -1400,13 +1752,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="855">
           <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="60" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="58" lean-forward="false" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -1552,11 +1897,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2685">
           <caret line="188" column="26" lean-forward="false" selection-start-line="188" selection-start-column="26" selection-end-line="188" selection-end-column="26" />
-          <folding>
-            <marker date="1540851040930" expanded="true" signature="7176:7790" ph="SELECT CAST(... " />
-            <marker date="1540851040930" expanded="true" signature="11778:12949" ph="SELECT CAST(... valuation_training_data" />
-            <marker date="1540851040930" expanded="true" signature="14380:14570" ph="SELECT vehic... valuation_configuration" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1564,15 +1904,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="38" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/assets/scss/_utilities.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="64" column="37" lean-forward="false" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1580,7 +1911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1588,21 +1918,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="960">
           <caret line="70" column="8" lean-forward="false" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/SecurityContext.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
+        <state relative-caret-position="300">
           <caret line="33" column="6" lean-forward="false" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/Authorization/AuthorizationChecker.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
+        <state relative-caret-position="660">
           <caret line="53" column="47" lean-forward="false" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="47" />
           <folding />
         </state>
@@ -1610,24 +1938,178 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Wbc/BranchBundle/Admin/AppointmentAdmin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2432">
+        <state relative-caret-position="2670">
           <caret line="199" column="29" lean-forward="false" selection-start-line="199" selection-start-column="23" selection-end-line="199" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Wbc/BranchBundle/Admin/InspectionAdmin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="885">
+          <caret line="81" column="5" lean-forward="false" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/assets/scss/_utilities.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="50" column="20" lean-forward="false" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Wbc/InventoryBundle/Entity/Inventory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="141" column="25" lean-forward="false" selection-start-line="141" selection-start-column="25" selection-end-line="141" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-399">
+          <caret line="14" column="58" lean-forward="false" selection-start-line="14" selection-start-column="58" selection-end-line="14" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Wbc/UtilityBundle/TwilioManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="44" lean-forward="false" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding>
+            <element signature="e#37#76#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Composer/ScriptHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="137" column="53" lean-forward="false" selection-start-line="137" selection-start-column="53" selection-end-line="137" selection-end-column="64" />
+          <folding>
+            <marker date="1543939958000" expanded="true" signature="15104:15194" ph="..." />
+            <marker date="1543939958000" expanded="true" signature="15248:15313" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/EventListener/SessionListener.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="33" column="19" lean-forward="true" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Command/CacheClearCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="61" column="71" lean-forward="false" selection-start-line="61" selection-start-column="71" selection-end-line="61" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/Core/Core_c.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="149" column="10" lean-forward="false" selection-start-line="149" selection-start-column="10" selection-end-line="149" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Wbc/UserBundle/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="217" column="27" lean-forward="false" selection-start-line="217" selection-start-column="27" selection-end-line="217" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Wbc/CrawlerBundle/Command/BaseCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Command/ContainerAwareCommand.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="22" column="48" lean-forward="true" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Console/Command/Command.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="671" column="47" lean-forward="true" selection-start-line="671" selection-start-column="47" selection-end-line="671" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Debug/Exception/ContextErrorException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/doctrine/orm/lib/Doctrine/ORM/UnitOfWork.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="2639" column="29" lean-forward="false" selection-start-line="2639" selection-start-column="29" selection-end-line="2639" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bower.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="32" lean-forward="false" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="32" lean-forward="false" selection-start-line="6" selection-start-column="32" selection-end-line="6" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/sonata-project/media-bundle/src/Controller/Api/MediaController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/SonataAdminBundle/views/standard_layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="136" column="37" lean-forward="false" selection-start-line="136" selection-start-column="37" selection-end-line="136" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Wbc/InventoryBundle/Admin/InventoryAdmin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="76" column="7" lean-forward="true" selection-start-line="76" selection-start-column="7" selection-end-line="76" selection-end-column="7" />
+        <state relative-caret-position="333">
+          <caret line="168" column="19" lean-forward="true" selection-start-line="168" selection-start-column="19" selection-end-line="168" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Wbc/BranchBundle/Admin/InspectionAdmin.php">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+        <state relative-caret-position="112">
+          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -164,7 +164,7 @@ class InventoryAdmin extends AbstractAdmin
             ->add('specifications', WbcVehicleType\SpecificationType::class, ['required' => false])
             ->add('bodyCondition', WbcVehicleType\ConditionType::class, ['required' => false])
             ->add('options', ChoiceType::class, ['required' => false, 'choices' => ['basic' => 'Basic', 'mid' => 'Mid', 'full' => 'Full']])
-            ->add('color', WbcVehicleType\ColorType::class)
+            ->add('color', WbcVehicleType\ColorType::class, ['required' => false])
             ->end()
             ->end()
             ->tab('Sales Details')
