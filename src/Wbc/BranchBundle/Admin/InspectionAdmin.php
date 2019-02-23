@@ -12,6 +12,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Type\DatePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -234,7 +235,7 @@ class InspectionAdmin extends AbstractAdmin
                 'read_only' => true,
                 'required' => false,
             ])
-            ->add('appointment.dateBooked', 'sonata_type_date_picker', [
+            ->add('appointment.dateBooked', DatePickerType::class, [
                 'dp_min_date' => new \DateTime(),
                 'dp_max_date' => '+30',
                 'dp_use_current' => false,

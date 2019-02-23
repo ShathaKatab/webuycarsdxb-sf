@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\Form\Type\DatePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -208,7 +209,7 @@ class DealAdmin extends AbstractAdmin
             ->end()
             ->with('Timings')
             ->add('appointmentBranch', BranchType::class, ['disabled' => true, 'read_only' => true, 'required' => false])
-            ->add('appointmentDateBooked', 'sonata_type_date_picker', [
+            ->add('appointmentDateBooked', DatePickerType::class, [
                 'dp_min_date' => new \DateTime(),
                 'dp_max_date' => '+30',
                 'dp_use_current' => false,

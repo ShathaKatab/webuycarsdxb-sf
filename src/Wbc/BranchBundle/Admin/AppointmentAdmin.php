@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\Form\Type\DatePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -166,7 +167,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->tab('Appointment Information')
             ->with('Timings')
             ->add('branch', BranchType::class)
-            ->add('dateBooked', 'sonata_type_date_picker', [
+            ->add('dateBooked', DatePickerType::class, [
                 'dp_use_current' => false,
                 'format' => 'EE dd-MMM-yyyy',
             ])
