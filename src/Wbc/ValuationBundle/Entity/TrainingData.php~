@@ -160,6 +160,7 @@ class TrainingData
      */
     protected $inspection;
 
+
     /**
      * @var array
      */
@@ -567,29 +568,5 @@ class TrainingData
     public function getInventory()
     {
         return $this->inventory;
-    }
-
-    /**
-     * Set inspection.
-     *
-     * @param Inspection $inspection
-     *
-     * @return TrainingData
-     */
-    public function setInspection(Inspection $inspection = null)
-    {
-        $this->inspection = $inspection;
-
-        return $this;
-    }
-
-    /**
-     * Get inspection.
-     *
-     * @return Inspection
-     */
-    public function getInspection()
-    {
-        return $this->inspection;
     }
 }

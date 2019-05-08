@@ -9,9 +9,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Wbc\BranchBundle\Entity\Inspection;
 use Wbc\CrawlerBundle\Entity\ClassifiedsAd;
 use Wbc\InventoryBundle\Entity\Inventory;
 use Wbc\ValuationBundle\Entity\TrainingData;
+use Wbc\ValuationBundle\ValuationManager;
 
 /**
  * Class TrainingDataCommand.
@@ -37,7 +39,11 @@ class TrainingDataCommand extends ContainerAwareCommand
     {
         $this
             ->setName('valuation:generate:training-data')
-            ->addArgument('source', InputArgument::REQUIRED, 'Source of the Classifieds Ad; manheim, dubizzle, inventory')
+            ->addArgument(
+                'source',
+                InputArgument::REQUIRED,
+                sprintf('Source of the Classifieds Ad; %s', implode(', ', [ClassifiedsAd::SOURCE_MANHEIM, ClassifiedsAd::SOURCE_INSPECTION, ClassifiedsAd::SOURCE_DUBIZZLE]))
+            )
             ->addOption('overwrite', null, InputOption::VALUE_OPTIONAL, 'Either true or false; if false existing rows will be ignored')
             ->setDescription('Generates machine learning test data from Classifieds Ads or Inventory.');
     }
@@ -53,21 +59,22 @@ class TrainingDataCommand extends ContainerAwareCommand
         $this->entityManager = $this->getContainer()->get('doctrine.orm.default_entity_manager');
         $this->output = $output;
         $source = $input->getArgument('source');
+        $sources = [ClassifiedsAd::SOURCE_MANHEIM, ClassifiedsAd::SOURCE_INSPECTION, ClassifiedsAd::SOURCE_DUBIZZLE];
 
-        if (!in_array($source, ['manheim.com', 'dubizzle.com', 'inventory'], true)) {
-            throw new \RuntimeException(sprintf('Source: %s is invalid! Valid sources are; manheim.com, dubizzle.com, inventory', $source));
+        if (!in_array($source, $sources, true)) {
+            throw new \RuntimeException(sprintf('Source: %s is invalid! Valid sources are; %s', $source, implode(', ', $sources)));
         }
 
-        if ('dubizzle.com' === $source) {
+        if (ClassifiedsAd::SOURCE_DUBIZZLE === $source) {
             $this->dubizzleTrainingData();
         }
 
-        if ('manheim.com' === $source) {
+        if (ClassifiedsAd::SOURCE_MANHEIM === $source) {
             $this->manheimTrainingData();
         }
 
-        if ('inventory' === $source) {
-            $this->inventoryTrainingData();
+        if (ClassifiedsAd::SOURCE_INSPECTION === $source) {
+            $this->inspectionTrainingData();
         }
 
         $output->writeln('<info>Done Generating Training Data for Machine Learning.</info>');
@@ -170,10 +177,15 @@ class TrainingDataCommand extends ContainerAwareCommand
         $this->output->writeln('<comment>Done with Training Data for Dubizzle.com</comment>');
     }
 
-    private function inventoryTrainingData(): void
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    private function inspectionTrainingData(): void
     {
-        $this->output->writeln('<comment>Working on Training Data from webuycarsdxb.com Inventory</comment>');
-        //Inventory
+        $this->output->writeln('<comment>Working on Training Data from webuycarsdxb.com Inspection</comment>');
+        //Inspection
         $connection = $this->entityManager->getConnection();
         $statement = $connection->prepare('SELECT make.name AS makeName, model.name AS modelName, make.id AS makeId, model.id AS modelId
                                               FROM vehicle_model AS model
@@ -184,28 +196,28 @@ class TrainingDataCommand extends ContainerAwareCommand
         foreach ($makesModels as $makeModel) {
             $this->output->writeln(sprintf('<fg=magenta>Setting Data for: Make => %s, Model => %s</>', $makeModel['makeName'], $makeModel['modelName']));
 
-            $statement = $connection->prepare('SELECT inv.id, i.vehicle_year, i.vehicle_mileage, i.vehicle_color, i.vehicle_body_condition, d.price_purchased
-                                                FROM inventory inv
-                                                INNER JOIN inspection i ON i.id = inv.inspection_id
+            $statement = $connection->prepare('SELECT i.id, i.vehicle_year, i.vehicle_mileage, i.vehicle_color, i.vehicle_body_condition, i.price_offered
+                                                FROM inspection i
                                                 WHERE i.vehicle_model_id = :modelId
-                                                AND inv.price_purchased > 0');
+                                                AND i.price_offered > :minimumPrice');
 
             $statement->bindValue(':modelId', $makeModel['modelId']);
+            $statement->bindValue(':minimumPrice', ValuationManager::MIN_ALLOWABLE_PRICE, \PDO::PARAM_INT);
             $statement->execute();
-            $inventory = $statement->fetchAll();
+            $inspection = $statement->fetchAll();
 
-            foreach ($inventory as $inv) {
+            foreach ($inspection as $ins) {
                 $make = $this->entityManager->getReference('WbcVehicleBundle:Make', $makeModel['makeId']);
                 $model = $this->entityManager->getReference('WbcVehicleBundle:Model', $makeModel['modelId']);
 
-                $trainingData = new TrainingData($make, $model, $inv['vehicle_year'], $inv['vehicle_mileage'], $inv['vehicle_color'], $inv['vehicle_body_condition'], $inv['price_purchased'], ClassifiedsAd::SOURCE_INVENTORY);
-                $trainingData->setInventory($this->entityManager->getReference(Inventory::class, $inv['id']));
+                $trainingData = new TrainingData($make, $model, $ins['vehicle_year'], $ins['vehicle_mileage'], $ins['vehicle_color'], $ins['vehicle_body_condition'], $ins['price_offered'], ClassifiedsAd::SOURCE_INSPECTION);
+                $trainingData->setInspection($this->entityManager->getReference(Inspection::class, $ins['id']));
                 $trainingData->setCurrency(ClassifiedsAd::CURRENCY_AED);
                 $this->entityManager->persist($trainingData);
             }
         }
 
         $this->entityManager->flush();
-        $this->output->writeln('<comment>Done with Training Data from webuycarsdxb.com Inventory</comment>');
+        $this->output->writeln('<comment>Done with Training Data from webuycarsdxb.com Inspection</comment>');
     }
 }

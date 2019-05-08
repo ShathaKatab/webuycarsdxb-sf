@@ -19,7 +19,6 @@ class ClassifiedsAd
     const SOURCE_DUBIZZLE = 'dubizzle.com';
     const SOURCE_GETTHAT = 'getthat.com';
     const SOURCE_MANHEIM = 'manheim.com';
-    const SOURCE_INSPECTION = 'inspection';
     const MILEAGE_KM = 'km';
     const MILEAGE_MILES = 'miles';
     const CURRENCY_AED = 'AED';
@@ -65,7 +64,7 @@ class ClassifiedsAd
     /**
      * @var ClassifiedsModel
      *
-     * @ORM\ManyToOne(targetEntity="\Wbc\CrawlerBundle\Entity\ClassifiedsModel", fetch="EAGER", inversedBy="classifiedAds")
+     * @ORM\ManyToOne(targetEntity="\Wbc\CrawlerBundle\Entity\ClassifiedsModel", fetch="EAGER")
      * @ORM\JoinColumn(name="classifieds_model_id", referencedColumnName="id", nullable=true)
      */
     protected $classifiedsModel;
@@ -1062,11 +1061,11 @@ class ClassifiedsAd
     /**
      * Set classifiedsModelType.
      *
-     * @param ClassifiedsModelType $classifiedsModelType
+     * @param \Wbc\CrawlerBundle\Entity\ClassifiedsModelType $classifiedsModelType
      *
      * @return ClassifiedsAd
      */
-    public function setClassifiedsModelType(ClassifiedsModelType $classifiedsModelType = null)
+    public function setClassifiedsModelType(\Wbc\CrawlerBundle\Entity\ClassifiedsModelType $classifiedsModelType = null)
     {
         $this->classifiedsModelType = $classifiedsModelType;
 
@@ -1081,29 +1080,5 @@ class ClassifiedsAd
     public function getClassifiedsModelType()
     {
         return $this->classifiedsModelType;
-    }
-
-    /**
-     * Set modelType.
-     *
-     * @param string $modelType
-     *
-     * @return ClassifiedsAd
-     */
-    public function setModelType($modelType)
-    {
-        $this->modelType = $modelType;
-
-        return $this;
-    }
-
-    /**
-     * Get modelType.
-     *
-     * @return string
-     */
-    public function getModelType()
-    {
-        return $this->modelType;
     }
 }
