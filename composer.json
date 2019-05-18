@@ -18,6 +18,7 @@
     "doctrine/migrations": "^1.0",
     "doctrine/orm": "~2.2,>=2.2.3,<2.5",
     "erusev/parsedown": "1.6.2",
+    "friendsofsymfony/ckeditor-bundle": "~1.2.0",
     "friendsofsymfony/rest-bundle": "^2.3",
     "friendsofsymfony/user-bundle": "~2.0.1",
     "gedmo/doctrine-extensions": "~2.4@stable",

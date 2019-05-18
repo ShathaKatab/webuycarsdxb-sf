@@ -1,7 +1,7 @@
 <?php
 namespace Wbc\UtilityBundle;
 
-use Sonata\Form\Type\DateRangeType;
+use Sonata\Form\Type\DateRangePickerType;
 
 /**
  * Class AdminDateRange.
@@ -14,7 +14,7 @@ final class AdminDateRange
     {
         $now = new \DateTime();
         $options = [
-            'field_type' => DateRangeType::class,
+            'field_type' => DateRangePickerType::class,
             'field_options' => [
                 'field_options' => ['format' => 'MMM dd, yyyy'],
             ],
