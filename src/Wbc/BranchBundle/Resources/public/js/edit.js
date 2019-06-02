@@ -172,6 +172,9 @@ $(document).ready(function () {
             return;
         }
 
+        var dateString = (new Date(dateBooked - dateBooked.getTimezoneOffset() * 60000))
+            .toISOString().split('T')[0];
+
         branchTimingSelect.find('option').remove();
         branchTimingSelector2.text('');
 
@@ -187,7 +190,7 @@ $(document).ready(function () {
             }
         });
 
-        $.get('/admin/wbc/branch/appointment/branchTimings/' + branchId + '/'+ dateBooked.toISOString().slice(0, 10), function (data) {
+        $.get('/admin/wbc/branch/appointment/branchTimings/' + branchId + '/'+ dateString, function (data) {
             var items = JSON.parse(data);
 
             if(!items.length){

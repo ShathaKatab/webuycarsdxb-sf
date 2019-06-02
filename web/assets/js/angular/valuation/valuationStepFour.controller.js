@@ -109,10 +109,13 @@ angular
 
             vm.fetchBranchTimings = function(){
                 if(vm.selectedBranch && vm.appointmentDate instanceof Date){
+                    var dateBooked = (new Date(vm.appointmentDate - vm.appointmentDate.getTimezoneOffset() * 60000))
+                        .toISOString().split('T')[0];
+
                     var loader = angular.element($document[0].getElementById('loading-container'));
                     loader.show();
 
-                    vm.branchTimings = BranchTiming.query({branchSlug: vm.selectedBranch, appointmentDay: vm.appointmentDate.toISOString().slice(0, 10)}, function(response){
+                    vm.branchTimings = BranchTiming.query({branchSlug: vm.selectedBranch, appointmentDay: dateBooked}, function(response){
                         loader.hide();
                         vm.isTimingSlotsAvailable = Boolean(response.length);
                     });
