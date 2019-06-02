@@ -6,8 +6,5 @@ var webuycarsApp = angular.module(['webuycarsApp'], [
     'angular-toArrayFilter',
     'ngResource',
     'ngMap',
-    'ui.bootstrap',
-    'angular-momentjs'
-]).config(function ($momentProvider) {
-
-});
+    'ui.bootstrap'
+]);

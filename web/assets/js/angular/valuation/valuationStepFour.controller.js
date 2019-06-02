@@ -11,7 +11,6 @@ angular
         '$window',
         '$location',
         '$anchorScroll',
-        '$moment',
         'NgMap',
         'BranchTiming',
         'Appointment',
@@ -22,7 +21,6 @@ angular
             $window,
             $location,
             $anchorScroll,
-            $moment,
             NgMap,
             BranchTiming,
             Appointment
@@ -111,11 +109,10 @@ angular
 
             vm.fetchBranchTimings = function(){
                 if(vm.selectedBranch && vm.appointmentDate instanceof Date){
-                    var appointmentDate = $moment(vm.appointmentDate);
                     var loader = angular.element($document[0].getElementById('loading-container'));
                     loader.show();
 
-                    vm.branchTimings = BranchTiming.query({branchSlug: vm.selectedBranch, appointmentDay: appointmentDate.format('Y-MM-DD')}, function(response){
+                    vm.branchTimings = BranchTiming.query({branchSlug: vm.selectedBranch, appointmentDay: vm.appointmentDate.toISOString().slice(0, 10)}, function(response){
                         loader.hide();
                         vm.isTimingSlotsAvailable = Boolean(response.length);
                     });

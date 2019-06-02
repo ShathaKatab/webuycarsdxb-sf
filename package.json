@@ -36,9 +36,7 @@
     "@bower_components/moment": "moment/moment#>=2.9.0",
     "@bower_components/ngmap": "allenhwkim/angularjs-google-maps#^1.18.4",
     "@bower_components/respond": "scottjehl/Respond#^1.4.2",
-    "@bower_components/underscore": "jashkenas/underscore#^1.8.3",
-    "angular-momentjs": "^0.2.2",
-    "moment": "^2.24.0"
+    "@bower_components/underscore": "jashkenas/underscore#^1.8.3"
   },
   "engines": {
     "yarn": ">= 1.0.0"

@@ -145,14 +145,6 @@
   version "1.9.1"
   resolved "https://codeload.github.com/jashkenas/underscore/tar.gz/ae037f7c41323807ae6f1533c45512e6d31a1574"
 
-angular-momentjs@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/angular-momentjs/-/angular-momentjs-0.2.2.tgz#2a980b4b74039a6d45bbabaea2b0bdc0a505fad1"
-  integrity sha1-KpgLS3QDmm1Fu6uuorC9wKUF+tE=
-  dependencies:
-    angular "*"
-    moment "*"
-
 angular-simple-logger@>=0.0.1:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/angular-simple-logger/-/angular-simple-logger-0.1.7.tgz#4ae48e5eac0973f577845918e56d4933cf66f041"
@@ -161,15 +153,15 @@ angular-simple-logger@>=0.0.1:
     angular "^1.2"
     debug "^2.2.0"
 
-angular@*, angular@1.x, angular@^1.0.x, angular@^1.2:
-  version "1.7.8"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.8.tgz#b77ede272ce1b261e3be30c1451a0b346905a3c9"
-  integrity sha512-wtef/y4COxM7ZVhddd7JtAAhyYObq9YXKar9tsW7558BImeVYteJiTxCKeJOL45lJ/+7B4wrAC49j8gTFYEthg==
-
 "angular@1.2 - 1.6":
   version "1.6.10"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.6.10.tgz#eed3080a34d29d0f681ff119b18ce294e3f74826"
   integrity sha512-PCZ5/hVdvPQiYyH0VwsPjrErPHRcITnaXxhksceOXgtJeesKHLA7KDu4X/yvcAi+1zdGgGF+9pDxkJvghXI9Wg==
+
+angular@1.x, angular@^1.0.x, angular@^1.2:
+  version "1.7.8"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.8.tgz#b77ede272ce1b261e3be30c1451a0b346905a3c9"
+  integrity sha512-wtef/y4COxM7ZVhddd7JtAAhyYObq9YXKar9tsW7558BImeVYteJiTxCKeJOL45lJ/+7B4wrAC49j8gTFYEthg==
 
 chart.js@2.3.x:
   version "2.3.0"
@@ -253,7 +245,7 @@ markerclustererplus@2.1.4:
   resolved "https://registry.yarnpkg.com/markerclustererplus/-/markerclustererplus-2.1.4.tgz#901225180dd5d5fc0827753a18eee35afcf9c4f7"
   integrity sha1-kBIlGA3V1fwIJ3U6GO7jWvz5xPc=
 
-moment@*, moment@^2.10.2, moment@^2.10.6, moment@^2.24.0, moment@^2.9.0:
+moment@^2.10.2, moment@^2.10.6, moment@^2.9.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
   integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
