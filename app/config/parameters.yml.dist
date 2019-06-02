@@ -84,3 +84,5 @@ parameters:
     tech_email: 'developer@webuycarsdxb.com'
     valuation_emails: [sultanasad@mail.com]
     google_reviews_url: "https://goo.gl/19nXZp"
+    no_appointment_dates:
+        - '2020-01-01'

@@ -2,10 +2,10 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('assets/vendor/blockUI/jquery.blockUI.js') }}"></script>
+    <script src="{{ asset('assets/vendor/@bower_components/blockUI/jquery.blockUI.js') }}"></script>
     {% javascripts
         '@WbcBranchBundle/Resources/public/js/edit.js'
     %}
-    <script src="{{ asset_url }}" type="text/javascript"></script>
+        <script src="{{ asset_url }}" type="text/javascript"></script>
     {% endjavascripts %}
 {% endblock %}

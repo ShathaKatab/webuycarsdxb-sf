@@ -13,17 +13,20 @@ use Wbc\BranchBundle\Entity\Timing;
  */
 class TimingRepository extends EntityRepository
 {
+    private $noAppointmentDates = [];
+
     /**
      * @param Branch $branch
-     * @param int    $dayBooked
-     * @param bool   $admin
-     * @param bool   $timeConstrained
+     * @param \DateTime $dateBooked
+     * @param bool $admin
+     * @param bool $timeConstrained
      *
      * @return array
      */
-    public function findAllByBranchAndDay(Branch $branch, $dayBooked, $admin = false, $timeConstrained = true)
+    public function findAllByBranchAndDate(Branch $branch, \DateTime $dateBooked, $admin = false, $timeConstrained = true)
     {
         $now = new \DateTime();
+        $dayBooked = $dateBooked->format('N');
 
         $queryBuilder = $this->createQueryBuilder('t')
             ->select('t')
@@ -34,19 +37,27 @@ class TimingRepository extends EntityRepository
             ->orderBy('t.dayBooked', 'ASC')
             ->addOrderBy('t.from', 'ASC');
 
-        if ($timeConstrained && (int) $dayBooked === $now->format('N')) {
+        if ($timeConstrained && $dateBooked->format('Y-m-d') === $now->format('Y-m-d')) {
             $queryBuilder->andWhere('t.from >= :fromTime')
                 ->setParameter(':fromTime', Timing::formatDateTimeToInteger($now));
         }
 
         if (false === $admin) {
-            $queryBuilder->andWhere('t.adminOnly = :falsy')->setParameter(':falsy', false, \PDO::PARAM_BOOL);
+            $queryBuilder->andWhere('t.adminOnly = :falsy')
+                ->setParameter(':falsy', false, \PDO::PARAM_BOOL);
 
-            if (in_array($dayBooked, [2, 3, 4, 5]) && $now->format('Y-m-d') < '2018-08-25') {
+            if (in_array($dateBooked->format('Y-m-d'), $this->noAppointmentDates)) {
                 return [];
             }
         }
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function setNoAppointmentDates(array $noAppointmentDates = []): self
+    {
+        $this->noAppointmentDates = $noAppointmentDates;
+
+        return $this;
     }
 }

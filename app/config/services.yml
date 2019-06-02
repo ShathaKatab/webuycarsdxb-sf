@@ -28,3 +28,11 @@ services:
         class: Doctrine\Common\Cache\MemcachedCache
         calls:
             - [ setMemcached, [@memcached] ]
+
+    timing_repository:
+        class: Wbc\BranchBundle\Repository\TimingRepository
+        factory: ['@doctrine', getRepository]
+        calls:
+            - [setNoAppointmentDates, ['%no_appointment_dates%']]
+        arguments:
+            - 'WbcBranchBundle:Timing'

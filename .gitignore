@@ -43,12 +43,24 @@
 
 .php_cs.cache
 
-/web/assets/vendor
+/web/assets/vendor/*
+!/web/assets/vendor/.gitkeep
 /web/assets/app.js
-/web/assets/css
 /web/assets/bundles
 !/web/assets/angular/*
 !/web/assets/jquery/*
+
+web/css/*
+!/web/css/.gitkeep
+web/js/*
+!web/js/.gitkeep
+web/admin/css/*
+!web/admin/css/.gitkeep
+web/admin/js/*
+!web/admin/js/.gitkeep
+
+
+
 
 .htaccess
 

@@ -1,0 +1,49 @@
+{
+  "name": "majidmvulle-webuycars-sf",
+  "version": "1.0.0",
+  "description": "The Easiest Way to Sell a Car in Dubai",
+  "main": "index.js",
+  "repository": "git@github.com:majidmvulle/webuycarsdxb-sf.git",
+  "author": "Majid Mvulle <majid@majidmvulle.com>",
+  "license": "None",
+  "private": true,
+  "dependencies": {
+    "@bower_components/angular": "angular/bower-angular#^1.2.17",
+    "@bower_components/angular-block-ui": "McNull/angular-block-ui#^0.2.2",
+    "@bower_components/angular-bootstrap": "angular-ui/bootstrap-bower#^2.5.0",
+    "@bower_components/angular-chart.js": "jtblin/angular-chart.js#^1.1.1",
+    "@bower_components/angular-cookies": "angular/bower-angular-cookies#^1.6.4",
+    "@bower_components/angular-daterangepicker": "fragaria/angular-daterangepicker#^0.2.2",
+    "@bower_components/angular-google-maps": "angular-ui/angular-google-maps#^2.4.1",
+    "@bower_components/angular-resource": "angular/bower-angular-resource#^1.6.4",
+    "@bower_components/angular-simple-logger": "nmccready/angular-simple-logger#>=0.0.1",
+    "@bower_components/angular-slugify": "paulsmith/angular-slugify#^1.0.1",
+    "@bower_components/angular-toArrayFilter": "petebacondarwin/angular-toArrayFilter#^1.0.1",
+    "@bower_components/blockUI": "malsup/blockui#*",
+    "@bower_components/bootstrap": "twbs/bootstrap#^3.0.0",
+    "@bower_components/bootstrap-daterangepicker": "dangrossman/bootstrap-daterangepicker#^2.0.0",
+    "@bower_components/bootstrap-sass": "twbs/bootstrap-sass#^3.3.7",
+    "@bower_components/chart.js": "chartjs/Chart.js#2.x",
+    "@bower_components/font-awesome": "FortAwesome/Font-Awesome#^4.7.0",
+    "@bower_components/google-maps-utility-library-v3-infobox": "nmccready/google-maps-utility-library-v3-infobox#^1.1.14",
+    "@bower_components/google-maps-utility-library-v3-keydragzoom": "nmccready/google-maps-utility-library-v3-keydragzoom#^2.0.9",
+    "@bower_components/google-maps-utility-library-v3-markerwithlabel": "git://github.com/nmccready/google-maps-utility-library-v3-markerwithlabel.git#*",
+    "@bower_components/html5shiv": "aFarkas/html5shiv#^3.7.3",
+    "@bower_components/jquery": "jquery/jquery-dist#>=1.7",
+    "@bower_components/js-rich-marker": "ashsidhu/js-rich-marker#*",
+    "@bower_components/lodash": "lodash/lodash#3.X - 4.X",
+    "@bower_components/markerclustererplus": "mahnunchik/markerclustererplus#^2.1.4",
+    "@bower_components/moment": "moment/moment#>=2.9.0",
+    "@bower_components/ngmap": "allenhwkim/angularjs-google-maps#^1.18.4",
+    "@bower_components/respond": "scottjehl/Respond#^1.4.2",
+    "@bower_components/underscore": "jashkenas/underscore#^1.8.3",
+    "angular-momentjs": "^0.2.2",
+    "moment": "^2.24.0"
+  },
+  "engines": {
+    "yarn": ">= 1.0.0"
+  },
+  "scripts": {
+    "postinstall": "node -e \"try { require('fs').symlinkSync(require('path').resolve('node_modules/@bower_components'), 'web/assets/vendor', 'junction') } catch (e) { }\""
+  }
+}

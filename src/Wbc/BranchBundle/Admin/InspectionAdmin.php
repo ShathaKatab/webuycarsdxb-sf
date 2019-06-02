@@ -403,7 +403,7 @@ class InspectionAdmin extends AbstractAdmin
             ->end()
             ->with('Timings')
             ->add('appointment.branch')
-            ->add('appointment.dayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Day Booked'])
+            ->add('appointment.dayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Days Booked'])
             ->add('appointment.dateBooked')
             ->add('appointment.branchTiming')
             ->add('appointment.notes', 'textarea')
@@ -422,7 +422,7 @@ class InspectionAdmin extends AbstractAdmin
             ->remove('delete')
             ->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
-            ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
+            ->add('listBranchTimings', 'branchTimings/{branchId}/{date}')
             ->add('generateDeal', $this->getRouterIdParameter().'/generateDeal')
         ;
     }

@@ -335,7 +335,7 @@ class DealAdmin extends AbstractAdmin
             ->end()
             ->with('Timings')
             ->add('appointmentBranch')
-            ->add('appointmentDayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Day Booked'])
+            ->add('appointmentDayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Days Booked'])
             ->add('dateBookedString')
             ->add('appointmentBranchTiming')
             ->add('appointmentNotes')
@@ -351,7 +351,7 @@ class DealAdmin extends AbstractAdmin
         $collection->remove('create')
             ->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
-            ->add('listBranchTimings', 'branchTimings/{branchId}/{day}');
+            ->add('listBranchTimings', 'branchTimings/{branchId}/{date}');
     }
 
     private function getValuationSources()

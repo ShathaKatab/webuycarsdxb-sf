@@ -364,7 +364,7 @@ class AppointmentAdmin extends AbstractAdmin
         $showMapper->tab('Appointment Information')
             ->with('')
             ->add('branch')
-            ->add('branchTiming.dayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Day Booked'])
+            ->add('branchTiming.dayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Days Booked'])
             ->add('dateBooked')
             ->add('branchTiming')
             ->add('valuation.priceOnline', 'currency', ['currency' => 'AED'])
@@ -384,7 +384,7 @@ class AppointmentAdmin extends AbstractAdmin
     {
         $collection->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
-            ->add('listBranchTimings', 'branchTimings/{branchId}/{day}')
+            ->add('listBranchTimings', 'branchTimings/{branchId}/{date}')
             ->add('generateInspection', $this->getRouterIdParameter().'/generateInspection')
             ->add('sendSms', $this->getRouterIdParameter().'/sendSms');
     }

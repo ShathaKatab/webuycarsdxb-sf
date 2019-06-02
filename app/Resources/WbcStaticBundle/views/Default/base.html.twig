@@ -262,18 +262,21 @@
 
 {% block javascripts %}
     <!--[if lt IE 9]>
-    <script src="{{ asset('assets/vendor/html5shiv/dist/html5shiv.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/respond/dest/respond.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/@bower_components/html5shiv/dist/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/@bower_components/respond/dest/respond.min.js') }}"></script>
     <![endif]-->
     {% javascripts filter='?jsqueeze' output='js/app.js'
         'assets/vendor/jquery/dist/jquery.js'
-        'assets/vendor/bootstrap-sass/assets/javascripts/bootstrap.min.js'
+        'assets/vendor/jquery/dist/jquery.js'
+        'assets/vendor/moment/min/moment.min.js'
+        'assets/vendor/@bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
         'assets/vendor/angular/angular.js'
-        'assets/vendor/angular-resource/angular-resource.js'
-        'assets/vendor/angular-toArrayFilter/toArrayFilter.js'
-        'assets/vendor/angular-block-ui/dist/angular-block-ui.js'
-        'assets/vendor/ngmap/build/scripts/ng-map.js'
-        'assets/vendor/angular-bootstrap/ui-bootstrap-tpls.js'
+        'assets/vendor/angular-momentjs/angular-momentjs.js'
+        'assets/vendor/@bower_components/angular-resource/angular-resource.js'
+        'assets/vendor/@bower_components/angular-toArrayFilter/toArrayFilter.js'
+        'assets/vendor/@bower_components/angular-block-ui/dist/angular-block-ui.js'
+        'assets/vendor/@bower_components/ngmap/build/scripts/ng-map.js'
+        'assets/vendor/@bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
         'assets/js/jquery/app.js'
         'assets/js/angular/app.js'
         'assets/js/angular/directives/wbcLoading.directive.js'

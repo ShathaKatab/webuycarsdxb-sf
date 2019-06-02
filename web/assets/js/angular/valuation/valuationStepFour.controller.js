@@ -11,10 +11,22 @@ angular
         '$window',
         '$location',
         '$anchorScroll',
+        '$moment',
         'NgMap',
         'BranchTiming',
         'Appointment',
-        function ($scope, $filter, $document, $window, $location, $anchorScroll, NgMap, BranchTiming, Appointment) {
+        function (
+            $scope,
+            $filter,
+            $document,
+            $window,
+            $location,
+            $anchorScroll,
+            $moment,
+            NgMap,
+            BranchTiming,
+            Appointment
+        ) {
             var vm = this;
             var defaultLat = 25.206497;
             var defaultLng = 55.268743;
@@ -43,7 +55,7 @@ angular
                 minDate: new Date(),
                 maxDate: maxDate,
                 showWeeks: false,
-                startingDay: 6,
+                startingDay: 7,
                 maxMode: 'day'
             };
 
@@ -98,16 +110,12 @@ angular
             };
 
             vm.fetchBranchTimings = function(){
-                if(vm.selectedBranch && vm.appointmentDate){
-                    var appointmentDay = vm.appointmentDate.getDay();
-                    if(appointmentDay === 0){
-                        appointmentDay = 7;
-                    }
-
+                if(vm.selectedBranch && vm.appointmentDate instanceof Date){
+                    var appointmentDate = $moment(vm.appointmentDate);
                     var loader = angular.element($document[0].getElementById('loading-container'));
                     loader.show();
 
-                    vm.branchTimings = BranchTiming.query({branchSlug: vm.selectedBranch, appointmentDay: appointmentDay}, function(response){
+                    vm.branchTimings = BranchTiming.query({branchSlug: vm.selectedBranch, appointmentDay: appointmentDate.format('Y-MM-DD')}, function(response){
                         loader.hide();
                         vm.isTimingSlotsAvailable = Boolean(response.length);
                     });

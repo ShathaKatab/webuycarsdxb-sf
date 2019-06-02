@@ -66,8 +66,10 @@ class CRUDController extends Controller
      */
     public function listBranchTimingsAction(Branch $branch, Request $request)
     {
+        $dateBooked = new \DateTime($request->get('date'));
+
         $timings = $this->get('doctrine.orm.default_entity_manager')->getRepository('WbcBranchBundle:Timing')
-            ->findAllByBranchAndDay($branch, $request->get('day'), true);
+            ->findAllByBranchAndDate($branch, $dateBooked, true);
 
         return new Response($this->get('serializer')->serialize($timings, 'json'));
     }

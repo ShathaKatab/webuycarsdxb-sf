@@ -89,7 +89,7 @@
     </div>
 {% endblock %}
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap-daterangepicker/daterangepicker.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('assets/vendor/@bower_components/bootstrap-daterangepicker/daterangepicker.css') }}"/>
             {{ parent() }}
         {% endblock %}
    {% block javascripts %}
@@ -97,13 +97,13 @@
        {% javascripts filter='?jsqueeze' output='admin/js/app.js'
            'assets/vendor/moment/min/moment-with-locales.min.js'
            'assets/vendor/angular/angular.js'
-           'assets/vendor/angular-resource/angular-resource.min.js'
-           'assets/vendor/angular-cookies/angular-cookies.min.js'
-           'assets/vendor/angular-toArrayFilter/toArrayFilter.js'
+           'assets/vendor/@bower_components/angular-resource/angular-resource.min.js'
+           'assets/vendor/@bower_components/angular-cookies/angular-cookies.min.js'
+           'assets/vendor/@bower_components/angular-toArrayFilter/toArrayFilter.js'
            'assets/vendor/chart.js/dist/Chart.min.js'
-           'assets/vendor/angular-chart.js/dist/angular-chart.min.js'
-           'assets/vendor/bootstrap-daterangepicker/daterangepicker.js'
-           'assets/vendor/angular-daterangepicker/js/angular-daterangepicker.min.js'
+           'assets/vendor/@bower_components/angular-chart.js/dist/angular-chart.min.js'
+           'assets/vendor/@bower_components/bootstrap-daterangepicker/daterangepicker.js'
+           'assets/vendor/@bower_components/angular-daterangepicker/js/angular-daterangepicker.min.js'
            'assets/admin/js/angular/app.js'
            'assets/admin/js/angular/dashboard/stats.controller.js'
            'assets/admin/js/angular/dashboard/stat-item.component.js'

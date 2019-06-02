@@ -172,12 +172,6 @@ $(document).ready(function () {
             return;
         }
 
-        var day = dateBooked.getDay();
-
-        if(day === 0){
-            day = 7; //fix to match ISO-8601 where Sunday is 7 instead of 0
-        }
-
         branchTimingSelect.find('option').remove();
         branchTimingSelector2.text('');
 
@@ -193,7 +187,7 @@ $(document).ready(function () {
             }
         });
 
-        $.get('/admin/wbc/branch/appointment/branchTimings/' + branchId + '/'+day, function (data) {
+        $.get('/admin/wbc/branch/appointment/branchTimings/' + branchId + '/'+ dateBooked.toISOString().slice(0, 10), function (data) {
             var items = JSON.parse(data);
 
             if(!items.length){
