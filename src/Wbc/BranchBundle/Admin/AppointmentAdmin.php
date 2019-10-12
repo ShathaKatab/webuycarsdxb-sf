@@ -70,7 +70,21 @@ class AppointmentAdmin extends AbstractAdmin
 
     public function getExportFields()
     {
-        return ['name', 'mobileNumber', 'emailAddress',  'vehicleMake', 'vehicleModel', 'vehicleYear', 'valuation.priceOnline', 'dateBooked', 'branchTiming', 'status', 'createdAt', 'createdBy'];
+        return [
+            'name',
+            'mobileNumber',
+            'emailAddress',
+            'vehicleMake',
+            'vehicleModel',
+            'vehicleYear',
+            'valuation.priceOnline',
+            'dateBooked',
+            'branchTiming',
+            'status',
+            'source',
+            'createdAt',
+            'createdBy',
+        ];
     }
 
     /**
@@ -87,7 +101,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureFormFields(FormMapper $formMapper)
+    protected function configureFormFields(FormMapper $formMapper): void
     {
         /** @var $subject \Wbc\BranchBundle\Entity\Appointment */
         $subject = $this->getSubject();
@@ -215,7 +229,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
         $now = new \DateTime();
 
@@ -288,7 +302,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureListFields(ListMapper $listMapper)
+    protected function configureListFields(ListMapper $listMapper): void
     {
         $filterParams = $this->getFilterParameters();
 
@@ -306,7 +320,7 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('branch')
         ;
 
-        if (isset($filterParams['dateRange']['value']) && $filterParams['dateRange']['value'] === 'today') {
+        if (isset($filterParams['dateRange']['value']) && 'today' === $filterParams['dateRange']['value']) {
             $listMapper->add('branchTiming.adminListTiming', 'text', [
                 'label' => 'Timing',
                 'sortable' => true,
@@ -336,7 +350,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureShowFields(ShowMapper $showMapper)
+    protected function configureShowFields(ShowMapper $showMapper): void
     {
         $showMapper->tab('Vehicle Information')
             ->with('')
@@ -380,7 +394,7 @@ class AppointmentAdmin extends AbstractAdmin
     /**
      * {@inheritdoc}
      */
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollection $collection): void
     {
         $collection->add('listVehicleModelsByMake', sprintf('modelsByMake/%s', $this->getRouterIdParameter()))
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))

@@ -10,7 +10,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\CoreBundle\Validator\ErrorElement;
+use Sonata\Form\Validator\ErrorElement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -43,7 +43,27 @@ class InventoryAdmin extends AbstractAdmin
      */
     public function getExportFields()
     {
-        return ['id', 'make', 'model', 'year', 'mileage', 'purchasedAt', 'soldAt', 'age', 'additionalCost', 'pricePurchased', 'overallCost', 'priceSold', 'grossProfit', 'netProfit', 'salesman', 'source', 'status', 'soldToDealer'];
+        return [
+            'id',
+            'make',
+            'model',
+            'year',
+            'mileage',
+            'purchasedAt',
+            'soldAt',
+            'age',
+            'additionalCost',
+            'pricePurchased',
+            'overallCost',
+            'priceSold',
+            'grossProfit',
+            'netProfit',
+            'salesman',
+            'source',
+            'status',
+            'source',
+            'soldToDealer',
+        ];
     }
 
     /**
@@ -60,7 +80,7 @@ class InventoryAdmin extends AbstractAdmin
         }
     }
 
-    public function prePersist($object)
+    public function prePersist($object): void
     {
         $tokenStorage = $this->getConfigurationPool()->getContainer()->get('security.token_storage');
         if ($tokenStorage->getToken()) {
@@ -68,7 +88,7 @@ class InventoryAdmin extends AbstractAdmin
         }
     }
 
-    public function validate(ErrorElement $errorElement, $object)
+    public function validate(ErrorElement $errorElement, $object): void
     {
         parent::validate($errorElement, $object);
 
@@ -86,15 +106,15 @@ class InventoryAdmin extends AbstractAdmin
             return; //status not changed
         }
 
-        if ('sold' === $newStatus && in_array($oldStatus, ['in-stock', 'in-garage'])) {
+        if ('sold' === $newStatus && \in_array($oldStatus, ['in-stock', 'in-garage'], true)) {
             $canTransition = true;
         }
 
-        if ('in-stock' === $newStatus && $oldStatus === 'in-garage') {
+        if ('in-stock' === $newStatus && 'in-garage' === $oldStatus) {
             $canTransition = true;
         }
 
-        if ('in-garage' === $newStatus && $oldStatus === 'in-stock') {
+        if ('in-garage' === $newStatus && 'in-stock' === $oldStatus) {
             $canTransition = true;
         }
 
@@ -103,7 +123,20 @@ class InventoryAdmin extends AbstractAdmin
         }
     }
 
-    protected function configureFormFields(FormMapper $form)
+    public function postUpdate($object): void
+    {
+        parent::postUpdate($object);
+
+        $usedCar = $object->getUsedCar();
+
+        if ($usedCar && $usedCar->getActive()) {
+            $usedCar->setActive(false);
+        }
+
+        $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager')->flush();
+    }
+
+    protected function configureFormFields(FormMapper $form): void
     {
         /** @var $subject \Wbc\InventoryBundle\Entity\Inventory */
         $subject = $this->getSubject();
@@ -201,7 +234,7 @@ class InventoryAdmin extends AbstractAdmin
             ->end();
     }
 
-    protected function configureListFields(ListMapper $list)
+    protected function configureListFields(ListMapper $list): void
     {
         $list->addIdentifier('id')
             ->add('make')
@@ -211,7 +244,7 @@ class InventoryAdmin extends AbstractAdmin
             ->add('status', 'choice', ['choices' => Inventory::getStatuses()])
             ->add('pricePurchased', MoneyType::class, ['currency' => 'AED'])
             ->add('priceSold', MoneyType::class, ['currency' => 'AED'])
-            ->add('profit', MoneyType::class, ['currency'=> 'AED', 'label' => 'GP'])
+            ->add('profit', MoneyType::class, ['currency' => 'AED', 'label' => 'GP'])
             ->add('soldAt')
             ->add('soldToDealer', null, ['label' => 'Sold To'])
             ->add('_action', 'actions', [
@@ -223,7 +256,7 @@ class InventoryAdmin extends AbstractAdmin
             ]);
     }
 
-    protected function configureShowFields(ShowMapper $show)
+    protected function configureShowFields(ShowMapper $show): void
     {
         $show->tab('Vehicle Information')
             ->with('Vehicle Details')
@@ -264,25 +297,9 @@ class InventoryAdmin extends AbstractAdmin
             ->end();
     }
 
-    protected function configureRoutes(RouteCollection $collection)
+    protected function configureRoutes(RouteCollection $collection): void
     {
         $collection->remove('delete')
             ->add('generateUsedCarFromInventory', $this->getRouterIdParameter().'/generateUsedCarFromInventory');
     }
-
-
-    public function postUpdate($object)
-    {
-        parent::postUpdate($object);
-
-        $usedCar = $object->getUsedCar();
-
-        if($usedCar && $usedCar->getActive()){
-            $usedCar->setActive(false);
-        }
-
-        $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager')->flush();
-    }
-
-
 }

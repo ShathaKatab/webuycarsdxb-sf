@@ -14,7 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\UtilityBundle\AdminDateRange;
 use Wbc\ValuationBundle\Entity\Valuation;
 use Wbc\VehicleBundle\Entity\Make;
@@ -41,7 +40,19 @@ class ValuationAdmin extends AbstractAdmin
      */
     public function getExportFields()
     {
-        return ['name', 'mobileNumber', 'emailAddress', 'vehicleYear', 'vehicleMake', 'vehicleModel', 'vehicleMileage', 'priceOnline', 'hasAppointment', 'createdAt'];
+        return [
+            'name',
+            'mobileNumber',
+            'emailAddress',
+            'vehicleYear',
+            'vehicleMake',
+            'vehicleModel',
+            'vehicleMileage',
+            'priceOnline',
+            'hasAppointment',
+            'source',
+            'createdAt',
+        ];
     }
 
     /**
