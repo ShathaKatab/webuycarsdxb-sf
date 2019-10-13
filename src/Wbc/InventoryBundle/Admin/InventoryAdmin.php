@@ -59,7 +59,6 @@ class InventoryAdmin extends AbstractAdmin
             'grossProfit',
             'netProfit',
             'salesman',
-            'source',
             'status',
             'source',
             'soldToDealer',
@@ -246,6 +245,7 @@ class InventoryAdmin extends AbstractAdmin
             ->add('priceSold', MoneyType::class, ['currency' => 'AED'])
             ->add('profit', MoneyType::class, ['currency' => 'AED', 'label' => 'GP'])
             ->add('soldAt')
+            ->add('source')
             ->add('soldToDealer', null, ['label' => 'Sold To'])
             ->add('_action', 'actions', [
                 'actions' => ['show' => [],
