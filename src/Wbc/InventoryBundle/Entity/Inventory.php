@@ -255,6 +255,13 @@ class Inventory
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="source", type="string", length=20, nullable=true)
+     */
+    protected $source;
+
+    /**
+     * @var string
      */
     protected $transitionName;
 
@@ -579,6 +586,7 @@ class Inventory
         $this->deal = $deal;
 
         if ($deal) {
+            $this->source = $deal->getSource();
             $this->setPricePurchased($deal->getPricePurchased());
         }
 
@@ -825,15 +833,28 @@ class Inventory
         return $deal->getCreatedBy();
     }
 
+    /**
+     * Set source.
+     *
+     * @param $source
+     *
+     * @return $this
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * Get source.
+     *
+     * @return string
+     */
     public function getSource()
     {
-        $deal = $this->getDeal();
-
-        if (!$deal) {
-            return '';
-        }
-
-        return $deal->getAppointment()->getValuation()->getSource();
+        return $this->source;
     }
 
     /**
@@ -893,6 +914,7 @@ class Inventory
             $this->bodyCondition = $inspection->getVehicleBodyCondition();
             $this->options = $appointment ? $appointment->getVehicleOption() : null;
             $this->color = $inspection->getVehicleColor();
+            $this->source = $inspection->getSource();
         }
 
         return $this;
@@ -930,6 +952,6 @@ class Inventory
 
     public function getProfit()
     {
-        return $this->status === self::STATUS_SOLD ? (float) $this->priceSold - $this->pricePurchased : 0;
+        return self::STATUS_SOLD === $this->status ? (float) $this->priceSold - $this->pricePurchased : 0;
     }
 }
