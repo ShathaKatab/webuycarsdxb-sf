@@ -5,6 +5,7 @@ imports:
     - { resource: services.yml }
     - { resource: sonata/sonata_formatter.yml }
     - { resource: ivory/ivory_ckeditor.yml }
+    - { resource: bugsnag.yml }
 
 parameters:
     locale: en
