@@ -9,6 +9,7 @@
   "require": {
     "php": ">=7.1",
     "ext-memcached": "^3.0",
+    "bugsnag/bugsnag-symfony": "^1.5",
     "craue/config-bundle": "^2.0",
     "danielstjules/stringy": "^3.0",
     "doctrine/dbal": "<2.5",
