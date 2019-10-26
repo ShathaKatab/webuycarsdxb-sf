@@ -143,7 +143,6 @@ class ValuationAdmin extends AbstractAdmin
             ->add('vehicleMileage', null, ['label' => 'Mileage (Kms)'])
             ->add('vehicleOption', 'choice', ['choices' => OptionType::getOptions()])
             ->add('priceOnline', 'currency', ['currency' => 'AED'])
-            ->add('priceOnline', 'currency', ['currency' => 'AED'])
             ->add('actualPrice', 'currency', ['currency' => 'AED'])
             ->add('discountPercentage', null, ['label' => 'Disc. %'])
             ->add('hasAppointment', 'boolean')
