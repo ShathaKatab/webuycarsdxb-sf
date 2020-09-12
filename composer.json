@@ -12,7 +12,7 @@
     ]
   },
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.4",
     "ext-memcached": "^3.0",
     "bugsnag/bugsnag-symfony": "^1.5",
     "craue/config-bundle": "^2.4.0",
@@ -82,7 +82,7 @@
   "config": {
     "bin-dir": "bin",
     "platform": {
-      "php": "7.2"
+      "php": "7.4"
     },
     "sort-packages": true
   },
