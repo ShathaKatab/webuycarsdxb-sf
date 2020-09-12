@@ -1,6 +1,7 @@
 <?php
 
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
@@ -70,13 +71,33 @@ class AppKernel extends Kernel
     {
         return __DIR__;
     }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getCacheDir()
     {
-        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
+        $file = new File('/dev/shm/appname/cache' . '/' . $this->environment, false);
+
+        if (in_array($this->environment, ['dev', 'test'], true) && $file->isWritable()) {
+            return '/dev/shm/appname/cache/'.$this->environment;
+        }
+
+        return dirname(__DIR__).'/var/cache/'.$this->environment;
     }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getLogDir()
     {
-        return dirname(__DIR__).'/var/logs';
+        $file = new File('/dev/shm/appname/logs' . '/' . $this->environment, false);
+
+        if (in_array($this->environment, ['dev', 'test'], true) && $file->isWritable()) {
+            return '/dev/shm/appname/logs'.'/'.$this->environment;
+        }
+
+        return dirname(__DIR__).'/var/logs/';
     }
 }
 

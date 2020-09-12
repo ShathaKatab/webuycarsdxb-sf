@@ -27,7 +27,7 @@ services:
     memcached_cache:
         class: Doctrine\Common\Cache\MemcachedCache
         calls:
-            - [ setMemcached, [@memcached] ]
+            - [ setMemcached, ['@memcached'] ]
 
     timing_repository:
         class: Wbc\BranchBundle\Repository\TimingRepository
