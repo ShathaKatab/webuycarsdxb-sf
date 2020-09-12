@@ -87,3 +87,5 @@ parameters:
     no_appointment_dates:
         - '2020-01-01'
     bugsnag_api_key: ~
+    rate_limit_valuations_hour: 3
+    rate_limit_appointments_hour: 3

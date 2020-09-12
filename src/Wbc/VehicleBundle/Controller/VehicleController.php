@@ -5,6 +5,7 @@ namespace Wbc\VehicleBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as CF;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\SerializerInterface;
 use Wbc\VehicleBundle\Entity\Make;
 
 /**
@@ -29,6 +30,6 @@ class VehicleController extends Controller
     {
         $models = $this->get('doctrine.orm.default_entity_manager')->getRepository('WbcVehicleBundle:Model')->findByMakeId($make->getId());
 
-        return new Response($this->get('serializer')->serialize($models, 'json'), Response::HTTP_OK, ['content-type' => 'application/json']);
+        return new Response($this->get('jms_serializer')->serialize($models, 'json'), Response::HTTP_OK, ['content-type' => 'application/json']);
     }
 }

@@ -42,7 +42,7 @@ class BranchController extends Controller
         $branchTimings = $this->get('timing_repository')->findAllByBranchAndDate($branch, $date);
 
         return new Response(
-            $this->get('serializer')->serialize($branchTimings, 'json'),
+            $this->get('jms_serializer')->serialize($branchTimings, 'json'),
             Response::HTTP_OK,
             ['content-type' => 'application/json']
         );

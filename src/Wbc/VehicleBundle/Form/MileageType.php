@@ -20,7 +20,7 @@ class MileageType extends AbstractType
     {
         $resolver->setDefaults([
             'label' => 'Vehicle Mileage',
-            'choices' => self::getMileages(),
+            'choices' => array_keys(self::getMileages()),
             'placeholder' => '',
         ]);
     }

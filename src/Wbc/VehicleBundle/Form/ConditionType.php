@@ -20,7 +20,7 @@ class ConditionType extends AbstractType
     {
         $resolver->setDefaults([
             'label' => 'Vehicle Condition',
-            'choices' => self::getConditions(),
+            'choices' => array_keys(self::getConditions()),
             'placeholder' => '', ]);
     }
 

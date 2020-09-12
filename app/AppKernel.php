@@ -39,6 +39,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new SunCat\MobileDetectBundle\MobileDetectBundle(),
             new Bugsnag\BugsnagBundle\BugsnagBundle(),
+            new Snc\RedisBundle\SncRedisBundle(),
+            new Noxlogic\RateLimitBundle\NoxlogicRateLimitBundle(),
 
             new Wbc\UserBundle\WbcUserBundle(),
             new Wbc\UtilityBundle\WbcUtilityBundle(),
@@ -98,26 +100,5 @@ class AppKernel extends Kernel
         }
 
         return dirname(__DIR__).'/var/logs/';
-    }
-}
-
-//APC Polyfills for PHP7
-if (!function_exists('apc_fetch')) {
-    function apc_fetch($key, &$success = null)
-    {
-        return apcu_fetch($key, $success);
-    }
-}
-
-if (!function_exists('apc_exists')) {
-    function apc_exists($keys)
-    {
-        return apcu_exists($keys);
-    }
-}
-if (!function_exists('apc_store')) {
-    function apc_store($keys)
-    {
-        return apcu_store($keys);
     }
 }

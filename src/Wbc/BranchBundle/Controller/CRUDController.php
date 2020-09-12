@@ -32,7 +32,7 @@ class CRUDController extends Controller
      */
     public function listVehicleModelsByMakeAction(Request $request)
     {
-        return new Response($this->get('serializer')->serialize(
+        return new Response($this->get('jms_serializer')->serialize(
             $this->get('doctrine.orm.default_entity_manager')
                 ->getRepository('WbcVehicleBundle:Model')
                 ->findByMakeId($request->get('id')),
@@ -48,7 +48,7 @@ class CRUDController extends Controller
      */
     public function listVehicleModelTypesByModelAction(Request $request)
     {
-        return new Response($this->get('serializer')->serialize(
+        return new Response($this->get('jms_serializer')->serialize(
             $this->get('doctrine.orm.default_entity_manager')
                 ->getRepository('WbcVehicleBundle:ModelType')
                 ->findAllBy(null, $request->get('id')), 'json'));
@@ -71,7 +71,7 @@ class CRUDController extends Controller
         $timings = $this->get('doctrine.orm.default_entity_manager')->getRepository('WbcBranchBundle:Timing')
             ->findAllByBranchAndDate($branch, $dateBooked, true);
 
-        return new Response($this->get('serializer')->serialize($timings, 'json'));
+        return new Response($this->get('jms_serializer')->serialize($timings, 'json'));
     }
 
     /**
