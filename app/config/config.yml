@@ -119,9 +119,6 @@ swiftmailer:
 
 # Doctrine Migrations Configuration
 doctrine_migrations:
-    # List of namespace/path pairs to search for migrations, at least one required
-    migrations_paths:
-        'Application\Migrations': 'app/DoctrineMigrations'
     dir_name: "%kernel.root_dir%/DoctrineMigrations"
     namespace: Application\Migrations
     table_name: migration_versions
