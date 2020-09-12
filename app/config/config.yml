@@ -119,6 +119,9 @@ swiftmailer:
 
 # Doctrine Migrations Configuration
 doctrine_migrations:
+    # List of namespace/path pairs to search for migrations, at least one required
+    migrations_paths:
+        'Application\Migrations': 'app/DoctrineMigrations'
     dir_name: "%kernel.root_dir%/DoctrineMigrations"
     namespace: Application\Migrations
     table_name: migration_versions
@@ -214,7 +217,7 @@ snc_redis:
             dsn: redis://localhost
 
 noxlogic_rate_limit:
-    enabled:              false
+    enabled:              true
 
     # The storage engine where all the rates will be stored
     storage_engine:       redis # One of "redis"; "memcache"; "doctrine"; "php_redis"; "php_redis_cluster"
@@ -254,7 +257,7 @@ noxlogic_rate_limit:
     rate_response_message:  'You exceeded the rate limit'
 
 #    # Should the ratelimit headers be automatically added to the response?
-    display_headers:      true
+    display_headers:      false
 #
 #    # What are the different header names to add
     headers:
