@@ -9,7 +9,7 @@ imports:
 
 parameters:
     locale: en
-    craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\SymfonyCacheComponentAdapter
+    craue_config.cache_adapter.class: Craue\ConfigBundle\CacheAdapter\DoctrineCacheBundleAdapter
     craue_config.redirectRouteAfterModify: sonata_admin_dashboard
 
 framework:
@@ -160,6 +160,14 @@ lexik_maintenance:
     driver:
         class: '\Lexik\Bundle\MaintenanceBundle\Drivers\FileDriver'
         options: {file_path: "%kernel.root_dir%/cache/lock"}
+
+doctrine_cache:
+    providers:
+        craue_config_cache:
+            apc: ~
+            namespace: craue_config
+            aliases:
+                - craue_config_cache_provider
 
 sonata_media:
     # if you don't use default namespace configuration

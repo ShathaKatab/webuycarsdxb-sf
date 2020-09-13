@@ -36,10 +36,3 @@ services:
             - [setNoAppointmentDates, ['%no_appointment_dates%']]
         arguments:
             - 'WbcBranchBundle:Timing'
-    craue_config_cache_provider:
-        class: Symfony\Component\Cache\Adapter\FilesystemAdapter
-        public: false
-        arguments:
-            - 'craue_config'
-            - 0
-            - '%kernel.cache_dir%'
