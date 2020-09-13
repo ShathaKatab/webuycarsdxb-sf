@@ -270,10 +270,9 @@ noxlogic_rate_limit:
         remaining:            X-RateLimit-Remaining
         reset:                X-RateLimit-Reset
 
-#
     path_limits:
         - { path: "/car-valuation-2", limit: "%rate_limit_valuations_hour%", period: 3600, methods: ['POST'] }
         - { path: "/car-valuation-thank-you", limit: "%rate_limit_appointments_hour%", period: 3600, methods: ['POST'] }
-#
+
     # Should the FOS OAuthServerBundle listener be enabled
     fos_oauth_key_listener: false

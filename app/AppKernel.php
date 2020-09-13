@@ -1,7 +1,6 @@
 <?php
 
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
@@ -39,8 +38,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new SunCat\MobileDetectBundle\MobileDetectBundle(),
             new Bugsnag\BugsnagBundle\BugsnagBundle(),
-            new Snc\RedisBundle\SncRedisBundle(),
             new Noxlogic\RateLimitBundle\NoxlogicRateLimitBundle(),
+            new Snc\RedisBundle\SncRedisBundle(),
 
             new Wbc\UserBundle\WbcUserBundle(),
             new Wbc\UtilityBundle\WbcUtilityBundle(),
@@ -68,37 +67,25 @@ class AppKernel extends Kernel
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
+}
 
-    public function getRootDir()
+//APC Polyfills for PHP7
+if (!function_exists('apc_fetch')) {
+    function apc_fetch($key, &$success = null)
     {
-        return __DIR__;
+        return apcu_fetch($key, $success);
     }
+}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCacheDir()
+if (!function_exists('apc_exists')) {
+    function apc_exists($keys)
     {
-        $file = new File('/dev/shm/appname/cache' . '/' . $this->environment, false);
-
-        if (in_array($this->environment, ['dev', 'test'], true) && $file->isWritable()) {
-            return '/dev/shm/appname/cache/'.$this->environment;
-        }
-
-        return dirname(__DIR__).'/var/cache/'.$this->environment;
+        return apcu_exists($keys);
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getLogDir()
+}
+if (!function_exists('apc_store')) {
+    function apc_store($keys)
     {
-        $file = new File('/dev/shm/appname/logs' . '/' . $this->environment, false);
-
-        if (in_array($this->environment, ['dev', 'test'], true) && $file->isWritable()) {
-            return '/dev/shm/appname/logs'.'/'.$this->environment;
-        }
-
-        return dirname(__DIR__).'/var/logs/';
+        return apcu_store($keys);
     }
 }
