@@ -62,7 +62,7 @@ class DefaultController extends Controller
     public function apply(Role $role, Request $request)
     {
         $candidate = new Candidate($role);
-        $form = $this->createForm(new CandidateType(), $candidate);
+        $form = $this->createForm(CandidateType::class, $candidate);
 
         $data = $request->request->all();
         $dataUploadedFile = $request->files->all();

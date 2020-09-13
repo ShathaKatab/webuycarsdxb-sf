@@ -21,13 +21,13 @@ services:
             - [ setAnnotationReader, [ '@annotation_reader' ] ]
 
     memcached:
-        class: Memcached
+        class: \Memcached
         calls:
             - [ addServer, ['127.0.0.1', 11211] ]
     memcached_cache:
         class: Doctrine\Common\Cache\MemcachedCache
         calls:
-            - [ setMemcached, [@memcached] ]
+            - [ setMemcached, ['@memcached'] ]
 
     timing_repository:
         class: Wbc\BranchBundle\Repository\TimingRepository
@@ -36,3 +36,10 @@ services:
             - [setNoAppointmentDates, ['%no_appointment_dates%']]
         arguments:
             - 'WbcBranchBundle:Timing'
+    craue_config_cache_provider:
+        class: Symfony\Component\Cache\Adapter\FilesystemAdapter
+        public: false
+        arguments:
+            - 'craue_config'
+            - 0
+            - '%kernel.cache_dir%'

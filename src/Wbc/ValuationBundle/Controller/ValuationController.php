@@ -45,7 +45,7 @@ class ValuationController extends Controller
 
         if (Request::METHOD_POST === $request->getMethod()) {
             $data = $request->request->all();
-            $form = $this->createForm(new ValuationStepOneType());
+            $form = $this->createForm(ValuationStepOneType::class);
 
             $form->submit($data);
 
@@ -86,17 +86,20 @@ class ValuationController extends Controller
         $entityManager = $this->get('doctrine.orm.default_entity_manager');
 
         if (Request::METHOD_POST === $request->getMethod()) {
-            $data = $request->request->all();
-            $data['vehicleModel'] = $modelId;
-            $data['vehicleYear'] = $modelYear;
+            $request->request->set('vehicleModel', $modelId);
+            $request->request->set('vehicleYear', $modelYear);
 
             $valuation = new Valuation();
             $valuation->setStatus(Valuation::STATUS_NEW);
             $valuation->setSource(Valuation::SOURCE_WEBSITE_ORGANIC);
 
-            $form = $this->createForm(new ValuationStepTwoType(), $valuation);
+            $form = $this->createForm(ValuationStepTwoType::class, $valuation);
+            $form->submit($request->request->all());
 
-            $form->submit($data);
+            if($form->isSubmitted() && !$form->isValid()){
+                dump($form->getErrors(true));
+                exit;
+            }
 
             if ($form->isValid()) {
                 $entityManager->persist($valuation);
@@ -167,7 +170,7 @@ class ValuationController extends Controller
         if (Request::METHOD_POST === $request->getMethod()) {
             $data = $request->request->all();
 
-            $form = $this->createForm(new ValuationStepThreeType(), $valuation);
+            $form = $this->createForm(ValuationStepThreeType::class, $valuation);
             $form->submit($data);
 
             if ($form->isValid()) {
@@ -222,7 +225,7 @@ class ValuationController extends Controller
 
             $appointment = new Appointment($valuation);
 
-            $form = $this->createForm(new AppointmentType(), $appointment);
+            $form = $this->createForm(AppointmentType::class, $appointment);
 
             $form->submit($data);
 

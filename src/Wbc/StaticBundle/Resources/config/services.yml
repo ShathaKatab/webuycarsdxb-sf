@@ -4,4 +4,4 @@ services:
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments: ['Wbc\StaticBundle\Entity\Parameter']
         calls:
-            - [ setCacheManager, [@memcached] ]
+            - [ setCacheManager, ['@memcached'] ]
