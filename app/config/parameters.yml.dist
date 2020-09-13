@@ -19,8 +19,8 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     # Domains
-    web_domain: "@domain.com"
-    #api_domain: ""@domain.com"
+    web_domain: @domain.com
+    #api_domain: @domain.com
     #mongodb_server: "mongodb://localhost/27017"
     crawler_getthat_auth:
         "x-algolia-agent": "Algolia for vanilla JavaScript 3.22.1;JS Helper 2.20.1"
@@ -89,3 +89,4 @@ parameters:
     bugsnag_api_key: ~
     rate_limit_valuations_hour: 3
     rate_limit_appointments_hour: 3
+    
