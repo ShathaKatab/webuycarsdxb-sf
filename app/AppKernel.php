@@ -38,6 +38,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new SunCat\MobileDetectBundle\MobileDetectBundle(),
             new Bugsnag\BugsnagBundle\BugsnagBundle(),
+            new Noxlogic\RateLimitBundle\NoxlogicRateLimitBundle(),
+            new Snc\RedisBundle\SncRedisBundle(),
 
             new Wbc\UserBundle\WbcUserBundle(),
             new Wbc\UtilityBundle\WbcUtilityBundle(),
