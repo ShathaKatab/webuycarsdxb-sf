@@ -222,7 +222,7 @@ snc_redis:
             dsn: redis://localhost
 
 noxlogic_rate_limit:
-    enabled:              true
+    enabled:              false
 
     # The storage engine where all the rates will be stored
     storage_engine:       redis # One of "redis"; "memcache"; "doctrine"; "php_redis"; "php_redis_cluster"
