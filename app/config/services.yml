@@ -36,3 +36,8 @@ services:
             - [setNoAppointmentDates, ['%no_appointment_dates%']]
         arguments:
             - 'WbcBranchBundle:Timing'
+
+    utility.listener.rate_limit_generate_key:
+        class: Wbc\UtilityBundle\EventListener\IpBasedRateLimitGenerateKeyListener
+        tags:
+            - { name: kernel.event_listener, event: 'ratelimit.generate.key', method: 'onGenerateKey' }
