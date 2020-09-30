@@ -13,6 +13,7 @@ phases:
       - php -v
       - composer install --optimize-autoloader --no-dev
       - cp ./.ebextensions/01_environment.config.production ./.ebextensions/01_environment.config
+      - yarn install
 
 artifacts:
   files:
