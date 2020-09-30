@@ -1,0 +1,22 @@
+version: 0.2
+
+env:
+  variables:
+    COMMIT_HASH: $(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+    ENV_NAME: "production"
+phases:
+  install:
+    runtime-versions:
+      php: 7.4
+  build:
+    commands:
+      - php -v
+      - composer install --optimize-autoloader --no-dev
+      - cp ./.ebextensions/01_environment.config.production ./.ebextensions/01_environment.config
+      - yarn install
+
+artifacts:
+  files:
+    - '**/*'
+  name: webuycarsdxb-symfony-production-$COMMIT_HASH
+  
