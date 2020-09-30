@@ -282,14 +282,16 @@ file that was distributed with this source code.
                                 </li>
                             </ul>
                             {{ knp_menu_render('sonata_admin_sidebar', {template: sonata_admin.adminPool.getTemplate('knp_menu_template')}) }}
-
-                            {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                <p class="text-center small"
-                                   style="border-top: 1px solid #444444; padding-top: 10px">
-                                    <a href="{{ path('craue_config_settings_modify') }}">Parameters</a>
-                                </p>
-                            {% endif %}
                         {% endblock side_bar_nav %}
+                        {% if app.user and is_granted('ROLE_SUPER_ADMIN') %}
+                            <ul class="sidebar-menu">
+                                <li class="{% if app.request.get('_route') == 'craue_config_settings_modify' %}active{% endif %}">
+                                    <a href="{{ path('craue_config_settings_modify') }}">
+                                        <i class="fa fa-cog"></i>Settings
+                                    </a>
+                                </li>
+                            </ul>
+                        {% endif %}
                         {% block side_bar_after_nav %}
                             <p class="text-center small" style="display:none;border-top: 1px solid #444444; padding-top: 10px">
                                 {% block side_bar_after_nav_content %}

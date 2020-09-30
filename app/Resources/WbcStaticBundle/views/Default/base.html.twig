@@ -91,10 +91,17 @@
                         <div class="h2">We buy any car in 30 min!</div>
                     </div>
                     <div id="navbar-phone-container" class="col-md-3 col-md-pull-0 col-xs-pull-9 text-right">
-                        <a href="tel: {{ site_phone }}">
+                        {% if craue_setting('phoneNumber1') is not null and craue_setting('phoneNumber1') != '' %}
+                        <a href="tel: {{ craue_setting('phoneNumber1') }}">
                             <i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>
-                            &nbsp;<span>{{ site_phone }}</span>
+                            &nbsp;<span>{{ craue_setting('phoneNumber1') }}</span>
                         </a>
+                        {% endif %}
+                        {% if craue_setting('phoneNumber2') is not null and craue_setting('phoneNumber2') != '' %}
+                            <br/><a href="tel: {{ craue_setting('phoneNumber2') }}">
+                                <span>{{ craue_setting('phoneNumber2') }}</span>
+                            </a>
+                        {% endif %}
                     </div>
                     <div class="col-md-1 hidden-xs hidden-sm">
                         <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -130,13 +137,20 @@
                     </div>
 
                     <div id="second-row-container" class="row">
-                        <div id="navbar-phone-container" class="col-xs-6 text-left">
-                            <a href="tel: {{ site_phone }}">
-                                <i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>
-                                &nbsp;<span>{{ site_phone }}</span>
+                        <div id="navbar-phone-container" class="col-xs-9 text-left">
+                            {% if craue_setting('phoneNumber1') is not null and craue_setting('phoneNumber1') != '' %}
+                                <a href="tel: {{ craue_setting('phoneNumber1') }}">
+                                    <i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>
+                                    &nbsp;<span>{{ craue_setting('phoneNumber1') }}</span>
+                                </a>
+                            {% endif %}
+                            {% if craue_setting('phoneNumber2') is not null and craue_setting('phoneNumber2') != '' %}
+                                /<a href="tel: {{ craue_setting('phoneNumber2') }}">
+                                <span>{{ craue_setting('phoneNumber2') }}</span>
                             </a>
+                            {% endif %}
                         </div>
-                        <div class="col-xs-6 text-right">
+                        <div class="col-xs-3 text-right">
                             <button type="button" class="navbar-toggle" data-toggle="collapse"
                                     data-target=".navbar-collapse">
                                 <span class="icon-bar"></span>

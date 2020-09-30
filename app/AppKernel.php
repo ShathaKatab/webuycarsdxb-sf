@@ -67,6 +67,34 @@ class AppKernel extends Kernel
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCacheDir()
+    {
+        $file = new Symfony\Component\HttpFoundation\File\File('/dev/shm/appname/cache' . '/' . $this->environment, false);
+
+        if (in_array($this->environment, ['dev', 'test'], true) && $file->isWritable()) {
+            return '/dev/shm/appname/cache/'.$this->environment;
+        }
+
+        return parent::getCacheDir();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLogDir()
+    {
+        $file = new Symfony\Component\HttpFoundation\File\File('/dev/shm/appname/logs' . '/' . $this->environment, false);
+
+        if (in_array($this->environment, ['dev', 'test'], true) && $file->isWritable()) {
+            return '/dev/shm/appname/logs'.'/'.$this->environment;
+        }
+
+        return parent::getLogDir();
+    }
 }
 
 //APC Polyfills for PHP7
