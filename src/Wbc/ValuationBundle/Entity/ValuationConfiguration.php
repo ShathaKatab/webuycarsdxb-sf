@@ -9,6 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Wbc\UserBundle\Entity\User;
 use Wbc\VehicleBundle\Entity\Make;
 use Wbc\VehicleBundle\Entity\Model;
+use Wbc\VehicleBundle\Entity\ModelType;
 
 /**
  * Class ValuationConfiguration.
@@ -46,6 +47,14 @@ class ValuationConfiguration
     protected $vehicleModel;
 
     /**
+     * @var ModelType
+     *
+     * @ORM\ManyToOne(targetEntity="\Wbc\VehicleBundle\Entity\ModelType")
+     * @ORM\JoinColumn(name="vehicle_model_type_id", referencedColumnName="id", nullable=true)
+     */
+    protected $vehicleModelType;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="vehicle_year", type="smallint", nullable=true)
@@ -67,7 +76,7 @@ class ValuationConfiguration
     protected $vehicleBodyCondition;
 
     /**
-     * @var float
+     * @var string
      *
      * @ORM\Column(name="discount", type="decimal", precision=11, scale=2)
      */
@@ -117,7 +126,7 @@ class ValuationConfiguration
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -129,7 +138,7 @@ class ValuationConfiguration
      *
      * @return ValuationConfiguration
      */
-    public function setVehicleYear($vehicleYear)
+    public function setVehicleYear(int $vehicleYear): self
     {
         $this->vehicleYear = $vehicleYear;
 
@@ -139,9 +148,9 @@ class ValuationConfiguration
     /**
      * Get vehicleYear.
      *
-     * @return int
+     * @return null|int
      */
-    public function getVehicleYear()
+    public function getVehicleYear(): ?int
     {
         return $this->vehicleYear;
     }
@@ -153,7 +162,7 @@ class ValuationConfiguration
      *
      * @return ValuationConfiguration
      */
-    public function setDiscount($discount)
+    public function setDiscount(string $discount): self
     {
         $this->discount = $discount;
 
@@ -163,9 +172,9 @@ class ValuationConfiguration
     /**
      * Get discount.
      *
-     * @return string
+     * @return string|null
      */
-    public function getDiscount()
+    public function getDiscount(): ?string
     {
         return $this->discount;
     }
@@ -177,7 +186,7 @@ class ValuationConfiguration
      *
      * @return ValuationConfiguration
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -189,7 +198,7 @@ class ValuationConfiguration
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
@@ -201,7 +210,7 @@ class ValuationConfiguration
      *
      * @return ValuationConfiguration
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -213,7 +222,7 @@ class ValuationConfiguration
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
@@ -225,7 +234,7 @@ class ValuationConfiguration
      *
      * @return ValuationConfiguration
      */
-    public function setVehicleMake(\Wbc\VehicleBundle\Entity\Make $vehicleMake = null)
+    public function setVehicleMake(Make $vehicleMake = null): self
     {
         $this->vehicleMake = $vehicleMake;
 
@@ -235,9 +244,9 @@ class ValuationConfiguration
     /**
      * Get vehicleMake.
      *
-     * @return \Wbc\VehicleBundle\Entity\Make
+     * @return \Wbc\VehicleBundle\Entity\Make|null
      */
-    public function getVehicleMake()
+    public function getVehicleMake(): ?Make
     {
         return $this->vehicleMake;
     }
@@ -249,7 +258,7 @@ class ValuationConfiguration
      *
      * @return ValuationConfiguration
      */
-    public function setVehicleModel(\Wbc\VehicleBundle\Entity\Model $vehicleModel = null)
+    public function setVehicleModel(Model $vehicleModel = null): self
     {
         $this->vehicleModel = $vehicleModel;
 
@@ -259,9 +268,9 @@ class ValuationConfiguration
     /**
      * Get vehicleModel.
      *
-     * @return \Wbc\VehicleBundle\Entity\Model
+     * @return \Wbc\VehicleBundle\Entity\Model|null
      */
-    public function getVehicleModel()
+    public function getVehicleModel(): ?Model
     {
         return $this->vehicleModel;
     }
@@ -273,7 +282,7 @@ class ValuationConfiguration
      *
      * @return ValuationConfiguration
      */
-    public function setVehicleColor($vehicleColor)
+    public function setVehicleColor(string $vehicleColor): self
     {
         $this->vehicleColor = $vehicleColor;
 
@@ -283,9 +292,9 @@ class ValuationConfiguration
     /**
      * Get vehicleColor.
      *
-     * @return string
+     * @return string|null
      */
-    public function getVehicleColor()
+    public function getVehicleColor(): ?string
     {
         return $this->vehicleColor;
     }
@@ -297,7 +306,7 @@ class ValuationConfiguration
      *
      * @return ValuationConfiguration
      */
-    public function setVehicleBodyCondition($vehicleBodyCondition)
+    public function setVehicleBodyCondition(string $vehicleBodyCondition): self
     {
         $this->vehicleBodyCondition = $vehicleBodyCondition;
 
@@ -307,9 +316,9 @@ class ValuationConfiguration
     /**
      * Get vehicleBodyCondition.
      *
-     * @return string
+     * @return string|null
      */
-    public function getVehicleBodyCondition()
+    public function getVehicleBodyCondition(): ?string
     {
         return $this->vehicleBodyCondition;
     }
@@ -321,7 +330,7 @@ class ValuationConfiguration
      *
      * @return ValuationConfiguration
      */
-    public function setActive($active)
+    public function setActive(bool $active): self
     {
         $this->active = $active;
 
@@ -333,7 +342,7 @@ class ValuationConfiguration
      *
      * @return bool
      */
-    public function getActive()
+    public function getActive(): bool
     {
         return $this->active;
     }
@@ -343,7 +352,7 @@ class ValuationConfiguration
      *
      * @return bool
      */
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->active;
     }
@@ -351,11 +360,11 @@ class ValuationConfiguration
     /**
      * Set createdBy.
      *
-     * @param User $createdBy
+     * @param null|User $createdBy
      *
      * @return ValuationConfiguration
      */
-    public function setCreatedBy(User $createdBy = null)
+    public function setCreatedBy(User $createdBy = null): self
     {
         $this->createdBy = $createdBy;
 
@@ -367,8 +376,32 @@ class ValuationConfiguration
      *
      * @return User
      */
-    public function getCreatedBy()
+    public function getCreatedBy(): User
     {
         return $this->createdBy;
+    }
+
+    /**
+     * getVehicleModelType.
+     *
+     * @return null|ModelType
+     */
+    public function getVehicleModelType(): ?ModelType
+    {
+        return $this->vehicleModelType;
+    }
+
+    /**
+     * setVehicleModelType.
+     *
+     * @param ModelType|null $vehicleModelType
+     *
+     * @return $this
+     */
+    public function setVehicleModelType(ModelType $vehicleModelType = null): self
+    {
+        $this->vehicleModelType = $vehicleModelType;
+
+        return $this;
     }
 }

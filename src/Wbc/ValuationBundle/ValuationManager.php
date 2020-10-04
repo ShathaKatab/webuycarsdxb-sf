@@ -66,12 +66,12 @@ class ValuationManager
      * "logger" = @DI\Inject("logger")
      * })
      *
-     * @param EntityManager      $entityManager
-     * @param string             $valuationCommand
-     * @param LoggerInterface    $logger
+     * @param EntityManager $entityManager
+     * @param string $valuationCommand
      * @param ContainerInterface $container
+     * @param LoggerInterface $logger
      */
-    public function __construct(EntityManager $entityManager, $valuationCommand, ContainerInterface $container, LoggerInterface $logger)
+    public function __construct(EntityManager $entityManager, string $valuationCommand, ContainerInterface $container, LoggerInterface $logger)
     {
         $this->entityManager = $entityManager;
         $this->valuationCommand = $valuationCommand;
@@ -352,13 +352,14 @@ class ValuationManager
         $makeId = $valuation->getVehicleMake()->getId();
         $year = $valuation->getVehicleYear();
         $modelId = $valuation->getVehicleModel()->getId();
+        $modelTypeId = $valuation->getVehicleModelType()->getId();
         $color = strtolower($valuation->getVehicleColor() ?: '');
         $bodyCondition = strtolower($valuation->getVehicleBodyCondition() ?: '');
         $discount = 0.0;
 
         $connection = $this->entityManager->getConnection();
         $statement = $connection->prepare('
-                SELECT vehicle_make_id, vehicle_model_id, vehicle_year, vehicle_color, vehicle_body_condition, discount
+                SELECT vehicle_make_id, vehicle_model_id, vehicle_model_type_id, vehicle_year, vehicle_color, vehicle_body_condition, discount
                 FROM valuation_configuration 
                 WHERE active = :isActive
                 ');
@@ -370,6 +371,7 @@ class ValuationManager
         foreach ($configs as $config) {
             if (null === $config['vehicle_make_id']
                 && null === $config['vehicle_model_id']
+                && null === $config['vehicle_model_type_id']
                 && null === $config['vehicle_year']
                 && null === $config['vehicle_color']
                 && null === $config['vehicle_body_condition']) {
@@ -381,6 +383,10 @@ class ValuationManager
             }
 
             if (null !== $config['vehicle_model_id'] && (int) ($config['vehicle_model_id']) !== $modelId) {
+                continue;
+            }
+
+            if (null !== $config['vehicle_model_type_id'] && (int) ($config['vehicle_model_type_id']) !== $modelTypeId) {
                 continue;
             }
 

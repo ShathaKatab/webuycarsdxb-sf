@@ -84,13 +84,7 @@ $(document).ready(function () {
         }
     });
 
-
     modelSelect.on('change', function (e) {
-        if(isValuationConfiguration){
-            e.stopPropagation();
-            return;
-        }
-
         clearTransmissionAndSpecifications();
         var modelIdValue = this.value;
         modelTypeSelect.find('option').remove();
