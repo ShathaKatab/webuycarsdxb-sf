@@ -4,12 +4,11 @@ namespace Wbc\ValuationBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Wbc\BranchBundle\Entity\Appointment;
-use Wbc\BranchBundle\Entity\Timing;
 use Wbc\BranchBundle\Form\BranchSelectorType;
 use Wbc\ValuationBundle\Entity\Valuation;
 
@@ -27,8 +26,7 @@ class AppointmentType extends AbstractType
     {
         $builder->add('valuation', EntityType::class, ['class' => Valuation::class, 'label' => 'Valuation'])
             ->add('branch', BranchSelectorType::class, ['label' => 'Branch'])
-            ->add('branchTiming', EntityType::class, ['class' => Timing::class, 'label' => 'Branch Timing'])
-            ->add('dateBooked', DateType::class, ['format' => DateType::HTML5_FORMAT, 'label' => 'Date'])
+            ->add('bookedAt', DateTimeType::class, ['format' => 'yyyy-MM-dd HH:mm:ss', 'widget' => 'single_text',])
             ->add('emailAddress', EmailType::class, ['label' => 'Email Address'])
         ;
     }

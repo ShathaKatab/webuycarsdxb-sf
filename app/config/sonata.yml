@@ -46,7 +46,7 @@ sonata_admin:
                 on_top: true
             Branches:
                 label: Branches
-                items: [admin.branch, admin.branch.timing]
+                items: [admin.branch, admin.branch.timing, admin.branch.holiday]
                 roles: [ROLE_SUPER_ADMIN]
                 icon:   '<i class="fa fa-building"></i>'
             Users:
@@ -191,6 +191,12 @@ services:
         arguments: [~, Wbc\BranchBundle\Entity\Timing, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Branch Timings, group: "Branches" }
+
+    admin.branch.holiday:
+        class: Wbc\BranchBundle\Admin\HolidayAdmin
+        arguments: [~, Wbc\BranchBundle\Entity\Holiday, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Branch Holidays, group: "Branches" }
 
     admin.user:
         class: Wbc\UserBundle\Admin\UserAdmin

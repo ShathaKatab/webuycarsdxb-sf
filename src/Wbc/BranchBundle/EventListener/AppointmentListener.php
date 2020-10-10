@@ -93,6 +93,7 @@ class AppointmentListener
      * @DI\Observe(BranchEvents::BEFORE_APPOINTMENT_CREATE)
      *
      * @param AppointmentEvent $event
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function onBeforeCreate(AppointmentEvent $event): void
     {
@@ -117,19 +118,14 @@ class AppointmentListener
      */
     public function postLoad(LifecycleEventArgs $args): void
     {
+        /**@var Appointment $object*/
         $object = $args->getObject();
 
         if (!$object instanceof Appointment) {
             return;
         }
 
-        $branch = $object->getBranch();
-        $branchTiming = $object->getBranchTiming();
         $vehicleModel = $object->getVehicleModel();
-
-        if (!$branch && $branchTiming) {
-            $object->setBranch($branchTiming->getBranch());
-        }
 
         if ($vehicleModel) {
             $object->setVehicleMake($vehicleModel->getMake());
@@ -141,6 +137,7 @@ class AppointmentListener
      */
     public function prePersist(LifecycleEventArgs $args): void
     {
+        /**@var Appointment $object*/
         $object = $args->getObject();
 
         if (!$object instanceof Appointment) {
@@ -156,9 +153,11 @@ class AppointmentListener
 
     /**
      * @param LifecycleEventArgs $args
+     * @throws \Twig\Error\Error
      */
     public function postPersist(LifecycleEventArgs $args): void
     {
+        /**@var Appointment $object*/
         $object = $args->getObject();
         $objectManager = $args->getObjectManager();
 
@@ -175,12 +174,6 @@ class AppointmentListener
         }
 
         if ($object->getBranch() && $object->getSmsTimingString() && $object->getName()) {
-            $branchTiming = $object->getBranchTiming();
-
-            if ($branchTiming && $branchTiming->isAdminOnly()) {
-                return;
-            }
-
             $this->smsManager->sendSms($object->getMobileNumber(),
                 $this->templating->render('WbcBranchBundle::appointmentSms.txt.twig', [
                     'appointment' => $object,
@@ -244,7 +237,7 @@ class AppointmentListener
         $details = $appointment->getDetails();
 
         if (!$details) {
-            $details = new AppointmentDetails($appointment, $appointment->getBranch(), $appointment->getBranchTiming());
+            $details = new AppointmentDetails($appointment, $appointment->getBranch());
             $objectManager->persist($details);
         }
 

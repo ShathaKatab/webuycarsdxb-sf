@@ -72,28 +72,15 @@ class AppointmentDetails
     protected $branch;
 
     /**
-     * @var Timing
-     *
-     * @ORM\Column(name="branch_timing", type="branch_timing_object", nullable=true)
-     *
-     * @Assert\NotBlank()
-     *
-     * @Serializer\Expose()
-     */
-    protected $branchTiming;
-
-    /**
      * AppointmentDetails Constructor.
      *
      * @param Appointment $appointment
-     * @param Branch      $branch
-     * @param Timing      $timing
+     * @param Branch|null $branch
      */
-    public function __construct(Appointment $appointment, Branch $branch = null, Timing $timing = null)
+    public function __construct(Appointment $appointment, Branch $branch = null)
     {
         $this->setAppointment($appointment);
         $this->branch = $branch;
-        $this->branchTiming = $timing;
     }
 
     /**
@@ -103,7 +90,7 @@ class AppointmentDetails
      *
      * @return AppointmentDetails
      */
-    public function setVehicleMakeName($vehicleMakeName)
+    public function setVehicleMakeName(string $vehicleMakeName)
     {
         $this->vehicleMakeName = $vehicleMakeName;
 
@@ -113,9 +100,9 @@ class AppointmentDetails
     /**
      * Get vehicleMakeName.
      *
-     * @return string
+     * @return string|null
      */
-    public function getVehicleMakeName()
+    public function getVehicleMakeName(): ?string
     {
         return $this->vehicleMakeName;
     }
@@ -127,7 +114,7 @@ class AppointmentDetails
      *
      * @return AppointmentDetails
      */
-    public function setVehicleModelName($vehicleModelName)
+    public function setVehicleModelName(string $vehicleModelName)
     {
         $this->vehicleModelName = $vehicleModelName;
 
@@ -137,9 +124,9 @@ class AppointmentDetails
     /**
      * Get vehicleModelName.
      *
-     * @return string
+     * @return string|null
      */
-    public function getVehicleModelName()
+    public function getVehicleModelName(): ?string
     {
         return $this->vehicleModelName;
     }
@@ -161,35 +148,11 @@ class AppointmentDetails
     /**
      * Get branch.
      *
-     * @return Branch
+     * @return Branch|null
      */
-    public function getBranch()
+    public function getBranch(): ?Branch
     {
         return $this->branch;
-    }
-
-    /**
-     * Set branchTiming.
-     *
-     * @param Timing $branchTiming
-     *
-     * @return AppointmentDetails
-     */
-    public function setBranchTiming(Timing $branchTiming)
-    {
-        $this->branchTiming = $branchTiming;
-
-        return $this;
-    }
-
-    /**
-     * Get branchTiming.
-     *
-     * @return Timing
-     */
-    public function getBranchTiming()
-    {
-        return $this->branchTiming;
     }
 
     /**
@@ -210,9 +173,9 @@ class AppointmentDetails
     /**
      * Get appointment.
      *
-     * @return Appointment
+     * @return Appointment|null
      */
-    public function getAppointment()
+    public function getAppointment(): ?Appointment
     {
         return $this->appointment;
     }
@@ -224,7 +187,7 @@ class AppointmentDetails
      *
      * @return AppointmentDetails
      */
-    public function setVehicleModelTypeName($vehicleModelTypeName)
+    public function setVehicleModelTypeName(string $vehicleModelTypeName)
     {
         $this->vehicleModelTypeName = $vehicleModelTypeName;
 
@@ -234,9 +197,9 @@ class AppointmentDetails
     /**
      * Get vehicleModelTypeName.
      *
-     * @return string
+     * @return string|null
      */
-    public function getVehicleModelTypeName()
+    public function getVehicleModelTypeName(): ?string
     {
         return $this->vehicleModelTypeName;
     }

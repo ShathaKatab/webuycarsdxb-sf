@@ -161,15 +161,15 @@ angular
                 $scope.valuationStepFourForm.$setSubmitted();
 
                 if($scope.valuationStepFourForm.$valid && Object.prototype.toString.call(vm.appointmentDate) === '[object Date]'){
-
+                    var timing = vm.selectedBranchTiming.split(':');
                     var appointmentObject = new Appointment;
-
-                    appointmentObject.dateBooked = {};
-                    appointmentObject.dateBooked.day = vm.appointmentDate.getDate();
-                    appointmentObject.dateBooked.month = vm.appointmentDate.getMonth() + 1;
-                    appointmentObject.dateBooked.year = vm.appointmentDate.getFullYear();
-
-                    appointmentObject.branchTiming = vm.selectedBranchTiming;
+                    var month =  vm.appointmentDate.getMonth() + 1;
+                    appointmentObject.bookedAt = vm.appointmentDate.getFullYear()
+                        + "-" + month
+                        + "-" + vm.appointmentDate.getDate()
+                        + " " + timing[0]
+                        + ":" + timing[1]
+                        + ":00";
                     appointmentObject.branch = vm.selectedBranch;
 
                     appointmentObject.emailAddress = vm.emailAddress;

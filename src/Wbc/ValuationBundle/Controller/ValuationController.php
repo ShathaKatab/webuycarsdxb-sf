@@ -70,9 +70,9 @@ class ValuationController extends Controller
      *
      * @param Request $request
      *
-     * @return array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
      */
-    public function step2Action(Request $request): array
+    public function step2Action(Request $request)
     {
         $form    = null;
         $session = $this->get('session');
@@ -134,9 +134,9 @@ class ValuationController extends Controller
      *
      * @param Request $request
      *
-     * @return array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
      */
-    public function step3Action(Request $request): array
+    public function step3Action(Request $request)
     {
         $session       = $this->get('session');
         $entityManager = $this->get('doctrine.orm.default_entity_manager');
@@ -180,9 +180,9 @@ class ValuationController extends Controller
      *
      * @param Request $request
      *
-     * @return array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|JsonResponse|array
      */
-    public function step4Action(Request $request): array
+    public function step4Action(Request $request)
     {
         $form = null;
         $this->checkValuationInSession();
@@ -240,9 +240,9 @@ class ValuationController extends Controller
      * @CF\Route("/car-appointment-thank-you", name="wbc_appointment_step_5")
      * @CF\Method({"GET"})
      *
-     * @return array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
      */
-    public function step5Action(): array
+    public function step5Action()
     {
         $this->checkValuationInSession();
         $session       = $this->get('session');

@@ -259,11 +259,11 @@ class Valuation
     /**
      * Get id.
      *
-     * @return guid
+     * @return string|null
      */
-    public function getId()
+    public function getId(): ?string
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     /**

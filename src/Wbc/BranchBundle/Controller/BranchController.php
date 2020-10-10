@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Wbc\BranchBundle\Entity\Branch;
-use Wbc\BranchBundle\Entity\Timing;
 
 /**
  * Class BranchController.
@@ -39,7 +38,8 @@ class BranchController extends Controller
         }catch (\Exception $e){
             return new JsonResponse([]);
         }
-        $branchTimings = $this->get('timing_repository')->findAllByBranchAndDate($branch, $date);
+
+        $branchTimings = $this->get('timing_repository')->findByBranchAndDate($branch, $date);
 
         return new Response(
             $this->get('jms_serializer')->serialize($branchTimings, 'json'),

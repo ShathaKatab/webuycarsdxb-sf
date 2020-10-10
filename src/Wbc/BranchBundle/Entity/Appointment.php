@@ -27,14 +27,14 @@ use Wbc\VehicleBundle\Entity\ModelType;
  */
 class Appointment
 {
-    const STATUS_NEW = 'new';
-    const STATUS_CONFIRMED = 'confirmed';
-    const STATUS_CANCELLED = 'cancelled';
+    const STATUS_NEW             = 'new';
+    const STATUS_CONFIRMED       = 'confirmed';
+    const STATUS_CANCELLED       = 'cancelled';
     const STATUS_INVALID_CONTACT = 'invalid_contact';
-    const STATUS_CALLBACK = 'callback';
-    const STATUS_CHECKED_IN = 'checked-in';
-    const STATUS_DUPLICATE = 'duplicate';
-    const STATUS_INSPECTED = 'inspected';
+    const STATUS_CALLBACK        = 'callback';
+    const STATUS_CHECKED_IN      = 'checked-in';
+    const STATUS_DUPLICATE       = 'duplicate';
+    const STATUS_INSPECTED       = 'inspected';
 
     /**
      * @var int
@@ -178,22 +178,12 @@ class Appointment
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_booked", type="date")
+     * @ORM\Column(name="booked_at", type="datetime")
      *
      * @Assert\NotBlank()
      * @Assert\Date()
      */
-    protected $dateBooked;
-
-    /**
-     * @var Timing
-     *
-     * @ORM\ManyToOne(targetEntity="\Wbc\BranchBundle\Entity\Timing")
-     * @ORM\JoinColumn(name="branch_timing", referencedColumnName="id", onDelete="SET NULL", nullable=true)})
-     *
-     * @Serializer\Expose()
-     */
-    protected $branchTiming;
+    protected $bookedAt;
 
     /**
      * @var AppointmentDetails
@@ -292,18 +282,15 @@ class Appointment
 
     /**
      * @var Branch
+     *
+     * @ORM\ManyToOne(targetEntity="\Wbc\BranchBundle\Entity\Branch")
+     * @ORM\JoinColumn(name="branch_id", referencedColumnName="id")
+     *
+     * @Assert\NotBlank()
+     *
+     * @Serializer\Expose()
      */
     protected $branch;
-
-    /**
-     * @var string
-     */
-    protected $from;
-
-    /**
-     * @var string
-     */
-    protected $to;
 
     /**
      * @var Make
@@ -313,7 +300,7 @@ class Appointment
     /**
      * Appointment Constructor.
      *
-     * @param Valuation $valuation
+     * @param null|Valuation $valuation
      */
     public function __construct(Valuation $valuation = null)
     {
@@ -325,11 +312,11 @@ class Appointment
     /**
      * Get id.
      *
-     * @return int
+     * @return string|null
      */
-    public function getId()
+    public function getId(): ?string
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     /**
@@ -339,7 +326,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -349,9 +336,9 @@ class Appointment
     /**
      * Get name.
      *
-     * @return string
+     * @return null|string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -363,7 +350,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function setMobileNumber($mobileNumber)
+    public function setMobileNumber(string $mobileNumber): self
     {
         $this->mobileNumber = $mobileNumber;
 
@@ -373,9 +360,9 @@ class Appointment
     /**
      * Get mobileNumber.
      *
-     * @return string
+     * @return null|string
      */
-    public function getMobileNumber()
+    public function getMobileNumber(): ?string
     {
         return $this->mobileNumber;
     }
@@ -387,7 +374,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function setEmailAddress($emailAddress)
+    public function setEmailAddress(string $emailAddress): self
     {
         $this->emailAddress = $emailAddress;
 
@@ -397,9 +384,9 @@ class Appointment
     /**
      * Get emailAddress.
      *
-     * @return string
+     * @return null|string
      */
-    public function getEmailAddress()
+    public function getEmailAddress(): ?string
     {
         return $this->emailAddress;
     }
@@ -411,7 +398,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function setVehicleSpecifications($vehicleSpecifications)
+    public function setVehicleSpecifications(string $vehicleSpecifications): self
     {
         $this->vehicleSpecifications = $vehicleSpecifications;
 
@@ -421,9 +408,9 @@ class Appointment
     /**
      * Get vehicleSpecifications.
      *
-     * @return string
+     * @return null|string
      */
-    public function getVehicleSpecifications()
+    public function getVehicleSpecifications(): ?string
     {
         return $this->vehicleSpecifications;
     }
@@ -433,9 +420,9 @@ class Appointment
      *
      * @param string $vehicleBodyCondition
      *
-     * @return Appointment
+     * @return null|Appointment
      */
-    public function setVehicleBodyCondition($vehicleBodyCondition)
+    public function setVehicleBodyCondition(string $vehicleBodyCondition): self
     {
         $this->vehicleBodyCondition = $vehicleBodyCondition;
 
@@ -445,9 +432,9 @@ class Appointment
     /**
      * Get vehicleBodyCondition.
      *
-     * @return string
+     * @return null|string
      */
-    public function getVehicleBodyCondition()
+    public function getVehicleBodyCondition(): ?string
     {
         return $this->vehicleBodyCondition;
     }
@@ -459,7 +446,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -471,7 +458,7 @@ class Appointment
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
@@ -483,7 +470,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -495,7 +482,7 @@ class Appointment
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
@@ -503,11 +490,11 @@ class Appointment
     /**
      * Set vehicleModel.
      *
-     * @param Model $vehicleModel
+     * @param null|Model $vehicleModel
      *
      * @return Appointment
      */
-    public function setVehicleModel(Model $vehicleModel = null)
+    public function setVehicleModel(Model $vehicleModel = null): self
     {
         $this->vehicleModel = $vehicleModel;
 
@@ -517,9 +504,9 @@ class Appointment
     /**
      * Get vehicleModel.
      *
-     * @return Model
+     * @return null|Model
      */
-    public function getVehicleModel()
+    public function getVehicleModel(): ?Model
     {
         return $this->vehicleModel;
     }
@@ -527,11 +514,11 @@ class Appointment
     /**
      * Set vehicleModelType.
      *
-     * @param ModelType $vehicleModelType
+     * @param null|ModelType $vehicleModelType
      *
      * @return Appointment
      */
-    public function setVehicleModelType(ModelType $vehicleModelType = null)
+    public function setVehicleModelType(ModelType $vehicleModelType = null): self
     {
         $this->vehicleModelType = $vehicleModelType;
 
@@ -541,45 +528,21 @@ class Appointment
     /**
      * Get vehicleModelType.
      *
-     * @return ModelType
+     * @return null|ModelType
      */
-    public function getVehicleModelType()
+    public function getVehicleModelType(): ?ModelType
     {
         return $this->vehicleModelType;
     }
 
     /**
-     * Set branchTiming.
-     *
-     * @param Timing $branchTiming
-     *
-     * @return Appointment
-     */
-    public function setBranchTiming(Timing $branchTiming = null)
-    {
-        $this->branchTiming = $branchTiming;
-
-        return $this;
-    }
-
-    /**
-     * Get branchTiming.
-     *
-     * @return Timing
-     */
-    public function getBranchTiming()
-    {
-        return $this->branchTiming;
-    }
-
-    /**
      * Set details.
      *
-     * @param AppointmentDetails $details
+     * @param null|AppointmentDetails $details
      *
      * @return Appointment
      */
-    public function setDetails(AppointmentDetails $details = null)
+    public function setDetails(AppointmentDetails $details = null): self
     {
         $this->details = $details;
 
@@ -589,9 +552,9 @@ class Appointment
     /**
      * Get details.
      *
-     * @return AppointmentDetails
+     * @return null|AppointmentDetails
      */
-    public function getDetails()
+    public function getDetails(): ?AppointmentDetails
     {
         return $this->details;
     }
@@ -601,17 +564,17 @@ class Appointment
      *
      * @return array
      */
-    public static function getStatuses()
+    public static function getStatuses(): array
     {
         return [
-            self::STATUS_NEW => 'New',
-            self::STATUS_CONFIRMED => 'Confirmed',
-            self::STATUS_CANCELLED => 'Cancelled',
+            self::STATUS_NEW             => 'New',
+            self::STATUS_CONFIRMED       => 'Confirmed',
+            self::STATUS_CANCELLED       => 'Cancelled',
             self::STATUS_INVALID_CONTACT => 'Invalid Contact',
-            self::STATUS_CALLBACK => 'Call Back',
-            self::STATUS_CHECKED_IN => 'Checked In',
-            self::STATUS_DUPLICATE => 'Duplicate',
-            self::STATUS_INSPECTED => 'Inspected',
+            self::STATUS_CALLBACK        => 'Call Back',
+            self::STATUS_CHECKED_IN      => 'Checked In',
+            self::STATUS_DUPLICATE       => 'Duplicate',
+            self::STATUS_INSPECTED       => 'Inspected',
         ];
     }
 
@@ -622,7 +585,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function setStatus($status)
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
@@ -632,9 +595,9 @@ class Appointment
     /**
      * Get status.
      *
-     * @return string
+     * @return null|string
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -642,9 +605,9 @@ class Appointment
     /**
      * Get vehicleMileage.
      *
-     * @return int
+     * @return null|int
      */
-    public function getVehicleMileage()
+    public function getVehicleMileage(): ?int
     {
         return $this->vehicleMileage;
     }
@@ -656,7 +619,7 @@ class Appointment
      *
      * @return $this
      */
-    public function setVehicleMileage($vehicleMileage)
+    public function setVehicleMileage($vehicleMileage): self
     {
         $this->vehicleMileage = $vehicleMileage;
 
@@ -670,7 +633,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function setVehicleYear($vehicleYear)
+    public function setVehicleYear(int $vehicleYear): self
     {
         $this->vehicleYear = $vehicleYear;
 
@@ -680,9 +643,9 @@ class Appointment
     /**
      * Get vehicleYear.
      *
-     * @return int
+     * @return null|int
      */
-    public function getVehicleYear()
+    public function getVehicleYear(): ?int
     {
         return $this->vehicleYear;
     }
@@ -694,7 +657,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function setVehicleTransmission($vehicleTransmission)
+    public function setVehicleTransmission(string $vehicleTransmission): self
     {
         $this->vehicleTransmission = $vehicleTransmission;
 
@@ -704,9 +667,9 @@ class Appointment
     /**
      * Get vehicleTransmission.
      *
-     * @return string
+     * @return null|string
      */
-    public function getVehicleTransmission()
+    public function getVehicleTransmission(): ?string
     {
         return $this->vehicleTransmission;
     }
@@ -714,9 +677,9 @@ class Appointment
     /**
      * Get branch.
      *
-     * @return Branch
+     * @return null|Branch
      */
-    public function getBranch()
+    public function getBranch(): ?Branch
     {
         return $this->branch;
     }
@@ -733,62 +696,6 @@ class Appointment
         $this->branch = $branch;
 
         return $this;
-    }
-
-    /**
-     * Get date.
-     *
-     * @return \DateTime
-     */
-    public function getDateBooked()
-    {
-        return $this->dateBooked;
-    }
-
-    /**
-     * Set date.
-     *
-     * @param \DateTime $dateBooked
-     *
-     * @return $this
-     */
-    public function setDateBooked(\DateTime $dateBooked)
-    {
-        $this->dateBooked = $dateBooked;
-
-        return $this;
-    }
-
-    /**
-     * Get from.
-     *
-     * @return string
-     */
-    public function getFrom()
-    {
-        return $this->from;
-    }
-
-    /**
-     * Set from.
-     *
-     * @param string $from
-     *
-     * @return $this
-     */
-    public function setFrom($from)
-    {
-        $this->from = $from;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTo()
-    {
-        return $this->to;
     }
 
     /**
@@ -812,7 +719,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function setVehicleColor($vehicleColor)
+    public function setVehicleColor(string $vehicleColor): self
     {
         $this->vehicleColor = $vehicleColor;
 
@@ -822,9 +729,9 @@ class Appointment
     /**
      * Get vehicleColor.
      *
-     * @return string
+     * @return null|string
      */
-    public function getVehicleColor()
+    public function getVehicleColor(): ?string
     {
         return $this->vehicleColor;
     }
@@ -832,26 +739,26 @@ class Appointment
     /**
      * Set valuation.
      *
-     * @param Valuation $valuation
+     * @param null|Valuation $valuation
      *
      * @return Appointment
      */
-    public function setValuation(Valuation $valuation = null)
+    public function setValuation(Valuation $valuation = null): self
     {
         $this->valuation = $valuation;
 
         if ($valuation) {
-            $this->vehicleModel = $valuation->getVehicleModel();
-            $this->vehicleYear = $valuation->getVehicleYear();
-            $this->vehicleModelType = $valuation->getVehicleModelType();
-            $this->vehicleMileage = $valuation->getVehicleMileage();
-            $this->vehicleColor = $valuation->getVehicleColor();
+            $this->vehicleModel         = $valuation->getVehicleModel();
+            $this->vehicleYear          = $valuation->getVehicleYear();
+            $this->vehicleModelType     = $valuation->getVehicleModelType();
+            $this->vehicleMileage       = $valuation->getVehicleMileage();
+            $this->vehicleColor         = $valuation->getVehicleColor();
             $this->vehicleBodyCondition = $valuation->getVehicleBodyCondition();
-            $this->vehicleOption = $valuation->getVehicleOption();
-            $this->name = $valuation->getName();
-            $this->emailAddress = $valuation->getEmailAddress();
-            $this->mobileNumber = $valuation->getMobileNumber();
-            $this->source = $valuation->getSource();
+            $this->vehicleOption        = $valuation->getVehicleOption();
+            $this->name                 = $valuation->getName();
+            $this->emailAddress         = $valuation->getEmailAddress();
+            $this->mobileNumber         = $valuation->getMobileNumber();
+            $this->source               = $valuation->getSource();
         }
 
         return $this;
@@ -860,9 +767,9 @@ class Appointment
     /**
      * Get valuation.
      *
-     * @return Valuation
+     * @return null|Valuation
      */
-    public function getValuation()
+    public function getValuation(): ?Valuation
     {
         return $this->valuation;
     }
@@ -870,11 +777,11 @@ class Appointment
     /**
      * Set createdBy.
      *
-     * @param User $createdBy
+     * @param null|User $createdBy
      *
      * @return Appointment
      */
-    public function setCreatedBy(User $createdBy = null)
+    public function setCreatedBy(User $createdBy = null): self
     {
         $this->createdBy = $createdBy;
 
@@ -884,9 +791,9 @@ class Appointment
     /**
      * Get createdBy.
      *
-     * @return User
+     * @return null|User
      */
-    public function getCreatedBy()
+    public function getCreatedBy(): ?User
     {
         return $this->createdBy;
     }
@@ -898,7 +805,7 @@ class Appointment
      *
      * @return $this
      */
-    public function setVehicleMake(Make $make)
+    public function setVehicleMake(Make $make): self
     {
         $this->vehicleMake = $make;
 
@@ -908,9 +815,9 @@ class Appointment
     /**
      * Get Vehicle Make.
      *
-     * @return Make
+     * @return null|Make
      */
-    public function getVehicleMake()
+    public function getVehicleMake(): ?Make
     {
         return $this->vehicleMake;
     }
@@ -922,7 +829,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function setNotes($notes)
+    public function setNotes(string $notes): self
     {
         $this->notes = $notes;
 
@@ -932,9 +839,9 @@ class Appointment
     /**
      * Get notes.
      *
-     * @return string
+     * @return null|string
      */
-    public function getNotes()
+    public function getNotes(): ?string
     {
         return $this->notes;
     }
@@ -942,35 +849,29 @@ class Appointment
     /**
      * Gets SmsTimingString.
      *
-     * @return string
+     * @return null|string
      */
-    public function getSmsTimingString()
+    public function getSmsTimingString(): ?string
     {
-        if ($this->dateBooked && $this->branchTiming) {
-            return sprintf('%s @ "%s"', $this->dateBooked->format('d/m/y'), $this->branchTiming->getTimingString());
+        if (null !== $this->bookedAt) {
+            return sprintf('%s @ "%s"', $this->bookedAt->format('d/m/y'), $this->bookedAt->format('h:i a'));
         }
+
+        return null;
     }
 
     /**
      * Gets online price.
      *
-     * @return float
+     * @return null|float
      */
-    public function getPriceOnline()
+    public function getPriceOnline(): ?float
     {
         if ($this->valuation) {
             return $this->valuation->getPriceOnline();
         }
-    }
 
-    /**
-     * Gets day booked.
-     *
-     * @return int
-     */
-    public function getDayBooked()
-    {
-        return $this->branchTiming->getDayBooked();
+        return null;
     }
 
     /**
@@ -980,7 +881,7 @@ class Appointment
      *
      * @return Appointment
      */
-    public function addInspection(Inspection $inspection)
+    public function addInspection(Inspection $inspection): self
     {
         $this->inspections[] = $inspection;
 
@@ -992,7 +893,7 @@ class Appointment
      *
      * @param Inspection $inspection
      */
-    public function removeInspection(Inspection $inspection)
+    public function removeInspection(Inspection $inspection): void
     {
         $this->inspections->removeElement($inspection);
     }
@@ -1002,7 +903,7 @@ class Appointment
      *
      * @return ArrayCollection
      */
-    public function getInspections()
+    public function getInspections(): ?ArrayCollection
     {
         return $this->inspections;
     }
@@ -1012,7 +913,7 @@ class Appointment
      *
      * @return bool
      */
-    public function hasInspections()
+    public function hasInspections(): bool
     {
         return (bool) ($this->inspections->count());
     }
@@ -1020,9 +921,9 @@ class Appointment
     /**
      * Gets first inspection.
      *
-     * @return Inspection|null
+     * @return null|Inspection
      */
-    public function getInspection()
+    public function getInspection(): ?Inspection
     {
         return $this->inspections->first();
     }
@@ -1032,9 +933,9 @@ class Appointment
      *
      * @param bool $smsSent
      *
-     * @return Appointment
+     * @return null|Appointment
      */
-    public function setSmsSent($smsSent)
+    public function setSmsSent(bool $smsSent): ?self
     {
         $this->smsSent = $smsSent;
 
@@ -1044,9 +945,9 @@ class Appointment
     /**
      * Get smsSent.
      *
-     * @return bool
+     * @return null|bool
      */
-    public function isSmsSent()
+    public function isSmsSent(): ?bool
     {
         return $this->smsSent;
     }
@@ -1056,9 +957,9 @@ class Appointment
      *
      * @param string $vehicleOption
      *
-     * @return Appointment
+     * @return null|Appointment
      */
-    public function setVehicleOption($vehicleOption)
+    public function setVehicleOption(string $vehicleOption): ?self
     {
         $this->vehicleOption = $vehicleOption;
 
@@ -1068,9 +969,9 @@ class Appointment
     /**
      * Get vehicleOption.
      *
-     * @return string
+     * @return null|string
      */
-    public function getVehicleOption()
+    public function getVehicleOption(): ?string
     {
         return $this->vehicleOption;
     }
@@ -1078,9 +979,9 @@ class Appointment
     /**
      * Get smsSent.
      *
-     * @return bool
+     * @return null|bool
      */
-    public function getSmsSent()
+    public function getSmsSent(): ?bool
     {
         return $this->smsSent;
     }
@@ -1088,11 +989,11 @@ class Appointment
     /**
      * Set appointmentReminder.
      *
-     * @param AppointmentReminder $appointmentReminder
+     * @param null|AppointmentReminder $appointmentReminder
      *
      * @return Appointment
      */
-    public function setAppointmentReminder(AppointmentReminder $appointmentReminder = null)
+    public function setAppointmentReminder(AppointmentReminder $appointmentReminder = null): self
     {
         $this->appointmentReminder = $appointmentReminder;
 
@@ -1102,20 +1003,21 @@ class Appointment
     /**
      * Get appointmentReminder.
      *
-     * @return AppointmentReminder
+     * @return null|AppointmentReminder
      */
-    public function getAppointmentReminder()
+    public function getAppointmentReminder(): ?AppointmentReminder
     {
         return $this->appointmentReminder;
     }
 
     /**
-     * Set source
+     * Set source.
      *
      * @param string $source
+     *
      * @return Appointment
      */
-    public function setSource($source)
+    public function setSource(string $source): self
     {
         $this->source = $source;
 
@@ -1123,12 +1025,36 @@ class Appointment
     }
 
     /**
-     * Get source
+     * Get source.
      *
-     * @return string 
+     * @return null|string
      */
-    public function getSource()
+    public function getSource(): ?string
     {
         return $this->source;
+    }
+
+    /**
+     * getBookedAt.
+     *
+     * @return null|\DateTime
+     */
+    public function getBookedAt(): ?\DateTime
+    {
+        return $this->bookedAt;
+    }
+
+    /**
+     * setBookedAt.
+     *
+     * @param \DateTime|null $bookedAt
+     *
+     * @return $this
+     */
+    public function setBookedAt(?\DateTime $bookedAt = null): self
+    {
+        $this->bookedAt = $bookedAt;
+
+        return $this;
     }
 }

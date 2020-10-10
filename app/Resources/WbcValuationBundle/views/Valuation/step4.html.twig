@@ -81,7 +81,7 @@
                                         <label class="col-md-5">Pick a Timing</label>
                                         <div class="col-md-7">
                                             <select ng-model="ctrl.selectedBranchTiming" class="form-control"
-                                                    ng-options="branchTiming.id as branchTiming.shortName for branchTiming in ctrl.branchTimings"
+                                                    ng-options="branchTiming.from as branchTiming.short_name for branchTiming in ctrl.branchTimings"
                                                     required
                                                     name="selectedBranchTiming"
                                                     ng-class="{'form-control-invalid': valuationStepFourForm.$submitted && valuationStepFourForm.selectedBranchTiming.$invalid, 'disabled': !ctrl.isTimingSlotsAvailable }">

@@ -12,7 +12,7 @@ use Wbc\BranchBundle\Form\DayType;
  * Class Timing.
  *
  * @ORM\Table(name="branch_timing", uniqueConstraints={@ORM\UniqueConstraint(name="wbc_timing_unique_idx", columns={"branch_id",
- * "day_booked", "from_time"})})
+ * "day_of_week", "from_time"})})
  * @ORM\Entity(repositoryClass="Wbc\BranchBundle\Repository\TimingRepository")
  *
  * @Serializer\ExclusionPolicy("all")*
@@ -45,63 +45,43 @@ class Timing
     protected $branch;
 
     /**
-     * ISO-8601 numeric representation of the day of the week (1 - Monday, 7 - Sunday).
-     *
      * @var int
      *
-     * @ORM\Column(name="day_booked", type="smallint")
+     * @ORM\Column(name="day_of_week", type="smallint")
      *
      * @Assert\NotBlank()
      *
      * @Serializer\Expose
      */
-    protected $dayBooked;
+    protected $dayOfWeek;
 
     /**
-     * Time (format => hour * 60 + minutes).
+     * @var \DateTime
      *
-     * @var int
-     *
-     * @ORM\Column(name="from_time", type="smallint")
+     * @ORM\Column(name="from_time", type="time")
      *
      * @Assert\NotBlank()
      *
      * @Serializer\Expose
-     * @Serializer\Type("string")
+     * @Serializer\Type(
+     *   "DateTime<'h:i a'>"
+     * )
      */
     protected $from;
 
     /**
-     * Time (format => hour * 60 + minutes).
+     * @var \DateTime
      *
-     * @var int
-     *
-     * @ORM\Column(name="to_time", type="smallint")
+     * @ORM\Column(name="to_time", type="time")
      *
      * @Assert\NotBlank()
      *
      * @Serializer\Expose
-     * @Serializer\Type("string")
+     * @Serializer\Type(
+     *   "DateTime<'h:i a'>"
+     * )
      */
     protected $to;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="number_of_slots", type="smallint", options={"default": 0})
-     *
-     * @Assert\NotBlank()
-     *
-     * @Serializer\Expose
-     */
-    protected $numberOfSlots;
-
-    /**
-     * @Serializer\Expose
-     *
-     * @fixme: Remove this hardcoded value
-     */
-    protected $availableSlots = 3;
 
     /**
      * @var \DateTime
@@ -122,65 +102,44 @@ class Timing
     protected $updatedAt;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="admin_only", type="boolean", nullable=true, options={"default": false})
-     */
-    protected $adminOnly;
-
-    /**
      * Timing Constructor.
      *
-     * @param Branch $branch
-     * @param int    $dayBooked
-     * @param int    $from
+     * @param Branch|null $branch
+     * @param null $dayOfWeek
+     * @param null $from
+     * @param null $to
      */
-    public function __construct(Branch $branch = null, $dayBooked = null, $from = null)
+    public function __construct(Branch $branch = null, $dayOfWeek = null, $from = null, $to=null)
     {
         $this->branch = $branch;
-        $this->dayBooked = $dayBooked;
+        $this->dayOfWeek = $dayOfWeek;
         $this->from = $from;
-        $this->adminOnly = false;
+        $this->to = $to;
     }
 
+    /**
+     * __toString.
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->getName() ?: '';
     }
 
     /**
-     * Set dayBooked.
-     *
-     * @param int $dayBooked
-     *
-     * @return Timing
-     */
-    public function setDayBooked($dayBooked)
-    {
-        $this->dayBooked = $dayBooked;
-
-        return $this;
-    }
-
-    /**
-     * Get dayBooked.
-     *
-     * @return int
-     */
-    public function getDayBooked()
-    {
-        return $this->dayBooked;
-    }
-
-    /**
      * Set from.
      *
-     * @param string $from
+     * @param $from
      *
      * @return Timing
      */
-    public function setFrom($from)
+    public function setFrom($from): self
     {
+        if(is_string($from)){
+            $from = date_create($from);
+        }
+
         $this->from = $from;
 
         return $this;
@@ -189,7 +148,7 @@ class Timing
     /**
      * Get from.
      *
-     * @return string
+     * @return \DateTime|null|string
      */
     public function getFrom()
     {
@@ -199,12 +158,16 @@ class Timing
     /**
      * Set to.
      *
-     * @param string $to
+     * @param $to
      *
      * @return Timing
      */
-    public function setTo($to)
+    public function setTo($to): self
     {
+        if(is_string($to)){
+            $to = date_create($to);
+        }
+
         $this->to = $to;
 
         return $this;
@@ -213,35 +176,11 @@ class Timing
     /**
      * Get to.
      *
-     * @return string
+     * @return \DateTime|null|string
      */
     public function getTo()
     {
         return $this->to;
-    }
-
-    /**
-     * Set numberOfSlots.
-     *
-     * @param int $numberOfSlots
-     *
-     * @return Timing
-     */
-    public function setNumberOfSlots($numberOfSlots)
-    {
-        $this->numberOfSlots = $numberOfSlots;
-
-        return $this;
-    }
-
-    /**
-     * Get numberOfSlots.
-     *
-     * @return int
-     */
-    public function getNumberOfSlots()
-    {
-        return $this->numberOfSlots;
     }
 
     /**
@@ -251,7 +190,7 @@ class Timing
      *
      * @return Timing
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -261,9 +200,9 @@ class Timing
     /**
      * Get createdAt.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
@@ -275,7 +214,7 @@ class Timing
      *
      * @return Timing
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -285,9 +224,9 @@ class Timing
     /**
      * Get updatedAt.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?\DateTime
     {
         return $this->updatedAt;
     }
@@ -299,7 +238,7 @@ class Timing
      *
      * @return Timing
      */
-    public function setBranch(Branch $branch)
+    public function setBranch(Branch $branch): self
     {
         $this->branch = $branch;
 
@@ -309,9 +248,9 @@ class Timing
     /**
      * Get branch.
      *
-     * @return Branch
+     * @return Branch|null
      */
-    public function getBranch()
+    public function getBranch(): ?Branch
     {
         return $this->branch;
     }
@@ -320,38 +259,63 @@ class Timing
      * @Serializer\VirtualProperty
      * @Serializer\SerializedName("name")
      *
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        if ($this->branch !== null && null !== $this->dayOfWeek && null !== $this->from && null !== $this->to) {
+            return self::getNameStatic($this->branch->getName(), $this->dayOfWeek, $this->from, $this->to);
+        }
+
+        return null;
+    }
+
+    /**
+     * getNameStatic.
+     * @param string $branchName
+     * @param int $dayOfWeek
+     * @param \DateTime $from
+     * @param \DateTime $to
      * @return string
      */
-    public function getName()
+    public static function getNameStatic(string $branchName, int $dayOfWeek, \DateTime $from, \DateTime $to): string
     {
-        if ($this->branch && null !== $this->dayBooked && null !== $this->from && null !== $this->to) {
-            if ($this->adminOnly) {
-                return sprintf('%s - %s (Walk-In)', $this->branch->getName(), DayType::getDays()[$this->dayBooked]);
-            }
-
-            return sprintf('%s - %s (%s - %s)', $this->branch->getName(), DayType::getDays()[$this->dayBooked], $this->from, $this->to);
-        }
+        return sprintf('%s - %s (%s - %s)', $branchName, DayType::getDays()[$dayOfWeek], $from->format('h:i a'), $to->format('h:i a'));
     }
 
     /**
      * @Serializer\VirtualProperty
      * @Serializer\SerializedName("shortName")
      *
+     * @return string|null
+     */
+    public function getShortName(): ?string
+    {
+        if (null !== $this->dayOfWeek && null !== $this->from && null !== $this->to) {
+            return self::getShortNameStatic($this->dayOfWeek, $this->from, $this->to);
+        }
+
+        return null;
+    }
+
+    /**
+     * getShortNameStatic.
+     * @param int $dayOfWeek
+     * @param \DateTime $from
+     * @param \DateTime $to
      * @return string
      */
-    public function getShortName()
+    public static function getShortNameStatic(int $dayOfWeek, \DateTime $from, \DateTime $to): string
     {
-        if (null !== $this->dayBooked && null !== $this->from && null !== $this->to) {
-            return sprintf('%s (%s - %s)', DayType::getDays()[$this->dayBooked], $this->from, $this->to);
-        }
+        return sprintf('%s (%s - %s)', DayType::getDays()[$dayOfWeek], $from->format('h:i a'), $to->format('h:i a'));
     }
 
     /**
      * Get id.
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -359,43 +323,15 @@ class Timing
     /**
      * Get Timing string for FE.
      *
-     * @return string
+     * @return string|null
      */
-    public function getTimingString()
+    public function getTimingString(): ?string
     {
         if (null !== $this->from && null !== $this->to) {
-            if ($this->adminOnly) {
-                return 'Walk-In';
-            }
-
-            return sprintf('%s - %s', self::formatIntegerToTimeString($this->from), self::formatIntegerToTimeString($this->to));
-        }
-    }
-
-    /**
-     * @param int $integerTime
-     *
-     * @return string
-     */
-    public static function formatIntegerToTimeString($integerTime)
-    {
-        if (is_int($integerTime)) {
-            $timeString = sprintf('%02d:%02d', (int) ($integerTime / 60), (int) ($integerTime % 60));
-
-            return strtoupper((new \DateTime($timeString))->format('h:i a'));
+            return sprintf('%s - %s', $this->from->format('h:i a'), $this->to->format('h:i a'));
         }
 
-        return $integerTime;
-    }
-
-    /**
-     * @param \DateTime $dateTime
-     *
-     * @return int
-     */
-    public static function formatDateTimeToInteger(\DateTime $dateTime)
-    {
-        return (int) ($dateTime->format('H')) * 60 + (int) ($dateTime->format('i'));
+        return null;
     }
 
     /**
@@ -413,42 +349,74 @@ class Timing
      *
      * @return bool
      */
-    public function hasTimeSurpassed()
+    public function hasTimeSurpassed(): bool
     {
-        return $this->formatDateTimeToInteger(new \DateTime()) > $this->formatDateTimeToInteger(new \DateTime($this->from));
+        return (new \DateTime())->format('H:i') > $this->from->format('H:i');
     }
 
     /**
-     * Set adminOnly.
+     * getDayOfWeek.
      *
-     * @param bool $adminOnly
-     *
-     * @return Timing
+     * @return int|null
      */
-    public function setAdminOnly($adminOnly)
+    public function getDayOfWeek(): ?int
     {
-        $this->adminOnly = $adminOnly;
+        return $this->dayOfWeek;
+    }
+
+    /**
+     * setDayOfWeek.
+     *
+     * @param int $dayOfWeek
+     *
+     * @return $this
+     */
+    public function setDayOfWeek(int $dayOfWeek): self
+    {
+        $this->dayOfWeek = $dayOfWeek;
 
         return $this;
     }
 
     /**
-     * Get adminOnly.
-     *
-     * @return bool
+     * setFromString.
+     * @param $from
+     * @return $this
      */
-    public function getAdminOnly()
+    public function setFromString($from): self
     {
-        return $this->adminOnly;
+        $this->setFrom(date_create($from));
+
+        return $this;
     }
 
     /**
-     * Is adminOnly.
-     *
-     * @return bool
+     * getFromString.
+     * @return string|null
      */
-    public function isAdminOnly()
+    public function getFromString(): ?string
     {
-        return $this->adminOnly;
+        return $this->from !== null ? $this->from->format('H:i') : null;
+    }
+
+    /**
+     * getToString.
+     * @return string|null
+     */
+    public function getToString(): ?string
+    {
+        return $this->to !== null ? $this->to->format('H:i') : null;
+    }
+
+    /**
+     * setToString.
+     * @param $to
+     * @return $this
+     */
+    public function setToString($to): self
+    {
+        $this->setTo(date_create($to));
+
+        return $this;
     }
 }

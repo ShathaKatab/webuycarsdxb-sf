@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\BranchBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -7,25 +9,20 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Wbc\BranchBundle\Entity\Branch;
 use Wbc\BranchBundle\Form\DayType;
 
 /**
- * Class TimingAdmin.
+ * Class HolidayAdmin.
  *
  * @author Majid Mvulle <majid@majidmvulle.com>
  */
-class TimingAdmin extends AbstractAdmin
+class HolidayAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
-        '_page' => 1,
-        '_per_page' => 25,
+        '_page'       => 1,
+        '_per_page'   => 25,
         '_sort_order' => 'DESC',
-        '_sort_by' => 'createdAt',
+        '_sort_by'    => 'createdAt',
     ];
 
     /**
@@ -35,18 +32,13 @@ class TimingAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper->add('branch', EntityType::class, [
-            'class' => Branch::class,
-            'property' => 'name',
+        $formMapper->add('branch', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+            'class'       => 'Wbc\BranchBundle\Entity\Branch',
+            'property'    => 'name',
             'placeholder' => '-- Select a Branch --',
         ])
-            ->add('dayOfWeek', DayType::class)
-            ->add('fromString', TextType::class, [
-                'help' => 'e.g. 09:00',
-            ])
-            ->add('toString', TextType::class, [
-                'help' => 'e.g. 13:00',
-            ])
+            ->add('from', 'Symfony\Component\Form\Extension\Core\Type\DateType', ['widget' => 'single_text'])
+            ->add('to', 'Symfony\Component\Form\Extension\Core\Type\DateType', ['widget' => 'single_text'])
         ;
     }
 
@@ -68,12 +60,9 @@ class TimingAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('dayOfWeek', 'choice', [
-                'choices' => DayType::getDays(),
-            ])
             ->add('branch.name')
-            ->add('fromString')
-            ->add('toString')
+            ->add('from', 'Symfony\Component\Form\Extension\Core\Type\DateType')
+            ->add('to', 'Symfony\Component\Form\Extension\Core\Type\DateType')
         ;
     }
 
@@ -85,8 +74,8 @@ class TimingAdmin extends AbstractAdmin
     protected function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper->add('branch.name')
-            ->add('dayOfWeek')
-            ->add('fromString')
-            ->add('toString');
+            ->add('from')
+            ->add('to')
+        ;
     }
 }

@@ -24,10 +24,10 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <p class="p-lg">
-                        The appointment for your <span class="text-bold">{{ appointment.vehicleYear }} {{ appointment.vehicleMake.name }} {{ appointment.vehicleModel.name }}</span><br>
-                        at <span class="text-bold">{{ appointment.branch.name }}, {{ appointment.branch.citySlug | citySlug }}<br></span>
-                        on <span class="text-bold">{{ appointment.dateBooked|date('l jS F Y') }}</span><br>
-                        between <span class="text-bold">{{ appointment.branchTiming.timingString }}</span> is done
+                        The appointment for your <span class="text-bold">{{ appointment.vehicleYear }}&nbsp;{{ appointment.vehicleMake.name }}&nbsp;{{ appointment.vehicleModel.name }}</span><br>
+                        at <span class="text-bold">{{ appointment.branch.name }},&nbsp;{{ appointment.branch.citySlug | citySlug }}<br></span>
+                        on <span class="text-bold">{{ appointment.bookedAt|date('l jS F Y') }}</span><br>
+                        at <span class="text-bold">{{ appointment.bookedAt|date('h:i a') }}</span> is done
                     </p>
                 </div>
             </div>
