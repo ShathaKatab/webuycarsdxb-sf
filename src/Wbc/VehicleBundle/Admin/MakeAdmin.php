@@ -25,7 +25,7 @@ class MakeAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $form)
     {
         $form->add('name', TextType::class)
-            ->add('active', CheckboxType::class, ['required' => false])
+            ->add('active', CheckboxType::class, ['required' => false, 'label' => 'Enabled'])
             ->add('country', CountryType::class, ['required' => false, 'label' => 'Country of Origin']);
     }
 
@@ -36,9 +36,8 @@ class MakeAdmin extends AbstractAdmin
     {
         $list->addIdentifier('id')
             ->add('name')
-            ->add('active', 'checkbox', ['editable' => true])
-            ->add('source')
-            ->add('sourceId')
+            ->add('active', 'boolean', ['editable' => true, 'label' => 'Enabled'])
+            ->add('country')
             ->add('createdAt')
             ->add('updatedAt')
             ->add('_action', 'actions', [
@@ -51,7 +50,7 @@ class MakeAdmin extends AbstractAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $filter)
     {
-        $filter->add('name')->add('country')->add('source')->add('active');
+        $filter->add('name')->add('country')->add('source')->add('active', null, ['label' => 'Enabled']);
     }
 
     /**
@@ -61,9 +60,8 @@ class MakeAdmin extends AbstractAdmin
     {
         $show->add('id')
             ->add('name')
-            ->add('active', 'checkbox')
-            ->add('source')
-            ->add('sourceId')
+            ->add('active', 'checkbox', ['label' => 'Enabled'])
+            ->add('country')
             ->add('createdAt')
             ->add('updatedAt');
     }

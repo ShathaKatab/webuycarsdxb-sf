@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\VehicleBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -122,6 +124,13 @@ class ModelType
     private $isGcc;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="enabled", type="boolean", options={"default": true})
+     */
+    private $enabled;
+
+    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -137,6 +146,11 @@ class ModelType
      */
     private $updatedAt;
 
+    /**
+     * @var Make
+     */
+    private $make;
+
     public function __toString()
     {
         $name = $this->getName();
@@ -149,7 +163,7 @@ class ModelType
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -161,7 +175,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setSeats($seats)
+    public function setSeats(int $seats): self
     {
         $this->seats = $seats;
 
@@ -171,9 +185,9 @@ class ModelType
     /**
      * Get seats.
      *
-     * @return int
+     * @return null|int
      */
-    public function getSeats()
+    public function getSeats(): ?int
     {
         return $this->seats;
     }
@@ -185,7 +199,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -197,7 +211,7 @@ class ModelType
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
@@ -209,7 +223,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -221,7 +235,7 @@ class ModelType
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
@@ -229,11 +243,11 @@ class ModelType
     /**
      * Set model.
      *
-     * @param Model $model
+     * @param null|Model $model
      *
      * @return ModelType
      */
-    public function setModel(Model $model = null)
+    public function setModel(Model $model = null): self
     {
         $this->model = $model;
 
@@ -243,9 +257,9 @@ class ModelType
     /**
      * Get model.
      *
-     * @return Model
+     * @return null|Model
      */
-    public function getModel()
+    public function getModel(): ?Model
     {
         return $this->model;
     }
@@ -257,7 +271,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setTrim($trim)
+    public function setTrim(string $trim): self
     {
         $this->trim = $trim;
 
@@ -267,9 +281,9 @@ class ModelType
     /**
      * Get trim.
      *
-     * @return string
+     * @return null|string
      */
-    public function getTrim()
+    public function getTrim(): ?string
     {
         return $this->trim;
     }
@@ -281,7 +295,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setTrimSourceId($trimSourceId)
+    public function setTrimSourceId(string $trimSourceId): self
     {
         $this->trimSourceId = $trimSourceId;
 
@@ -293,7 +307,7 @@ class ModelType
      *
      * @return string
      */
-    public function getTrimSourceId()
+    public function getTrimSourceId(): string
     {
         return $this->trimSourceId;
     }
@@ -305,7 +319,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setBodyType($bodyType)
+    public function setBodyType(string $bodyType): self
     {
         $this->bodyType = $bodyType;
 
@@ -315,9 +329,9 @@ class ModelType
     /**
      * Get bodyType.
      *
-     * @return string
+     * @return null|string
      */
-    public function getBodyType()
+    public function getBodyType(): ?string
     {
         return $this->bodyType;
     }
@@ -329,7 +343,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setBodyTypeSourceId($bodyTypeSourceId)
+    public function setBodyTypeSourceId(string $bodyTypeSourceId): self
     {
         $this->bodyTypeSourceId = $bodyTypeSourceId;
 
@@ -341,7 +355,7 @@ class ModelType
      *
      * @return string
      */
-    public function getBodyTypeSourceId()
+    public function getBodyTypeSourceId(): string
     {
         return $this->bodyTypeSourceId;
     }
@@ -353,7 +367,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setYears($years)
+    public function setYears(array $years): self
     {
         $this->years = array_unique($years);
 
@@ -363,9 +377,9 @@ class ModelType
     /**
      * Get years.
      *
-     * @return array
+     * @return null|array
      */
-    public function getYears()
+    public function getYears(): ?array
     {
         return $this->years;
     }
@@ -377,7 +391,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setIsGcc($isGcc)
+    public function setIsGcc(bool $isGcc): self
     {
         $this->isGcc = $isGcc;
 
@@ -387,9 +401,9 @@ class ModelType
     /**
      * Get isGcc.
      *
-     * @return bool
+     * @return null|bool
      */
-    public function getIsGcc()
+    public function getIsGcc(): ?bool
     {
         return $this->isGcc;
     }
@@ -397,11 +411,11 @@ class ModelType
     /**
      * Set transmission.
      *
-     * @param string $transmission
+     * @param string|null $transmission
      *
      * @return ModelType
      */
-    public function setTransmission($transmission)
+    public function setTransmission(?string $transmission = null): self
     {
         $this->transmission = $transmission;
 
@@ -411,9 +425,9 @@ class ModelType
     /**
      * Get transmission.
      *
-     * @return string
+     * @return null|string
      */
-    public function getTransmission()
+    public function getTransmission(): ?string
     {
         return $this->transmission;
     }
@@ -425,7 +439,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setTransmissionSourceId($transmissionSourceId)
+    public function setTransmissionSourceId(string $transmissionSourceId): self
     {
         $this->transmissionSourceId = $transmissionSourceId;
 
@@ -435,9 +449,9 @@ class ModelType
     /**
      * Get transmissionSourceId.
      *
-     * @return string
+     * @return null|string
      */
-    public function getTransmissionSourceId()
+    public function getTransmissionSourceId(): ?string
     {
         return $this->transmissionSourceId;
     }
@@ -449,7 +463,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setCylinders($cylinders)
+    public function setCylinders(int $cylinders): self
     {
         $this->cylinders = $cylinders;
 
@@ -459,9 +473,9 @@ class ModelType
     /**
      * Get cylinders.
      *
-     * @return int
+     * @return null|int
      */
-    public function getCylinders()
+    public function getCylinders(): ?int
     {
         return $this->cylinders;
     }
@@ -473,7 +487,7 @@ class ModelType
      *
      * @return ModelType
      */
-    public function setEngine($engine)
+    public function setEngine(int $engine): self
     {
         $this->engine = $engine;
 
@@ -483,11 +497,11 @@ class ModelType
     /**
      * Get engine.
      *
-     * @return int
+     * @return null|int
      */
-    public function getEngine()
+    public function getEngine(): ?int
     {
-        return $this->engine;
+        return (int) $this->engine;
     }
 
     /**
@@ -495,7 +509,7 @@ class ModelType
      *
      * @return int
      */
-    public function getPassengerNumber()
+    public function getPassengerNumber(): int
     {
         //remove the driver's seat
         return $this->seats ? $this->seats - 1 : $this->seats;
@@ -507,7 +521,7 @@ class ModelType
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return sprintf('%s - %s - %s (%sL)', $this->trim, $this->bodyType, $this->transmission, number_format($this->engine / 1000, 1));
     }
@@ -517,8 +531,58 @@ class ModelType
      *
      * @return string
      */
-    public function getFlattenedYears()
+    public function getFlattenedYears(): string
     {
         return implode(',', $this->years);
+    }
+
+    /**
+     * isEnabled.
+     *
+     * @return null|bool
+     */
+    public function isEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * setEnabled.
+     *
+     * @param bool $enabled
+     *
+     * @return $this
+     */
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * getMake.
+     *
+     * @return null|Make
+     */
+    public function getMake(): ?Make
+    {
+        $model = $this->getModel();
+
+        return null !== $model ? $model->getMake() : null;
+    }
+
+    /**
+     * setMake.
+     *
+     * @param Make $make
+     *
+     * @return $this
+     */
+    public function setMake(Make $make): self
+    {
+        $this->make = $make;
+
+        return $this;
     }
 }

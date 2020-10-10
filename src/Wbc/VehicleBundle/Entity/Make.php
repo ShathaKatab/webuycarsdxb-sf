@@ -3,6 +3,7 @@
 namespace Wbc\VehicleBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
@@ -123,9 +124,9 @@ class Make
     /**
      * Get name.
      *
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -137,7 +138,7 @@ class Make
      *
      * @return Make
      */
-    public function setSource($source)
+    public function setSource(string $source): self
     {
         $this->source = $source;
 
@@ -147,9 +148,9 @@ class Make
     /**
      * Get source.
      *
-     * @return string
+     * @return string|null
      */
-    public function getSource()
+    public function getSource(): ?string
     {
         return $this->source;
     }
@@ -161,7 +162,7 @@ class Make
      *
      * @return Make
      */
-    public function setSourceId($sourceId)
+    public function setSourceId(string $sourceId): self
     {
         $this->sourceId = $sourceId;
 
@@ -171,9 +172,9 @@ class Make
     /**
      * Get sourceId.
      *
-     * @return string
+     * @return string|null
      */
-    public function getSourceId()
+    public function getSourceId(): ?string
     {
         return $this->sourceId;
     }
@@ -185,7 +186,7 @@ class Make
      *
      * @return Make
      */
-    public function setActive($active)
+    public function setActive(bool $active)
     {
         $this->active = $active;
 
@@ -195,9 +196,9 @@ class Make
     /**
      * Get active.
      *
-     * @return bool
+     * @return bool|null
      */
-    public function isActive()
+    public function isActive(): ?bool
     {
         return $this->active;
     }
@@ -209,7 +210,7 @@ class Make
      *
      * @return Make
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -221,7 +222,7 @@ class Make
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
@@ -233,7 +234,7 @@ class Make
      *
      * @return Make
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -245,7 +246,7 @@ class Make
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
@@ -257,7 +258,7 @@ class Make
      *
      * @return Make
      */
-    public function addModel(Model $models)
+    public function addModel(Model $models): self
     {
         $this->models[] = $models;
 
@@ -269,7 +270,7 @@ class Make
      *
      * @param Model $models
      */
-    public function removeModel(Model $models)
+    public function removeModel(Model $models): self
     {
         $this->models->removeElement($models);
     }
@@ -277,9 +278,9 @@ class Make
     /**
      * Get models.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
-    public function getModels()
+    public function getModels(): Collection
     {
         return $this->models;
     }
@@ -287,7 +288,7 @@ class Make
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name ?: '';
     }
@@ -299,7 +300,7 @@ class Make
      *
      * @return Make
      */
-    public function setCountry($country)
+    public function setCountry(string $country)
     {
         $this->country = $country;
 
@@ -309,9 +310,9 @@ class Make
     /**
      * Get country.
      *
-     * @return string
+     * @return string|null
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->country;
     }

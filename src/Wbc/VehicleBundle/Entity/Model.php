@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Wbc\VehicleBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,6 +20,22 @@ use JMS\Serializer\Annotation as Serializer;
  */
 class Model
 {
+    /**
+     * @var Make
+     *
+     * @ORM\ManyToOne(targetEntity="Wbc\VehicleBundle\Entity\Make", inversedBy="models", fetch="EAGER")
+     * @ORM\JoinColumn(name="make_id", referencedColumnName="id")
+     * @Serializer\Expose()
+     */
+    protected $make;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Wbc\VehicleBundle\Entity\ModelType", mappedBy="model")
+     * @ORM\OrderBy({"engine" = "ASC", "bodyType" = "ASC"})
+     */
+    protected $modelTypes;
     /**
      * @var int
      *
@@ -51,23 +69,6 @@ class Model
     private $sourceId;
 
     /**
-     * @var Make
-     *
-     * @ORM\ManyToOne(targetEntity="Wbc\VehicleBundle\Entity\Make", inversedBy="models", fetch="EAGER")
-     * @ORM\JoinColumn(name="make_id", referencedColumnName="id")
-     * @Serializer\Expose()
-     */
-    protected $make;
-
-    /**
-     * @var ArrayCollection
-     *
-     * @ORM\OneToMany(targetEntity="Wbc\VehicleBundle\Entity\ModelType", mappedBy="model")
-     * @ORM\OrderBy({"engine" = "ASC", "bodyType" = "ASC"})
-     */
-    protected $modelTypes;
-
-    /**
      * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
@@ -89,7 +90,15 @@ class Model
     public function __construct()
     {
         $this->modelTypes = new ArrayCollection();
-        $this->active = true;
+        $this->active     = true;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->name ?: '';
     }
 
     /**
@@ -97,7 +106,7 @@ class Model
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -109,7 +118,7 @@ class Model
      *
      * @return Model
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -119,9 +128,9 @@ class Model
     /**
      * Get name.
      *
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -133,7 +142,7 @@ class Model
      *
      * @return Model
      */
-    public function setActive($active)
+    public function setActive(bool $active): self
     {
         $this->active = $active;
 
@@ -143,9 +152,9 @@ class Model
     /**
      * Get isActive.
      *
-     * @return bool
+     * @return bool|null
      */
-    public function isActive()
+    public function isActive(): ?bool
     {
         return $this->active;
     }
@@ -157,7 +166,7 @@ class Model
      *
      * @return Model
      */
-    public function setSourceId($sourceId)
+    public function setSourceId(string $sourceId): self
     {
         $this->sourceId = $sourceId;
 
@@ -169,7 +178,7 @@ class Model
      *
      * @return string
      */
-    public function getSourceId()
+    public function getSourceId(): string
     {
         return $this->sourceId;
     }
@@ -181,7 +190,7 @@ class Model
      *
      * @return Model
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -193,7 +202,7 @@ class Model
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
@@ -205,7 +214,7 @@ class Model
      *
      * @return Model
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -217,7 +226,7 @@ class Model
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
@@ -225,11 +234,11 @@ class Model
     /**
      * Set make.
      *
-     * @param Make $make
+     * @param null|Make $make
      *
      * @return Model
      */
-    public function setMake(Make $make = null)
+    public function setMake(Make $make = null): self
     {
         $this->make = $make;
 
@@ -239,19 +248,11 @@ class Model
     /**
      * Get make.
      *
-     * @return Make
+     * @return Make|null
      */
-    public function getMake()
+    public function getMake(): ?Make
     {
         return $this->make;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->name ?: '';
     }
 
     /**
@@ -261,7 +262,7 @@ class Model
      *
      * @return Model
      */
-    public function addModelType(ModelType $modelType)
+    public function addModelType(ModelType $modelType): self
     {
         $this->modelTypes[] = $modelType;
 
@@ -283,7 +284,7 @@ class Model
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getModelTypes()
+    public function getModelTypes(): \Doctrine\Common\Collections\Collection
     {
         return $this->modelTypes;
     }

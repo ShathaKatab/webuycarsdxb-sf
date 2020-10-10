@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -73,10 +75,14 @@ class AppKernel extends Kernel
      */
     public function getCacheDir()
     {
-        $file = new Symfony\Component\HttpFoundation\File\File('/dev/shm/appname/cache' . '/' . $this->environment, false);
+        if (in_array($this->environment, ['dev', 'test'], true)) {
+            $path = '/dev/shm/webuycarsdxb/cache/'.$this->environment;
 
-        if (in_array($this->environment, ['dev', 'test'], true) && $file->isWritable()) {
-            return '/dev/shm/appname/cache/'.$this->environment;
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+
+            return $path;
         }
 
         return parent::getCacheDir();
@@ -87,10 +93,14 @@ class AppKernel extends Kernel
      */
     public function getLogDir()
     {
-        $file = new Symfony\Component\HttpFoundation\File\File('/dev/shm/appname/logs' . '/' . $this->environment, false);
+        if (in_array($this->environment, ['dev', 'test'], true)) {
+            $path = '/dev/shm/webuycarsdxb/logs/'.$this->environment;
 
-        if (in_array($this->environment, ['dev', 'test'], true) && $file->isWritable()) {
-            return '/dev/shm/appname/logs'.'/'.$this->environment;
+            if (!file_exists($path)) {
+                mkdir($path, 0777, true);
+            }
+
+            return $path;
         }
 
         return parent::getLogDir();

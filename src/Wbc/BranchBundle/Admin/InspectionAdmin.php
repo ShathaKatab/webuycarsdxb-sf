@@ -182,7 +182,8 @@ class InspectionAdmin extends AbstractAdmin
                 'class' => Model::class,
                 'query_builder' => function (EntityRepository $entityRepository) {
                     return $entityRepository->createQueryBuilder('m')->where('m.id IS NULL'); //don't populate anything
-                }, ])->add('vehicleModelType', EntityType::class, [
+                }, ])
+            ->add('vehicleModelType', EntityType::class, [
                 'required' => false,
                 'placeholder' => '',
                 'class' => ModelType::class,

@@ -85,6 +85,10 @@ $(document).ready(function () {
     });
 
     modelSelect.on('change', function (e) {
+        if(window.location.href.includes('vehicle/modeltype')){
+            e.stopPropagation();
+            return;
+        }
         clearTransmissionAndSpecifications();
         var modelIdValue = this.value;
         modelTypeSelect.find('option').remove();

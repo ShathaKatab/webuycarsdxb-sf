@@ -37,7 +37,7 @@ class ValuationController extends Controller
      *
      * @param Request $request
      *
-     * @return array
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array
      */
     public function step1Action(Request $request)
     {
@@ -51,7 +51,7 @@ class ValuationController extends Controller
 
             if ($form->isValid()) {
                 $formData = $form->getData();
-                $session = $this->get('session');
+                $session  = $this->get('session');
                 $session->set('modelId', $formData['vehicleModel']->getId());
                 $session->set('modelYear', $formData['vehicleYear']);
 
@@ -72,23 +72,23 @@ class ValuationController extends Controller
      *
      * @return array
      */
-    public function step2Action(Request $request)
+    public function step2Action(Request $request): array
     {
-        $form = null;
+        $form    = null;
         $session = $this->get('session');
 
         if (!$session->has('modelId') || !$session->has('modelYear')) {
             return $this->redirectToRoute('wbc_appointment_step_1');
         }
 
-        $modelId = $session->get('modelId');
-        $modelYear = $session->get('modelYear');
+        $modelId       = $session->get('modelId');
+        $modelYear     = $session->get('modelYear');
         $entityManager = $this->get('doctrine.orm.default_entity_manager');
 
         if (Request::METHOD_POST === $request->getMethod()) {
-            $data = $request->request->all();
+            $data                 = $request->request->all();
             $data['vehicleModel'] = $modelId;
-            $data['vehicleYear'] = $modelYear;
+            $data['vehicleYear']  = $modelYear;
 
             $valuation = new Valuation();
             $valuation->setStatus(Valuation::STATUS_NEW);
@@ -114,24 +114,15 @@ class ValuationController extends Controller
             throw new NotFoundHttpException('Vehicle model is not found!');
         }
 
-        $modelTypesData = [];
-
         $modelTypes = $entityManager->getRepository('WbcVehicleBundle:ModelType')
-            ->findBy(['model' => $model, 'isGcc' => true]);
-
-        if ($modelTypes) {
-            foreach ($modelTypes as $modelType) {
-                if (in_array($modelYear, $modelType->getYears(), true)) {
-                    $modelTypesData[] = $modelType;
-                }
-            }
-        }
+            ->findBy(['model' => $model, 'enabled' => true, 'isGcc' => true])
+        ;
 
         return [
-            'vehicleModelTypes' => count($modelTypesData) ? $modelTypesData : $modelTypes,
-            'vehicleModel' => $model,
-            'vehicleYear' => $modelYear,
-            'form' => $form ? $form->createView() : null,
+            'vehicleModelTypes' => $modelTypes,
+            'vehicleModel'      => $model,
+            'vehicleYear'       => $modelYear,
+            'form'              => $form ? $form->createView() : null,
         ];
     }
 
@@ -145,9 +136,9 @@ class ValuationController extends Controller
      *
      * @return array
      */
-    public function step3Action(Request $request)
+    public function step3Action(Request $request): array
     {
-        $session = $this->get('session');
+        $session       = $this->get('session');
         $entityManager = $this->get('doctrine.orm.default_entity_manager');
 
         $this->checkValuationInSession();
@@ -191,19 +182,19 @@ class ValuationController extends Controller
      *
      * @return array
      */
-    public function step4Action(Request $request)
+    public function step4Action(Request $request): array
     {
         $form = null;
         $this->checkValuationInSession();
-        $session = $this->get('session');
-        $valuationId = $session->get('valuationId');
+        $session       = $this->get('session');
+        $valuationId   = $session->get('valuationId');
         $entityManager = $this->get('doctrine.orm.default_entity_manager');
 
         if (!$valuationId) {
             return $this->redirectToRoute('wbc_appointment_step_1');
         }
 
-        $valuation = $entityManager->getRepository(Valuation::class)->find($valuationId);
+        $valuation = $entityManager->getRepository('Wbc\ValuationBundle\Entity\Valuation')->find($valuationId);
 
         if (!$valuation) {
             throw new NotFoundHttpException('Valuation is not found!');
@@ -251,10 +242,10 @@ class ValuationController extends Controller
      *
      * @return array
      */
-    public function step5Action()
+    public function step5Action(): array
     {
         $this->checkValuationInSession();
-        $session = $this->get('session');
+        $session       = $this->get('session');
         $entityManager = $this->get('doctrine.orm.default_entity_manager');
 
         if (!$session->has('appointmentId')) {
@@ -269,13 +260,13 @@ class ValuationController extends Controller
             return $this->redirectToRoute('wbc_appointment_step_1');
         }
 
-        $valuation = $entityManager->getRepository(Valuation::class)->find($session->get('valuationId'));
+        $valuation = $entityManager->getRepository('Wbc\ValuationBundle\Entity\Valuation')->find($session->get('valuationId'));
 
         if (!$valuation) {
             throw new NotFoundHttpException('Valuation is not found!');
         }
 
-        $appointment = $entityManager->getRepository(Appointment::class)->find($session->get('appointmentId'));
+        $appointment = $entityManager->getRepository('Wbc\BranchBundle\Entity\Appointment')->find($session->get('appointmentId'));
 
         if (!$appointment) {
             throw new NotFoundHttpException('Appointment is not found!');
