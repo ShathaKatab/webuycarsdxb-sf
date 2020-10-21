@@ -312,7 +312,7 @@ class Appointment
     /**
      * Get id.
      *
-     * @return string|null
+     * @return null|string
      */
     public function getId(): ?string
     {
@@ -609,7 +609,7 @@ class Appointment
      */
     public function getVehicleMileage(): ?int
     {
-        return $this->vehicleMileage;
+        return (int) $this->vehicleMileage;
     }
 
     /**
@@ -925,7 +925,9 @@ class Appointment
      */
     public function getInspection(): ?Inspection
     {
-        return $this->inspections->first();
+        $inspections = $this->inspections;
+
+        return $inspections instanceof ArrayCollection ? $this->inspections->first() : null;
     }
 
     /**
@@ -1047,7 +1049,7 @@ class Appointment
     /**
      * setBookedAt.
      *
-     * @param \DateTime|null $bookedAt
+     * @param null|\DateTime $bookedAt
      *
      * @return $this
      */
@@ -1056,5 +1058,40 @@ class Appointment
         $this->bookedAt = $bookedAt;
 
         return $this;
+    }
+
+    /**
+     * bookedAtTiming.
+     *
+     * @return null|string
+     */
+    public function bookedAtTiming(): ?string
+    {
+        $timing   = null;
+        $bookedAt = $this->bookedAt;
+
+        if ($bookedAt instanceof \DateTime) {
+            $bookedAtTo = (clone $bookedAt)->add(new \DateInterval('PT30M'));
+            $timing     = sprintf('%s - %s', $bookedAt->format('h:i A'), $bookedAtTo->format('h:i A'));
+        }
+
+        return $timing;
+    }
+
+    /**
+     * dayBooked.
+     *
+     * @return null|string
+     */
+    public function dayBooked(): ?string
+    {
+        $dayBooked = null;
+        $bookedAt  = $this->bookedAt;
+
+        if ($bookedAt instanceof \DateTime) {
+            $dayBooked = $bookedAt->format('l');
+        }
+
+        return $dayBooked;
     }
 }

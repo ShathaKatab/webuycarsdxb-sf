@@ -75,6 +75,8 @@ class AppKernel extends Kernel
      */
     public function getCacheDir()
     {
+        return parent::getCacheDir();
+
         if (in_array($this->environment, ['dev', 'test'], true)) {
             $path = '/dev/shm/webuycarsdxb/cache/'.$this->environment;
 

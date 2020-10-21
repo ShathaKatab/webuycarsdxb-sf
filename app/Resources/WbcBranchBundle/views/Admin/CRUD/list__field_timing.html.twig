@@ -1,12 +1,12 @@
 {% extends '@WbcBranch/Admin/base_list_field.html.twig' %}
 
 {% block field %}
-    {% if object.branchTiming is not null and object.branchTiming != false %}
+    {% if object.bookedAt is not null and object.bookedAt != false %}
         {% if (object.status == 'new' or object.status == 'callback')
-        and object.dateBooked|date('m/d/Y') == "now"|date('m/d/Y')
+        and object.bookedAt|date('m/d/Y') == "now"|date('m/d/Y')
         and object.branchTiming.hasTimeSurpassed == false %}
             <img style="width: 10px; height: 10px; vertical-align: middle;" src="{{ asset('images/roundgreen-blinker.gif') }}">
         {% endif %}
-        {{ object.branchTiming.adminListTiming }}
+        {{ object.bookedAtTiming }}
     {% endif %}
 {% endblock %}

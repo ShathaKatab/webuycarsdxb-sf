@@ -11,21 +11,10 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\Form\Type\DatePickerType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Wbc\BranchBundle\Entity\Appointment;
-use Wbc\BranchBundle\Entity\Timing;
-use Wbc\BranchBundle\Form\BranchType;
 use Wbc\BranchBundle\Form\DayType;
-use Wbc\UserBundle\Entity\User;
 use Wbc\UtilityBundle\AdminDateRange;
 use Wbc\VehicleBundle\Entity\Make;
-use Wbc\VehicleBundle\Entity\Model;
-use Wbc\VehicleBundle\Entity\ModelType;
 use Wbc\VehicleBundle\Form as WbcVehicleType;
 
 /**
@@ -36,10 +25,10 @@ use Wbc\VehicleBundle\Form as WbcVehicleType;
 class AppointmentAdmin extends AbstractAdmin
 {
     protected $datagridValues = [
-        '_page' => 1,
-        '_per_page' => 25,
+        '_page'       => 1,
+        '_per_page'   => 25,
         '_sort_order' => 'DESC',
-        '_sort_by' => 'createdAt',
+        '_sort_by'    => 'createdAt',
     ];
 
     /**
@@ -79,7 +68,7 @@ class AppointmentAdmin extends AbstractAdmin
             'vehicleYear',
             'valuation.priceOnline',
             'dateBooked',
-            'branchTiming',
+            'bookedAtTiming',
             'status',
             'source',
             'createdAt',
@@ -103,131 +92,123 @@ class AppointmentAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper): void
     {
-        /** @var $subject \Wbc\BranchBundle\Entity\Appointment */
+        /** @var \Wbc\BranchBundle\Entity\Appointment $subject */
         $subject = $this->getSubject();
         $request = $this->getRequest();
 
         $formMapper->tab('Vehicle Information')
             ->with('Vehicle Details')
-            ->add('vehicleYear', WbcVehicleType\ModelYearType::class)
-            ->add('vehicleMake', WbcVehicleType\MakeType::class)
-            ->add('vehicleModel', EntityType::class, [
-                'placeholder' => '',
-                'class' => Model::class,
+            ->add('vehicleYear', 'Wbc\VehicleBundle\Form\ModelYearType')
+            ->add('vehicleMake', 'Wbc\VehicleBundle\Form\MakeType')
+            ->add('vehicleModel', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                'placeholder'   => '',
+                'class'         => 'Wbc\VehicleBundle\Entity\Model',
                 'query_builder' => function (EntityRepository $entityRepository) {
                     return $entityRepository->createQueryBuilder('m')->where('m.id IS NULL'); //don't populate anything
                 },
             ])
-            ->add('vehicleModelType', EntityType::class, [
-                'required' => false,
-                'placeholder' => '',
-                'class' => ModelType::class,
+            ->add('vehicleModelType', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                'required'      => false,
+                'placeholder'   => '',
+                'class'         => 'Wbc\VehicleBundle\Entity\ModelType',
                 'query_builder' => function (EntityRepository $entityRepository) {
                     return $entityRepository->createQueryBuilder('m')->where('m.id IS NULL'); //don't populate anything
                 },
             ])
         ;
 
-        if ($subject) {
-            $vehicleMake = $subject->getVehicleMake();
+        if (null !== $subject) {
+            $vehicleMake  = $subject->getVehicleMake();
             $vehicleModel = $subject->getVehicleModel();
 
             if ($vehicleMake || $request->isMethod('POST')) {
-                $formMapper->add('vehicleModel', EntityType::class, [
-                    'placeholder' => '',
-                    'class' => Model::class,
+                $formMapper->add('vehicleModel', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                    'placeholder'   => '',
+                    'class'         => 'Wbc\VehicleBundle\Entity\Model',
                     'query_builder' => $request->isMethod('POST') ? null : function (EntityRepository $entityRepository) use ($subject, $vehicleMake) {
                         return $entityRepository->createQueryBuilder('m')
                             ->where('m.make = :make')
                             ->andWhere('m.active = :active')
                             ->setParameter('make', $vehicleMake)
                             ->setParameter('active', true)
-                            ->orderBy('m.name', 'ASC');
+                            ->orderBy('m.name', 'ASC')
+                            ;
                     },
                 ]);
             }
 
             if ($vehicleModel || $request->isMethod('POST')) {
-                $formMapper->add('vehicleModelType', EntityType::class, [
-                    'placeholder' => '',
-                    'class' => ModelType::class,
-                    'label' => 'Vehicle Trim',
-                    'required' => false,
+                $formMapper->add('vehicleModelType', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                    'placeholder'   => '',
+                    'class'         => 'Wbc\VehicleBundle\Entity\ModelType',
+                    'label'         => 'Vehicle Trim',
+                    'required'      => false,
                     'query_builder' => $request->isMethod('POST') ? null : function (EntityRepository $entityRepository) use ($subject, $vehicleModel) {
                         return $entityRepository->createQueryBuilder('m')
                             ->where('m.model = :model')
-                            ->setParameter('model', $vehicleModel);
+                            ->setParameter('model', $vehicleModel)
+                            ;
                     },
                 ]);
             }
         }
 
-        $formMapper->add('vehicleTransmission', WbcVehicleType\TransmissionType::class, ['required' => false])
-            ->add('vehicleMileage', WbcVehicleType\MileageType::class)
-            ->add('vehicleSpecifications', WbcVehicleType\SpecificationType::class, ['required' => false])
-            ->add('vehicleBodyCondition', WbcVehicleType\ConditionType::class)
-            ->add('vehicleColor', WbcVehicleType\ColorType::class, ['required' => false])
-            ->add('vehicleOption', WbcVehicleType\OptionType::class, ['required' => false])
+        $formMapper->add('vehicleTransmission', 'Wbc\VehicleBundle\Form\TransmissionType', ['required' => false])
+            ->add('vehicleMileage', 'Wbc\VehicleBundle\Form\MileageType')
+            ->add('vehicleSpecifications', 'Wbc\VehicleBundle\Form\SpecificationType', ['required' => false])
+            ->add('vehicleBodyCondition', 'Wbc\VehicleBundle\Form\ConditionType')
+            ->add('vehicleColor', 'Wbc\VehicleBundle\Form\ColorType', ['required' => false])
+            ->add('vehicleOption', 'Wbc\VehicleBundle\Form\OptionType', ['required' => false])
             ->end()
-            ->end();
+            ->end()
+        ;
 
         $formMapper->tab('Customer Information')
             ->with('Customer Details')
             ->add('name')
             ->add('mobileNumber')
-            ->add('emailAddress', EmailType::class, ['required' => false])
+            ->add('emailAddress', 'Symfony\Component\Form\Extension\Core\Type\EmailType', ['required' => false])
             ->end()
             ->end()
             ->tab('Appointment Information')
             ->with('Timings')
-            ->add('branch', BranchType::class)
-            ->add('dateBooked', DatePickerType::class, [
+            ->add('branch', 'Wbc\BranchBundle\Form\BranchType')
+            ->add('bookedAt', 'Sonata\Form\Type\DateTimePickerType', [
                 'dp_use_current' => false,
-                'format' => 'EE dd-MMM-yyyy',
+                'format'         => 'EE dd-MMM-yyyy H:mm',
+                'dp_side_by_side'       => true,
             ])
-            ->add('branchTiming', ChoiceType::class);
-
-        if (($subject && $subject->getBranch() && $subject->getDateBooked()) || $request->isMethod('POST')) {
-            $formMapper->add('branchTiming', EntityType::class, [
-                'class' => Timing::class,
-                'query_builder' => $request->isMethod('POST') ? null : function (EntityRepository $entityRepository) use ($subject) {
-                    return $entityRepository->createQueryBuilder('t')
-                        ->select('t')
-                        ->innerJoin('t.branch', 'branch', 'WITH', 'branch = :branch')
-                        ->where('t.dayBooked = :dayBooked')
-                        ->setParameter('branch', $subject->getBranch())
-                        ->setParameter('dayBooked', $subject->getDateBooked()->format('N'))
-                        ->orderBy('t.dayBooked', 'ASC')
-                        ->addOrderBy('t.from', 'ASC');
-                },
-            ]);
-        }
+        ;
 
         if ($subject->getValuation()) {
             $formMapper->end()
                 ->with('Other Details')
                 ->add('valuation.priceOnline', null, [
-                    'label' => 'Price Online (AED)',
+                    'label'     => 'Price Online (AED)',
                     'read_only' => true,
-                    'disabled' => true,
-                    'required' => false,
+                    'disabled'  => true,
+                    'required'  => false,
                 ])
-                ->add('status', ChoiceType::class, [
-                    'choices' => Appointment::getStatuses(),
+                ->add('status', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                    'choices'    => Appointment::getStatuses(),
                     'empty_data' => Appointment::STATUS_NEW,
                 ])
-                ->add('notes', TextareaType::class, ['required' => false])
+                ->add('notes', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', ['required' => false])
                 ->add('createdBy', null, ['read_only' => true, 'disabled' => true, 'required' => false])
-                ->add('source', ChoiceType::class, ['choices' => $this->getValuationSources(), 'required' => false]);
+                ->add('source', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', ['choices' => $this->getValuationSources(), 'required' => false])
+            ;
         }
 
-        $formMapper->add('smsSent', CheckboxType::class, ['required' => false, 'disabled' => true])
+        $formMapper->add('smsSent', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', ['required' => false, 'disabled' => true])
             ->end()
-            ->end();
+            ->end()
+        ;
     }
 
     /**
-     * {@inheritdoc}
+     * configureDatagridFilters.
+     *
+     * @param DatagridMapper $datagridMapper
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
@@ -243,64 +224,70 @@ class AppointmentAdmin extends AbstractAdmin
 
                     $queryBuilder->innerJoin($alias.'.vehicleModel', 'vehicleModel')
                         ->andWhere('vehicleModel.make = :make')
-                        ->setParameter(':make', $value['value']);
+                        ->setParameter(':make', $value['value'])
+                    ;
 
                     return true;
                 },
-                'field_type' => 'entity',
+                'field_type'    => 'entity',
                 'field_options' => [
-                    'class' => Make::class,
+                    'class' => 'Wbc\VehicleBundle\Entity\Make',
                 ],
             ])
             ->add('vehicleModel')
             ->add('vehicleYear')
             ->add('dateRange', 'doctrine_orm_callback', [
-                'label' => 'Booked Today/Tomorrow',
+                'label'    => 'Booked Today/Tomorrow',
                 'callback' => function ($queryBuilder, $alias, $field, $value) use ($now) {
-                    $dateBooked = null;
+                    $bookedAt = null;
 
                     if (!$value['value']) {
                         return;
                     }
 
                     if ('today' === $value['value']) {
-                        $dateBooked = (new \DateTime())->format('Y-m-d');
+                        $bookedAt = (new \DateTime())->format('Y-m-d');
                     } elseif ('tomorrow' === $value['value']) {
-                        $dateBooked = (new \DateTime('+1 day'))->format('Y-m-d');
+                        $bookedAt = (new \DateTime('+1 day'))->format('Y-m-d');
                     }
 
-                    if ($dateBooked) {
-                        $queryBuilder->andWhere($alias.'.dateBooked = :dateBooked')
-                            ->setParameter(':dateBooked', $dateBooked);
+                    if (null !== $bookedAt) {
+                        $queryBuilder->andWhere($alias.'.bookedAt BETWEEN :bookedAtFrom AND :bookedAtTo')
+                            ->setParameter(':bookedAtFrom', $bookedAt.' 00:00:00')
+                            ->setParameter(':bookedAtTo', $bookedAt.'23:59:59')
+                        ;
                     }
 
                     return true;
                 },
-                'field_type' => 'choice',
+                'field_type'    => 'choice',
                 'field_options' => [
                     'choices' => [
-                        'today' => 'Today',
+                        'today'    => 'Today',
                         'tomorrow' => 'Tomorrow',
                     ],
                 ],
             ])
-            ->add('dateBooked', 'doctrine_orm_date_range', AdminDateRange::getDoctrineOrmDateRange('Date Range'))
+            ->add('bookedAt', 'doctrine_orm_date_range', AdminDateRange::getDoctrineOrmDateRange('Date Range'))
             ->add('createdBy', null, [], 'entity', [
-                'class' => User::class,
+                'class'         => 'Wbc\UserBundle\Entity\User',
                 'query_builder' => function (EntityRepository $repository) {
                     return $repository->createQueryBuilder('u')
-                        ->where('u.enabled = true');
+                        ->where('u.enabled = true')
+                        ;
                 },
             ])
             ->add('status', 'doctrine_orm_choice', [
                 'field_options' => ['choices' => Appointment::getStatuses()],
-                'field_type' => 'choice',
+                'field_type'    => 'choice',
             ])
         ;
     }
 
     /**
-     * {@inheritdoc}
+     * configureListFields.
+     *
+     * @param ListMapper $listMapper
      */
     protected function configureListFields(ListMapper $listMapper): void
     {
@@ -316,21 +303,21 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('source', 'choice', ['choices' => $this->getValuationSources(), 'editable' => true])
             ->add('vehicleOption', 'choice', ['choices' => WbcVehicleType\OptionType::getOptions()])
             ->add('valuation.priceOnline', 'currency', ['currency' => 'AED', 'label' => 'Online Valuation'])
-            ->add('dateBooked')
             ->add('branch')
+            ->add('bookedAt', 'date', ['label' => 'Date Booked'])
         ;
 
         if (isset($filterParams['dateRange']['value']) && 'today' === $filterParams['dateRange']['value']) {
-            $listMapper->add('branchTiming.adminListTiming', 'text', [
-                'label' => 'Timing',
-                'sortable' => true,
-                'sort_field_mapping' => ['fieldName' => 'from'],
-                'sort_parent_association_mappings' => [['fieldName' => 'branchTiming']],
-                'template' => 'WbcBranchBundle:Admin/CRUD:list__field_timing.html.twig',
+            $listMapper->add('bookedAtTiming', 'text', [
+                'label'                            => 'Timing',
+                'sortable'                         => true,
+                'sort_field_mapping'               => ['fieldName' => 'from'],
+                'sort_parent_association_mappings' => [['fieldName' => 'bookedAt']],
+                'template'                         => 'WbcBranchBundle:Admin/CRUD:list__field_timing.html.twig',
             ]);
         } else {
             $listMapper->add('branchTiming.adminListTiming', 'text', [
-                'label' => 'Timing',
+                'label'    => 'Timing',
                 'template' => 'WbcBranchBundle:Admin/CRUD:list__field_timing.html.twig',
             ]);
         }
@@ -340,11 +327,12 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('smsSent')
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
-                    'delete' => [],
+                    'show'       => [],
+                    'edit'       => [],
+                    'delete'     => [],
                     'inspection' => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_inspection.html.twig'],
-                    'sms' => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_sms.html.twig'], ], ]);
+                    'sms'        => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_sms.html.twig'], ], ])
+        ;
     }
 
     /**
@@ -365,7 +353,8 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('vehicleColor', 'choice', ['choices' => WbcVehicleType\ColorType::getColors()])
             ->add('vehicleOption', 'choice', ['choices' => WbcVehicleType\OptionType::getOptions()])
             ->end()
-            ->end();
+            ->end()
+        ;
 
         $showMapper->tab('Customer Information')
             ->with('')
@@ -373,14 +362,15 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('mobileNumber')
             ->add('emailAddress')
             ->end()
-            ->end();
+            ->end()
+        ;
 
         $showMapper->tab('Appointment Information')
             ->with('')
             ->add('branch')
-            ->add('branchTiming.dayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Days Booked'])
-            ->add('dateBooked')
-            ->add('branchTiming')
+            ->add('dayBooked', 'choice', ['label' => 'Days Booked'])
+            ->add('bookedAt', 'date', ['label' => 'Date Booked'])
+            ->add('bookedAtTiming')
             ->add('valuation.priceOnline', 'currency', ['currency' => 'AED'])
             ->add('status', 'choice', ['choices' => Appointment::getStatuses(), 'empty_data' => Appointment::STATUS_NEW])
             ->add('notes')
@@ -388,7 +378,8 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('createdBy')
             ->add('smsSent')
             ->end()
-            ->end();
+            ->end()
+        ;
     }
 
     /**
@@ -400,7 +391,8 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('listVehicleModelTypesByModel', sprintf('modelTypesByModel/%s', $this->getRouterIdParameter()))
             ->add('listBranchTimings', 'branchTimings/{branchId}/{date}')
             ->add('generateInspection', $this->getRouterIdParameter().'/generateInspection')
-            ->add('sendSms', $this->getRouterIdParameter().'/sendSms');
+            ->add('sendSms', $this->getRouterIdParameter().'/sendSms')
+        ;
     }
 
     private function getValuationSources()

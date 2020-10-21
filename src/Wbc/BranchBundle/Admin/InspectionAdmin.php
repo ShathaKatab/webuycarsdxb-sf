@@ -12,21 +12,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\CoreBundle\Validator\ErrorElement;
-use Sonata\Form\Type\DatePickerType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Wbc\BranchBundle\Entity\Appointment;
 use Wbc\BranchBundle\Entity\Inspection;
-use Wbc\BranchBundle\Entity\Timing;
-use Wbc\BranchBundle\Form\BranchType;
-use Wbc\BranchBundle\Form\DayType;
 use Wbc\UtilityBundle\AdminDateRange;
 use Wbc\VehicleBundle\Entity\Make;
-use Wbc\VehicleBundle\Entity\Model;
-use Wbc\VehicleBundle\Entity\ModelType;
 use Wbc\VehicleBundle\Form as WbcVehicleType;
 
 /**
@@ -63,7 +51,7 @@ class InspectionAdmin extends AbstractAdmin
     /**
      * @return array
      */
-    public function getExportFields()
+    public function getExportFields(): array
     {
         return [
             'id',
@@ -73,8 +61,8 @@ class InspectionAdmin extends AbstractAdmin
             'vehicleMake',
             'vehicleModel',
             'vehicleYear',
-            'appointment.dateBooked',
-            'appointment.branchTiming',
+            'appointment.bookedAt',
+            'appointment.bookedAtTiming',
             'source',
             'status',
             'priceOnline',
@@ -82,7 +70,7 @@ class InspectionAdmin extends AbstractAdmin
             'priceExpected',
             'source',
             'createdAt',
-            'createdBy'
+            'createdBy',
         ];
     }
 
@@ -101,29 +89,29 @@ class InspectionAdmin extends AbstractAdmin
     {
         parent::validate($errorElement, $object);
 
-        if($this->getConfigurationPool()->getContainer()->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')){
+        if ($this->getConfigurationPool()->getContainer()->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
             return;
         }
 
-        $em = $this->getModelManager()->getEntityManager($this->getClass());
+        $em             = $this->getModelManager()->getEntityManager($this->getClass());
         $originalObject = $em->getUnitOfWork()->getOriginalEntityData($object);
-        $newStatus = $object->getStatus();
-        $oldStatus = $originalObject['status'];
-        $canTransition = false;
+        $newStatus      = $object->getStatus();
+        $oldStatus      = $originalObject['status'];
+        $canTransition  = false;
 
         if ($newStatus === $oldStatus) {
             return; //status not changed
         }
 
-        if ('invalid' === $newStatus && $oldStatus === 'new') {
+        if ('invalid' === $newStatus && 'new' === $oldStatus) {
             $canTransition = true;
         }
 
-        if ('offer_accepted' === $newStatus && in_array($oldStatus, ['new', 'pending'])) {
+        if ('offer_accepted' === $newStatus && \in_array($oldStatus, ['new', 'pending'], true)) {
             $canTransition = true;
         }
 
-        if ('offer_rejected' === $newStatus && in_array($oldStatus, ['new', 'pending'])) {
+        if ('offer_rejected' === $newStatus && \in_array($oldStatus, ['new', 'pending'], true)) {
             $canTransition = true;
         }
 
@@ -141,155 +129,131 @@ class InspectionAdmin extends AbstractAdmin
      */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        /** @var $subject \Wbc\BranchBundle\Entity\Inspection */
+        /** @var \Wbc\BranchBundle\Entity\Inspection $subject */
         $subject = $this->getSubject();
         $request = $this->getRequest();
 
         $formMapper->tab('Inspection Information')
             ->with('Inspection Details')
-            ->add('priceOnline', MoneyType::class, [
-                'label' => 'Online Price',
-                'currency' => 'AED',
+            ->add('priceOnline', 'Symfony\Component\Form\Extension\Core\Type\MoneyType', [
+                'label'     => 'Online Price',
+                'currency'  => 'AED',
                 'read_only' => true,
-                'disabled' => true,
-                'required' => false,
+                'disabled'  => true,
+                'required'  => false,
             ])
-            ->add('priceOffered', MoneyType::class, [
-                'label' => 'Offered Price',
+            ->add('priceOffered', 'Symfony\Component\Form\Extension\Core\Type\MoneyType', [
+                'label'    => 'Offered Price',
                 'currency' => 'AED',
                 'required' => false,
             ])
-            ->add('priceExpected', MoneyType::class, [
-                'label' => 'Expected Price',
+            ->add('priceExpected', 'Symfony\Component\Form\Extension\Core\Type\MoneyType', [
+                'label'    => 'Expected Price',
                 'currency' => 'AED',
                 'required' => false,
             ])
-            ->add('status', ChoiceType::class, [
-                'choices' => Inspection::getStatuses(),
+            ->add('status', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                'choices'    => Inspection::getStatuses(),
                 'empty_data' => Inspection::STATUS_NEW,
             ])
-            ->add('notes', TextareaType::class, [
-                'label' => 'Inspection Notes',
+            ->add('notes', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
+                'label'    => 'Inspection Notes',
                 'required' => false,
             ])
-            ->add('source', ChoiceType::class, ['choices' => $this->getValuationSources(), 'required' => false])
+            ->add('source', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', ['choices' => $this->getValuationSources(), 'required' => false])
             ->end()
             ->with('Vehicle Details')
-            ->add('vehicleYear', WbcVehicleType\ModelYearType::class)
-            ->add('vehicleMake', WbcVehicleType\MakeType::class)
-            ->add('vehicleModel', EntityType::class, [
-                'placeholder' => '',
-                'class' => Model::class,
+            ->add('vehicleYear', 'Wbc\VehicleBundle\Form\ModelYearType')
+            ->add('vehicleMake', 'Wbc\VehicleBundle\Form\MakeType')
+            ->add('vehicleModel', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                'placeholder'   => '',
+                'class'         => 'Wbc\VehicleBundle\Entity\Model',
                 'query_builder' => function (EntityRepository $entityRepository) {
                     return $entityRepository->createQueryBuilder('m')->where('m.id IS NULL'); //don't populate anything
                 }, ])
-            ->add('vehicleModelType', EntityType::class, [
-                'required' => false,
-                'placeholder' => '',
-                'class' => ModelType::class,
+            ->add('vehicleModelType', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                'required'      => false,
+                'placeholder'   => '',
+                'class'         => 'Wbc\VehicleBundle\Entity\ModelType',
                 'query_builder' => function (EntityRepository $entityRepository) {
                     return $entityRepository->createQueryBuilder('m')->where('m.id IS NULL'); //don't populate anything
                 },
-            ]);
+            ])
+        ;
 
         if ($subject) {
-            $vehicleMake = $subject->getVehicleMake();
+            $vehicleMake  = $subject->getVehicleMake();
             $vehicleModel = $subject->getVehicleModel();
             if ($vehicleMake || $request->isMethod('POST')) {
-                $formMapper->add('vehicleModel', EntityType::class, [
-                    'placeholder' => '',
-                    'class' => Model::class,
+                $formMapper->add('vehicleModel', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                    'placeholder'   => '',
+                    'class'         => 'Wbc\VehicleBundle\Entity\Model',
                     'query_builder' => $request->isMethod('POST') ? null : function (EntityRepository $entityRepository) use ($subject, $vehicleMake) {
                         return $entityRepository->createQueryBuilder('m')
                             ->where('m.make = :make')
                             ->andWhere('m.active = :active')
                             ->setParameter('make', $vehicleMake)
                             ->setParameter('active', true)
-                            ->orderBy('m.name', 'ASC');
+                            ->orderBy('m.name', 'ASC')
+                        ;
                     },
                 ]);
             }
             if ($vehicleModel || $request->isMethod('POST')) {
-                $formMapper->add('vehicleModelType', EntityType::class, [
-                    'placeholder' => '',
-                    'class' => ModelType::class,
-                    'label' => 'Vehicle Trim',
-                    'required' => false,
+                $formMapper->add('vehicleModelType', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                    'placeholder'   => '',
+                    'class'         => 'Wbc\VehicleBundle\Entity\ModelType',
+                    'label'         => 'Vehicle Trim',
+                    'required'      => false,
                     'query_builder' => $request->isMethod('POST') ? null : function (EntityRepository $entityRepository) use ($subject, $vehicleModel) {
                         return $entityRepository->createQueryBuilder('m')
                             ->where('m.model = :model')
-                            ->setParameter('model', $vehicleModel);
+                            ->setParameter('model', $vehicleModel)
+                        ;
                     },
                 ]);
             }
         }
 
-        $formMapper->add('vehicleTransmission', WbcVehicleType\TransmissionType::class, ['required' => false])
-            ->add('vehicleMileage', WbcVehicleType\MileageType::class)
-            ->add('vehicleSpecifications', WbcVehicleType\SpecificationType::class, ['required' => false])
-            ->add('vehicleBodyCondition', WbcVehicleType\ConditionType::class)
-            ->add('vehicleColor', WbcVehicleType\ColorType::class, ['required' => false])
+        $formMapper->add('vehicleTransmission', 'Wbc\VehicleBundle\Form\TransmissionType', ['required' => false])
+            ->add('vehicleMileage', 'Wbc\VehicleBundle\Form\MileageType')
+            ->add('vehicleSpecifications', 'Wbc\VehicleBundle\Form\SpecificationType', ['required' => false])
+            ->add('vehicleBodyCondition', 'Wbc\VehicleBundle\Form\ConditionType')
+            ->add('vehicleColor', 'Wbc\VehicleBundle\Form\ColorType', ['required' => false])
             ->end()
-            ->end();
+            ->end()
+        ;
 
         $formMapper
             ->tab('Appointment Information')
             ->with('Customer Details')
-            ->add('appointment.name', TextType::class, [
+            ->add('appointment.name', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'read_only' => true,
-                'required' => false,
+                'required'  => false,
             ])
-            ->add('appointment.mobileNumber', TextType::class, [
+            ->add('appointment.mobileNumber', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'read_only' => true,
-                'required' => false,
+                'required'  => false,
             ])
-            ->add('appointment.emailAddress', TextType::class, [
+            ->add('appointment.emailAddress', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
                 'read_only' => true,
-                'required' => false,
+                'required'  => false,
             ])
             ->end()
             ->with('Timings')
-            ->add('appointment.branch', BranchType::class, [
-                'disabled' => true,
+            ->add('appointment.branch', 'Wbc\BranchBundle\Form\BranchType', [
+                'disabled'  => true,
                 'read_only' => true,
-                'required' => false,
+                'required'  => false,
             ])
-            ->add('appointment.dateBooked', DatePickerType::class, [
-                'dp_min_date' => new \DateTime(),
-                'dp_max_date' => '+30',
-                'dp_use_current' => false,
-                'format' => 'EE dd-MMM-yyyy',
-                'disabled' => true,
-                'read_only' => true,
-                'required' => false,
-            ])
-            ->add('appointment.branchTiming', ChoiceType::class, [
-                'read_only' => true,
-                'required' => false,
-            ])
-            ->add('appointment.notes', TextareaType::class, ['disabled' => true, 'read_only' => true, 'required' => false]);
-
-        if (($subject && $subject->getAppointment()->getBranch() && $subject->getAppointment()->getDateBooked()) || $request->isMethod('POST')) {
-            $appointment = $subject->getAppointment();
-            $formMapper->add('appointment.branchTiming', EntityType::class, [
-                'class' => Timing::class,
-                'query_builder' => $request->isMethod('POST') ? null : function (EntityRepository $entityRepository) use ($subject, $appointment) {
-                    return $entityRepository->createQueryBuilder('t')
-                        ->select('t')
-                        ->innerJoin('t.branch', 'branch', 'WITH', 'branch = :branch')
-                        ->where('t.dayBooked = :dayBooked')
-                        ->setParameter('branch', $appointment->getBranch())
-                        ->setParameter('dayBooked', $appointment->getDateBooked()->format('N'))
-                        ->orderBy('t.dayBooked', 'ASC')
-                        ->addOrderBy('t.from', 'ASC');
-                },
-                'disabled' => true,
-                'read_only' => true,
-                'required' => false,
-            ]);
-        }
+            ->add('dayBooked', 'Symfony\Component\Form\Extension\Core\Type\TextType', ['label' => 'Day Booked', 'read_only' => true])
+            ->add('appointment.bookedAt', 'Sonata\Form\Type\DatePickerType', ['label' => 'Date Booked', 'read_only' => true])
+            ->add('bookedAtTiming', 'Symfony\Component\Form\Extension\Core\Type\TextType', ['label' => 'Timing', 'read_only' => true])
+            ->add('appointment.notes', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', ['disabled' => true, 'read_only' => true, 'required' => false])
+        ;
         $formMapper->end()
-            ->end();
+            ->end()
+        ;
     }
 
     /**
@@ -309,14 +273,14 @@ class InspectionAdmin extends AbstractAdmin
 
                     return true;
                 },
-                'field_type' => 'entity',
-                'field_options' => ['class' => Make::class],
-                'label' => 'Vehicle Make',
+                'field_type'    => 'entity',
+                'field_options' => ['class' => 'Wbc\VehicleBundle\Entity\Make'],
+                'label'         => 'Vehicle Make',
             ])
             ->add('vehicleModel')
             ->add('vehicleYear')
             ->add('appointment.dateRange', 'doctrine_orm_callback', [
-                'label' => 'Booked Today/Tomorrow',
+                'label'    => 'Booked Today/Tomorrow',
                 'callback' => function ($queryBuilder, $alias, $field, $value) use ($now) {
                     $dateBooked = null;
                     if (!$value['value']) {
@@ -333,10 +297,10 @@ class InspectionAdmin extends AbstractAdmin
 
                     return true;
                 },
-                'field_type' => 'choice',
+                'field_type'    => 'choice',
                 'field_options' => [
                     'choices' => [
-                        'today' => 'Today',
+                        'today'    => 'Today',
                         'tomorrow' => 'Tomorrow',
                     ],
                 ],
@@ -365,28 +329,30 @@ class InspectionAdmin extends AbstractAdmin
             ->add('source', 'choice', ['choices' => $this->getValuationSources(), 'editable' => true])
             ->add('priceOnline', 'currency', [
                 'currency' => 'AED',
-                'label' => 'Online Valuation',
+                'label'    => 'Online Valuation',
             ])
             ->add('priceOffered', 'currency', [
                 'currency' => 'AED',
-                'label' => 'Offered Price',
+                'label'    => 'Offered Price',
             ])
             ->add('priceExpected', 'currency', [
                 'currency' => 'AED',
-                'label' => 'Expected Price',
+                'label'    => 'Expected Price',
             ])
-            ->add('appointment.dateBooked')
-            ->add('branchTiming.timingString', null, ['label' => 'Timing'])
+            ->add('dayBooked', null, ['label' => 'Day Booked'])
+            ->add('appointment.bookedAt', 'date', ['label' => 'Date Booked'])
+            ->add('bookedAtTiming', null, ['label' => 'Timing'])
             ->add('createdAt', null, ['label' => 'Created'])
             ->add('createdBy', null, ['placeholder' => 'User'])
             ->add('_action', 'actions', [
                 'actions' => [
-                    'show' => [],
-                    'edit' => [],
-                    'delete' => [],
+                    'show'      => [],
+                    'edit'      => [],
+                    'delete'    => [],
                     'inventory' => ['template' => 'WbcBranchBundle:Admin/CRUD:list__action_inventory.html.twig'],
                 ],
-            ]);
+            ])
+        ;
     }
 
     /**
@@ -413,7 +379,8 @@ class InspectionAdmin extends AbstractAdmin
             ->add('vehicleSpecifications', 'choice', ['choices' => WbcVehicleType\SpecificationType::getSpecifications()])
             ->add('vehicleBodyCondition', 'choice', ['choices' => WbcVehicleType\ConditionType::getConditions()])
             ->end()
-            ->end();
+            ->end()
+        ;
         $showMapper->tab('Appointment Information')
             ->with('Customer Details')
             ->add('appointment.name')
@@ -421,14 +388,15 @@ class InspectionAdmin extends AbstractAdmin
             ->add('appointment.emailAddress')
             ->end()
             ->with('Timings')
-            ->add('appointment.branch')
-            ->add('appointment.dayBooked', 'choice', ['choices' => DayType::getDays(), 'label' => 'Days Booked'])
-            ->add('appointment.dateBooked')
-            ->add('appointment.branchTiming')
-            ->add('appointment.notes', 'textarea')
+            ->add('appointment.branch', null, ['label' => 'Branch'])
+            ->add('dayBooked', null, ['label' => 'Days Booked'])
+            ->add('appointment.bookedAt', 'date', ['label' => 'Date Booked'])
+            ->add('bookedAtTiming', null, ['label' => 'Timing'])
+            ->add('appointment.notes', 'textarea', ['label' => 'Notes'])
 
             ->end()
-            ->end();
+            ->end()
+        ;
         $showMapper->tab('Appointment Information')->with('')->end()->end();
     }
 

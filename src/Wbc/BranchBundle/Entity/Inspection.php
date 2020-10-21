@@ -26,11 +26,16 @@ use Wbc\VehicleBundle\Entity\ModelType;
  */
 class Inspection
 {
-    const STATUS_NEW = 'new';
-    const STATUS_INVALID = 'invalid';
+    const STATUS_NEW            = 'new';
+    const STATUS_INVALID        = 'invalid';
     const STATUS_OFFER_ACCEPTED = 'offer_accepted';
     const STATUS_OFFER_REJECTED = 'offer_rejected';
-    const STATUS_PENDING = 'pending';
+    const STATUS_PENDING        = 'pending';
+
+    /**
+     * @var string
+     */
+    public $bookedAtTiming;
 
     /**
      * @var int
@@ -237,9 +242,9 @@ class Inspection
     /**
      * Get id.
      *
-     * @return int
+     * @return null|int
      */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -251,7 +256,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setVehicleYear($vehicleYear)
+    public function setVehicleYear(int $vehicleYear): self
     {
         $this->vehicleYear = $vehicleYear;
 
@@ -261,9 +266,9 @@ class Inspection
     /**
      * Get vehicleYear.
      *
-     * @return int
+     * @return null|int
      */
-    public function getVehicleYear()
+    public function getVehicleYear(): ?int
     {
         return $this->vehicleYear;
     }
@@ -275,7 +280,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setVehicleTransmission($vehicleTransmission)
+    public function setVehicleTransmission(string $vehicleTransmission): self
     {
         $this->vehicleTransmission = $vehicleTransmission;
 
@@ -285,9 +290,9 @@ class Inspection
     /**
      * Get vehicleTransmission.
      *
-     * @return string
+     * @return null|string
      */
-    public function getVehicleTransmission()
+    public function getVehicleTransmission(): ?string
     {
         return $this->vehicleTransmission;
     }
@@ -299,7 +304,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setVehicleMileage($vehicleMileage)
+    public function setVehicleMileage(int $vehicleMileage): self
     {
         $this->vehicleMileage = $vehicleMileage;
 
@@ -309,11 +314,11 @@ class Inspection
     /**
      * Get vehicleMileage.
      *
-     * @return int
+     * @return null|int
      */
-    public function getVehicleMileage()
+    public function getVehicleMileage(): ?int
     {
-        return $this->vehicleMileage;
+        return (int) $this->vehicleMileage;
     }
 
     /**
@@ -323,7 +328,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setVehicleSpecifications($vehicleSpecifications)
+    public function setVehicleSpecifications(string $vehicleSpecifications): self
     {
         $this->vehicleSpecifications = $vehicleSpecifications;
 
@@ -333,9 +338,9 @@ class Inspection
     /**
      * Get vehicleSpecifications.
      *
-     * @return string
+     * @return null|string
      */
-    public function getVehicleSpecifications()
+    public function getVehicleSpecifications(): ?string
     {
         return $this->vehicleSpecifications;
     }
@@ -347,7 +352,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setVehicleBodyCondition($vehicleBodyCondition)
+    public function setVehicleBodyCondition(string $vehicleBodyCondition): self
     {
         $this->vehicleBodyCondition = $vehicleBodyCondition;
 
@@ -357,9 +362,9 @@ class Inspection
     /**
      * Get vehicleBodyCondition.
      *
-     * @return string
+     * @return null|string
      */
-    public function getVehicleBodyCondition()
+    public function getVehicleBodyCondition(): ?string
     {
         return $this->vehicleBodyCondition;
     }
@@ -371,7 +376,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setVehicleColor($vehicleColor)
+    public function setVehicleColor(string $vehicleColor): self
     {
         $this->vehicleColor = $vehicleColor;
 
@@ -381,9 +386,9 @@ class Inspection
     /**
      * Get vehicleColor.
      *
-     * @return string
+     * @return null|string
      */
-    public function getVehicleColor()
+    public function getVehicleColor(): ?string
     {
         return $this->vehicleColor;
     }
@@ -395,7 +400,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setPriceOffered($priceOffered)
+    public function setPriceOffered(string $priceOffered): self
     {
         $this->priceOffered = $priceOffered;
 
@@ -405,11 +410,11 @@ class Inspection
     /**
      * Get priceOffered.
      *
-     * @return string
+     * @return null|float
      */
-    public function getPriceOffered()
+    public function getPriceOffered(): ?float
     {
-        return $this->priceOffered;
+        return (float) $this->priceOffered;
     }
 
     /**
@@ -419,7 +424,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setPriceExpected($priceExpected)
+    public function setPriceExpected(string $priceExpected): self
     {
         $this->priceExpected = $priceExpected;
 
@@ -429,11 +434,11 @@ class Inspection
     /**
      * Get priceExpected.
      *
-     * @return string
+     * @return null|float
      */
-    public function getPriceExpected()
+    public function getPriceExpected(): ?float
     {
-        return $this->priceExpected;
+        return (float) $this->priceExpected;
     }
 
     /**
@@ -443,7 +448,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -455,7 +460,7 @@ class Inspection
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
     }
@@ -467,7 +472,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -479,7 +484,7 @@ class Inspection
      *
      * @return \DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
@@ -487,11 +492,11 @@ class Inspection
     /**
      * Set vehicleModel.
      *
-     * @param Model $vehicleModel
+     * @param null|Model $vehicleModel
      *
      * @return Inspection
      */
-    public function setVehicleModel(Model $vehicleModel = null)
+    public function setVehicleModel(Model $vehicleModel = null): self
     {
         $this->vehicleModel = $vehicleModel;
 
@@ -501,9 +506,9 @@ class Inspection
     /**
      * Get vehicleModel.
      *
-     * @return Model
+     * @return null|Model
      */
-    public function getVehicleModel()
+    public function getVehicleModel(): ?Model
     {
         return $this->vehicleModel;
     }
@@ -511,23 +516,25 @@ class Inspection
     /**
      * Gets vehicle make.
      *
-     * @return Make
+     * @return null|Make
      */
-    public function getVehicleMake()
+    public function getVehicleMake(): ?Make
     {
         if ($this->vehicleModel) {
             return $this->vehicleModel->getMake();
         }
+
+        return null;
     }
 
     /**
      * Set vehicleModelType.
      *
-     * @param ModelType $vehicleModelType
+     * @param null|ModelType $vehicleModelType
      *
      * @return Inspection
      */
-    public function setVehicleModelType(ModelType $vehicleModelType = null)
+    public function setVehicleModelType(ModelType $vehicleModelType = null): self
     {
         $this->vehicleModelType = $vehicleModelType;
 
@@ -537,9 +544,9 @@ class Inspection
     /**
      * Get vehicleModelType.
      *
-     * @return ModelType
+     * @return null|ModelType
      */
-    public function getVehicleModelType()
+    public function getVehicleModelType(): ?ModelType
     {
         return $this->vehicleModelType;
     }
@@ -547,24 +554,24 @@ class Inspection
     /**
      * Set appointment.
      *
-     * @param Appointment $appointment
+     * @param null|Appointment $appointment
      *
      * @return Inspection
      */
-    public function setAppointment(Appointment $appointment = null)
+    public function setAppointment(Appointment $appointment = null): self
     {
         $this->appointment = $appointment;
 
         if ($appointment) {
-            $this->vehicleModel = $appointment->getVehicleModel();
-            $this->vehicleMileage = $appointment->getVehicleMileage();
-            $this->vehicleModelType = $appointment->getVehicleModelType();
-            $this->vehicleBodyCondition = $appointment->getVehicleBodyCondition();
-            $this->vehicleColor = $appointment->getVehicleColor();
-            $this->vehicleYear = $appointment->getVehicleYear();
-            $this->vehicleTransmission = $appointment->getVehicleTransmission();
+            $this->vehicleModel          = $appointment->getVehicleModel();
+            $this->vehicleMileage        = $appointment->getVehicleMileage();
+            $this->vehicleModelType      = $appointment->getVehicleModelType();
+            $this->vehicleBodyCondition  = $appointment->getVehicleBodyCondition();
+            $this->vehicleColor          = $appointment->getVehicleColor();
+            $this->vehicleYear           = $appointment->getVehicleYear();
+            $this->vehicleTransmission   = $appointment->getVehicleTransmission();
             $this->vehicleSpecifications = $appointment->getVehicleSpecifications();
-            $this->source = $appointment->getSource();
+            $this->source                = $appointment->getSource();
         }
 
         return $this;
@@ -573,9 +580,9 @@ class Inspection
     /**
      * Get appointment.
      *
-     * @return Appointment
+     * @return null|Appointment
      */
-    public function getAppointment()
+    public function getAppointment(): ?Appointment
     {
         return $this->appointment;
     }
@@ -587,7 +594,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setCreatedBy(User $createdBy)
+    public function setCreatedBy(User $createdBy): self
     {
         $this->createdBy = $createdBy;
 
@@ -597,9 +604,9 @@ class Inspection
     /**
      * Get createdBy.
      *
-     * @return User
+     * @return null|User
      */
-    public function getCreatedBy()
+    public function getCreatedBy(): ?User
     {
         return $this->createdBy;
     }
@@ -607,11 +614,11 @@ class Inspection
     /**
      * Set deal.
      *
-     * @param Deal $deal
+     * @param null|Deal $deal
      *
      * @return Inspection
      */
-    public function setDeal(Deal $deal = null)
+    public function setDeal(Deal $deal = null): self
     {
         $this->deal = $deal;
 
@@ -621,9 +628,9 @@ class Inspection
     /**
      * Get deal.
      *
-     * @return Deal
+     * @return null|Deal
      */
-    public function getDeal()
+    public function getDeal(): ?Deal
     {
         return $this->deal;
     }
@@ -635,7 +642,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setStatus($status)
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
@@ -645,9 +652,9 @@ class Inspection
     /**
      * Get status.
      *
-     * @return string
+     * @return null|string
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
@@ -655,9 +662,9 @@ class Inspection
     /**
      * Gets online valuation price.
      *
-     * @return float
+     * @return null|float
      */
-    public function getPriceOnline()
+    public function getPriceOnline(): ?float
     {
         if ($this->appointment) {
             $valuation = $this->appointment->getValuation();
@@ -666,14 +673,16 @@ class Inspection
                 return $valuation->getPriceOnline();
             }
         }
+
+        return null;
     }
 
     /**
      * Gets timing string.
      *
-     * @return string
+     * @return null|string
      */
-    public function getTimingString()
+    public function getTimingString(): ?string
     {
         if ($this->appointment) {
             $timing = $this->appointment->getBranchTiming();
@@ -682,6 +691,8 @@ class Inspection
                 return $timing->getTimingString();
             }
         }
+
+        return null;
     }
 
     /**
@@ -689,14 +700,14 @@ class Inspection
      *
      * @return array
      */
-    public static function getStatuses()
+    public static function getStatuses(): array
     {
         return [
-            self::STATUS_NEW => 'New',
+            self::STATUS_NEW            => 'New',
             self::STATUS_OFFER_ACCEPTED => 'Offer Accepted',
             self::STATUS_OFFER_REJECTED => 'Offer Rejected',
-            self::STATUS_PENDING => 'Pending',
-            self::STATUS_INVALID => 'Invalid',
+            self::STATUS_PENDING        => 'Pending',
+            self::STATUS_INVALID        => 'Invalid',
         ];
     }
 
@@ -707,7 +718,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setNotes($notes)
+    public function setNotes(string $notes): self
     {
         $this->notes = $notes;
 
@@ -717,9 +728,9 @@ class Inspection
     /**
      * Get notes.
      *
-     * @return string
+     * @return null|string
      */
-    public function getNotes()
+    public function getNotes(): ?string
     {
         return $this->notes;
     }
@@ -731,7 +742,7 @@ class Inspection
      *
      * @return Inspection
      */
-    public function setSource($source)
+    public function setSource(string $source): self
     {
         $this->source = $source;
 
@@ -741,9 +752,9 @@ class Inspection
     /**
      * Get source.
      *
-     * @return string
+     * @return null|string
      */
-    public function getSource()
+    public function getSource(): ?string
     {
         return $this->source;
     }
@@ -751,11 +762,11 @@ class Inspection
     /**
      * Set inventory.
      *
-     * @param Inventory $inventory
+     * @param null|Inventory $inventory
      *
      * @return Inspection
      */
-    public function setInventory(Inventory $inventory = null)
+    public function setInventory(Inventory $inventory = null): self
     {
         $this->inventory = $inventory;
 
@@ -765,10 +776,44 @@ class Inspection
     /**
      * Get inventory.
      *
-     * @return Inventory
+     * @return null|Inventory
      */
-    public function getInventory()
+    public function getInventory(): ?Inventory
     {
         return $this->inventory;
+    }
+
+    /**
+     * dayBooked.
+     *
+     * @return null|string
+     */
+    public function dayBooked(): ?string
+    {
+        $dayBooked   = null;
+        $appointment = $this->getAppointment();
+
+        if (null !== $appointment) {
+            $dayBooked = $appointment->dayBooked();
+        }
+
+        return $dayBooked;
+    }
+
+    /**
+     * bookedAtTiming.
+     *
+     * @return null|string
+     */
+    public function bookedAtTiming(): ?string
+    {
+        $timing      = null;
+        $appointment = $this->getAppointment();
+
+        if (null !== $appointment) {
+            $timing = $appointment->bookedAtTiming();
+        }
+
+        return $timing;
     }
 }

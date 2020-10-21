@@ -52,7 +52,7 @@ class TimingRepository extends EntityRepository
             }
         }
         /** @var Timing $timing */
-        $timing = $queryBuilder->getQuery()->getSingleResult();
+        $timing = $queryBuilder->getQuery()->getOneOrNullResult();
 
         if (null === $timing) {
             return [];
