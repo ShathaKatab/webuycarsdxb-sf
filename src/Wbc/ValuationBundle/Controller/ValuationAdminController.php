@@ -39,7 +39,7 @@ class ValuationAdminController extends Controller
         }
 
         $appointment = new Appointment($valuation);
-        $appointment->setDateBooked(new \DateTime());
+        $appointment->setBookedAt(new \DateTime());
         $this->get('event_dispatcher')->dispatch(BranchEvents::BEFORE_APPOINTMENT_CREATE, new AppointmentEvent($appointment));
         $entityManager->persist($appointment);
         $entityManager->flush();
