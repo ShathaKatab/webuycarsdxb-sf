@@ -311,7 +311,6 @@ class AppointmentAdmin extends AbstractAdmin
             $listMapper->add('bookedAtTiming', 'text', [
                 'label'                            => 'Timing',
                 'sortable'                         => true,
-                'associated_property'              => 'bookedAt',
                 'template'                         => 'WbcBranchBundle:Admin/CRUD:list__field_timing.html.twig',
             ]);
         } else {
