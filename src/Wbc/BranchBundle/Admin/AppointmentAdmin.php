@@ -305,22 +305,11 @@ class AppointmentAdmin extends AbstractAdmin
             ->add('valuation.priceOnline', 'currency', ['currency' => 'AED', 'label' => 'Online Valuation'])
             ->add('branch')
             ->add('bookedAt', 'date', ['label' => 'Date Booked'])
-        ;
-
-        if (isset($filterParams['dateRange']['value']) && 'today' === $filterParams['dateRange']['value']) {
-            $listMapper->add('bookedAtTiming', 'text', [
+            ->add('bookedAtTiming', 'text', [
                 'label'                            => 'Timing',
-                'sortable'                         => true,
                 'template'                         => 'WbcBranchBundle:Admin/CRUD:list__field_timing.html.twig',
-            ]);
-        } else {
-            $listMapper->add('branchTiming.adminListTiming', 'text', [
-                'label'    => 'Timing',
-                'template' => 'WbcBranchBundle:Admin/CRUD:list__field_timing.html.twig',
-            ]);
-        }
-
-        $listMapper->add('createdAt', null, ['label' => 'Created'])
+            ])
+            ->add('createdAt', null, ['label' => 'Created'])
             ->add('createdBy')
             ->add('smsSent')
             ->add('_action', 'actions', [
