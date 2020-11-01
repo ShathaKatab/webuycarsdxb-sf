@@ -252,7 +252,7 @@ class AppointmentAdmin extends AbstractAdmin
                     }
 
                     if (null !== $bookedAt) {
-                        $queryBuilder->andWhere($alias.'.booked_at BETWEEN :bookedAtFrom AND :bookedAtTo')
+                        $queryBuilder->andWhere($alias.'.bookedAt BETWEEN :bookedAtFrom AND :bookedAtTo')
                             ->setParameter(':bookedAtFrom', $bookedAt.' 00:00:00')
                             ->setParameter(':bookedAtTo', $bookedAt.' 23:59:59')
                         ;
@@ -311,8 +311,7 @@ class AppointmentAdmin extends AbstractAdmin
             $listMapper->add('bookedAtTiming', 'text', [
                 'label'                            => 'Timing',
                 'sortable'                         => true,
-                'sort_field_mapping'               => ['fieldName' => 'from'],
-                'sort_parent_association_mappings' => [['fieldName' => 'bookedAt']],
+                'associated_property'              => 'bookedAt',
                 'template'                         => 'WbcBranchBundle:Admin/CRUD:list__field_timing.html.twig',
             ]);
         } else {
