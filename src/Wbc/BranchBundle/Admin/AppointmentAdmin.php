@@ -253,6 +253,7 @@ class AppointmentAdmin extends AbstractAdmin
 
                     if (null !== $bookedAt) {
                         $queryBuilder->andWhere($alias.'.bookedAt BETWEEN :bookedAtFrom AND :bookedAtTo')
+                            ->addOrderBy($alias.'.bookedAt', 'ASC')
                             ->setParameter(':bookedAtFrom', $bookedAt.' 00:00:00')
                             ->setParameter(':bookedAtTo', $bookedAt.' 23:59:59')
                         ;
