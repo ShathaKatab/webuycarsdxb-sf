@@ -1,6 +1,6 @@
 {% extends '@WbcStatic/Default/base.html.twig' %}
 {% block header %}
-    <h1 class="text-center">{{ site_domain|capitalize }} Careers in Dubai</h1>
+    <h1 class="text-center">WeBuyCarsDXB Family</h1>
 
     {% block seoHead %}
         {% block title %}<title>Check out our careers and apply to join our family - {{ site_domain }}</title>{% endblock %}
@@ -19,17 +19,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2" style="padding-bottom: 25px;">
-                            <h2>let’s change the title to: WeBuyCarsDXB Family</h2>
                             <p>We Buy Cars DXB has an exceptional reputation built by thousands of satisfied customers. We are proud to have achieved this level of success through dedication and by doing our best to achieve a high level of service for our customers.</p>
                             <p>If you’re a car enthusiast, have experience in the car trade business, or just a car lover who happens to be active and inspired to learn, work hard, and provide excellent customer service; who also wants to be a part of a rewarding, innovative and a collaborative workplace you have a chance to be a member of We Buy Cars DXB family. Our staff is committed to making our customers happy with the deals they make, and of course, we work to create a happy work environment as well.</p>
                             <p>At We Buy Cars DXB family we share experiences, work with passion, and deliver the best prices the car trading market in Dubai can offer, we achieve our good reputation through being professional with our customers and delivering excellent service, by knowing how to treat the customer right, and – more importantly – giving them a good price… We do that through experience and knowledge of the market and each individual car price; evaluating every car according to specific parameters (known as: make, model, mileage, condition, etc.) to get the best evaluation and value possible. Another selling point in our service is that we handle the transaction from start to finish; we take care of the paperwork and loans for our customers which makes for an even better deal.</p>
                             <p>Our employee is (as is our customer) an asset to us… and we strive to build people through our experience in the market and sales industry and a professional work environment… our culture is built upon trust, passion, hard work, and customer satisfaction… we take care of our own.</p>
-                            <p>We Buy Cars DXB is an equal opportunity/affirmative action employer which is certified by the RTA.</p>
+                            <p>We Buy Cars DXB is an equal opportunity employer which is certified by the RTA.</p>
                             <div class="row">
                                 {% if roles|length %}
                                     {% include '@WbcCareers/partials/role-list.html.twig' with {roles: roles} %}
-                                {% else %}
-                                    {% include '@WbcCareers/partials/no-role-list.html.twig' %}
+
                                 {% endif %}
                             </div>
                         </div>
