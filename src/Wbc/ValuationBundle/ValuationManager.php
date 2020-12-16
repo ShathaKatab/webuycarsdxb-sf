@@ -386,9 +386,9 @@ class ValuationManager
                 continue;
             }
 
-            if (null !== $config['vehicle_model_type_id'] && (int) ($config['vehicle_model_type_id']) !== $modelTypeId) {
-                continue;
-            }
+//            if (null !== $config['vehicle_model_type_id'] && (int) ($config['vehicle_model_type_id']) !== $modelTypeId) {
+//                continue;
+//            }
 
             if (null !== $config['vehicle_year'] && (int) ($config['vehicle_year']) !== $year) {
                 continue;
