@@ -2,7 +2,8 @@
 
 {% block title %}<title>Want To Get in Touch With {{ site_title }}?</title>{% endblock %}
 {% block meta %}
-    <meta name="description" content="We would love to hear from you. Please feel free to contact us here. Looking forward to be in touch.">
+    <meta name="description"
+          content="We would love to hear from you. Please feel free to contact us here. Looking forward to be in touch.">
 {% endblock %}
 
 {% block body %}
@@ -12,7 +13,31 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1>Contact Us</h1>
+
+                        <h1>Get in Touch with We Buy Cars DXB</h1>
+                        <p> If you are a car owner and want to sell your car, if you have any inquiries, or for business
+                            needs. Never hesitate to contact us and get to know about our services. We are happy to
+                            answer all your questions and talk to you. </p>
+                        <p>We have built a solid reputation among thousands of customers throughout our long years of
+                            experience.</p>
+                        <p>Our reputation is mainly built with the satisfaction and trust of our customers.</p>
+                        <p>Our service includes:</p>
+                        <p>Obligation-free car valuation.</p>
+                        <p>Car buying.</p>
+                        <p>Handling paperwork of any automobile purchase we make.</p>
+                        <p>We would love to help our customers in any way we can. </p>
+                        <p>If you have any questions about our services or any inquiries, don’t hesitate to get in touch and ask. Our team will always be delighted to help... Feel free to email or call us, and we will make sure to answer as soon as possible.</p>
+                        <h2>Our contact number:</h2>
+                        <p>042284111</p>
+
+                        <h2>Our location:</h2>
+                        <p>Dubai</p>
+                        <p>Times Square Centre (Basement Level)</p>
+                        <p>Sheikh Zayed Road,</p>
+                        <p>Al Quoz</p>
+
+                        <p>At We Buy Cars DXB, we can make selling your car as easy as it gets for you, and help you get the best value for your dearest asset.</p>
+                        <h2>Contact Us</h2>
                         {% if form is defined and form is not null %}
                             <div class="alert alert-danger" role="alert">
                                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -25,7 +50,8 @@
                 <div class="row" ng-controller="ContactUsController as ctrl">
                     <div id="contact-us-form-container" class="col-md-8 col-md-offset-2">
                         <div class="row">
-                            <form name="contactUsForm" ng-submit="ctrl.submitForm(contactUsForm.$valid)" method="post" novalidate>
+                            <form name="contactUsForm" ng-submit="ctrl.submitForm(contactUsForm.$valid)" method="post"
+                                  novalidate>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <input ng-model="ctrl.name"
