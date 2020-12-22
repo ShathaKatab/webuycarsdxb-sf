@@ -28,7 +28,12 @@
                         <p>We would love to help our customers in any way we can. </p>
                         <p>If you have any questions about our services or any inquiries, don’t hesitate to get in touch and ask. Our team will always be delighted to help... Feel free to email or call us, and we will make sure to answer as soon as possible.</p>
                         <h2>Our contact number:</h2>
-                        <p>042284111</p>
+                        <p>
+                            <a href="tel: {{ branch.phoneNumber }}"><i class="fa fa-phone"
+                                                                       aria-hidden="true"></i>&nbsp;042284111
+                            </a>
+
+                        </p>
 
                         <h2>Our location:</h2>
                         <p>Dubai</p>
@@ -103,29 +108,30 @@
                 </div>
             </div>
         </section>
-        <section>
-            <div id="contact-us-branches-container" class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <div class="row">
-                            {% for branch in getBranches() %}
-                                <div class="col-md-4">
-                                    <p class="p-somatic text-left">{{ branch.name }}</p>
-                                    <h4 class="text-left"><a href="tel: {{ branch.phoneNumber }}"><i class="fa fa-phone"
-                                                                                                     aria-hidden="true"></i>&nbsp;{{ branch.phoneNumber }}
-                                        </a></h4>
-                                    <h4 class="text-left"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{ branch.address|nl2br }}
-                                    </h4>
-                                    <h4 class="text-left"><i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;{{ branch.citySlug | citySlug }}
-                                    </h4>
-                                </div>
+        {#        <section>#}
+        {#            <div id="contact-us-branches-container" class="container">#}
+        {#                <div class="row">#}
+        {#                    <div class="col-md-8 col-md-offset-2">#}
+        {#                        <div class="row">#}
+        {#                            {% for branch in getBranches() %}#}
+        {#                                <div class="col-md-4">#}
+        {#                                    <p class="p-somatic text-left">{{ branch.name }}</p>#}
+        {#                                    <h4 class="text-left">#}
+        {#                                        <a href="tel: {{ branch.phoneNumber }}"><i class="fa fa-phone"#}
+        {#                                                                                                     aria-hidden="true"></i>&nbsp;{{ branch.phoneNumber }}#}
+        {#                                        </a></h4>#}
+        {#                                    <h4 class="text-left"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;&nbsp;{{ branch.address|nl2br }}#}
+        {#                                    </h4>#}
+        {#                                    <h4 class="text-left"><i class="fa fa-location-arrow" aria-hidden="true"></i>&nbsp;&nbsp;{{ branch.citySlug | citySlug }}#}
+        {#                                    </h4>#}
+        {#                                </div>#}
 
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        {#                            {% endfor %}#}
+        {#                        </div>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#        </section>#}
     </article>
 
     {% include 'WbcStaticBundle:partials:inline-valuation-form.html.twig' %}
