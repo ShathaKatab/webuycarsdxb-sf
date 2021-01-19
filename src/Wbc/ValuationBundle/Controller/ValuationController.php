@@ -160,9 +160,9 @@ class ValuationController extends Controller
 
             $form = $this->createForm(new ValuationStepThreeType(), $valuation);
 
-
+            $form->submit($data);
             if ($form->isValid()) {
-                $form->submit($data);
+
                 $entityManager->persist($valuation);
                 $entityManager->flush();
 
