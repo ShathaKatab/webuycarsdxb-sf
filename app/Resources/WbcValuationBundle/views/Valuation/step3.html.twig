@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <input data-type="telephone" ng-model="ctrl.mobileNumber" ng-pattern="/^(0|((\+|00)?971))(50|51|52|53|54|55|56|57|58|59)\d{7}$/" ng-class="{'form-control-invalid': valuationStepThreeForm.$submitted && valuationStepThreeForm.mobileNumber.$invalid }"
-                                   required name="mobileNumber" type="text" class="form-control" placeholder="Type your mobile phone number (You will receive an SMS)">
+                                   required name="mobileNumber" type="text" class="form-control" placeholder="Type your mobile number (You will receive an SMS)">
                             <p class="text-error hidden"
                                ng-class="{'hidden': !valuationStepThreeForm.$submitted || valuationStepThreeForm.mobileNumber.$valid }">Type a valid UAE mobile phone number</p>
                         </div>
