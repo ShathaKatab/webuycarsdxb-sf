@@ -22,7 +22,7 @@ class ValuationStepThreeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, ['label' => 'Name'])
-            ->add('mobileNumber', MobileNumberType::class, ['label' => 'Mobile Number'])
+            ->add('mobileNumber', MobileNumberType::class, ['label' => 'Mobile number (You will receive an SMS)'])
         ;
     }
 
