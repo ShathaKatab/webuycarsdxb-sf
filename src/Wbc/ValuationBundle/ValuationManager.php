@@ -41,6 +41,13 @@ class ValuationManager
      */
     private $valuationDiscountPercentage;
 
+
+    /**
+     * @var int
+     */
+    private $pricePercentageForAllCars;
+
+
     /**
      * @var LoggerInterface
      */
@@ -420,7 +427,12 @@ class ValuationManager
         if ($price && $price > self::MIN_ALLOWABLE_PRICE) {
             $discount = $this->getValuationConfigurationDiscount($valuation);
 
-            $price = $price + $price * $discount / 100;
+            if (isset($discount) && $discount > 0 && $discount > 100)
+                $price=$discount;
+            else
+                $price = $price + $price * $discount / 100;
+
+            $price = $price + ($price * $this->pricePercentageForAllCars / 100);
 
             $price = $this->roundUpToAny($price + $price * $this->valuationDiscountPercentage / 100);
 
@@ -428,7 +440,7 @@ class ValuationManager
                 $price = 0.0;
             }
 
-            $valuation->setDiscountPercentage($discount);
+            $valuation->setDiscountPercentage($this->pricePercentageForAllCars);
             $valuation->setPriceOnline($price);
         }
 
