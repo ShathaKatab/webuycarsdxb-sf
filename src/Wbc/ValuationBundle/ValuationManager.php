@@ -85,6 +85,7 @@ class ValuationManager
         $this->logger = $logger;
         $this->container = $container;
         $this->valuationDiscountPercentage = (float) ($this->container->get('craue_config')->get('valuationDiscountPercentage'));
+        $this->pricePercentageForAllCars = (float) ($this->container->get('craue_config')->get('pricePercentageForAllCars'));
         $this->usdExchangeRate = (float) ($this->container->get('craue_config')->get('usdExchangeRate'));
     }
 
