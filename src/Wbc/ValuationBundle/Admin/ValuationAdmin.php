@@ -79,6 +79,7 @@ class ValuationAdmin extends AbstractAdmin
      */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
     {
+        $now = new \DateTime();
         $datagridMapper->add('name')
             ->add('mobileNumber')
             ->add('vehicleMake', 'doctrine_orm_callback', ['callback' => function ($queryBuilder, $alias, $field, $value) {
