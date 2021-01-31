@@ -185,7 +185,8 @@ angular
                         }, 100);
                     }, function(error){
                         loader.hide();
-
+console.log(error.prototype.messageerror);
+console.log(error.prototype.message);
                         alert('Error: Unable to create an Appointment');
                     });
                 }else{

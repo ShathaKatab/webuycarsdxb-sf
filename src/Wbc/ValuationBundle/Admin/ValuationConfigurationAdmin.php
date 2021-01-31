@@ -60,7 +60,7 @@ class ValuationConfigurationAdmin extends AbstractAdmin
             ->add('vehicleModelType', ChoiceType::class, ['required' => false, 'data' => ''])
             ->add('vehicleColor', WbcVehicleType\ColorType::class, ['required' => false])
             ->add('vehicleBodyCondition', WbcVehicleType\ConditionType::class, ['required' => false])
-            ->add('discount', NumberType::class, ['label' => 'Discount (%)'])
+            ->add('discount', NumberType::class, ['label' => 'Price' , 'required' => false])
         ;
         if ($subject) {
             if ($subject->getVehicleMake() || $request->isMethod('POST')) {
@@ -93,7 +93,7 @@ class ValuationConfigurationAdmin extends AbstractAdmin
             ->add('vehicleModelType', null, array('sortable' => true, 'sort_field_mapping' => array('fieldName' => 'name'), 'sort_parent_association_mappings' => array(array('fieldName' => 'vehicleModelType'))))
             ->add('vehicleColor')
             ->add('vehicleBodyCondition')
-            ->add('discount', NumberType::class, ['label' => 'Discount (%)'])
+            ->add('discount', NumberType::class, ['label' => 'price'])
             ->add('active', 'boolean', ['editable' => $authorizationChecker->isGranted('ROLE_VALUATION_CONFIGURATION_ACTIVATOR')])
             ->add('_action', 'actions', ['actions' => ['show' => [], 'edit' => [], 'delete' => []]]);
     }
@@ -106,7 +106,7 @@ class ValuationConfigurationAdmin extends AbstractAdmin
             ->add('vehicleModelType')
             ->add('vehicleColor')
             ->add('vehicleBodyCondition')
-            ->add('discount', NumberType::class, ['label' => 'Discount (%)'])
+            ->add('discount', NumberType::class, ['label' => 'price'])
             ->add('active', 'boolean');
     }
 }
