@@ -290,7 +290,7 @@ class Appointment
      *
      * @Serializer\Expose()
      */
-    protected $branch;
+    public $branch;
 
     /**
      * @var Make
