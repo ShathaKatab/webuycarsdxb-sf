@@ -360,7 +360,7 @@ class ValuationManager
         $makeId = $valuation->getVehicleMake()->getId();
         $year = $valuation->getVehicleYear();
         $modelId = $valuation->getVehicleModel()->getId();
-        $modelTypeId = $valuation->getVehicleModelType()->getId();
+       // $modelTypeId = $valuation->getVehicleModelType()->getId();
         $color = strtolower($valuation->getVehicleColor() ?: '');
         $bodyCondition = strtolower($valuation->getVehicleBodyCondition() ?: '');
         $discount = 0.0;
