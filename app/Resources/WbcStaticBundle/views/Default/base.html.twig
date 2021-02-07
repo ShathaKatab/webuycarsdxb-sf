@@ -24,7 +24,38 @@
     <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('images/favicon.ico/favicon-96x96.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.ico/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('images/favicon.ico/manifest.json') }}">
-
+    {% block javascripts %}
+        <!--[if lt IE 9]>
+    <script src="{{ asset('assets/vendor/@bower_components/html5shiv/dist/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/@bower_components/respond/dest/respond.min.js') }}"></script>
+    <![endif]-->
+        {% javascripts filter='?jsqueeze' output='js/app-v1.js'
+            'assets/vendor/jquery/dist/jquery.js'
+            'assets/vendor/@bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
+            'assets/vendor/angular/angular.js'
+            'assets/vendor/@bower_components/angular-resource/angular-resource.js'
+            'assets/vendor/@bower_components/angular-toArrayFilter/toArrayFilter.js'
+            'assets/vendor/@bower_components/angular-block-ui/dist/angular-block-ui.js'
+            'assets/vendor/@bower_components/ngmap/build/scripts/ng-map.js'
+            'assets/vendor/@bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+            'assets/js/jquery/app.js'
+            'assets/js/angular/app.js'
+            'assets/js/angular/directives/wbcLoading.directive.js'
+            'assets/js/angular/valuation/vehicleModel.service.js'
+            'assets/js/angular/valuation/branchTiming.service.js'
+            'assets/js/angular/valuation/appointment.service.js'
+            'assets/js/angular/static/appointmentsMade.component.js'
+            'assets/js/angular/valuation/valuationStepOne.component.js'
+            'assets/js/angular/valuation/valuationStepTwo.controller.js'
+            'assets/js/angular/valuation/valuationStepThree.controller.js'
+            'assets/js/angular/valuation/valuationStepFour.controller.js'
+            'assets/js/angular/valuation/valuationStepFive.controller.js'
+            'assets/js/angular/static/contactUs.controller.js'
+            'assets/js/angular/careers/detail.controller.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
     {% block seoHead %}
         {% block title %}<title>Want to Sell a Car in Dubai? Sell Any Car To Us Instantly - No Fees</title>{% endblock %}
         {% block meta %}
@@ -274,36 +305,5 @@
 {% endblock %}
 </body>
 
-{% block javascripts %}
-    <!--[if lt IE 9]>
-    <script src="{{ asset('assets/vendor/@bower_components/html5shiv/dist/html5shiv.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/@bower_components/respond/dest/respond.min.js') }}"></script>
-    <![endif]-->
-    {% javascripts filter='?jsqueeze' output='js/app-v1.js'
-        'assets/vendor/jquery/dist/jquery.js'
-        'assets/vendor/@bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
-        'assets/vendor/angular/angular.js'
-        'assets/vendor/@bower_components/angular-resource/angular-resource.js'
-        'assets/vendor/@bower_components/angular-toArrayFilter/toArrayFilter.js'
-        'assets/vendor/@bower_components/angular-block-ui/dist/angular-block-ui.js'
-        'assets/vendor/@bower_components/ngmap/build/scripts/ng-map.js'
-        'assets/vendor/@bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
-        'assets/js/jquery/app.js'
-        'assets/js/angular/app.js'
-        'assets/js/angular/directives/wbcLoading.directive.js'
-        'assets/js/angular/valuation/vehicleModel.service.js'
-        'assets/js/angular/valuation/branchTiming.service.js'
-        'assets/js/angular/valuation/appointment.service.js'
-        'assets/js/angular/static/appointmentsMade.component.js'
-        'assets/js/angular/valuation/valuationStepOne.component.js'
-        'assets/js/angular/valuation/valuationStepTwo.controller.js'
-        'assets/js/angular/valuation/valuationStepThree.controller.js'
-        'assets/js/angular/valuation/valuationStepFour.controller.js'
-        'assets/js/angular/valuation/valuationStepFive.controller.js'
-        'assets/js/angular/static/contactUs.controller.js'
-        'assets/js/angular/careers/detail.controller.js'
-    %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}
+
 </html>
