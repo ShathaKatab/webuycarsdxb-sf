@@ -244,7 +244,7 @@ class ValuationManager
                                                 price_updated AS isStaticPrice
                                             FROM crawler_classifieds_ad 
                                             WHERE year = :year
-                                            AND vehicle_model = : modelName 
+                                            AND vehicle_model = :modelName 
                                             AND price_updated = 1
                                             GROUP BY year
                                             ');
