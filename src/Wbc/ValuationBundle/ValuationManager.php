@@ -110,7 +110,7 @@ class ValuationManager
         /*check if valuation has static price */
         $connection = $this->entityManager->getConnection();
         $statement = $connection->prepare('SELECT
-                                            CAST(V.name AS UNSIGNED) AS modelName,                                            
+                                            V.name AS modelName                                           
                                             FROM 
                                             vehicle_model V
                                             WHERE V.id = :modelId
@@ -118,8 +118,9 @@ class ValuationManager
         $statement->bindValue(':modelId', $modelId, \PDO::PARAM_INT);
         $statement->execute();
         $statement->fetch();
-
-        var_dump($statement['modelName']);exit;
+        var_dump($modelId);
+        var_dump("$modelId");
+        var_dump($statement->fetch());exit;
 
         $staticPrice = $this->getPriceManual($statement['modelName'], $year);
 
