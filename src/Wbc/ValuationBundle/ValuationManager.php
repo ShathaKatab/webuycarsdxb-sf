@@ -110,7 +110,7 @@ class ValuationManager
         /*check if valuation has static price */
         $connection = $this->entityManager->getConnection();
         $statement = $connection->prepare('SELECT
-                                                    V.name 
+                                                    V.name  AS modelName
                                             FROM 
                                             vehicle_model V
                                             WHERE V.id = :modelId
@@ -119,9 +119,9 @@ class ValuationManager
         $statement->execute();
         $statement->fetch();
 
-        var_dump($statement);exit;
+        var_dump($statement['modelName']);exit;
 
-        $staticPrice = $this->getPriceManual($statement, $year);
+        $staticPrice = $this->getPriceManual($statement['modelName'], $year);
 
         if ($staticPrice){
             $averages = ['price' => $staticPrice['price'], 'mileage' => $staticPrice['avg_mileage']];
