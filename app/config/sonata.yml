@@ -1,9 +1,9 @@
 sonata_block:
-    default_contexts: [cms]
+    default_contexts: [ cms ]
     blocks:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
-            contexts:   [admin]
+            contexts: [ admin ]
 sonata_admin:
     templates:
         dashboard: ::Admin/dashboard.html.twig
@@ -11,132 +11,121 @@ sonata_admin:
         groups:
             Appointments:
                 label: Appointments
-                items: [admin.branch.appointment]
-                roles: [ROLE_APPOINTMENT_READER, ROLE_APPOINTMENT_EDITOR, ROLE_APPOINTMENT_ADMIN]
+                items: [ admin.branch.appointment ]
+                roles: [ ROLE_APPOINTMENT_READER, ROLE_APPOINTMENT_EDITOR, ROLE_APPOINTMENT_ADMIN ]
                 on_top: true
-                icon:   '<i class="fa fa-calendar-check-o"></i>'
+                icon: '<i class="fa fa-calendar-check-o"></i>'
             Appointment Reminders:
                 label: Appointment Reminders
-                items: [admin.branch.appointment_reminder]
-                roles: [ROLE_APPOINTMENT_READER, ROLE_APPOINTMENT_EDITOR, ROLE_APPOINTMENT_ADMIN]
+                items: [ admin.branch.appointment_reminder ]
+                roles: [ ROLE_APPOINTMENT_READER, ROLE_APPOINTMENT_EDITOR, ROLE_APPOINTMENT_ADMIN ]
                 on_top: true
-                icon:   '<i class="fa fa-calendar-check-o"></i> <span id="totalRequestCallback" style="margin-bottom: 4px; display:none;" class="badge label-danger"></span>'
+                icon: '<i class="fa fa-calendar-check-o"></i> <span id="totalRequestCallback" style="margin-bottom: 4px; display:none;" class="badge label-danger"></span>'
             Inspections:
                 label: Inspections
-                items: [admin.branch.inspection]
-                roles: [ROLE_INSPECTION_READER, ROLE_INSPECTION_EDITOR, ROLE_INSPECTION_ADMIN]
+                items: [ admin.branch.inspection ]
+                roles: [ ROLE_INSPECTION_READER, ROLE_INSPECTION_EDITOR, ROLE_INSPECTION_ADMIN ]
                 on_top: true
-                icon:   '<i class="fa fa-check-circle-o"></i>'
+                icon: '<i class="fa fa-check-circle-o"></i>'
             Inventory:
                 label: Inventory
-                items: [admin.inventory, admin.inventory.dealers, admin.inventory.used_cars]
-                roles: [ROLE_INVENTORY_EDITOR]
-                icon:   '<i class="fa fa-car"></i>'
+                items: [ admin.inventory, admin.inventory.dealers, admin.inventory.used_cars ]
+                roles: [ ROLE_INVENTORY_EDITOR ]
+                icon: '<i class="fa fa-car"></i>'
             Valuations:
                 label: Valuations
-                items: [admin.valuation]
-                roles: [ROLE_VALUATION_READER, ROLE_VALUATION_EDITOR, ROLE_VALUATION_ADMIN]
-                icon:   '<i class="fa fa-usd"></i>'
+                items: [ admin.valuation ]
+                roles: [ ROLE_VALUATION_READER, ROLE_VALUATION_EDITOR, ROLE_VALUATION_ADMIN ]
+                icon: '<i class="fa fa-usd"></i>'
                 on_top: true
             Valuations Configurations:
                 label: Valuations Configurations
-                items: [admin.valuation.valuation_configuration]
-                roles: [ROLE_VALUATION_CONFIGURATION_READER]
-                icon:   '<i class="fa fa-cogs"></i>'
+                items: [ admin.valuation.valuation_configuration ]
+                roles: [ ROLE_VALUATION_CONFIGURATION_READER ]
+                icon: '<i class="fa fa-cogs"></i>'
                 on_top: true
             Branches:
                 label: Branches
-                items: [admin.branch, admin.branch.timing, admin.branch.holiday]
-                roles: [ROLE_SUPER_ADMIN]
-                icon:   '<i class="fa fa-building"></i>'
+                items: [ admin.branch, admin.branch.timing, admin.branch.holiday ]
+                roles: [ ROLE_SUPER_ADMIN ]
+                icon: '<i class="fa fa-building"></i>'
             Users:
                 label: Users
-                items: [admin.user]
-                roles: [ROLE_SUPER_ADMIN]
+                items: [ admin.user ]
+                roles: [ ROLE_SUPER_ADMIN ]
                 on_top: true
-                icon:   '<i class="fa fa-user-circle-o"></i>'
+                icon: '<i class="fa fa-user-circle-o"></i>'
             Blog:
                 label: Blog
-                items: [admin.blog.post, admin.blog.category]
-                roles: [ROLE_BLOG_EDITOR]
-                icon:   '<i class="fa fa-file-text"></i>'
+                items: [ admin.blog.post, admin.blog.category ]
+                roles: [ ROLE_BLOG_EDITOR ]
+                icon: '<i class="fa fa-file-text"></i>'
             Careers:
                 label: Careers
-                items: [admin.careers.role, admin.careers.candidate]
-                roles: [ROLE_CAREERS_EDITOR]
-                icon:   '<i class="fa fa-briefcase"></i>'
+                items: [ admin.careers.role, admin.careers.candidate ]
+                roles: [ ROLE_CAREERS_EDITOR ]
+                icon: '<i class="fa fa-briefcase"></i>'
             Vehicles:
                 label: Vehicles
-                items: [admin.vehicle.make, admin.vehicle.model, admin.vehicle.model_type]
-                roles: [ROLE_SUPER_ADMIN]
-                icon:   '<i class="fa fa-car"></i>'
+                items: [ admin.vehicle.make, admin.vehicle.model, admin.vehicle.model_type , admin.vehicle.cars]
+                roles: [ ROLE_SUPER_ADMIN ]
+                icon: '<i class="fa fa-car"></i>'
         blocks:
-            -
-                position: left
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: ["Appointments"]
-                roles: [ROLE_ADMIN_BRANCH_APPOINTMENT_LIST]
-            -
-                position: left
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: ["Inspections"]
-                roles: [ROLE_ADMIN_BRANCH_INSPECTION_LIST]
-            -
-                position: left
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: ["Deals"]
-                roles: [ROLE_ADMIN_BRANCH_DEAL_LIST]
-            -
-                position: left
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: ["Valuations"]
-                roles: [ROLE_ADMIN_VALUATION_LIST]
-            -
-                position: right
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: ["Valuation Configuration"]
-                roles: [ROLE_ADMIN_VALUATION_VALUATION_CONFIGURATION_LIST]
-            -
-                position: right
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: ["Branches"]
-                roles: [ROLE_SUPER_ADMIN]
-            -
-                position: right
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: ["Users"]
-                roles: [ROLE_SUPER_ADMIN]
-            -
-                position: right
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: ["Vehicles"]
-                roles: [ROLE_SUPER_ADMIN]
-            -
-                position: left
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: ["Blog"]
-                roles: [ROLE_BLOG_EDITOR]
-            -
-                position: left
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: ["Careers"]
-                roles: [ROLE_CAREERS_EDITOR]
-            -
-                position: right
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: ["Inventory"]
-                roles: [ROLE_INVENTORY_EDITOR]
+            - position: left
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups: [ "Appointments" ]
+              roles: [ ROLE_ADMIN_BRANCH_APPOINTMENT_LIST ]
+            - position: left
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups: [ "Inspections" ]
+              roles: [ ROLE_ADMIN_BRANCH_INSPECTION_LIST ]
+            - position: left
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups: [ "Deals" ]
+              roles: [ ROLE_ADMIN_BRANCH_DEAL_LIST ]
+            - position: left
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups: [ "Valuations" ]
+              roles: [ ROLE_ADMIN_VALUATION_LIST ]
+            - position: right
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups: [ "Valuation Configuration" ]
+              roles: [ ROLE_ADMIN_VALUATION_VALUATION_CONFIGURATION_LIST ]
+            - position: right
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups: [ "Branches" ]
+              roles: [ ROLE_SUPER_ADMIN ]
+            - position: right
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups: [ "Users" ]
+              roles: [ ROLE_SUPER_ADMIN ]
+            - position: right
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups: [ "Vehicles" ]
+              roles: [ ROLE_SUPER_ADMIN ]
+            - position: left
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups: [ "Blog" ]
+              roles: [ ROLE_BLOG_EDITOR ]
+            - position: left
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups: [ "Careers" ]
+              roles: [ ROLE_CAREERS_EDITOR ]
+            - position: right
+              type: sonata.admin.block.admin_list
+              settings:
+                  groups: [ "Inventory" ]
+              roles: [ ROLE_INVENTORY_EDITOR ]
 
     title: "WeBuyCars Admin"
     title_logo: /images/admin-logo.png
@@ -146,17 +135,17 @@ sonata_admin:
 
         # acl security information
         information:
-            GUEST: [VIEW, LIST]
-            STAFF: [EDIT, LIST, CREATE]
-            EDITOR: [OPERATOR, EXPORT]
-            ADMIN: [MASTER]
+            GUEST: [ VIEW, LIST ]
+            STAFF: [ EDIT, LIST, CREATE ]
+            EDITOR: [ OPERATOR, EXPORT ]
+            ADMIN: [ MASTER ]
 
         # permissions not related to an object instance and also to be available when objects do not exist
         # the DELETE admin permission means the user is allowed to batch delete objects
-        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+        admin_permissions: [ CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER ]
 
         # permission related to the objects
-        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
+        object_permissions: [ VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER ]
 
     assets:
         extra_javascripts:
@@ -176,110 +165,116 @@ sonata_admin:
 services:
     admin.branch.appointment:
         class: Wbc\BranchBundle\Admin\AppointmentAdmin
-        arguments: [~, Wbc\BranchBundle\Entity\Appointment, WbcBranchBundle:CRUD]
+        arguments: [ ~, Wbc\BranchBundle\Entity\Appointment, WbcBranchBundle:CRUD ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Appointments, group: "Appointments" }
 
     admin.branch:
         class: Wbc\BranchBundle\Admin\BranchAdmin
-        arguments: [~, Wbc\BranchBundle\Entity\Branch, ~]
+        arguments: [ ~, Wbc\BranchBundle\Entity\Branch, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Branches, group: "Branches" }
 
     admin.branch.timing:
         class: Wbc\BranchBundle\Admin\TimingAdmin
-        arguments: [~, Wbc\BranchBundle\Entity\Timing, ~]
+        arguments: [ ~, Wbc\BranchBundle\Entity\Timing, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Branch Timings, group: "Branches" }
 
     admin.branch.holiday:
         class: Wbc\BranchBundle\Admin\HolidayAdmin
-        arguments: [~, Wbc\BranchBundle\Entity\Holiday, ~]
+        arguments: [ ~, Wbc\BranchBundle\Entity\Holiday, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Branch Holidays, group: "Branches" }
 
     admin.user:
         class: Wbc\UserBundle\Admin\UserAdmin
-        arguments: [~, Wbc\UserBundle\Entity\User, WbcUserBundle:CRUD]
+        arguments: [ ~, Wbc\UserBundle\Entity\User, WbcUserBundle:CRUD ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Users, group: "Users" }
 
     admin.valuation:
         class: Wbc\ValuationBundle\Admin\ValuationAdmin
-        arguments: [~, Wbc\ValuationBundle\Entity\Valuation, WbcValuationBundle:ValuationAdmin]
+        arguments: [ ~, Wbc\ValuationBundle\Entity\Valuation, WbcValuationBundle:ValuationAdmin ]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Valuation, group: "Valuations"}
+            - { name: sonata.admin, manager_type: orm, label: Valuation, group: "Valuations" }
 
     admin.valuation.valuation_configuration:
         class: Wbc\ValuationBundle\Admin\ValuationConfigurationAdmin
-        arguments: [~, Wbc\ValuationBundle\Entity\ValuationConfiguration, ~]
+        arguments: [ ~, Wbc\ValuationBundle\Entity\ValuationConfiguration, ~ ]
         tags:
-            - { name: sonata.admin, manager_type: orm, label: Valuation Configuration, group: "Valuation Configuration"}
+            - { name: sonata.admin, manager_type: orm, label: Valuation Configuration, group: "Valuation Configuration" }
 
     admin.branch.inspection:
         class: Wbc\BranchBundle\Admin\InspectionAdmin
-        arguments: [~, Wbc\BranchBundle\Entity\Inspection, WbcBranchBundle:CRUD]
+        arguments: [ ~, Wbc\BranchBundle\Entity\Inspection, WbcBranchBundle:CRUD ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Inspection, group: "Inspections" }
 
     admin.vehicle.make:
         class: Wbc\VehicleBundle\Admin\MakeAdmin
-        arguments: [~, Wbc\VehicleBundle\Entity\Make, ~]
+        arguments: [ ~, Wbc\VehicleBundle\Entity\Make, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Makes, group: "Vehicles" }
     admin.vehicle.model:
         class: Wbc\VehicleBundle\Admin\ModelAdmin
-        arguments: [~, Wbc\VehicleBundle\Entity\Model, ~]
+        arguments: [ ~, Wbc\VehicleBundle\Entity\Model, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Models, group: "Vehicles" }
     admin.vehicle.model_type:
         class: Wbc\VehicleBundle\Admin\ModelTypeAdmin
-        arguments: [~, Wbc\VehicleBundle\Entity\ModelType, ~]
+        arguments: [ ~, Wbc\VehicleBundle\Entity\ModelType, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Trims, group: "Vehicles" }
     admin.blog.post:
         class: Wbc\BlogBundle\Admin\PostAdmin
-        arguments: [~, Wbc\BlogBundle\Entity\Post, ~]
+        arguments: [ ~, Wbc\BlogBundle\Entity\Post, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: Post }
     admin.blog.category:
         class: Wbc\BlogBundle\Admin\CategoryAdmin
-        arguments: [~, Wbc\BlogBundle\Entity\Category, ~]
+        arguments: [ ~, Wbc\BlogBundle\Entity\Category, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Blog, label: Category }
 
     admin.careers.role:
         class: Wbc\CareersBundle\Admin\RoleAdmin
-        arguments: [~, Wbc\CareersBundle\Entity\Role, ~]
+        arguments: [ ~, Wbc\CareersBundle\Entity\Role, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Careers, label: Roles }
 
     admin.careers.candidate:
         class: Wbc\CareersBundle\Admin\CandidateAdmin
-        arguments: [~, Wbc\CareersBundle\Entity\Candidate, ~]
+        arguments: [ ~, Wbc\CareersBundle\Entity\Candidate, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Careers, label: Candidates }
 
     admin.inventory:
         class: Wbc\InventoryBundle\Admin\InventoryAdmin
-        arguments: [~, Wbc\InventoryBundle\Entity\Inventory, WbcInventoryBundle:CRUD]
+        arguments: [ ~, Wbc\InventoryBundle\Entity\Inventory, WbcInventoryBundle:CRUD ]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Inventory", label: "Inventory" }
 
     admin.inventory.used_cars:
         class: Wbc\InventoryBundle\Admin\UsedCarAdmin
-        arguments: [~, Wbc\InventoryBundle\Entity\UsedCar, ~]
+        arguments: [ ~, Wbc\InventoryBundle\Entity\UsedCar, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Inventory", label: "Used Cars" }
 
     admin.inventory.dealers:
         class: Wbc\InventoryBundle\Admin\DealerAdmin
-        arguments: [~, Wbc\InventoryBundle\Entity\Dealer, ~]
+        arguments: [ ~, Wbc\InventoryBundle\Entity\Dealer, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Inventory", label: "Dealers" }
 
     admin.branch.appointment_reminder:
         class: Wbc\BranchBundle\Admin\AppointmentReminderAdmin
-        arguments: [~, Wbc\BranchBundle\Entity\AppointmentReminder, ~]
+        arguments: [ ~, Wbc\BranchBundle\Entity\AppointmentReminder, ~ ]
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Appointment Reminders", label: "Appointment Reminders" }
+
+    admin.vehicle.cars:
+        class: Wbc\VehicleBundle\Admin\MakeAdminTest
+        arguments: [ ~, Wbc\CrawlerBundle\Entity\ClassifiedsAd, ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: "Cars", group: "Vehicles" }

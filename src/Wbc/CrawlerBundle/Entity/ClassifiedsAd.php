@@ -155,6 +155,14 @@ class ClassifiedsAd
      */
     protected $isUsed;
 
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="price_updated", type="boolean", options={"default": true})
+     */
+    private $updated;
+
     /**
      * @var string
      *
@@ -555,6 +563,30 @@ class ClassifiedsAd
     public function isUsed()
     {
         return $this->isUsed;
+    }
+
+    /**
+     * Set updated.
+     *
+     * @param bool $updated
+     *
+     * @return ClassifiedsAd
+     */
+    public function setUpdated(bool $updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated.
+     *
+     * @return bool|null
+     */
+    public function isUpdated(): ?bool
+    {
+        return $this->updated;
     }
 
     /**

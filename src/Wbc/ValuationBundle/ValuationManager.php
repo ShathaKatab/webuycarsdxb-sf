@@ -6,6 +6,7 @@ namespace Wbc\ValuationBundle;
 
 use Doctrine\ORM\EntityManager;
 use JMS\DiExtraBundle\Annotation as DI;
+use phpDocumentor\Reflection\Types\Float_;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -49,6 +50,17 @@ class ValuationManager
 
 
     /**
+     * @var float
+     */
+    private $staticPrice;
+
+
+    /**
+     * @var bool
+     */
+    private $isPriceUpdated;
+
+    /**
      * @var LoggerInterface
      */
     private $logger;
@@ -84,6 +96,8 @@ class ValuationManager
         $this->valuationCommand = $valuationCommand;
         $this->logger = $logger;
         $this->container = $container;
+        $this->staticPrice = (float) ($this->container->get('crawler_classifieds_ad')->get('price'));
+        $this->isPriceUpdated = (float) ($this->container->get('crawler_classifieds_ad')->get('price_updated'));
         $this->valuationDiscountPercentage = (float) ($this->container->get('craue_config')->get('valuationDiscountPercentage'));
         $this->pricePercentageForAllCars = (float) ($this->container->get('craue_config')->get('pricePercentageForAllCars'));
         $this->usdExchangeRate = (float) ($this->container->get('craue_config')->get('usdExchangeRate'));
@@ -141,6 +155,7 @@ class ValuationManager
         $mileagePercentage = 0;
         $optionPercentage = 0;
         $bodyConditionPercentage = 0;
+
 
         $downMileageInterval = (float) ($this->container->get('craue_config')->get('downMileageInterval'));
         $downMileagePercentage = (float) ($this->container->get('craue_config')->get('downMileagePercentage'));
@@ -360,7 +375,7 @@ class ValuationManager
         $makeId = $valuation->getVehicleMake()->getId();
         $year = $valuation->getVehicleYear();
         $modelId = $valuation->getVehicleModel()->getId();
-       // $modelTypeId = $valuation->getVehicleModelType()->getId();
+        $modelTypeId = $valuation->getVehicleModelType()->getId();
         $color = strtolower($valuation->getVehicleColor() ?: '');
         $bodyCondition = strtolower($valuation->getVehicleBodyCondition() ?: '');
         $discount = 0.0;
@@ -428,8 +443,8 @@ class ValuationManager
         if ($price && $price > self::MIN_ALLOWABLE_PRICE) {
             $discount = $this->getValuationConfigurationDiscount($valuation);
 
-            if (isset($discount) && $discount > 0 && $discount > 100)
-                $price=$discount;
+            if (isset($staticPrice) && $this->isPriceUpdated)
+                $price=$staticPrice;
             else
                 $price = $price + $price * $discount / 100;
 
