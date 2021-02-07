@@ -119,6 +119,7 @@ class ValuationManager
         $statement->execute();
         $statement->fetch();
 
+        var_dump($statement);exit;
 
         $staticPrice = $this->getPriceManual($statement, $year);
 
