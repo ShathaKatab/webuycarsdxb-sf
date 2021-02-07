@@ -118,10 +118,8 @@ class ValuationManager
         $statement->bindValue(':modelId', $modelId, \PDO::PARAM_INT);
         $statement->execute();
         $modelName = $statement->fetch();
-        var_dump($modelName['modelName']);
-        exit;
 
-        $staticPrice = $this->getPriceManual($statement['modelName'], $year);
+        $staticPrice = $this->getPriceManual($modelName['modelName'], $year);
 
         if ($staticPrice){
             $averages = ['price' => $staticPrice['price'], 'mileage' => $staticPrice['avg_mileage']];
