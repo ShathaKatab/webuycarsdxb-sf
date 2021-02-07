@@ -117,10 +117,9 @@ class ValuationManager
                                             ');
         $statement->bindValue(':modelId', $modelId, \PDO::PARAM_INT);
         $statement->execute();
-        $statement->fetch();
-        var_dump($modelId);
-        var_dump("$modelId");
-        var_dump($statement->fetch());exit;
+        $modelName = $statement->fetch();
+        var_dump($modelName['modelName']);
+        exit;
 
         $staticPrice = $this->getPriceManual($statement['modelName'], $year);
 
