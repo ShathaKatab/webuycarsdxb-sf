@@ -110,7 +110,7 @@ class ValuationManager
         /*check if valuation has static price */
         $connection = $this->entityManager->getConnection();
         $statement = $connection->prepare('SELECT
-                                                    V.name  AS modelName
+                                            CAST(V.name AS UNSIGNED) AS modelName,                                            
                                             FROM 
                                             vehicle_model V
                                             WHERE V.id = :modelId
