@@ -96,8 +96,6 @@ class ValuationManager
         $this->valuationCommand = $valuationCommand;
         $this->logger = $logger;
         $this->container = $container;
-        $this->staticPrice = (float) ($this->container->get('crawler_classifieds_ad')->get('price'));
-        $this->isPriceUpdated = (float) ($this->container->get('crawler_classifieds_ad')->get('price_updated'));
         $this->valuationDiscountPercentage = (float) ($this->container->get('craue_config')->get('valuationDiscountPercentage'));
         $this->pricePercentageForAllCars = (float) ($this->container->get('craue_config')->get('pricePercentageForAllCars'));
         $this->usdExchangeRate = (float) ($this->container->get('craue_config')->get('usdExchangeRate'));
@@ -443,8 +441,8 @@ class ValuationManager
         if ($price && $price > self::MIN_ALLOWABLE_PRICE) {
             $discount = $this->getValuationConfigurationDiscount($valuation);
 
-            if (isset($staticPrice) && $this->isPriceUpdated)
-                $price=$staticPrice;
+            if (isset($discount) && $discount > 0 && $discount > 100)
+                $price=$discount;
             else
                 $price = $price + $price * $discount / 100;
 
