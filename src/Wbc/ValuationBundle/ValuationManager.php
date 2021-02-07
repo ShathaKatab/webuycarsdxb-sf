@@ -50,17 +50,6 @@ class ValuationManager
 
 
     /**
-     * @var float
-     */
-    private $staticPrice;
-
-
-    /**
-     * @var bool
-     */
-    private $isPriceUpdated;
-
-    /**
      * @var LoggerInterface
      */
     private $logger;
@@ -96,6 +85,8 @@ class ValuationManager
         $this->valuationCommand = $valuationCommand;
         $this->logger = $logger;
         $this->container = $container;
+//        $this->staticPrice = (float) ($this->container->get('crawler_classifieds_ad')->get('price'));
+//        $this->isPriceUpdated = (float) ($this->container->get('crawler_classifieds_ad')->get('price_updated'));
         $this->valuationDiscountPercentage = (float) ($this->container->get('craue_config')->get('valuationDiscountPercentage'));
         $this->pricePercentageForAllCars = (float) ($this->container->get('craue_config')->get('pricePercentageForAllCars'));
         $this->usdExchangeRate = (float) ($this->container->get('craue_config')->get('usdExchangeRate'));
@@ -108,6 +99,7 @@ class ValuationManager
         $this->setValuationPrice($valuation, $price);
     }
 
+
     protected function getPriceFromAverages(Valuation $valuation)
     {
         $modelId = (int) ($valuation->getVehicleModel()->getId());
@@ -115,34 +107,54 @@ class ValuationManager
 
         $averages = ['price' => 0, 'mileage' => 0];
 
-        $averagesDubizzle = $this->getAverages($modelId, $year, ClassifiedsAd::SOURCE_DUBIZZLE);
-        $averagesManheim = $this->getAverages($modelId, $year, ClassifiedsAd::SOURCE_MANHEIM, $this->usdExchangeRate);
-        $averagesInspection = $this->getAverages($modelId, $year, ClassifiedsAd::SOURCE_INSPECTION);
+        /*check if valuation has static price */
+        $connection = $this->entityManager->getConnection();
+        $statement = $connection->prepare('SELECT
+                                                    V.name 
+                                            FROM 
+                                            vehicle_model V
+                                            WHERE V.id = :modelId
+                                            ');
+        $statement->bindValue(':modelId', $modelId, \PDO::PARAM_INT);
+        $statement->execute();
+        $statement->fetch();
 
-        if ($averagesDubizzle) {
-            $averages = ['price' => $averagesDubizzle['avg_price'], 'mileage' => $averagesDubizzle['avg_mileage']];
-        }
 
-        if ($averagesManheim) {
-            if ($averages['price'] && $averages['mileage']) {
-                $averages['price'] = ($averages['price'] + $averagesManheim['avg_price']) / 2;
-                $averages['mileage'] = ($averages['mileage'] + $averagesManheim['avg_mileage']) / 2;
-            } else {
-                $averages = ['price' => $averagesManheim['avg_price'], 'mileage' => $averagesManheim['avg_mileage']];
+        $staticPrice = $this->getPriceManual($statement, $year);
+
+        if ($staticPrice){
+            $averages = ['price' => $staticPrice['price'], 'mileage' => $staticPrice['avg_mileage']];
+        }else{
+            $averagesDubizzle = $this->getAverages($modelId, $year, ClassifiedsAd::SOURCE_DUBIZZLE);
+            $averagesManheim = $this->getAverages($modelId, $year, ClassifiedsAd::SOURCE_MANHEIM, $this->usdExchangeRate);
+            $averagesInspection = $this->getAverages($modelId, $year, ClassifiedsAd::SOURCE_INSPECTION);
+
+            if ($averagesDubizzle) {
+                $averages = ['price' => $averagesDubizzle['avg_price'], 'mileage' => $averagesDubizzle['avg_mileage']];
+            }
+
+            if ($averagesManheim) {
+                if ($averages['price'] && $averages['mileage']) {
+                    $averages['price'] = ($averages['price'] + $averagesManheim['avg_price']) / 2;
+                    $averages['mileage'] = ($averages['mileage'] + $averagesManheim['avg_mileage']) / 2;
+                } else {
+                    $averages = ['price' => $averagesManheim['avg_price'], 'mileage' => $averagesManheim['avg_mileage']];
+                }
+            }
+
+            if ($averagesInspection) {
+                //Hassan wants to add 20% to the price from Inspection
+                $averagesInspection['avg_price'] = $averagesInspection['avg_price'] + $averagesInspection['avg_price'] * 0.2;
+
+                if ($averages['price'] && $averages['mileage']) {
+                    $averages['price'] = ($averages['price'] + $averagesInspection['avg_price']) / 2;
+                    $averages['mileage'] = ($averages['mileage'] + $averagesInspection['avg_mileage']) / 2;
+                } else {
+                    $averages = ['price' => $averagesInspection['avg_price'], 'mileage' => $averagesInspection['avg_mileage']];
+                }
             }
         }
 
-        if ($averagesInspection) {
-            //Hassan wants to add 20% to the price from Inspection
-            $averagesInspection['avg_price'] = $averagesInspection['avg_price'] + $averagesInspection['avg_price'] * 0.2;
-
-            if ($averages['price'] && $averages['mileage']) {
-                $averages['price'] = ($averages['price'] + $averagesInspection['avg_price']) / 2;
-                $averages['mileage'] = ($averages['mileage'] + $averagesInspection['avg_mileage']) / 2;
-            } else {
-                $averages = ['price' => $averagesInspection['avg_price'], 'mileage' => $averagesInspection['avg_mileage']];
-            }
-        }
 
         $option = $valuation->getVehicleOption();
         $bodyCondition = $valuation->getVehicleBodyCondition();
@@ -218,6 +230,27 @@ class ValuationManager
         $statement->bindParam(':source', $source, \PDO::PARAM_STR);
         $statement->execute();
 
+        return $statement->fetch();
+    }
+
+
+    protected function getPriceManual($modelName, $year)
+    {
+        $connection = $this->entityManager->getConnection();
+        $statement = $connection->prepare('SELECT
+                                                CAST(year AS UNSIGNED) AS year,
+                                                AVG(CAST(mileage AS UNSIGNED)) AS avg_mileage,
+                                                CAST(price AS UNSIGNED) AS price,
+                                                price_updated AS isStaticPrice
+                                            FROM crawler_classifieds_ad 
+                                            WHERE year = :year
+                                            AND vehicle_model = : modelName 
+                                            AND price_updated = 1
+                                            GROUP BY year
+                                            ');
+        $statement->bindValue(':year', $year, \PDO::PARAM_INT);
+        $statement->bindValue(':modelName', $modelName, \PDO::PARAM_STR);
+        $statement->execute();
         return $statement->fetch();
     }
 
@@ -439,12 +472,6 @@ class ValuationManager
         $valuation->setActualPrice($price);
 
         if ($price && $price > self::MIN_ALLOWABLE_PRICE) {
-            $discount = $this->getValuationConfigurationDiscount($valuation);
-
-            if (isset($discount) && $discount > 0 && $discount > 100)
-                $price=$discount;
-            else
-                $price = $price + $price * $discount / 100;
 
             $price = $price + ($price * $this->pricePercentageForAllCars / 100);
 
