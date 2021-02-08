@@ -24,7 +24,21 @@
     <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('images/favicon.ico/favicon-96x96.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.ico/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('images/favicon.ico/manifest.json') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.7.8/angular-resource.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-block-ui/0.2.1/angular-block-ui.min.js" integrity="sha512-BtmFfLX4GDXx/BORg3Og/jeW93uBPBxmt8gFYHCC4RqvxxAQIQWSHHMWauXZ21YzKJUWjt6mtJ6e/8E808Becw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-toarrayfilter/1.0.3/toArrayFilter.min.js" integrity="sha512-NQtYf59i2deooceVdYJ5b5RJnSWJMAbM+NhTXNOzU2WgwZtf1X0+r7VaLGLkM1ijKC0lvdYjIG+LN8+Wbzr9sA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.js" integrity="sha512-kPuyJOFpwcTSatVXfODhoK9TgOt7V7HdKAPYTmrtgMitwCpv512AlNoFmA5jxvNFQBqC1KvTyvrVdy+hubRYPg==" crossorigin="anonymous"></script>
     {% block seoHead %}
         {% block title %}<title>Want to Sell a Car in Dubai? Sell Any Car To Us Instantly - No Fees</title>{% endblock %}
         {% block meta %}
@@ -92,15 +106,15 @@
                     </div>
                     <div id="navbar-phone-container" class="col-md-3 col-md-pull-0 col-xs-pull-9 text-right">
                         {% if craue_setting('phoneNumber1') is not null and craue_setting('phoneNumber1') != '' %}
-                        <a href="tel: {{ craue_setting('phoneNumber1') }}">
-                            <i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>
-                            &nbsp;<span>{{ craue_setting('phoneNumber1') }}</span>
-                        </a>
+                            <a href="tel: {{ craue_setting('phoneNumber1') }}">
+                                <i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>
+                                &nbsp;<span>{{ craue_setting('phoneNumber1') }}</span>
+                            </a>
                         {% endif %}
                         {% if craue_setting('phoneNumber2') is not null and craue_setting('phoneNumber2') != '' %}
                             <br/><a href="tel: {{ craue_setting('phoneNumber2') }}">
-                                <span>{{ craue_setting('phoneNumber2') }}</span>
-                            </a>
+                            <span>{{ craue_setting('phoneNumber2') }}</span>
+                        </a>
                         {% endif %}
                     </div>
                     <div class="col-md-1 hidden-xs hidden-sm">
@@ -273,20 +287,11 @@
     </footer>
 {% endblock %}
 {% block javascripts %}
-    <!--[if lt IE 9]>
-    <script src="{{ asset('assets/vendor/@bower_components/html5shiv/dist/html5shiv.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/@bower_components/respond/dest/respond.min.js') }}"></script>
-    <![endif]-->
     {% javascripts filter='?jsqueeze' output='js/app-v1.js'
-        'assets/vendor/jquery/dist/jquery.js'
-        'assets/vendor/@bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js'
-        'assets/vendor/angular/angular.js'
-        'assets/vendor/@bower_components/angular-resource/angular-resource.js'
-        'assets/vendor/@bower_components/angular-toArrayFilter/toArrayFilter.js'
-        'assets/vendor/@bower_components/angular-block-ui/dist/angular-block-ui.js'
         'assets/vendor/@bower_components/ngmap/build/scripts/ng-map.js'
-        'assets/vendor/@bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+
         'assets/js/angular/valuation/controllers.controller.js'
+
     %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
